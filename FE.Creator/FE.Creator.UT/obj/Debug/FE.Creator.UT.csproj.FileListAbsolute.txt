@@ -1,0 +1,14 @@
+E:\projects\investigation\FE.Creator\FE.Creator.UT\obj\Debug\FE.Creator.UT.csprojResolveAssemblyReference.cache
+E:\projects\investigation\FE.Creator\FE.Creator.UT\bin\Debug\FE.Creator.UT.dll.config
+E:\projects\investigation\FE.Creator\FE.Creator.UT\bin\Debug\FE.Creator.UT.dll
+E:\projects\investigation\FE.Creator\FE.Creator.UT\bin\Debug\FE.Creator.UT.pdb
+E:\projects\investigation\FE.Creator\FE.Creator.UT\bin\Debug\EntityFramework.dll
+E:\projects\investigation\FE.Creator\FE.Creator.UT\bin\Debug\EntityFramework.SqlServer.dll
+E:\projects\investigation\FE.Creator\FE.Creator.UT\bin\Debug\FE.Creator.ObjectRepository.dll
+E:\projects\investigation\FE.Creator\FE.Creator.UT\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+E:\projects\investigation\FE.Creator\FE.Creator.UT\bin\Debug\FE.Creator.ObjectRepository.pdb
+E:\projects\investigation\FE.Creator\FE.Creator.UT\bin\Debug\EntityFramework.xml
+E:\projects\investigation\FE.Creator\FE.Creator.UT\bin\Debug\EntityFramework.SqlServer.xml
+E:\projects\investigation\FE.Creator\FE.Creator.UT\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.xml
+E:\projects\investigation\FE.Creator\FE.Creator.UT\obj\Debug\FE.Creator.UT.dll
+E:\projects\investigation\FE.Creator\FE.Creator.UT\obj\Debug\FE.Creator.UT.pdb
