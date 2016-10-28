@@ -1,0 +1,5 @@
+﻿@model FE.Creator.Admin.Models.AngularUrl
+@{
+    Layout = "~/Views/Shared/_AngularLayout.cshtml";
+}
+@Html.Partial(string.Format("~/Views/AngularView/ClientTemplates/{0}/{1}.cshtml", Model.ModuleName, Model.TemplateName))

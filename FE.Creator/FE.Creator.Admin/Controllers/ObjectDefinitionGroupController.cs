@@ -35,25 +35,42 @@ namespace FE.Creator.Admin.Controllers
             return Task.FromResult<IEnumerable<ObjectDefinitionGroup>>(objectService.GetObjectDefinitionGroups());
         }
 
+
+
         // GET: api/ObjectDefinitionGroup/5
-        public string Get(int id)
+
+        private Task<ObjectDefinitionGroup> GetObjectDefinitionGroup(int id)
         {
-            return "value";
+            return Task.FromResult<ObjectDefinitionGroup>(
+                    objectService.GetObjectDefinitionGroupById(id)
+                );
         }
 
-        // POST: api/ObjectDefinitionGroup
-        public void Post([FromBody]string value)
+        [ResponseType(typeof(ObjectDefinitionGroup))]
+        public async Task<IHttpActionResult> Get(int id)
         {
+            var objDefGroup = await GetObjectDefinitionGroup(id);
+
+
+            return this.Ok<ObjectDefinitionGroup>(objDefGroup);
+        }
+
+
+        // POST: api/ObjectDefinitionGroup
+        public void Post([FromBody]ObjectDefinitionGroup value)
+        {
+
         }
 
         // PUT: api/ObjectDefinitionGroup/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]ObjectDefinitionGroup value)
         {
         }
 
         // DELETE: api/ObjectDefinitionGroup/5
         public void Delete(int id)
         {
+
         }
     }
 }

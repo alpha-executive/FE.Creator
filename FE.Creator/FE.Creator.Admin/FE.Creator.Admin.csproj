@@ -190,6 +190,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AngularViewController.cs" />
     <Compile Include="Controllers\GeneralObjectController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -199,6 +200,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AngularViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="MVCExtension\UnityDependencyResolver.cs" />
@@ -1128,6 +1130,9 @@
     <Content Include="Content\adminlte-2.3.6\plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="Content\adminlte-2.3.6\starter.html" />
     <Content Include="Content\angularjs\angular.min.js" />
+    <Content Include="Content\apps\dataservice.js" />
+    <Content Include="Content\apps\definitiongroupcontroller.js" />
+    <Content Include="Content\apps\objectrepository.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
@@ -1312,6 +1317,10 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_AngularLayout.cshtml" />
+    <Content Include="Views\AngularView\Template.cshtml" />
+    <Content Include="Views\AngularView\ClientTemplates\ObjectRepository\ObjectDefinitionGroupList.cshtml" />
+    <Content Include="Views\AngularView\ClientTemplates\ObjectRepository\ObjectDefinitionGroup.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

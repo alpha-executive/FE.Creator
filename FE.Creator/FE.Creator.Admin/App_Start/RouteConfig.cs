@@ -13,6 +13,13 @@ namespace FE.Creator.Admin
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //routes for angular templates.
+            routes.MapRoute(
+                name: "AngularTemplates",
+                url: "ngview/{module}/{name}",
+               defaults: new { controller = "AngularView", action = "Template" });
+
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

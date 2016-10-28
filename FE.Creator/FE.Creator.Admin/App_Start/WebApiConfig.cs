@@ -28,7 +28,7 @@ namespace FE.Creator.Admin
             );
 
             //uncomment this will avoid return xml serialization output to client.
-            //config.Formatters.Remove(config.Formatters.XmlFormatter);
+            config.Formatters.Remove(config.Formatters.XmlFormatter);
 
             var container = new UnityContainer();
             container.RegisterType<IObjectService, DefaultObjectService>(new HierarchicalLifetimeManager());

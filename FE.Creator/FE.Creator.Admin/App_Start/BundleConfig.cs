@@ -57,6 +57,13 @@ namespace FE.Creator.Admin
             bundles.Add(new ScriptBundle("~/js/angularjs").Include(
                 "~/Content/angularjs/angular.min.js"
              ));
+
+            bundles.Add(new ScriptBundle("~/js/adminapp").Include(
+                  "~/Content/apps/objectrepository.js",
+                  "~/Content/apps/dataservice.js",
+                  "~/Content/apps/definitiongroupcontroller.js"
+                ));
+
         }
     }
 }

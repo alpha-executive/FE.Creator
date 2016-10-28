@@ -35,10 +35,21 @@ namespace FE.Creator.Admin.Controllers
             return this.Ok<IEnumerable<ObjectDefinition>>(objDefintions);
         }
 
-        // GET: api/ObjectDefinition/5
-        public string Get(int id)
+
+        private Task<ObjectDefinition> getObjectDefinition(int id)
         {
-            return "value";
+            var objectDefinition = objectService.GetObjectDefinitionById(id);
+
+            return Task.FromResult<ObjectDefinition>(objectDefinition);
+        }
+
+        [ResponseType(typeof(ObjectDefinition))]
+        // GET: api/ObjectDefinition/5
+        public async Task<IHttpActionResult> Get(int id)
+        {
+            var objDefinition = await getObjectDefinition(id);
+
+            return this.Ok<ObjectDefinition>(objDefinition);
         }
 
         // POST: api/ObjectDefinition
