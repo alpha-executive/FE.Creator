@@ -1,6 +1,7 @@
 ﻿<div class="info-box">
         <div class="box-tools pull-right">
-            <button class="btn btn-box-tool" data-widget="remove" ng-click="onDelete({group:currentGroup})"><i class="fa fa-trash"></i></button>
+            <a class="btn btn-box-tool" href="/ngView/EditOrDisplay/ObjectRepository/ObjectDefinitionGroupEdit/{{currentGroup.groupID}}"><i class="fa fa-pencil"></i></a>
+            <button class="btn btn-box-tool" ng-click="onDelete({group:currentGroup})"><i class="fa fa-trash"></i></button>
         </div>
         <!-- Apply any bg-* class to to the icon to color it -->
         <span class="info-box-icon bg-blue"><i class="fa fa-object-group"></i></span>
@@ -11,4 +12,4 @@
                 {{currentGroup.groupKey}}
             </span>
         </div><!-- /.info-box-content -->
-    </div><!-- /.info-box -->
+</div><!-- /.info-box -->

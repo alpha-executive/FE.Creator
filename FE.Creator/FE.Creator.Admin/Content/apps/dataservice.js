@@ -19,8 +19,8 @@
         };
 
         //get the object defintion groups
-        function getObjectDefinitionGroups() {
-           return   $http.get("/api/ObjectDefinitionGroup")
+        function getObjectDefinitionGroups(parentGroupId) {
+            return $http.get('/api/ObjectDefinitionGroup')
                 .then(complete)
                 .catch(error);
 

@@ -190,12 +190,12 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AngularViewController.cs" />
+    <Compile Include="Controllers\ViewController\AngularViewController.cs" />
     <Compile Include="Controllers\GeneralObjectController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\ObjectDefinitionController.cs" />
-    <Compile Include="Controllers\ObjectDefinitionGroupController.cs" />
+    <Compile Include="Controllers\ApiControllers\ObjectDefinitionController.cs" />
+    <Compile Include="Controllers\ApiControllers\ObjectDefinitionGroupController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1129,6 +1129,7 @@
     <Content Include="Content\adminlte-2.3.6\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Content\adminlte-2.3.6\plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="Content\adminlte-2.3.6\starter.html" />
+    <Content Include="Content\angularjs\angular-route.min.js" />
     <Content Include="Content\angularjs\angular.min.js" />
     <Content Include="Content\apps\dataservice.js" />
     <Content Include="Content\apps\definitiongroupcontroller.js" />
@@ -1318,9 +1319,10 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_AngularLayout.cshtml" />
-    <Content Include="Views\AngularView\Template.cshtml" />
-    <Content Include="Views\AngularView\ClientTemplates\ObjectRepository\ObjectDefinitionGroupList.cshtml" />
-    <Content Include="Views\AngularView\ClientTemplates\ObjectRepository\ObjectDefinitionGroup.cshtml" />
+    <Content Include="Views\AngularView\Client\ObjectRepository\ObjectDefinitionGroupList.cshtml" />
+    <Content Include="Views\AngularView\Client\ObjectRepository\ObjectDefinitionGroup.cshtml" />
+    <Content Include="Views\AngularView\Server\ObjectRepository\ObjectDefinitionGroupIndex.cshtml" />
+    <Content Include="Views\AngularView\Server\ObjectRepository\ObjectDefinitionGroupEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

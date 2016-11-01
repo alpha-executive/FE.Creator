@@ -1,12 +1,37 @@
 ﻿(function () {
     "use strict";
 
-    /*angular controller decalration*/
+    /*directive*/
     angular
         .module('ngObjectRepository')
         .directive("objectDefinitionGroupList", objectDefinitionGroupList)
         .directive("objectDefinitionGroup", objectDefinitionGroup);
-        
+
+    /*controller*/
+    angular
+         .module('ngObjectRepository')
+         .controller("editObjectDefinitionGroupController", editObjectDefinitionGroupController);
+    editObjectDefinitionGroupController.$inject = ["$scope", "ObjectRepositoryDataService"];
+
+    function editObjectDefinitionGroupController($scope, ObjectRepositoryDataService) {
+        var scopeContext = $scope;
+        scopeContext.currentGroup = {};
+        scopeContext.SaveChange = SaveChange;
+        scopeContext.Initialzie = Initialzie;
+
+        function SaveChange(){
+
+        }
+
+        function Initialzie() {
+                 return ObjectRepositoryDataService.getObjectDefinitionGroup(1)
+                        .then(function (data) {
+                            $scope.currentGroup = data;
+
+                            return $scope.currentGroup;
+                        });
+        }
+    }
 
     function objectDefinitionGroup() {
         return {
@@ -37,7 +62,7 @@
                 Activate();
 
                 function Activate() {
-                    return ObjectRepositoryDataService.getObjectDefinitionGroups()
+                    return ObjectRepositoryDataService.getObjectDefinitionGroups(null)
                                 .then(function (data) {
                                     dfContext.DefinitionGroups = data;
 

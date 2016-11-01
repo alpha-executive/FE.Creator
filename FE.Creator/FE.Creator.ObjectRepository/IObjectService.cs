@@ -116,7 +116,7 @@ namespace FE.Creator.ObjectRepository
         /// Get all the ObjectDefinitionGroups.
         /// </summary>
         /// <returns></returns>
-        List<ObjectDefinitionGroup> GetObjectDefinitionGroups();
+        List<ObjectDefinitionGroup> GetObjectDefinitionGroups(int? parentGroupId);
 
         /// <summary>
         /// Get the ObjectDefintionGroup by ID.

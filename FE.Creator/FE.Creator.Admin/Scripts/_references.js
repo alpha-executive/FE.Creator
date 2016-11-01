@@ -328,6 +328,7 @@
 /// <reference path="../Content/adminlte-2.3.6/plugins/sparkline/jquery.sparkline.js" />
 /// <reference path="../Content/adminlte-2.3.6/plugins/timepicker/bootstrap-timepicker.js" />
 /// <reference path="../content/angularjs/angular.min.js" />
+/// <reference path="../content/angularjs/angular-route.min.js" />
 /// <reference path="../content/apps/dataservice.js" />
 /// <reference path="../content/apps/definitiongroupcontroller.js" />
 /// <reference path="../content/apps/objectrepository.js" />

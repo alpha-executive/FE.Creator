@@ -622,7 +622,7 @@ namespace FE.Creator.ObjectRepository
             }
         }
 
-        public List<ObjectDefinitionGroup> GetObjectDefinitionGroups()
+        public List<ObjectDefinitionGroup> GetObjectDefinitionGroups(int? parentGroupId)
         {
             List<ObjectDefinitionGroup> objList = null;
             using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
@@ -631,7 +631,8 @@ namespace FE.Creator.ObjectRepository
                          .Where(g=>g.IsDeleted == false)
                         .Include(g => g.ParentGroup)
                         .Include(g => g.ChildrenGroups)
-                        .ToList();
+                        .ToList()
+                        .FindAll(s => parentGroupId.HasValue ? s.ParentGroup.GeneralObjectDefinitionGroupID == parentGroupId.Value : s.ParentGroup == null);
 
                 objList = ObjectConverter.Convert2ObjectDefinitionGroupList(objDefGroupList);
             }

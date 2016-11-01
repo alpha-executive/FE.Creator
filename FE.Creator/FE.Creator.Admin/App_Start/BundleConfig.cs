@@ -32,8 +32,9 @@ namespace FE.Creator.Admin
                    "~/Content/adminlte-2.3.6/plugins/datepicker/datepicker3.css",
                    "~/Content/adminlte-2.3.6/plugins/daterangepicker/daterangepicker.css",
                    "~/Content/adminlte-2.3.6/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css",
-                   "~/Content/adminlte-2.3.6/dist/css/skins/_all-skins.min.css",
-                   "~/Content/adminlte-2.3.6/dist/css/AdminLTE.min.css"
+                   "~/Content/adminlte-2.3.6/dist/css/AdminLTE.min.css",
+                   "~/Content/adminlte-2.3.6/dist/css/skins/_all-skins.min.css"
+                   
                ));
 
             bundles.Add(new ScriptBundle("~/js/adminlte").Include(
@@ -55,7 +56,8 @@ namespace FE.Creator.Admin
                 ));
 
             bundles.Add(new ScriptBundle("~/js/angularjs").Include(
-                "~/Content/angularjs/angular.min.js"
+                "~/Content/angularjs/angular.min.js",
+                "~/Content/angularjs/angular-route.min.js"
              ));
 
             bundles.Add(new ScriptBundle("~/js/adminapp").Include(

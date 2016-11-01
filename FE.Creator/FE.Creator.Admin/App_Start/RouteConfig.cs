@@ -15,9 +15,15 @@ namespace FE.Creator.Admin
 
             //routes for angular templates.
             routes.MapRoute(
-                name: "AngularTemplates",
+                name: "AngularClientTemplates",
                 url: "ngview/{module}/{name}",
-               defaults: new { controller = "AngularView", action = "Template" });
+               defaults: new { controller = "AngularView", action = "ClientTemplate" });
+
+
+            routes.MapRoute(
+                name: "AngularViewTemplates",
+                url: "ngview/{action}/{module}/{name}/{Id}",
+               defaults: new { controller = "AngularView", action = "EditOrDisplay", Id = UrlParameter.Optional });
 
 
             routes.MapRoute(

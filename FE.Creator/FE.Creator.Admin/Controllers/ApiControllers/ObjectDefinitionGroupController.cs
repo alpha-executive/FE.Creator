@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 
-namespace FE.Creator.Admin.Controllers
+namespace FE.Creator.Admin.ApiControllers.Controllers
 {
     using ObjectRepository;
     using ObjectRepository.ServiceModels;
@@ -23,19 +23,18 @@ namespace FE.Creator.Admin.Controllers
 
         // GET: api/ObjectDefinitionGroup
         [ResponseType(typeof(IEnumerable<ObjectDefinitionGroup>))]
+        [HttpGet]
         public async Task<IHttpActionResult> Get()
         {
-            IEnumerable<ObjectDefinitionGroup> objDefGroups = await GetAllObjectDefinitionGroups();
+            IEnumerable<ObjectDefinitionGroup> objDefGroups = await GetAllObjectDefinitionGroups(null);
 
             return this.Ok<IEnumerable<ObjectDefinitionGroup>>(objDefGroups);
         }
 
-        private Task<IEnumerable<ObjectDefinitionGroup>> GetAllObjectDefinitionGroups()
+        private Task<IEnumerable<ObjectDefinitionGroup>> GetAllObjectDefinitionGroups(int? parentGroupId)
         {
-            return Task.FromResult<IEnumerable<ObjectDefinitionGroup>>(objectService.GetObjectDefinitionGroups());
+            return Task.FromResult<IEnumerable<ObjectDefinitionGroup>>(objectService.GetObjectDefinitionGroups(parentGroupId));
         }
-
-
 
         // GET: api/ObjectDefinitionGroup/5
 
