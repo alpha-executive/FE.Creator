@@ -31,6 +31,16 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             return this.Ok<IEnumerable<ObjectDefinitionGroup>>(objDefGroups);
         }
 
+
+        [ResponseType(typeof(IEnumerable<ObjectDefinitionGroup>))]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetByParentId(int? id = null)
+        {
+            IEnumerable<ObjectDefinitionGroup> objDefGroups = await GetAllObjectDefinitionGroups(id);
+
+            return this.Ok<IEnumerable<ObjectDefinitionGroup>>(objDefGroups);
+        }
+
         private Task<IEnumerable<ObjectDefinitionGroup>> GetAllObjectDefinitionGroups(int? parentGroupId)
         {
             return Task.FromResult<IEnumerable<ObjectDefinitionGroup>>(objectService.GetObjectDefinitionGroups(parentGroupId));
@@ -56,20 +66,30 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
 
 
         // POST: api/ObjectDefinitionGroup
-        public void Post([FromBody]ObjectDefinitionGroup value)
+        [ResponseType(typeof(ObjectDefinitionGroup))]
+        public IHttpActionResult Post([FromBody]ObjectDefinitionGroup value)
         {
+            if (value != null)
+            {
+               value.GroupID =  objectService.CreateOrUpdateObjectDefinitionGroup(value);
+            }
 
+            return this.Created<ObjectDefinitionGroup>(this.Url.ToString(), value);
         }
 
         // PUT: api/ObjectDefinitionGroup/5
         public void Put(int id, [FromBody]ObjectDefinitionGroup value)
         {
+            if (value != null)
+            {
+                objectService.CreateOrUpdateObjectDefinitionGroup(value);
+            }
         }
 
         // DELETE: api/ObjectDefinitionGroup/5
         public void Delete(int id)
         {
-
+            objectService.SoftDeleteObjectDefintionGroup(id);
         }
     }
 }

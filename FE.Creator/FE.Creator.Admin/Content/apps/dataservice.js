@@ -15,12 +15,22 @@
 
         return {
             getObjectDefinitionGroups: getObjectDefinitionGroups,
-            getObjectDefinitionGroup: getObjectDefinitionGroup
+            getObjectDefinitionGroup: getObjectDefinitionGroup,
+            createOrUpdateDefinitionGroup: createOrUpdateDefinitionGroup,
+            deleteDefinitionGroup: deleteDefinitionGroup,
+            getObjectDefintionsbyGroup: getObjectDefintionsbyGroup,
+            getObjectDefinitionById: getObjectDefinitionById
         };
 
         //get the object defintion groups
         function getObjectDefinitionGroups(parentGroupId) {
-            return $http.get('/api/ObjectDefinitionGroup')
+
+            var url = "/api/custom/ObjectDefinitionGroup/GetByParentId";
+
+            if (parentGroupId != null)
+                url = url + "/" + parentGroupId;
+
+            return $http.get(url)
                 .then(complete)
                 .catch(error);
 
@@ -40,13 +50,86 @@
                .then(complete)
                .catch(error);
 
+
+           function complete(response) {
+               return response.data;
+           }
+
+           function error(response) {
+               logger.error('XHR Failed for getObjectDefinitionGroup - ' + error.data);
+           }
+        }
+
+        //create or update
+        function createOrUpdateDefinitionGroup(id, grpdata) {
+            //create
+            if (id == null) {
+                return $http.post("/api/ObjectDefinitionGroup", grpdata)
+                            .then(complete)
+                            .catch(error);
+            }//update
+            else {
+                return $http.put("/api/ObjectDefinitionGroup/" + id, grpdata)
+                            .then(complete)
+                            .catch(error);
+            }
+
             function complete(response) {
                 return response.data;
             }
 
-            function error(response)
-            {
-                logger.error('XHR Failed for getObjectDefinitionGroup - ' + error.data);
+            function error(response) {
+                logger.error('XHR Failed for createOrUpdateDefinitionGroup - ' + error.data);
+            }
+        }
+
+        //delete
+        function deleteDefinitionGroup(id)
+        {
+            return $http.delete("/api/ObjectDefinitionGroup/" + id)
+                            .then(complete)
+                            .catch(error);
+
+            function complete(response) {
+                return response.data;
+            }
+
+            function error(response) {
+                logger.error('XHR Failed for deleteDefinitionGroup - ' + error.data);
+            }
+        }
+
+        //===============================================Object Defintion API ================
+        function getObjectDefintionsbyGroup(groupId) {
+            var url = "/api/custom/ObjectDefinition/GetObjectDefintionsByGroup";
+
+            if (groupId != null)
+                url = url + "/" + groupId;
+
+            return $http.get(url)
+                .then(complete)
+                .catch(error);
+
+            function complete(response) {
+                return response.data;
+            }
+
+            function error(response) {
+                logger.error('XHR Failed for getObjectDefintionsbyGroup - ' + error.data);
+            }
+        }
+
+        function getObjectDefinitionById(objectId) {
+            return $http.get('/api/ObjectDefinition/' + objectId)
+                .then(complete)
+                .catch(error);
+
+            function complete(response) {
+                return response.data;
+            }
+
+            function error(response) {
+                logger.error('XHR Failed for getObjectDefintionsbyGroup - ' + error.data);
             }
         }
     }

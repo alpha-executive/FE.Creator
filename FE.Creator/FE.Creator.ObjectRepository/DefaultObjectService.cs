@@ -497,6 +497,7 @@ namespace FE.Creator.ObjectRepository
             {
                 var objDefList = dboContext.GeneralObjectDefinitions
                                  .Where(d => d.GeneralObjectDefinitionID == objDefId)
+                                 .Include(d => d.GeneralObjectDefinitionFields)
                                  .ToList();
 
                 return objDefList.Count > 0 ?
@@ -632,7 +633,7 @@ namespace FE.Creator.ObjectRepository
                         .Include(g => g.ParentGroup)
                         .Include(g => g.ChildrenGroups)
                         .ToList()
-                        .FindAll(s => parentGroupId.HasValue ? s.ParentGroup.GeneralObjectDefinitionGroupID == parentGroupId.Value : s.ParentGroup == null);
+                        .FindAll(s=> parentGroupId.HasValue ? s.ParentGroup != null && s.ParentGroup.GeneralObjectDefinitionGroupID == parentGroupId.Value : s.ParentGroup == null);
 
                 objList = ObjectConverter.Convert2ObjectDefinitionGroupList(objDefGroupList);
             }

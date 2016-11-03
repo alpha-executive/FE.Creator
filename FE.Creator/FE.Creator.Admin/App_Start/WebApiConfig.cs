@@ -21,11 +21,19 @@ namespace FE.Creator.Admin
             // Web API routes
             config.MapHttpAttributeRoutes();
 
+           
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+            config.Routes.MapHttpRoute(
+                   name: "DefaultCustomApi",
+                   routeTemplate: "api/custom/{controller}/{action}/{id}",
+                   defaults: new { id = RouteParameter.Optional }
+               );
+
 
             //uncomment this will avoid return xml serialization output to client.
             config.Formatters.Remove(config.Formatters.XmlFormatter);

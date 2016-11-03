@@ -331,6 +331,7 @@
 /// <reference path="../content/angularjs/angular-route.min.js" />
 /// <reference path="../content/apps/dataservice.js" />
 /// <reference path="../content/apps/definitiongroupcontroller.js" />
+/// <reference path="../content/apps/objectdefinitioncontroller.js" />
 /// <reference path="../content/apps/objectrepository.js" />
 /// <reference path="bootstrap.js" />
 /// <reference path="jquery.validate.js" />

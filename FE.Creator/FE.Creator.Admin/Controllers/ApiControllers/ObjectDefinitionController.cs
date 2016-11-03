@@ -29,12 +29,23 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
 
         // GET: api/ObjectDefinition
         [ResponseType(typeof(IEnumerable<ObjectDefinition>))]
+        [HttpGet]
         public async Task<IHttpActionResult> Get()
         {
             var objDefintions = await getObjectDefinitions();
             return this.Ok<IEnumerable<ObjectDefinition>>(objDefintions);
         }
 
+        [ResponseType(typeof(IEnumerable<ObjectDefinition>))]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetObjectDefintionsByGroup(int? id = null)
+        {
+            var objDefinitions = id.HasValue ?
+                objectService.GetObjectDefinitionsByGroup(id.Value, 1, int.MaxValue) :
+                await getObjectDefinitions();
+
+            return this.Ok<IEnumerable<ObjectDefinition>>(objDefinitions);
+        }
 
         private Task<ObjectDefinition> getObjectDefinition(int id)
         {

@@ -1,0 +1,30 @@
+﻿       
+<div class="alert alert-dismissible" ng-class="CurrMessageClass" ng-show="ShowWarningMsg">
+    <button class="close" aria-hidden="true" type="button" ng-click="ShowWarningMsg=false">×</button>
+    <h4><i class="icon fa fa-warning"></i> Update Results!</h4>
+    {{UpdateMessage}}
+</div> 
+       <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Object Definition Group</h3>
+            </div>
+            <!-- /.box-header -->
+            <!-- form start -->
+            <form role="form">
+                <div class="box-body">
+                    <div class="form-group">
+                        <label for="groupName">Group Name</label>
+                        <input class="form-control" id="groupName" type="text" ng-model="currentGroup.groupName" placeholder="Enter Group Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="groupKey">Group Key</label>
+                        <input class="form-control" id="groupKey" type="text" ng-model="currentGroup.groupKey" placeholder="Enter Group Key">
+                    </div>
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    <button class="btn btn-primary" type="submit" ng-click="SaveChange()">Submit</button>
+                    <a class="btn btn-primary" href="/defgrps">Back</a>
+                </div>
+            </form>
+        </div>

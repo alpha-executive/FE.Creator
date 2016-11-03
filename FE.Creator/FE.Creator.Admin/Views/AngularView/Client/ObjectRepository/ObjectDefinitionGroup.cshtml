@@ -1,6 +1,7 @@
 ﻿<div class="info-box">
         <div class="box-tools pull-right">
-            <a class="btn btn-box-tool" href="/ngView/EditOrDisplay/ObjectRepository/ObjectDefinitionGroupEdit/{{currentGroup.groupID}}"><i class="fa fa-pencil"></i></a>
+            <a class="btn btn-box-tool" ng-click="drillDown({group:currentGroup})"><i class="fa fa-folder"></i></a>
+            <a class="btn btn-box-tool" href="/defgrps/{{currentGroup.groupID}}"><i class="fa fa-pencil"></i></a>
             <button class="btn btn-box-tool" ng-click="onDelete({group:currentGroup})"><i class="fa fa-trash"></i></button>
         </div>
         <!-- Apply any bg-* class to to the icon to color it -->

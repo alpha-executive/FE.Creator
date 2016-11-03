@@ -1,11 +1,11 @@
 ﻿<div class="row">
     <div class="col-md-3 col-sm-6 col-xs-12" ng-repeat="grp in DefinitionGroups">
-        <object-definition-group group="grp" on-delete="DeleteGroup(group)"></object-definition-group>
+        <object-definition-group group="grp" on-delete="DeleteGroup(group)" drill-down="DrillDown(group)"></object-definition-group>
     </div>
     <div class="col-md-3 col-sm-6 col-xs-12">
-            <div class="info-box bg-green" ng-click="">
+            <div class="info-box bg-green">
                 <!-- Apply any bg-* class to to the icon to color it -->
-                <span class="info-box-icon"><i class="fa fa-plus"></i></span>
+                <a href="/defgrps/true/{{parentGroupID}}" class="info-box-icon"><i class="fa fa-plus"></i></a>
                 <div class="info-box-content">
                     <span class="info-box-text">Add New</span>
                 </div><!-- /.info-box-content -->

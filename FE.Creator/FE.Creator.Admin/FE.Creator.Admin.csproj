@@ -191,7 +191,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ViewController\AngularViewController.cs" />
-    <Compile Include="Controllers\GeneralObjectController.cs" />
+    <Compile Include="Controllers\ApiControllers\GeneralObjectController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ApiControllers\ObjectDefinitionController.cs" />
@@ -1133,6 +1133,7 @@
     <Content Include="Content\angularjs\angular.min.js" />
     <Content Include="Content\apps\dataservice.js" />
     <Content Include="Content\apps\definitiongroupcontroller.js" />
+    <Content Include="Content\apps\objectdefinitioncontroller.js" />
     <Content Include="Content\apps\objectrepository.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -1322,7 +1323,10 @@
     <Content Include="Views\AngularView\Client\ObjectRepository\ObjectDefinitionGroupList.cshtml" />
     <Content Include="Views\AngularView\Client\ObjectRepository\ObjectDefinitionGroup.cshtml" />
     <Content Include="Views\AngularView\Server\ObjectRepository\ObjectDefinitionGroupIndex.cshtml" />
-    <Content Include="Views\AngularView\Server\ObjectRepository\ObjectDefinitionGroupEdit.cshtml" />
+    <Content Include="Views\AngularView\Client\ObjectRepository\ObjectDefinitionGroupEdit.cshtml" />
+    <Content Include="Views\AngularView\Server\ObjectRepository\ObjectDefinitionIndex.cshtml" />
+    <Content Include="Views\AngularView\Client\ObjectRepository\ObjectDefintionList.cshtml" />
+    <Content Include="Views\AngularView\Client\ObjectRepository\ObjectDefintionEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,35 @@
+﻿<div class="col-md-4">
+    <div class="box box-success collapsed-box" ng-repeat="def in ObjectDefintions">
+        <div class="box-header with-border">
+            <h3 class="box-title"><i class="fa fa-table"></i>  {{def.objectDefinitionName}}</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                    <i class="fa fa-expand"></i>
+                </button>
+            </div>
+            <!-- /.box-tools -->
+        </div>
+        <!-- /.box-header -->
+        <div class="box-body" style="display: none;">
+            <ul class="nav nav-pills nav-stacked">
+                <li ng-repeat="fld in def.objectFields">
+                    <a href="#">
+                        <i class="fa fa-columns"></i> {{fld.objectDefinitionFieldName}}
+                        <span class="label label-primary pull-right">{{fld.generalObjectDefinitionFiledType}}</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.box-body -->
+        <div class="box-footer">
+            <div class="box-tools">
+                <a  href="#" class="btn btn-box-tool">
+                    <i class="fa fa-trash"></i>
+                </a>
+                <a href="/objdefs/{{def.objectDefinitionID}}/edit" class="btn btn-box-tool">
+                    <i class="fa fa-edit"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

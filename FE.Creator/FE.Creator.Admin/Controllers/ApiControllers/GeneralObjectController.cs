@@ -5,7 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace FE.Creator.Admin.Controllers
+namespace FE.Creator.Admin.ApiControllers.Controllers
 {
     using ObjectRepository;
 

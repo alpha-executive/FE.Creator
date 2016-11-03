@@ -2,5 +2,9 @@
     ViewBag.Title = "Object Definition Group";
 }
 <div ng-app="ngObjectRepository">
-    <object-definition-group-list></object-definition-group-list>
+    <div ng-view></div>
 </div>
+
+@section Scripts {
+    @Scripts.Render("~/js/adminapp/definitiongroup")
+}
