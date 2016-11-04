@@ -64,12 +64,12 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         }
 
         // POST: api/ObjectDefinition
-        public void Post([FromBody]string value)
+        public void Post([FromBody]ObjectDefinition value)
         {
         }
 
         // PUT: api/ObjectDefinition/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]ObjectDefinition value)
         {
         }
 

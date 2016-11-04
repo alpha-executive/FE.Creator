@@ -1327,6 +1327,9 @@
     <Content Include="Views\AngularView\Server\ObjectRepository\ObjectDefinitionIndex.cshtml" />
     <Content Include="Views\AngularView\Client\ObjectRepository\ObjectDefintionList.cshtml" />
     <Content Include="Views\AngularView\Client\ObjectRepository\ObjectDefintionEdit.cshtml" />
+    <Content Include="Views\AngularView\Client\ObjectRepository\SingleSDefinitionField.cshtml" />
+    <Content Include="Views\AngularView\Client\ObjectRepository\ObjRefDefinitionField.cshtml" />
+    <Content Include="Views\AngularView\Client\ObjectRepository\GeneralDefinitionField.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

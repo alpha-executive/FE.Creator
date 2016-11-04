@@ -19,7 +19,8 @@
             createOrUpdateDefinitionGroup: createOrUpdateDefinitionGroup,
             deleteDefinitionGroup: deleteDefinitionGroup,
             getObjectDefintionsbyGroup: getObjectDefintionsbyGroup,
-            getObjectDefinitionById: getObjectDefinitionById
+            getObjectDefinitionById: getObjectDefinitionById,
+            getLightWeightObjectDefinitions: getLightWeightObjectDefinitions
         };
 
         //get the object defintion groups
@@ -130,6 +131,20 @@
 
             function error(response) {
                 logger.error('XHR Failed for getObjectDefintionsbyGroup - ' + error.data);
+            }
+        }
+
+        function getLightWeightObjectDefinitions() {
+            return $http.get('/api/custom/ObjectDefinition/Get')
+                .then(complete)
+                .catch(error);
+
+            function complete(response) {
+                return response.data;
+            }
+
+            function error(response) {
+                logger.error('XHR Failed for getLightWeightObjectDefinitions - ' + error.data);
             }
         }
     }
