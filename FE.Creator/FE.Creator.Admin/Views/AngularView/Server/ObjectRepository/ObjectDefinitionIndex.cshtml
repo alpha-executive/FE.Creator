@@ -1,0 +1,49 @@
+﻿@{
+    ViewBag.Title = "Object Schema";
+}
+<div ng-app="ngObjectRepository">
+    <div class="row" ng-controller="ObjectDefinitionController">
+        <div class="col-md-3">
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Object Definition Groups</h3>
+                    <div class="box-tools">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-compress"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body no-padding">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li ng-repeat="grp in DefinitionGroups">
+                            <a href="/objdefs/{{grp.groupID}}">
+                                <i class="fa fa-database"></i> {{grp.groupName}}
+                                <span class="label label-primary pull-right">12</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /. box -->
+        </div>
+        <div class="col-md-9">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Objects In The Groups</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div ng-view></div>
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/js/adminapp/objectdefinition")
+}
