@@ -54,6 +54,7 @@ namespace FE.Creator.ObjectRepository.Utils
                     //insert.
                     field.SelectionItems.Add(new GeneralObjectDefinitionSelectItem()
                     {
+                        GeneralObjectDefinitionSelectItemID = -1, 
                         SelectItemKey = item.SelectItemKey,
                         SelectDisplayName = item.SelectDisplayName
                     });

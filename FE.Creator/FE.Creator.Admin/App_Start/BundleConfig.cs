@@ -33,8 +33,9 @@ namespace FE.Creator.Admin
                    "~/Content/adminlte-2.3.6/plugins/daterangepicker/daterangepicker.css",
                    "~/Content/adminlte-2.3.6/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css",
                    "~/Content/adminlte-2.3.6/dist/css/AdminLTE.min.css",
-                   "~/Content/adminlte-2.3.6/dist/css/skins/_all-skins.min.css"
-                   
+                   "~/Content/adminlte-2.3.6/dist/css/skins/_all-skins.min.css",
+                   "~/Content/adminlte-2.3.6/plugins/ui-notification/angular-ui-notification.min.css"
+
                ));
 
             bundles.Add(new ScriptBundle("~/js/adminlte").Include(
@@ -47,8 +48,8 @@ namespace FE.Creator.Admin
                     "~/Content/adminlte-2.3.6/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js",
                     "~/Content/adminlte-2.3.6/plugins/jvectormap/jquery-jvectormap-world-mill-en.js",
                     "~/Content/adminlte-2.3.6/plugins/knob/jquery.knob.js",
+                     "~/Content/adminlte-2.3.6/plugins/datepicker/bootstrap-datepicker.js",
                     "~/Content/adminlte-2.3.6/plugins/daterangepicker/daterangepicker.js",
-                    "~/Content/adminlte-2.3.6/plugins/datepicker/bootstrap-datepicker.js",
                     "~/Content/adminlte-2.3.6/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js",
                     "~/Content/adminlte-2.3.6/plugins/slimScroll/jquery.slimscroll.min.js",
                     "~/Content/adminlte-2.3.6/plugins/fastclick/fastclick.js",
@@ -57,7 +58,9 @@ namespace FE.Creator.Admin
 
             bundles.Add(new ScriptBundle("~/js/angularjs").Include(
                 "~/Content/angularjs/angular.min.js",
-                "~/Content/angularjs/angular-route.min.js"
+                "~/Content/angularjs/angular-route.min.js",
+                "~/Content/angularjs/angular-messages.min.js",
+                "~/Content/adminlte-2.3.6/plugins/ui-notification/angular-ui-notification.min.js"
              ));
 
             bundles.Add(new ScriptBundle("~/js/adminapp").Include(

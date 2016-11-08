@@ -36,7 +36,16 @@ namespace FE.Creator.Admin
 
 
             //uncomment this will avoid return xml serialization output to client.
-            config.Formatters.Remove(config.Formatters.XmlFormatter);
+            //config.Formatters.Remove(config.Formatters.XmlFormatter);
+            config.Formatters.Clear();
+
+            config.Formatters.Add(new ObjectDefintionFormatter());
+            Newtonsoft.Json.JsonConvert.DefaultSettings = () => new Newtonsoft.Json.JsonSerializerSettings
+            {
+                Formatting = Newtonsoft.Json.Formatting.Indented,
+                TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Objects,
+                ContractResolver = new CamelCasePropertyNamesContractResolver()
+            };
 
             var container = new UnityContainer();
             container.RegisterType<IObjectService, DefaultObjectService>(new HierarchicalLifetimeManager());

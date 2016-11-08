@@ -367,6 +367,8 @@ namespace FE.Creator.ObjectRepository
                                                       where fd.GeneralObjectDefinitionFieldID == f.ObjectDefinitionFieldID
                                                       select fd).FirstOrDefault();
 
+                bool needCreated = field == null;
+
                 //for the selection field, we need to load the related select options.
                 if(field != null && field is SingleSelectionDefinitionField)
                 {
@@ -375,7 +377,12 @@ namespace FE.Creator.ObjectRepository
                 }
 
                 field = ObjectConverter.ConvertSvcField2ObjDefinitionField(f, field);
-                goDefinition.GeneralObjectDefinitionFields.Add(field);
+                if (needCreated)
+                {
+                    goDefinition.GeneralObjectDefinitionFields.Add(field);
+                    //if there is new added item, we need to do the save change operation.
+                    dboContext.SaveChanges();
+                }
             }
             dboContext.SaveChanges();
         }
@@ -499,6 +506,10 @@ namespace FE.Creator.ObjectRepository
                                  .Where(d => d.GeneralObjectDefinitionID == objDefId)
                                  .Include(d => d.GeneralObjectDefinitionFields)
                                  .ToList();
+                if (objDefList.Count > 0)
+                {
+                    LoadSelctionItems(dboContext, objDefList);
+                }
 
                 return objDefList.Count > 0 ?
                     ObjectConverter.ConvertToObjectDefinitionList(objDefList).First() : null;
@@ -788,6 +799,8 @@ namespace FE.Creator.ObjectRepository
                     var definitionField = dboContext.GeneralObjectDefinitionFields.Find(fieldDefinitionId);
                     if (definitionField != null)
                     {
+                        //special deal with the selection items.
+                        DeleteSingleSelectionItems(definitionField, dboContext);
                         dboContext.GeneralObjectDefinitionFields.Remove(definitionField);
                     }
 
@@ -827,23 +840,46 @@ namespace FE.Creator.ObjectRepository
 
                         objectDefinition.GeneralObjectDefinitionFields.ToList().ForEach(f =>
                         {
-                            //deal with the dependency to selection items.
-                            if (f is SingleSelectionDefinitionField)
-                            {
-                                var sField = f as SingleSelectionDefinitionField;
-                                dboContext.Entry(sField).Collection(c => c.SelectionItems).Load();
-
-                                sField.SelectionItems.ToList().ForEach(l =>
-                                {
-                                    dboContext.GeneralObjectDefinitionSelectItems.Remove(l);
-                                });
-                            }
+                            DeleteSingleSelectionItems(f, dboContext);
 
                             dboContext.GeneralObjectDefinitionFields.Remove(f);
                         });
 
                         //delete the object definition finally.
                         dboContext.GeneralObjectDefinitions.Remove(objectDefinition);
+                    }
+
+                    dboContext.SaveChanges();
+                }
+            }
+        }
+
+        private static void DeleteSingleSelectionItems(GeneralObjectDefinitionField f, DBObjectContext dboContext)
+        {
+            //deal with the dependency to selection items.
+            if (f is SingleSelectionDefinitionField)
+            {
+                var sField = f as SingleSelectionDefinitionField;
+                dboContext.Entry(sField).Collection(c => c.SelectionItems).Load();
+
+                sField.SelectionItems.ToList().ForEach(l =>
+                {
+                    dboContext.GeneralObjectDefinitionSelectItems.Remove(l);
+                });
+            }
+        }
+
+        public void DeleteSingleSelectionFieldSelectionItem(int selectionItemId)
+        {
+            lock (SyncRoot)
+            {
+                using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+                {
+                    var selectionItem =  dboContext.GeneralObjectDefinitionSelectItems.Find(selectionItemId);
+
+                    if (selectionItem != null)
+                    {
+                        dboContext.GeneralObjectDefinitionSelectItems.Remove(selectionItem);
                     }
 
                     dboContext.SaveChanges();

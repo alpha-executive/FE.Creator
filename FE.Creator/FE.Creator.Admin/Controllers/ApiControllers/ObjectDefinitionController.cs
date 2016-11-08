@@ -63,19 +63,32 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             return this.Ok<ObjectDefinition>(objDefinition);
         }
 
+        
         // POST: api/ObjectDefinition
-        public void Post([FromBody]ObjectDefinition value)
+        public async Task<IHttpActionResult> Post([FromBody]ObjectDefinition value)
         {
+            int objectId = -1;
+            if(value != null)
+            {
+               objectId = objectService.CreateORUpdateObjectDefinition(value);
+            }
+
+            return await this.Get(objectId);
         }
 
         // PUT: api/ObjectDefinition/5
         public void Put(int id, [FromBody]ObjectDefinition value)
         {
+            if(value != null)
+            {
+                objectService.CreateORUpdateObjectDefinition(value);
+            }
         }
 
         // DELETE: api/ObjectDefinition/5
         public void Delete(int id)
         {
+            objectService.DeleteObjectDefinition(id);
         }
     }
 }

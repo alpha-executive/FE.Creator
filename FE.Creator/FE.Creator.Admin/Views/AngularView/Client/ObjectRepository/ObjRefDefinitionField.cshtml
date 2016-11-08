@@ -9,7 +9,7 @@
 </div>
 <div class="form-group">
     <label>Refered Object</label>
-    <select class="form-control" ng-model="fld.referedObjectDefinitionID">
-        <option ng-repeat="objdef in AvailableObjectDefinitions" value="{{def.objectDefinitionID}}" selected="{{$first}}">{{objdef.objectDefinitionName}}</option>
+    <select class="form-control" ng-required="true" ng-model="fld.referedObjectDefinitionID" convert-to-number>
+        <option ng-repeat="option in AvailableObjectDefinitions" value="{{option.objectDefinitionID}}">{{option.objectDefinitionName}}</option>
     </select>
 </div>

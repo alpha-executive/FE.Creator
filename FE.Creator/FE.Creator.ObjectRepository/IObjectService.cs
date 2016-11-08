@@ -167,5 +167,8 @@ namespace FE.Creator.ObjectRepository
         /// </summary>
         /// <param name="objectDefinitionId"></param>
         void DeleteObjectDefinition(int objectDefinitionId);
+
+
+        void DeleteSingleSelectionFieldSelectionItem(int selectionItemId);
     }
 }

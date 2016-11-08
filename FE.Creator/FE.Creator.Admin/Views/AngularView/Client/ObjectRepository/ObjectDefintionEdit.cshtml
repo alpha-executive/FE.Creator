@@ -1,27 +1,23 @@
-﻿<div class="col-lg-12">
+﻿<div class="col-lg-12" ng-messages="messagetoShow">
+    <div class="alert alert-dismissible alert-success" ng-message="success">
+        <button class="close" type="button" ng-click="messagetoShow=''">×</button>
+        <h4><i class="icon fa fa-warning"></i> Update Results!</h4>
+        Changes were successfully saved to server!
+    </div> 
+    <div class="alert alert-dismissible alert-warning" ng-message="error">
+        <button class="close" type="button" ng-click="messagetoShow=''">×</button>
+        <h4><i class="icon fa fa-warning"></i> Update Results!</h4>
+        Operation failed due to error, please check the log!
+    </div> 
+</div>
+<div class="col-lg-12">
     <div class="box box-success box-solid">
         <div class="box-header with-border">
-            <h3 class="box-title"><i class="fa fa-table"></i> Edit Object Schema</h3>
+            <h3 class="box-title"><i class="fa fa-table"></i> Edit Object Schema - {{CurrentObjectDefinition.objectDefinitionName}}</h3>
             <div class="box-tools pull-right">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-box-tool"><i class="fa fa-save"></i> Save Changes</button>
-                    <button class="btn btn-box-tool"><i class="fa fa-mail-reply"></i> Back to List</button>
-                    <button type="button" class="btn btn-box-tool"><i class="fa fa-plus"></i>Add</button>
-                    <button type="button" class="btn btn-info btn-box-tool dropdown-toggle" data-toggle="dropdown">
-                        <span class="caret"></span>
-                        <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <ul class="dropdown-menu menu" role="menu">
-                        <li><a ng-click="addPrimaryField(0)" style="color:#333;">String Field</a></li>
-                        <li><a ng-click="addPrimaryField(1)" style="color:#333;">Integer Field</a></li>
-                        <li><a ng-click="addPrimaryField(2)" style="color:#333;">Big Integer Field</a></li>
-                        <li><a ng-click="addPrimaryField(3)" style="color:#333;">DateTime Field</a></li>
-                        <li><a ng-click="addPrimaryField(4)" style="color:#333;">Number Field</a></li>
-                        <li><a ng-click="addPrimaryField(5)" style="color:#333;">Binary Field</a></li>
-                        <li><a ng-click="addFileUploadField()" style="color:#333;">File Upload Field</a></li>
-                        <li><a ng-click="addObjectReferenceField()" style="color:#333;">Object Reference Field</a></li>
-                        <li><a ng-click="addSingleSelectionField()" style="color:#333;">Single Selection Field</a></li>
-                    </ul>
+                    <button type="button" class="btn btn-box-tool" ng-click="saveChanges()"><i class="fa fa-save"></i> Save Changes</button>
+                    <a class="btn btn-box-tool" href="/objdefs/{{groupId}}"><i class="fa fa-mail-reply"></i> Back to List</a>
                 </div>
             </div>
         </div>
@@ -45,6 +41,26 @@
             <div class="box box-warning">
                 <div class="box-header">
                     <h4 class="box-title"><i class="fa fa-cubes"></i> Advanced Properties</h4>
+                    <div class="box-tools pull-right">
+                        <div class="btn-group">
+                            <span type="button" class="btn btn-warning btn-box-tool"><i class="fa fa-plus"></i>Add</span>
+                            <button type="button" class="btn btn-warning btn-box-tool dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                                <span class="sr-only">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu menu" role="menu">
+                                <li><a ng-click="addPrimaryField(0)" style="color:#333;">String Field</a></li>
+                                <li><a ng-click="addPrimaryField(1)" style="color:#333;">Integer Field</a></li>
+                                <li><a ng-click="addPrimaryField(2)" style="color:#333;">Big Integer Field</a></li>
+                                <li><a ng-click="addPrimaryField(3)" style="color:#333;">DateTime Field</a></li>
+                                <li><a ng-click="addPrimaryField(4)" style="color:#333;">Number Field</a></li>
+                                <li><a ng-click="addPrimaryField(5)" style="color:#333;">Binary Field</a></li>
+                                <li><a ng-click="addFileUploadField()" style="color:#333;">File Upload Field</a></li>
+                                <li><a ng-click="addObjectReferenceField()" style="color:#333;">Object Reference Field</a></li>
+                                <li><a ng-click="addSingleSelectionField()" style="color:#333;">Single Selection Field</a></li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <div class="box-body">
                     <div class="box-group" id="accordion">
@@ -58,7 +74,7 @@
                                 </h4>
                                 <div class="box-tools pull-right">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-box-tool"><i class="fa fa-trash"></i> Delete</button>
+                                        <button type="button" class="btn btn-box-tool" ng-click="deleteObjectDefinitionField(fld)"><i class="fa fa-trash"></i> Delete</button>
                                     </div>
                                 </div>
                             </div>
@@ -77,8 +93,8 @@
         <div class="box-footer">
             <div class="box-tools">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-box-tool"><i class="fa fa-save"></i> Save Changes</button>
-                    <button class="btn btn-box-tool"><i class="fa fa-mail-reply"></i> Back to List</button>
+                    <button type="button" class="btn btn-box-tool" ng-click="saveChanges()"><i class="fa fa-save"></i> Save Changes</button>
+                    <a class="btn btn-box-tool" href="/objdefs/{{groupId}}"><i class="fa fa-mail-reply"></i> Back to List</a>
                 </div>
             </div>
         </div>

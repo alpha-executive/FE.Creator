@@ -20,7 +20,11 @@
             deleteDefinitionGroup: deleteDefinitionGroup,
             getObjectDefintionsbyGroup: getObjectDefintionsbyGroup,
             getObjectDefinitionById: getObjectDefinitionById,
-            getLightWeightObjectDefinitions: getLightWeightObjectDefinitions
+            getLightWeightObjectDefinitions: getLightWeightObjectDefinitions,
+            createOrUpdateObjectDefintion: createOrUpdateObjectDefintion,
+            deleteObjectDefintionField: deleteObjectDefintionField,
+            deleteObjectDefintion: deleteObjectDefintion,
+            deleteSingleSelectionFieldItem: deleteSingleSelectionFieldItem
         };
 
         //get the object defintion groups
@@ -145,6 +149,56 @@
 
             function error(response) {
                 logger.error('XHR Failed for getLightWeightObjectDefinitions - ' + error.data);
+            }
+        }
+
+        function createOrUpdateObjectDefintion(id, objdefdata) {
+            //create
+            if (id == null) {
+                return $http.post("/api/ObjectDefinition", 
+                       objdefdata)
+                    .then(complete)
+                    .catch(error);
+            }//update
+            else {
+                return $http.put("/api/ObjectDefinition/" + id, objdefdata)
+                            .then(complete)
+                            .catch(error);
+            }
+
+            function complete(response) {
+                return response.data;
+            }
+
+            function error(response) {
+                logger.error('XHR Failed for createOrUpdateObjectDefintion - ' + error.data);
+            }
+        }
+
+        function deleteObjectDefintionField(id) {
+            return $http.delete("/api/ObjectDefinitionField/" + id)
+                           .catch(error);
+
+            function error(response) {
+                logger.error('XHR Failed for deleteObjectDefintionField - ' + error.data);
+            }
+        }
+
+        function deleteObjectDefintion(id) {
+            return $http.delete("/api/ObjectDefinition/" + id)
+                          .catch(error);
+
+            function error(response) {
+                logger.error('XHR Failed for deleteObjectDefintion - ' + error.data);
+            }
+        }
+
+        function deleteSingleSelectionFieldItem(id) {
+            return $http.delete("/api/SingleSelectionFieldItem/" + id)
+                         .catch(error);
+
+            function error(response) {
+                logger.error('XHR Failed for deleteSingleSelectionFieldItem - ' + error.data);
             }
         }
     }
