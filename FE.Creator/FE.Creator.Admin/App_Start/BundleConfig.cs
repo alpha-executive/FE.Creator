@@ -34,13 +34,12 @@ namespace FE.Creator.Admin
                    "~/Content/adminlte-2.3.6/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css",
                    "~/Content/adminlte-2.3.6/dist/css/AdminLTE.min.css",
                    "~/Content/adminlte-2.3.6/dist/css/skins/_all-skins.min.css",
-                   "~/Content/adminlte-2.3.6/plugins/ui-notification/angular-ui-notification.min.css"
-
+                   "~/Content/adminlte-2.3.6/plugins/pace/pace.min.css",
+                   "~/Content/adminlte-2.3.6/plugins/ui-notification/angular-ui-notification.min.css",
+                   "~/Content/adminlte-2.3.6/plugins/ui-select-master/select.min.css"
                ));
 
             bundles.Add(new ScriptBundle("~/js/adminlte").Include(
-                    "~/Content/adminlte-2.3.6/bootstrap/js/bootstrap.min.js",
-                    "~/Content/adminlte-2.3.6/dist/js/app.min.js",
                     "~/Content/adminlte-2.3.6/plugins/jQuery/jquery-2.2.3.min.js",
                     "~/Content/adminlte-2.3.6/bootstrap/js/bootstrap.min.js",
                     "~/Content/adminlte-2.3.6/plugins/morris/morris.min.js",
@@ -53,6 +52,7 @@ namespace FE.Creator.Admin
                     "~/Content/adminlte-2.3.6/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js",
                     "~/Content/adminlte-2.3.6/plugins/slimScroll/jquery.slimscroll.min.js",
                     "~/Content/adminlte-2.3.6/plugins/fastclick/fastclick.js",
+                    "~/Content/adminlte-2.3.6/plugins/pace/pace.min.js",
                     "~/Content/adminlte-2.3.6/dist/js/app.min.js"
                 ));
 
@@ -60,7 +60,8 @@ namespace FE.Creator.Admin
                 "~/Content/angularjs/angular.min.js",
                 "~/Content/angularjs/angular-route.min.js",
                 "~/Content/angularjs/angular-messages.min.js",
-                "~/Content/adminlte-2.3.6/plugins/ui-notification/angular-ui-notification.min.js"
+                "~/Content/adminlte-2.3.6/plugins/ui-notification/angular-ui-notification.min.js",
+                "~/Content/adminlte-2.3.6/plugins/ui-select-master/select.min.js"
              ));
 
             bundles.Add(new ScriptBundle("~/js/adminapp").Include(
@@ -75,6 +76,10 @@ namespace FE.Creator.Admin
             bundles.Add(new ScriptBundle("~/js/adminapp/objectdefinition").Include(
                     "~/Content/apps/objectdefinitioncontroller.js"
                ));
+
+            bundles.Add(new ScriptBundle("~/js/adminapp/generalobject").Include(
+                "~/Content/apps/generalobjectcontroller.js"
+                ));
 
         }
     }

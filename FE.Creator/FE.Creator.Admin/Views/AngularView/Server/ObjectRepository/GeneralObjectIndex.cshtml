@@ -1,0 +1,91 @@
+﻿
+@{
+    ViewBag.Title = "Objects Management";
+}
+<div ng-app="ngObjectRepository">
+
+    <div class="row"  ng-controller="DemoCtrl as ctrl">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Object List</h3>
+                    <div class="box-tools">
+                        <div class="input-group input-group-sm" style="width: 300px;">
+                            <div class="input-group-btn">
+                                <ui-select ng-model="ctrl.currentObjectDefinition.selected" ng-disabled="ctrl.disabled" style="min-width: 100px;" title="Choose a person">
+                                    <ui-select-match placeholder="Select a Object Definition...">{{$select.selected.objectDefinitionName}}</ui-select-match>
+                                    <ui-select-choices group-by="ctrl.GetObjectDefinitionGroup" repeat="objdef in ctrl.ObjectDefintions">
+                                        <div ng-bind-html="objdef.objectDefinitionName"></div>
+                                        <small>
+                                            {{objdef.objectDefinitionName}}
+                                        </small>
+                                    </ui-select-choices>
+                                </ui-select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr>
+                                <th>ID</th>
+                                <th>User</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Reason</th>
+                            </tr>
+                            <tr>
+                                <td>183</td>
+                                <td>John Doe</td>
+                                <td>11-7-2014</td>
+                                <td><span class="label label-success">Approved</span></td>
+                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                            </tr>
+                            <tr>
+                                <td>219</td>
+                                <td>Alexander Pierce</td>
+                                <td>11-7-2014</td>
+                                <td><span class="label label-warning">Pending</span></td>
+                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                            </tr>
+                            <tr>
+                                <td>657</td>
+                                <td>Bob Doe</td>
+                                <td>11-7-2014</td>
+                                <td><span class="label label-primary">Approved</span></td>
+                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                            </tr>
+                            <tr>
+                                <td>175</td>
+                                <td>Mike Doe</td>
+                                <td>11-7-2014</td>
+                                <td><span class="label label-danger">Denied</span></td>
+                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-controller="DemoCtrl as ctrl">
+        <div class="col-xs-12">
+            @*<ui-select ng-model="ctrl.currentObjectDefinition.selected" ng-disabled="ctrl.disabled" style="min-width: 100px;" title="Choose a Object Defintion">
+                <ui-select-match placeholder="Select a Definition....">{{$select.selected.objectDefinitionName}}</ui-select-match>
+                <ui-select-choices group-by="ctrl.GetObjectDefinitionGroup" repeat="def in ctrl.ObjectDefintions">
+                    <div ng-bind-html="def.objectDefinitionName"></div>
+                    <small>{{def.objectDefinitionName}}</small>
+                </ui-select-choices>
+            </ui-select>*@
+
+            
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/js/adminapp/generalobject")
+}

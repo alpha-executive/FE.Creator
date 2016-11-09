@@ -25,11 +25,11 @@
              });
          });
 
-    editObjectDefinitionGroupController.$inject = ["$scope", "$route", "$routeParams", "$location", "ObjectRepositoryDataService"];
+    editObjectDefinitionGroupController.$inject = ["$scope", "$route", "$routeParams", "$location", "ObjectRepositoryDataService", "Notification"];
 
 
     /*controller*/
-    function editObjectDefinitionGroupController($scope, $route, $routeParams, $location, ObjectRepositoryDataService) {
+    function editObjectDefinitionGroupController($scope, $route, $routeParams, $location, ObjectRepositoryDataService, Notification) {
         var scopeContext = $scope;
         scopeContext.$route = $route;
         scopeContext.$location = $location;
@@ -37,7 +37,6 @@
 
         scopeContext.currentGroup = {};
         scopeContext.SaveChange = SaveChange;
-        scopeContext.ShowWarningMsg = false;
 
         //if it's update.
         if ($routeParams.iscreate != null && $routeParams.iscreate == "true") {
@@ -52,9 +51,13 @@
                 ObjectRepositoryDataService.createOrUpdateDefinitionGroup(scopeContext.currentGroup.groupID,
                     scopeContext.currentGroup)
                     .then(function(data){
-                            scopeContext.CurrMessageClass = "alert-success";
-                            scopeContext.UpdateMessage = "Succeed Update the Definition Group";
-
+                            Notification.success({
+                                message: 'Succeed Update the Definition Group!',
+                                delay: 3000,
+                                positionY: 'bottom',
+                                positionX: 'right',
+                                title: 'Success',
+                            });
                             //for create, we will update the currentGroup model.
                             if (scopeContext.currentGroup.groupID == null)
                                 scopeContext.currentGroup = data;
@@ -62,10 +65,14 @@
             }
             catch(e)
             {
-                scopeContext.CurrMessageClass = "alert-error";
-                scopeContext.UpdateMessage = "Failed to update the Definition Group" + e;
+                Notification.error({
+                    message: "Failed to update the Definition Group" + e,
+                    delay: 5000,
+                    positionY: 'bottom',
+                    positionX: 'right',
+                    title: 'Error'
+                });
             }
-            scopeContext.ShowWarningMsg = true;
         }
 
         function LoadParentGroup() {

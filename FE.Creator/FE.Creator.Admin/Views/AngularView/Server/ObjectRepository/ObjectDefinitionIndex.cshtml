@@ -18,7 +18,11 @@
                         <li ng-repeat="grp in DefinitionGroups">
                             <a href="/objdefs/{{grp.groupID}}">
                                 <i class="fa fa-database"></i> {{grp.groupName}}
-                                <span class="label label-primary pull-right">12</span>
+                                <span class="label label-primary pull-right">{{grp.chidrenGroups.length}}</span>
+                            </a>
+                            <a ng-repeat="cgrp in grp.chidrenGroups" href="/objdefs/{{cgrp.groupID}}">
+                                <i class="fa fa-circle-o text-yellow"></i> {{cgrp.groupName}}
+                                <span class="label label-primary pull-right">{{cgrp.chidrenGroups.length}}</span>
                             </a>
                         </li>
                     </ul>

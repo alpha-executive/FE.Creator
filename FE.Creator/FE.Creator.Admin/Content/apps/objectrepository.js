@@ -2,7 +2,7 @@
     "use strict";
 
     //for object defintion group
-    angular.module('ngObjectRepository', ['ngRoute', 'ngMessages', 'ui-notification']);
+    angular.module('ngObjectRepository', ['ngRoute', 'ngMessages', 'ui-notification', 'ui.select']);
 
     angular.module('ngObjectRepository').directive('convertToNumber', function () {
         return {

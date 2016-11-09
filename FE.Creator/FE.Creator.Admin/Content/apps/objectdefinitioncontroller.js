@@ -152,7 +152,13 @@
                         })
                     }
                     catch (e) {
-                        Notification.error({ message: 'Failed: ' + e.message, delay: 5000, positionY: 'bottom', positionX: 'right' });
+                        Notification.error({
+                            message: 'Delete Faild: ' + e.message,
+                            delay: 5000,
+                            positionY: 'bottom',
+                            positionX: 'right',
+                            title: 'Error',
+                        });
                     }
                 }
                 else {
@@ -202,11 +208,23 @@
                 ObjectRepositoryDataService.createOrUpdateObjectDefintion(scopeContext.CurrentObjectDefinition.objectDefinitionID,
                     scopeContext.CurrentObjectDefinition)
                 .then(function (data) {
-                    Notification.success({ message: 'Change Saved!', delay: 3000, positionY: 'bottom', positionX: 'right' });
+                    Notification.success({
+                        message: 'Change Saved!',
+                        delay: 3000,
+                        positionY: 'bottom',
+                        positionX: 'right',
+                        title: 'Warn',
+                    });
                 });
             }
             catch (e) {
-                Notification.error({ message: 'Change Faild: ' + e.message, delay: 5000, positionY: 'bottom', positionX: 'right' });
+                Notification.error({
+                    message: 'Change Faild: ' + e.message,
+                    delay: 5000,
+                    positionY: 'bottom',
+                    positionX: 'right',
+                    title: 'Error'
+                });
             }
         }
     }

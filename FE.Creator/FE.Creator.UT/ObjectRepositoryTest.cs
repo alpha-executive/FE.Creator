@@ -97,7 +97,7 @@ namespace FE.Creator.UT
         public void GetObjectDefinitionByGroupTest()
         {
             IObjectService service = new DefaultObjectService();
-            var objectGroup = service.GetObjectDefinitionGroups()[0];
+            var objectGroup = service.GetObjectDefinitionGroups(null)[0];
             var objectDefinition = service.GetObjectDefinitionsByGroup(objectGroup.GroupID, 1, 10);
 
             Assert.IsTrue(objectDefinition.Count > 0);

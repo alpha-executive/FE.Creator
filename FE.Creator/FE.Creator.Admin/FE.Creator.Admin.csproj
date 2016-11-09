@@ -1131,12 +1131,19 @@
     <Content Include="Content\adminlte-2.3.6\plugins\timepicker\bootstrap-timepicker.js" />
     <Content Include="Content\adminlte-2.3.6\plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="Content\adminlte-2.3.6\plugins\timepicker\bootstrap-timepicker.min.js" />
+    <Content Include="Content\adminlte-2.3.6\plugins\ui-notification\angular-ui-notification.min.css" />
+    <Content Include="Content\adminlte-2.3.6\plugins\ui-notification\angular-ui-notification.min.js" />
+    <Content Include="Content\adminlte-2.3.6\plugins\ui-select-master\select.css" />
+    <Content Include="Content\adminlte-2.3.6\plugins\ui-select-master\select.js" />
+    <Content Include="Content\adminlte-2.3.6\plugins\ui-select-master\select.min.css" />
+    <Content Include="Content\adminlte-2.3.6\plugins\ui-select-master\select.min.js" />
     <Content Include="Content\adminlte-2.3.6\starter.html" />
     <Content Include="Content\angularjs\angular-messages.min.js" />
     <Content Include="Content\angularjs\angular-route.min.js" />
     <Content Include="Content\angularjs\angular.min.js" />
     <Content Include="Content\apps\dataservice.js" />
     <Content Include="Content\apps\definitiongroupcontroller.js" />
+    <Content Include="Content\apps\generalobjectcontroller.js" />
     <Content Include="Content\apps\objectdefinitioncontroller.js" />
     <Content Include="Content\apps\objectrepository.js" />
     <Content Include="Content\bootstrap.css" />
@@ -1275,6 +1282,8 @@
     <Content Include="Content\adminlte-2.3.6\plugins\input-mask\phone-codes\phone-be.json" />
     <Content Include="Content\adminlte-2.3.6\plugins\input-mask\phone-codes\phone-codes.json" />
     <Content Include="Content\adminlte-2.3.6\README.md" />
+    <Content Include="Content\adminlte-2.3.6\plugins\ui-select-master\LICENSE" />
+    <Content Include="Content\adminlte-2.3.6\plugins\ui-notification\LICENSE" />
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1334,9 +1343,11 @@
     <Content Include="Views\AngularView\Client\ObjectRepository\SingleSDefinitionField.cshtml" />
     <Content Include="Views\AngularView\Client\ObjectRepository\ObjRefDefinitionField.cshtml" />
     <Content Include="Views\AngularView\Client\ObjectRepository\GeneralDefinitionField.cshtml" />
+    <Content Include="Views\AngularView\Server\ObjectRepository\GeneralObjectIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\AngularView\Client\Common\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
