@@ -20,7 +20,7 @@ namespace FE.Creator.UT
                 GroupName = "SERVER OBJECT",
             });
 
-            Assert.IsTrue(service.GetObjectDefinitionGroups().Count == 1);
+            Assert.IsTrue(service.GetObjectDefinitionGroups(null).Count == 1);
         }
 
         [TestMethod]
@@ -31,7 +31,7 @@ namespace FE.Creator.UT
             ObjectDefinition definition = new ObjectDefinition();
             definition.IsFeildsUpdateOnly = false;
             definition.ObjectDefinitionKey = "PERSON_TEST";
-            definition.ObjectDefinitionGroupID = service.GetObjectDefinitionGroups()[0].GroupID;
+            definition.ObjectDefinitionGroupID = service.GetObjectDefinitionGroups(null)[0].GroupID;
             definition.ObjectDefinitionName = "Person";
             definition.ObjectOwner = "Admin";
             definition.UpdatedBy = "Admin";
@@ -113,7 +113,7 @@ namespace FE.Creator.UT
             svObject.OnlyUpdateProperties = false;
             svObject.UpdatedBy = "Admin";
             svObject.CreatedBy = "Admin";
-            svObject.ObjectDefinitionId = service.GetAllObjectDefinitions()[0].ObjectDefinitionID;
+            svObject.ObjectDefinitionId = service.GetAllObjectDefinitions()[1].ObjectDefinitionID;
 
             svObject.Properties.Add(new ObjectKeyValuePair()
             {

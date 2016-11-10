@@ -8,7 +8,7 @@ using System.Web.Http;
 namespace FE.Creator.Admin.ApiControllers.Controllers
 {
     using ObjectRepository;
-
+    using ObjectRepository.ServiceModels;
     public class GeneralObjectController : ApiController
     {
         IObjectService objectService = null;
@@ -18,31 +18,33 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             this.objectService = objectService;
         }
 
-        // GET: api/GeneralObject
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
         // GET: api/GeneralObject/5
-        public string Get(int id)
+        public ServiceObject Get(int id, [FromBody]string []properties = null)
         {
-            return "value";
+            var generalObj = objectService.GetServiceObjectById(id, properties);
+
+            return generalObj;
         }
 
         // POST: api/GeneralObject
-        public void Post([FromBody]string value)
+        public void Post([FromBody]ServiceObject value)
         {
+            if (value != null)
+            {
+                objectService.CreateORUpdateGeneralObject(value);
+            }
         }
 
         // PUT: api/GeneralObject/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(int id, [FromBody]ServiceObject value)
         {
+            Post(value);
         }
 
         // DELETE: api/GeneralObject/5
         public void Delete(int id)
         {
+            objectService.DeleteServiceObject(id);
         }
     }
 }

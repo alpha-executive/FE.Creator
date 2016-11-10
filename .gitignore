@@ -3,3 +3,6 @@
 ################################################################################
 
 /FE.Creator/.vs
+/FE.Creator/FE.Creator.ObjectRepository/obj/Debug/FE.Creator.ObjectRepository.csprojResolveAssemblyReference.cache
+/FE.Creator/FE.Creator.Admin/App_Data
+/FE.Creator/FE.Creator.Admin/bin

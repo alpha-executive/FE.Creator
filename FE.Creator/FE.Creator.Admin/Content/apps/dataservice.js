@@ -24,7 +24,8 @@
             createOrUpdateObjectDefintion: createOrUpdateObjectDefintion,
             deleteObjectDefintionField: deleteObjectDefintionField,
             deleteObjectDefintion: deleteObjectDefintion,
-            deleteSingleSelectionFieldItem: deleteSingleSelectionFieldItem
+            deleteSingleSelectionFieldItem: deleteSingleSelectionFieldItem,
+            getServiceObjects: getServiceObjects
         };
 
         //get the object defintion groups
@@ -45,7 +46,8 @@
 
             function error(response)
             {
-                logger.error('XHR Failed for getObjectDefinitionGroups - ' + error.data);
+                logger.error('XHR Failed for getObjectDefinitionGroups - ' + response.data);
+                return response.data;
             }
         }
 
@@ -61,7 +63,8 @@
            }
 
            function error(response) {
-               logger.error('XHR Failed for getObjectDefinitionGroup - ' + error.data);
+               logger.error('XHR Failed for getObjectDefinitionGroup - ' + response.data);
+               return response.data;
            }
         }
 
@@ -84,7 +87,8 @@
             }
 
             function error(response) {
-                logger.error('XHR Failed for createOrUpdateDefinitionGroup - ' + error.data);
+                logger.error('XHR Failed for createOrUpdateDefinitionGroup - ' + response.data);
+                return response.data;
             }
         }
 
@@ -100,7 +104,8 @@
             }
 
             function error(response) {
-                logger.error('XHR Failed for deleteDefinitionGroup - ' + error.data);
+                logger.error('XHR Failed for deleteDefinitionGroup - ' + response.data);
+                return response.data;
             }
         }
 
@@ -120,7 +125,8 @@
             }
 
             function error(response) {
-                logger.error('XHR Failed for getObjectDefintionsbyGroup - ' + error.data);
+                logger.error('XHR Failed for getObjectDefintionsbyGroup - ' + response.data);
+                return response.data;
             }
         }
 
@@ -134,7 +140,8 @@
             }
 
             function error(response) {
-                logger.error('XHR Failed for getObjectDefintionsbyGroup - ' + error.data);
+                logger.error('XHR Failed for getObjectDefintionsbyGroup - ' + response.data);
+                return response.data;
             }
         }
 
@@ -148,7 +155,8 @@
             }
 
             function error(response) {
-                logger.error('XHR Failed for getLightWeightObjectDefinitions - ' + error.data);
+                logger.error('XHR Failed for getLightWeightObjectDefinitions - ' + response.data);
+                return response.data;
             }
         }
 
@@ -171,7 +179,8 @@
             }
 
             function error(response) {
-                logger.error('XHR Failed for createOrUpdateObjectDefintion - ' + error.data);
+                logger.error('XHR Failed for createOrUpdateObjectDefintion - ' + response.data);
+                return response.data;
             }
         }
 
@@ -180,7 +189,8 @@
                            .catch(error);
 
             function error(response) {
-                logger.error('XHR Failed for deleteObjectDefintionField - ' + error.data);
+                logger.error('XHR Failed for deleteObjectDefintionField - ' + response.data);
+                return response.data;
             }
         }
 
@@ -189,7 +199,8 @@
                           .catch(error);
 
             function error(response) {
-                logger.error('XHR Failed for deleteObjectDefintion - ' + error.data);
+                logger.error('XHR Failed for deleteObjectDefintion - ' + response.data);
+                return response.data;
             }
         }
 
@@ -198,7 +209,30 @@
                          .catch(error);
 
             function error(response) {
-                logger.error('XHR Failed for deleteSingleSelectionFieldItem - ' + error.data);
+                logger.error('XHR Failed for deleteSingleSelectionFieldItem - ' + response.data);
+
+                return response.data;
+            }
+        }
+
+        /*==========================Service Objects ===============================*/
+        function getServiceObjects(objectDefintionId, properties) {
+            var config = {
+                method: 'GET',
+                url: '/api/GeneralObjectList/' + objectDefintionId + "/" + properties,
+            };
+
+            return $http(config)
+              .then(complete)
+              .catch(error);
+
+            function complete(response) {
+                return response.data;
+            }
+
+            function error(response) {
+                logger.error('XHR Failed for getServiceObjects - ' + response.data);
+                return response.data;
             }
         }
     }

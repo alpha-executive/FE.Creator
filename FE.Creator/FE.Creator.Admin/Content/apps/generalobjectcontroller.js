@@ -30,7 +30,13 @@
     };
 });
 
-angular.module("ngObjectRepository").controller('DemoCtrl', function ($scope, ObjectRepositoryDataService) {
+
+angular.module("ngObjectRepository")
+    .controller('GeneralObjectListController', GeneralObjectListController);
+
+GeneralObjectListController.$inject = ["$scope", "ObjectRepositoryDataService"];
+
+function GeneralObjectListController($scope, ObjectRepositoryDataService) {
     var vm = this;
 
     vm.disabled = undefined;
@@ -56,6 +62,8 @@ angular.module("ngObjectRepository").controller('DemoCtrl', function ($scope, Ob
     vm.ObjectDefintions = [];
     vm.ObjectDefGroups = [];
     vm.disabled = false;
+    vm.GetObjectDefinitionGroup = GetObjectDefinitionGroup;
+    vm.ServiceObjectList = [];
 
     Activate();
     function Activate() {
@@ -72,38 +80,29 @@ angular.module("ngObjectRepository").controller('DemoCtrl', function ($scope, Ob
 
                 return vm.ObjectDefintions;
             });
+
+        ObjectRepositoryDataService.getServiceObjects(2, ["Person Name",
+                   "Person Sex",
+                   "Person AGE",
+                   "Person Image",
+                   "Person Manager"].toString())
+        .then(function (data) {
+            vm.ServiceObjectList = data;
+
+            return vm.ServiceObjectList;
+        });
+
+
     }
     function GetObjectDefinitionGroup(objdef) {
+        var foundItem = {};
         vm.ObjectDefGroups.forEach(function (item, index, arr) {
-                if (objdef.objectDefinitionGroupID == item.groupID) {
-                    return item.groupName;
-             }
+            if (objdef.objectDefinitionGroupID == item.groupID) {
+                foundItem = item;
             }
+        }
         );
 
-        return "Unknown Group";
+        return foundItem.groupName || "Unknown Group";
     }
-
-    //vm.onSelectCallback = function (item, model) {
-    //    vm.counter++;
-    //    vm.eventResult = { item: item, model: model };
-    //};
-
-    //vm.removed = function (item, model) {
-    //    vm.lastRemoved = {
-    //        item: item,
-    //        model: model
-    //    };
-    //};
-
-    //vm.tagTransform = function (newTag) {
-    //    var item = {
-    //        name: newTag,
-    //        email: newTag.toLowerCase() + '@email.com',
-    //        age: 'unknown',
-    //        country: 'unknown'
-    //    };
-
-    //    return item;
-    //};
-});
+}
