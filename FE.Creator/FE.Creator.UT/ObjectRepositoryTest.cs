@@ -113,7 +113,7 @@ namespace FE.Creator.UT
             svObject.OnlyUpdateProperties = false;
             svObject.UpdatedBy = "Admin";
             svObject.CreatedBy = "Admin";
-            svObject.ObjectDefinitionId = service.GetAllObjectDefinitions()[1].ObjectDefinitionID;
+            svObject.ObjectDefinitionId = service.GetAllObjectDefinitions()[0].ObjectDefinitionID;
 
             svObject.Properties.Add(new ObjectKeyValuePair()
             {

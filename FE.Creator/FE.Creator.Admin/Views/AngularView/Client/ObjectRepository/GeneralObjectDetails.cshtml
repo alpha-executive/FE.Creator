@@ -1,0 +1,121 @@
+﻿
+    <div class="box box-primary box-solid">
+        <div class="box-header with-border">
+            <h3 class="box-title"><i class="fa fa-table"></i> View Object - {{ctrl.currentGeneralObject.objectName}}</h3>
+            <div class="box-tools pull-right">
+                <div class="btn-group">
+                    <button class="btn btn-box-tool" ng-click="ctrl.setViewMode('list')"><i class="fa fa-mail-reply"></i> Back to List</button>
+                </div>
+            </div>
+        </div>
+        <div class="box-body">
+            <div class="box box-warning">
+                <div class="box-header">
+                    <h4><i class="fa fa-flag-o"></i> General Property</h4>
+                </div>
+                <div class="box-body">
+                    <!--ID and Name-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-addon label-default"><i class="fa fa-star-o text-yellow"></i> Object Id</span>
+                                <span class="form-control">{{ctrl.currentGeneralObject.objectID}}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-addon label-default"><i class="fa fa-star-o text-yellow"></i> Object Name</span>
+                                <span class="form-control">{{ctrl.currentGeneralObject.objectName}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <!--owner-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <span class="input-group-addon label-default"><i class="fa fa-star-o text-yellow"></i> Object Owner</span>
+                                <span class="form-control">{{ctrl.currentGeneralObject.objectOwner}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <!--Created and Created By-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-addon label-default"><i class="fa fa-star-o text-yellow"></i> Created</span>
+                                <span class="form-control">{{ctrl.currentGeneralObject.created}}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-addon label-default"><i class="fa fa-star-o text-yellow"></i> Created By</span>
+                                <span class="form-control">{{ctrl.currentGeneralObject.createdBy}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <!--Updated and updatedBy-->
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-addon label-default"><i class="fa fa-star-o text-yellow"></i> Updated</span>
+                                <span class="form-control">{{ctrl.currentGeneralObject.updated}}</span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-addon label-default"><i class="fa fa-star-o text-yellow"></i> Updated By</span>
+                                <span class="form-control">{{ctrl.currentGeneralObject.updatedBy}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box box-warning">
+                <div class="box-header">
+                    <h4 class="box-title"><i class="fa fa-cubes"></i> Advanced Properties</h4>
+                </div>
+                <div class="box-body">
+                    <div class="row" ng-repeat="field in ctrl.currentObjectDefinition.objectFields">
+                        <div class="col-md-12" ng-if="field.generalObjectDefinitionFiledType != 3">
+                            <div class="input-group">
+                                <span class="input-group-addon label-default"><i class="fa fa-star-o text-yellow"></i> {{field.objectDefinitionFieldName}}</span>
+                                <span class="form-control">{{ctrl.currentGeneralObject.properties | objectValueFilter:field}}</span>
+                            </div>
+                            <br />
+                        </div>
+                        <div class="box" ng-if="field.generalObjectDefinitionFiledType==3">
+                            <div class="box-header">
+                                <h5 class="box-title"><i class="fa fa-paperclip"></i> {{field.objectDefinitionFieldName}}</h5>
+                            </div>
+                            <div class="box-body">
+                                <ul class="mailbox-attachments clearfix">
+                                    <li>
+                                        <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
+                                        <div class="mailbox-attachment-info">
+                                            <a href="#" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> {{ctrl.currentGeneralObject.properties | objectValueFilter:field}}</a>
+                                            <span class="mailbox-attachment-size">
+                                                1,245 KB
+                                                <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
+                                            </span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <!-- /.ng-if -->
+                    </div>
+                </div>
+                <!-- /.box-body -->
+            </div><!--/.box-->
+        </div><!-- /.box-body -->
+        <div class="box-footer">
+            <div class="box-tools">
+                <div class="btn-group">
+                    <button class="btn btn-box-tool" ng-click="ctrl.setViewMode('list')"><i class="fa fa-mail-reply"></i> Back to List</button>
+                </div>
+            </div>
+        </div>
+    </div>

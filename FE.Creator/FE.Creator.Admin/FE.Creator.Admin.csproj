@@ -190,7 +190,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\ApiControllers\GeneralObjectListController.cs" />
     <Compile Include="Controllers\ApiControllers\ObjectDefinitionFieldController.cs" />
     <Compile Include="Controllers\ApiControllers\SingleSelectionFieldItemController.cs" />
     <Compile Include="Controllers\ViewController\AngularViewController.cs" />
@@ -1349,6 +1348,8 @@
     <Content Include="Views\AngularView\Client\ObjectRepository\ObjRefDefinitionField.cshtml" />
     <Content Include="Views\AngularView\Client\ObjectRepository\GeneralDefinitionField.cshtml" />
     <Content Include="Views\AngularView\Server\ObjectRepository\GeneralObjectIndex.cshtml" />
+    <Content Include="Views\AngularView\Client\ObjectRepository\GeneralObjectDetails.cshtml" />
+    <Content Include="Views\AngularView\Client\ObjectRepository\GeneralObjectEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\AngularView\Client\Common\" />

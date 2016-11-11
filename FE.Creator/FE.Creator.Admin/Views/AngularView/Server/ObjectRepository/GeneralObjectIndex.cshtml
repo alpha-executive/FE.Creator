@@ -6,13 +6,13 @@
 
     <div class="row"  ng-controller="GeneralObjectListController as ctrl">
         <div class="col-xs-12">
-            <div class="box">
+            <div class="box box-primary" ng-show="ctrl.viewMode=='list'">
                 <div class="box-header">
                     <h3 class="box-title">Object List</h3>
                     <div class="box-tools">
                         <div class="input-group input-group-sm" style="width: 300px;">
                             <div class="input-group-btn">
-                                <ui-select ng-model="ctrl.currentObjectDefinition" ng-disabled="ctrl.disabled" style="min-width: 100px;" title="Choose a person">
+                                <ui-select ng-model="ctrl.currentObjectDefinition" ng-disabled="ctrl.disabled" style="min-width: 100px;" on-select="ctrl.onDefinitionChanged($item, $model)" title="Choose a person">
                                     <ui-select-match placeholder="Select a Object Definition...">{{$select.selected.objectDefinitionName}}</ui-select-match>
                                     <ui-select-choices group-by="ctrl.GetObjectDefinitionGroup" repeat="objdef in ctrl.ObjectDefintions">
                                         <div ng-bind-html="objdef.objectDefinitionName"></div>
@@ -31,58 +31,44 @@
                         <tbody>
                             <tr>
                                 <th>ID</th>
-                                <th>User</th>
-                                <th>Date</th>
+                                <th>Object Name</th>
+                                <th>Create Date</th>
                                 <th>Status</th>
-                                <th>Reason</th>
+                                <th><div class="pull-right"><i class="fa  fa-wrench"></i> Action</div></th>
                             </tr>
-                            <tr>
-                                <td>183</td>
-                                <td>John Doe</td>
-                                <td>11-7-2014</td>
-                                <td><span class="label label-success">Approved</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                                <td>219</td>
-                                <td>Alexander Pierce</td>
-                                <td>11-7-2014</td>
-                                <td><span class="label label-warning">Pending</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                                <td>657</td>
-                                <td>Bob Doe</td>
-                                <td>11-7-2014</td>
-                                <td><span class="label label-primary">Approved</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
-                            </tr>
-                            <tr>
-                                <td>175</td>
-                                <td>Mike Doe</td>
-                                <td>11-7-2014</td>
-                                <td><span class="label label-danger">Denied</span></td>
-                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>
+                            <tr ng-repeat="row in ctrl.ServiceObjectList">
+                                <td>{{row.objectID}}</td>
+                                <td>{{row.objectName}}</td>
+                                <td>{{row.created}}</td>
+                                <td><span class="label label-success">Active</span></td>
+                                <td>
+                                    <div class="btn-group pull-right">
+                                        <button type="button" class="btn btn-info btn-flat btn-xs" ng-click="ctrl.viewObjectDetails(row.objectID)"><i class="fa fa-eye"></i> View</button>
+                                        <button type="button" class="btn btn-info btn-flat btn-xs" ng-click="ctrl.editObject(row.objectID)"><i class="fa fa-pencil"></i> Edit</button>
+                                        <button type="button" class="btn btn-info btn-flat btn-xs" ng-click="ctrl.deleteObject(row.objectID)"><i class="fa fa-minus-square"></i> Delete</button>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <!-- /.box-body -->
+                <div class="box-footer clearfix">
+                    <ul class="pagination pagination-sm no-margin">
+                        <li><a href="#">«</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">»</a></li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </div>
-
-    <div class="row" ng-controller="DemoCtrl as ctrl">
-        <div class="col-xs-12">
-            @*<ui-select ng-model="ctrl.currentObjectDefinition.selected" ng-disabled="ctrl.disabled" style="min-width: 100px;" title="Choose a Object Defintion">
-                <ui-select-match placeholder="Select a Definition....">{{$select.selected.objectDefinitionName}}</ui-select-match>
-                <ui-select-choices group-by="ctrl.GetObjectDefinitionGroup" repeat="def in ctrl.ObjectDefintions">
-                    <div ng-bind-html="def.objectDefinitionName"></div>
-                    <small>{{def.objectDefinitionName}}</small>
-                </ui-select-choices>
-            </ui-select>*@
-
-            
+            <div class="box" ng-show="ctrl.viewMode=='view'">
+                @Html.Partial("~/Views/AngularView/Client/ObjectRepository/GeneralObjectDetails.cshtml")
+            </div>
+            <div class="box" ng-show="ctrl.viewMode=='edit'">
+                @Html.Partial("~/Views/AngularView/Client/ObjectRepository/GeneralObjectEdit.cshtml")
+            </div>
         </div>
     </div>
 </div>

@@ -38,7 +38,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
 
         [ResponseType(typeof(IEnumerable<ObjectDefinition>))]
         [HttpGet]
-        public async Task<IHttpActionResult> GetObjectDefintionsByGroup(int? id = null)
+        public async Task<IHttpActionResult> FindObjectDefintionsByGroup(int? id = null)
         {
             var objDefinitions = id.HasValue ?
                 objectService.GetObjectDefinitionsByGroup(id.Value, 1, int.MaxValue) :

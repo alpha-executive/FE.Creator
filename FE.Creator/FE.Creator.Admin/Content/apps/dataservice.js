@@ -111,7 +111,7 @@
 
         //===============================================Object Defintion API ================
         function getObjectDefintionsbyGroup(groupId) {
-            var url = "/api/custom/ObjectDefinition/GetObjectDefintionsByGroup";
+            var url = "/api/custom/ObjectDefinition/FindObjectDefintionsByGroup";
 
             if (groupId != null)
                 url = url + "/" + groupId;
@@ -219,7 +219,7 @@
         function getServiceObjects(objectDefintionId, properties) {
             var config = {
                 method: 'GET',
-                url: '/api/GeneralObjectList/' + objectDefintionId + "/" + properties,
+                url: '/api/custom/GeneralObject/FindServiceObjects/' + objectDefintionId + "/" + properties,
             };
 
             return $http(config)
