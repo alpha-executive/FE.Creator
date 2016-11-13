@@ -47,6 +47,15 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             return this.Ok<IEnumerable<ServiceObject>>(objectList);
         }
 
+        [ResponseType(typeof(ServiceObject))]
+        [HttpGet]
+        public IHttpActionResult FindServiceObject(int id)
+        {
+            var obj = objectService.GetServiceObjectById(id, null);
+
+            return this.Ok<ServiceObject>(obj);
+        }
+
         // POST: api/GeneralObject
         public void Post([FromBody]ServiceObject value)
         {

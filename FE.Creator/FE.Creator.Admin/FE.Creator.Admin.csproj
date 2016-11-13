@@ -190,6 +190,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApiControllers\FilesController.cs" />
     <Compile Include="Controllers\ApiControllers\ObjectDefinitionFieldController.cs" />
     <Compile Include="Controllers\ApiControllers\SingleSelectionFieldItemController.cs" />
     <Compile Include="Controllers\ViewController\AngularViewController.cs" />
@@ -1070,6 +1071,10 @@
     <Content Include="Content\adminlte-2.3.6\plugins\morris\morris.css" />
     <Content Include="Content\adminlte-2.3.6\plugins\morris\morris.js" />
     <Content Include="Content\adminlte-2.3.6\plugins\morris\morris.min.js" />
+    <Content Include="Content\adminlte-2.3.6\plugins\ng-file-upload-master\FileAPI.flash.swf" />
+    <Content Include="Content\adminlte-2.3.6\plugins\ng-file-upload-master\FileAPI.min.js" />
+    <Content Include="Content\adminlte-2.3.6\plugins\ng-file-upload-master\ng-file-upload-shim.min.js" />
+    <Content Include="Content\adminlte-2.3.6\plugins\ng-file-upload-master\ng-file-upload.min.js" />
     <Content Include="Content\adminlte-2.3.6\plugins\pace\pace.css" />
     <Content Include="Content\adminlte-2.3.6\plugins\pace\pace.js" />
     <Content Include="Content\adminlte-2.3.6\plugins\pace\pace.min.css" />
@@ -1288,6 +1293,7 @@
     <Content Include="Content\adminlte-2.3.6\README.md" />
     <Content Include="Content\adminlte-2.3.6\plugins\ui-select-master\LICENSE" />
     <Content Include="Content\adminlte-2.3.6\plugins\ui-notification\LICENSE" />
+    <Content Include="Content\adminlte-2.3.6\plugins\ng-file-upload-master\LICENSE" />
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -1350,6 +1356,10 @@
     <Content Include="Views\AngularView\Server\ObjectRepository\GeneralObjectIndex.cshtml" />
     <Content Include="Views\AngularView\Client\ObjectRepository\GeneralObjectDetails.cshtml" />
     <Content Include="Views\AngularView\Client\ObjectRepository\GeneralObjectEdit.cshtml" />
+    <Content Include="Views\AngularView\Client\ObjectRepository\GeneralObjectPrimeField.cshtml" />
+    <Content Include="Views\AngularView\Client\ObjectRepository\GeneralObjectFileField.cshtml" />
+    <Content Include="Views\AngularView\Client\ObjectRepository\GeneralObjectSSelectField.cshtml" />
+    <Content Include="Views\AngularView\Client\ObjectRepository\GeneralObjectObjRefField.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\AngularView\Client\Common\" />

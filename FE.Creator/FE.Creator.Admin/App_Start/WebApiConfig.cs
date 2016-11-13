@@ -35,6 +35,8 @@ namespace FE.Creator.Admin
                );
 
 
+            GlobalConfiguration.Configuration.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
+
             //uncomment this will avoid return xml serialization output to client.
             //config.Formatters.Remove(config.Formatters.XmlFormatter);
             config.Formatters.Clear();

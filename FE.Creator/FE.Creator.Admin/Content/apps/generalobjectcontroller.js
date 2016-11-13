@@ -33,7 +33,6 @@ angular.module("ngObjectRepository").filter('propsFilter', function () {
         return out;
     };
 });
-
 angular.module("ngObjectRepository")
 .filter('objectValueFilter', function () {
     return function (items, field) {
@@ -46,7 +45,7 @@ angular.module("ngObjectRepository")
                             out = '' + items[idx].value.value;
                             break;
                         case 1:
-                            out = '' + items[idx].value.objectFieldID;
+                            out = '' + items[idx].value.referedGeneralObjectID;
                             break;
                         case 2:
                             out = '' + items[idx].value.selectedItemID;
@@ -71,9 +70,9 @@ angular.module("ngObjectRepository")
 angular.module("ngObjectRepository")
     .controller('GeneralObjectListController', GeneralObjectListController);
 
-GeneralObjectListController.$inject = ["$scope", "ObjectRepositoryDataService"];
+GeneralObjectListController.$inject = ["$scope", "ObjectRepositoryDataService", "Upload"];
 
-function GeneralObjectListController($scope, ObjectRepositoryDataService) {
+function GeneralObjectListController($scope, ObjectRepositoryDataService,Upload) {
     var vm = this;
 
     vm.disabled = undefined;
@@ -103,10 +102,33 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService) {
     vm.GetObjectDefinitionGroup = GetObjectDefinitionGroup;
     vm.onDefinitionChanged = onDefinitionChanged;
     vm.viewObjectDetails = viewObjectDetails;
-    vm.getObjectFieldTemplateUrl = getObjectFieldTemplateUrl;
     vm.editObject = editObject;
     vm.deleteObject = deleteObject;
+    vm.loadReferedObjectList = loadReferedObjectList;
+    vm.getObjectFieldTemplateUrl = getObjectFieldTemplateUrl;
+    vm.uploadFiles = function (file, errFiles, objfield) {
+        vm.f = file;
+        vm.errFile = errFiles && errFiles[0];
+        if (file) {
+            file.upload = Upload.upload({
+                url: '/api/Files',
+                data: { file: file }
+            });
+
+            file.upload.then(function (response) {
+                file.result = response.data;
+                objfield.value.fileName = file.result.files[0].fileName;
+            }, function (response) {
+                if (response.status > 0)
+                    vm.errorMsg = response.status + ': ' + response.data;
+            }, function (evt) {
+                file.progress = Math.min(100, parseInt(100.0 *
+                                         evt.loaded / evt.total));
+            });
+        }
+    }
     vm.currentGeneralObject = {};
+    vm.onSelectObjectReference = onSelectObjectReference;
     vm.ServiceObjectList = [];
 
     vm.setViewMode = function (view) {
@@ -147,14 +169,53 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService) {
     }
 
     function findObjectAndSetView(objectid, view) {
-        for (var idx = 0; idx < vm.ServiceObjectList.length; i++) {
+        for (var idx = 0; idx < vm.ServiceObjectList.length; idx++) {
             if (vm.ServiceObjectList[idx].objectID == objectid) {
                 vm.currentGeneralObject = vm.ServiceObjectList[idx];
-
+                loadReferedObjects(vm.currentGeneralObject);
                 vm.setViewMode(view);
                 break;
             }
         }
+    }
+
+    function loadReferedObjects(currSvcObj) {
+        for (var i = 0; i < vm.currentObjectDefinition.objectFields.length; i++) {
+            for (var idx = 0; idx < currSvcObj.properties.length; idx++) {
+                //refered object field.
+                if (vm.currentObjectDefinition.objectFields[i].generalObjectDefinitionFiledType == 1
+                    && vm.currentObjectDefinition.objectFields[i].objectDefinitionFieldName == currSvcObj.properties[idx].keyName) {
+                    var currField = currSvcObj.properties[idx];
+                    loadObjectbyId(currField.value.referedGeneralObjectID)
+                    .then(function (data) {
+                        currField.referedObject = data;
+                    });
+                }
+            }
+        }
+    }
+
+    function loadReferedObjectList(field) {
+        for (var i = 0; i < vm.currentObjectDefinition.objectFields.length; i++) {
+            //refered object field.
+            if (vm.currentObjectDefinition.objectFields[i].generalObjectDefinitionFiledType == 1
+                && vm.currentObjectDefinition.objectFields[i].objectDefinitionFieldName == field.keyName) {
+                
+                if (field.referedObjectList == null) {
+                    ObjectRepositoryDataService.getServiceObjects(vm.currentObjectDefinition.objectFields[i].referedObjectDefinitionID, null)
+                   .then(function (data) {
+                       field.referedObjectList = data || [];
+
+                       return field.referedObjectList;
+                   });
+                }
+            }
+        }
+    }
+
+    function onSelectObjectReference(obj, objfield) {
+        objfield.referedObject = obj;
+        objfield.value.referedGeneralObjectID = obj.objectID;
     }
 
     function GetObjectDefinitionGroup(objdef) {
@@ -189,8 +250,43 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService) {
                 });
         }
     }
+    
+    function loadObjectbyId(id) {
+        return ObjectRepositoryDataService.getServiceObject(id)
+              .then(function (data) {
+                  return data;
+              });
+    }
 
-    function getObjectFieldTemplateUrl(objectDefinitionFieldId) {
+    function getObjectFieldTemplateUrl(objectDefinitionFieldName) {
 
+        var fieldType = -1;
+        for (var index = 0; index < vm.currentObjectDefinition.objectFields.length; index++) {
+            if (vm.currentObjectDefinition.objectFields[index].objectDefinitionFieldName == objectDefinitionFieldName)
+            {
+                fieldType = vm.currentObjectDefinition.objectFields[index].generalObjectDefinitionFiledType;
+                break;
+            }
+        }
+
+        switch (fieldType) {
+            case 0:
+                return '/ngview/ObjectRepository/GeneralObjectPrimeField';
+            case 1:
+                return '/ngview/ObjectRepository/GeneralObjectObjRefField'
+            case 2:
+                return '/ngview/ObjectRepository/GeneralObjectSSelectField'
+            case 3:
+                return '/ngview/ObjectRepository/GeneralObjectFileField'
+            default:
+                return '';
+        }
     }
 }
+
+
+//file upload
+angular.module("ngObjectRepository")
+    .controller('fileUploadController', ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
+  
+}]);

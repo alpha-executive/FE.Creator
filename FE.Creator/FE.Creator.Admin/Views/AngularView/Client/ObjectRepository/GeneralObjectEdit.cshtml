@@ -1,6 +1,6 @@
 ﻿<div class="box box-primary box-solid">
     <div class="box-header with-border">
-        <h3 class="box-title"><i class="fa fa-table"></i> View Object - {{ctrl.currentGeneralObject.objectName}}</h3>
+        <h3 class="box-title"><i class="fa fa-table"></i> Edit Object - {{ctrl.currentGeneralObject.objectName}}</h3>
         <div class="box-tools pull-right">
             <div class="btn-group">
                 <button class="btn btn-box-tool" ng-click="ctrl.setViewMode('list')"><i class="fa fa-mail-reply"></i> Back to List</button>
@@ -30,16 +30,7 @@
             </div>
             <div class="box-body">
                 <div class="row" ng-repeat="objfield in ctrl.currentGeneralObject.properties">
-                    <div class="col-md-12">
-                        <div class="box">
-                            <div class="box-header">
-                                <h5 class="box-title"><i class="fa fa-flag-o"></i> {{objfield.keyName}}</h5>
-                            </div>
-                            <div class="box-body">
-                                <div ng-include="getObjectFieldTemplateUrl(objfield.value.objectFieldID)"></div>
-                            </div>
-                        </div>
-                    </div>
+                        <div ng-include="ctrl.getObjectFieldTemplateUrl(objfield.keyName)"></div>
                     <!-- /.ng-if -->
                 </div>
             </div>

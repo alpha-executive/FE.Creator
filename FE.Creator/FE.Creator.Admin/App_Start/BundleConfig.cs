@@ -61,7 +61,9 @@ namespace FE.Creator.Admin
                 "~/Content/angularjs/angular-route.min.js",
                 "~/Content/angularjs/angular-messages.min.js",
                 "~/Content/adminlte-2.3.6/plugins/ui-notification/angular-ui-notification.min.js",
-                "~/Content/adminlte-2.3.6/plugins/ui-select-master/select.min.js"
+                "~/Content/adminlte-2.3.6/plugins/ui-select-master/select.min.js",
+                "~/Content/adminlte-2.3.6/plugins/ng-file-upload-master/ng-file-upload-shim.min.js",
+                "~/Content/adminlte-2.3.6/plugins/ng-file-upload-master/ng-file-upload.min.js"
              ));
 
             bundles.Add(new ScriptBundle("~/js/adminapp").Include(

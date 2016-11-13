@@ -25,7 +25,8 @@
             deleteObjectDefintionField: deleteObjectDefintionField,
             deleteObjectDefintion: deleteObjectDefintion,
             deleteSingleSelectionFieldItem: deleteSingleSelectionFieldItem,
-            getServiceObjects: getServiceObjects
+            getServiceObjects: getServiceObjects,
+            getServiceObject: getServiceObject
         };
 
         //get the object defintion groups
@@ -232,6 +233,26 @@
 
             function error(response) {
                 logger.error('XHR Failed for getServiceObjects - ' + response.data);
+                return response.data;
+            }
+        }
+
+        function getServiceObject(id) {
+            var config = {
+                method: 'GET',
+                url: '/api/custom/GeneralObject/FindServiceObject/' + id
+            };
+
+            return $http(config)
+              .then(complete)
+              .catch(error);
+
+            function complete(response) {
+                return response.data;
+            }
+
+            function error(response) {
+                logger.error('XHR Failed for getServiceObject - ' + response.data);
                 return response.data;
             }
         }
