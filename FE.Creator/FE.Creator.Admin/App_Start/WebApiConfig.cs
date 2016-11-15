@@ -1,4 +1,5 @@
 ﻿using FE.Creator.Admin.MVCExtension;
+using FE.Creator.FileStorage;
 using FE.Creator.ObjectRepository;
 using Microsoft.Practices.Unity;
 using Newtonsoft.Json.Serialization;
@@ -51,6 +52,9 @@ namespace FE.Creator.Admin
 
             var container = new UnityContainer();
             container.RegisterType<IObjectService, DefaultObjectService>(new HierarchicalLifetimeManager());
+
+            string rootPath = System.IO.Path.Combine(System.Web.HttpRuntime.AppDomainAppPath, "App_Data");
+            container.RegisterType<IFileStorageService, LocalFileSystemStorage>(new HierarchicalLifetimeManager(),new InjectionConstructor(rootPath));
             config.DependencyResolver = new UnityDependencyResolver(container);
 
         }

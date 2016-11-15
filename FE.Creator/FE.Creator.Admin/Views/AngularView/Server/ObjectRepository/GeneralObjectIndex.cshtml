@@ -9,19 +9,22 @@
             <div class="box box-primary" ng-show="ctrl.viewMode=='list'">
                 <div class="box-header">
                     <h3 class="box-title">Object List</h3>
-                    <div class="box-tools">
-                        <div class="input-group input-group-sm" style="width: 300px;">
-                            <div class="input-group-btn">
-                                <ui-select ng-model="ctrl.currentObjectDefinition" ng-disabled="ctrl.disabled" style="min-width: 100px;" on-select="ctrl.onDefinitionChanged($item, $model)" title="Choose a person">
-                                    <ui-select-match placeholder="Select a Object Definition...">{{$select.selected.objectDefinitionName}}</ui-select-match>
-                                    <ui-select-choices group-by="ctrl.GetObjectDefinitionGroup" repeat="objdef in ctrl.ObjectDefintions">
-                                        <div ng-bind-html="objdef.objectDefinitionName"></div>
-                                        <small>
-                                            {{objdef.objectDefinitionName}}
-                                        </small>
-                                    </ui-select-choices>
-                                </ui-select>
-                            </div>
+                    <div class="box-tools pull-right">
+                        <div class="btn-group" style="width: 300px;">
+                            <ui-select ng-model="ctrl.currentObjectDefinition" ng-disabled="ctrl.disabled" style="min-width: 100px;" on-select="ctrl.onDefinitionChanged($item, $model)" title="Choose a person">
+                                <ui-select-match placeholder="Select a Object Definition...">{{$select.selected.objectDefinitionName}}</ui-select-match>
+                                <ui-select-choices group-by="ctrl.GetObjectDefinitionGroup" repeat="objdef in ctrl.ObjectDefintions">
+                                    <div ng-bind-html="objdef.objectDefinitionName"></div>
+                                    <small>
+                                        {{objdef.objectDefinitionName}}
+                                    </small>
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-box-tool" ng-click="ctrl.createObject()" ng-disabled="ctrl.disabledNewObject">
+                                <i class="fa fa-plus text-green"></i>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -34,7 +37,16 @@
                                 <th>Object Name</th>
                                 <th>Create Date</th>
                                 <th>Status</th>
-                                <th><div class="pull-right"><i class="fa  fa-wrench"></i> Action</div></th>
+                                <th>
+                                    <div class="box-tools pull-right">
+                                        <button type="button" class="btn btn-box-tool">
+                                            <i class="fa fa-wrench"></i> Action
+                                        </button>
+                                        @*<ul class="dropdown-menu" role="menu">
+                                            <li><a type="button" class="btn btn-primary btn-flat btn-group-xs"><i class="fa fa-angle-down"></i> Display Columns</a></li>
+                                        </ul>*@
+                                    </div>
+                                </th>
                             </tr>
                             <tr ng-repeat="row in ctrl.ServiceObjectList">
                                 <td>{{row.objectID}}</td>
@@ -43,9 +55,9 @@
                                 <td><span class="label label-success">Active</span></td>
                                 <td>
                                     <div class="btn-group pull-right">
-                                        <button type="button" class="btn btn-info btn-flat btn-xs" ng-click="ctrl.viewObjectDetails(row.objectID)"><i class="fa fa-eye"></i> View</button>
+                                        <button type="button" class="btn btn-success btn-flat btn-xs" ng-click="ctrl.viewObjectDetails(row.objectID)"><i class="fa fa-eye"></i> View</button>
                                         <button type="button" class="btn btn-info btn-flat btn-xs" ng-click="ctrl.editObject(row.objectID)"><i class="fa fa-pencil"></i> Edit</button>
-                                        <button type="button" class="btn btn-info btn-flat btn-xs" ng-click="ctrl.deleteObject(row.objectID)"><i class="fa fa-minus-square"></i> Delete</button>
+                                        <button type="button" class="btn btn-warning btn-flat btn-xs" ng-click="ctrl.deleteObject(row.objectID)"><i class="fa fa-minus-square"></i> Delete</button>
                                     </div>
                                 </td>
                             </tr>

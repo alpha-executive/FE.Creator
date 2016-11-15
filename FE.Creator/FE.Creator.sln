@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FE.Creator.UT", "FE.Creator
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FE.Creator.Admin", "FE.Creator.Admin\FE.Creator.Admin.csproj", "{87733B95-05D5-4C23-944B-39114B818E6D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FE.Creator.FileStorage", "FE.Creator.FileStorage\FE.Creator.FileStorage.csproj", "{7C9AA71D-9792-475B-891B-4EAA816C5562}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{87733B95-05D5-4C23-944B-39114B818E6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87733B95-05D5-4C23-944B-39114B818E6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87733B95-05D5-4C23-944B-39114B818E6D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C9AA71D-9792-475B-891B-4EAA816C5562}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C9AA71D-9792-475B-891B-4EAA816C5562}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C9AA71D-9792-475B-891B-4EAA816C5562}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C9AA71D-9792-475B-891B-4EAA816C5562}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

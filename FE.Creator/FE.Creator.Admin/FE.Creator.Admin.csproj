@@ -1375,6 +1375,10 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FE.Creator.FileStorage\FE.Creator.FileStorage.csproj">
+      <Project>{7c9aa71d-9792-475b-891b-4eaa816c5562}</Project>
+      <Name>FE.Creator.FileStorage</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FE.Creator.ObjectRepository\FE.Creator.ObjectRepository.csproj">
       <Project>{742e3995-c77d-46b4-b2dd-95fc46315cdf}</Project>
       <Name>FE.Creator.ObjectRepository</Name>
@@ -1394,7 +1398,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>36078</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

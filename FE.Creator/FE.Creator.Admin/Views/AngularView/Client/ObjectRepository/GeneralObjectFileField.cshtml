@@ -5,35 +5,28 @@
         </div>
         <div class="box-body">
             <div class="row">
-                <div class="col-md-6">
-                    ngf-max-height="1000" ngf-max-size="10MB">
-                    <button class="btn btn-warning" type="file" ngf-select="ctrl.uploadFiles($file, $invalidFiles,objfield)"
-                            ngf-max-height="1000" ngf-max-size="10MB">
-                       <i class="fa fa-upload"></i> Upload File
-                    </button>
-                    <div style="font:smaller">
-                        {{ctrl.f.name}} {{ctrl.errFile.name}} {{ctrl.errFile.$error}} {{ctrl.errFile.$errorParam}}
-                        <span class="progress" ng-show="ctrl.f.progress >= 0">
-                            <div style="width:{{ctrl.f.progress}}%"
-                                 ng-bind="ctrl.f.progress + '%'"></div>
-                        </span>
+                <div class="col-lg-6">
+                    <button class="btn btn-warning" type="file" ngf-select="ctrl.uploadFiles($file, $invalidFiles,objfield)" ngf-max-height="1000" ngf-max-size="10MB">
+                        <i class="fa fa-upload"></i> Upload File <i class="fa fa-refresh fa-spin text-green" ng-if="ctrl.f.showprogress"></i>
+                    </button><span class="message">{{ctrl.errorMsg}}</span>
+                    @*<div class="progress progress-sm active" ng-show="ctrl.f.progress > 0">
+                    <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="{{ctrl.f.progress}}"
+                         aria-valuemin="0" aria-valuemax="100" style="width: {{ctrl.f.progress}}%" ng-bind="ctrl.f.progress + '%'">
                     </div>
-                    {{ctrl.errorMsg}}
-                </div>
-                <div class="col-md-6">
-                    <ul class="mailbox-attachments clearfix">
-                        <li>
-                            <span class="mailbox-attachment-icon"><i class="fa fa-file-pdf-o"></i></span>
-                            <div class="mailbox-attachment-info">
-                                <a href="{{objfield.value.fileUrl}}" class="mailbox-attachment-name"><i class="fa fa-paperclip"></i> {{ objfield.value.fileName }}</a>
-                                <span class="mailbox-attachment-size">
-                                    {{objfield.value.fileSize}} KB
-                                    <a href="#" class="btn btn-default btn-xs pull-right"><i class="fa fa-cloud-download"></i></a>
-                                </span>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+            </div>*@
+                    
+                    <br />
+                    <br />
+                    <div class="info-box" ng-if="objfield.value.fileName != null">
+                        <a class="info-box-icon bg-aqua" href="{{objfield.value.fileUrl}}"><i class="fa fa-cloud-download"></i></a>
+                        <div class="info-box-content text-black">
+                            <span class="info-box-text">{{ objfield.value.fileName }}</span>
+                            <span class="info-box-number">{{objfield.value.fileSize}} KB</span>
+                            <span class="info-box-text">SHA: {{objfield.value.fileCRC}}</span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                </div> <!--/.col-lg-6-->
             </div>
         </div>
     </div>

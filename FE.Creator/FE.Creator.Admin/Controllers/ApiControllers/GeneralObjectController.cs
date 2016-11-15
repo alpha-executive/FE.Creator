@@ -57,12 +57,17 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         }
 
         // POST: api/GeneralObject
-        public void Post([FromBody]ServiceObject value)
+        [ResponseType(typeof(ServiceObject))]
+        public IHttpActionResult Post([FromBody]ServiceObject value)
         {
             if (value != null)
             {
-                objectService.CreateORUpdateGeneralObject(value);
+                value.CreatedBy = "Administrator";
+                value.UpdatedBy = "Administrator";
+                value.ObjectID =  objectService.CreateORUpdateGeneralObject(value);
             }
+
+            return this.Created<ServiceObject>(Request.RequestUri, value);
         }
 
         // PUT: api/GeneralObject/5

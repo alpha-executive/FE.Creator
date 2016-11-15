@@ -45,10 +45,15 @@ angular.module("ngObjectRepository")
                             out = '' + items[idx].value.value;
                             break;
                         case 1:
-                            out = '' + items[idx].value.referedGeneralObjectID;
+                            out = items[idx].referedObject != null ? items[idx].referedObject.objectName
+                                : '';
                             break;
                         case 2:
-                            out = '' + items[idx].value.selectedItemID;
+                            var findItem = items[idx].selectionItems.find(function (item) {
+                                return item.selectItemID == items[idx].value.selectedItemID;
+                            });
+
+                            out = findItem == null ? '' : findItem.selectDisplayName;
                             break;
                         case 3:
                             out = '' + items[idx].value.fileName;
@@ -70,13 +75,14 @@ angular.module("ngObjectRepository")
 angular.module("ngObjectRepository")
     .controller('GeneralObjectListController', GeneralObjectListController);
 
-GeneralObjectListController.$inject = ["$scope", "ObjectRepositoryDataService", "Upload"];
+GeneralObjectListController.$inject = ["$scope", "ObjectRepositoryDataService", "Upload", "Notification"];
 
-function GeneralObjectListController($scope, ObjectRepositoryDataService,Upload) {
+function GeneralObjectListController($scope, ObjectRepositoryDataService, Upload, Notification) {
     var vm = this;
 
     vm.disabled = undefined;
     vm.searchEnabled = undefined;
+    vm.disabledNewObject = true;
 
     vm.enable = function () {
         vm.disabled = false;
@@ -85,6 +91,13 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService,Upload)
     vm.disable = function () {
         vm.disabled = true;
     };
+
+    vm.enableNewObject = function () {
+        vm.disabledNewObject = false;
+    }
+    vm.disableNewObject = function () {
+        vm.disabledNewObject = true;
+    }
 
     vm.enableSearch = function () {
         vm.searchEnabled = true;
@@ -104,12 +117,16 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService,Upload)
     vm.viewObjectDetails = viewObjectDetails;
     vm.editObject = editObject;
     vm.deleteObject = deleteObject;
+    vm.createObject = createObject;
+    vm.saveChanges = saveChanges;
     vm.loadReferedObjectList = loadReferedObjectList;
     vm.getObjectFieldTemplateUrl = getObjectFieldTemplateUrl;
     vm.uploadFiles = function (file, errFiles, objfield) {
         vm.f = file;
         vm.errFile = errFiles && errFiles[0];
         if (file) {
+            file.showprogress = true;
+
             file.upload = Upload.upload({
                 url: '/api/Files',
                 data: { file: file }
@@ -117,7 +134,20 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService,Upload)
 
             file.upload.then(function (response) {
                 file.result = response.data;
-                objfield.value.fileName = file.result.files[0].fileName;
+
+                if (file.result.files.length > 0){
+                    objfield.value.fileName = file.result.files[0].fileName;
+                    objfield.value.fileUrl = file.result.files[0].fileUrl;
+                    objfield.value.fileCRC = file.result.files[0].fileCRC;
+                    objfield.value.fileExtension = file.result.files[0].fileExtension;
+                    objfield.value.created = file.result.files[0].created;
+                    objfield.value.updated = file.result.files[0].updated;
+                    objfield.value.freated = file.result.files[0].created;
+                    objfield.value.fileSize = file.result.files[0].fileSize;
+                    objfield.value.fileFullPath = file.result.files[0].fileFullPath;
+                }
+
+                file.showprogress = false;
             }, function (response) {
                 if (response.status > 0)
                     vm.errorMsg = response.status + ': ' + response.data;
@@ -161,11 +191,26 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService,Upload)
     }
 
     function deleteObject(objectid) {
-        vm.ServiceObjectList.forEach(function (item, index, arr) {
-            if (item.objectID == objectid) {
-                vm.ServiceObjectList.splice(index, 1);
-            }
-        });
+        ObjectRepositoryDataService.deleteServiceObject(objectid)
+            .then(function (data) {
+                //if there is no error to delete the object
+                if (data != null && data.status == 204) {
+                    vm.ServiceObjectList.forEach(function (item, index, arr) {
+                        if (item.objectID == objectid) {
+                            vm.ServiceObjectList.splice(index, 1);
+                        }
+                    });
+                }
+                else {
+                    Notification.error({
+                        message: 'Delete Object Failed: ' + data.toString(),
+                        delay: 5000,
+                        positionY: 'bottom',
+                        positionX: 'right',
+                        title: 'Error'
+                    });
+                }
+            });
     }
 
     function findObjectAndSetView(objectid, view) {
@@ -190,6 +235,14 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService,Upload)
                     .then(function (data) {
                         currField.referedObject = data;
                     });
+                }
+
+                //single selection
+                if(vm.currentObjectDefinition.objectFields[i].generalObjectDefinitionFiledType == 2
+                    && vm.currentObjectDefinition.objectFields[i].objectDefinitionFieldName == currSvcObj.properties[idx].keyName) {
+
+                    var currField = currSvcObj.properties[idx];
+                    currField.selectionItems = vm.currentObjectDefinition.objectFields[i].selectionItems;
                 }
             }
         }
@@ -224,14 +277,15 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService,Upload)
             if (objdef.objectDefinitionGroupID == item.groupID) {
                 foundItem = item;
             }
-        }
-        );
+        });
 
         return foundItem.groupName || "Unknown Group";
     }
 
     function onDefinitionChanged($item, $model) {
         if ($item != null) {
+
+            vm.enableNewObject();
 
             var searchColumns = [];
             vm.ObjectDefintions.forEach(function (item, index, arr) {
@@ -248,6 +302,9 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService,Upload)
 
                     return vm.ServiceObjectList;
                 });
+        }
+        else {
+            vm.disabledNewObject()
         }
     }
     
@@ -280,6 +337,82 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService,Upload)
                 return '/ngview/ObjectRepository/GeneralObjectFileField'
             default:
                 return '';
+        }
+    }
+
+    function createObject() {
+        vm.currentGeneralObject = {};
+        vm.currentGeneralObject.properties = [];
+        vm.currentGeneralObject.objectName = '';
+        vm.currentGeneralObject.objectDefinitionId = vm.currentObjectDefinition.objectDefinitionID;
+
+        for (var i = 0; i < vm.currentObjectDefinition.objectFields.length; i++) {
+            var property = {};
+            property.keyName = vm.currentObjectDefinition.objectFields[i].objectDefinitionFieldName;
+            property.$type = "FE.Creator.ObjectRepository.ServiceModels.ObjectKeyValuePair, FE.Creator.ObjectRepository";
+            property.value = {};
+            if (vm.currentObjectDefinition.objectFields[i].generalObjectDefinitionFiledType == 0) {
+                property.value.$type = "FE.Creator.ObjectRepository.ServiceModels.PrimeObjectField, FE.Creator.ObjectRepository";
+                property.value.primeDataType = vm.currentObjectDefinition.objectFields[i].primeDataType;
+            }
+
+            if (vm.currentObjectDefinition.objectFields[i].generalObjectDefinitionFiledType == 1) {
+                property.referedObject = {};
+                property.value.$type = "FE.Creator.ObjectRepository.ServiceModels.ObjectReferenceField, FE.Creator.ObjectRepository";
+            }
+            if (vm.currentObjectDefinition.objectFields[i].generalObjectDefinitionFiledType == 2) {
+                property.value.$type = "FE.Creator.ObjectRepository.ServiceModels.SingleSelectionField, FE.Creator.ObjectRepository";
+                property.selectionItems = vm.currentObjectDefinition.objectFields[i].selectionItems;
+            }
+
+            if (vm.currentObjectDefinition.objectFields[i].generalObjectDefinitionFiledType == 3) {
+                property.value.$type = "FE.Creator.ObjectRepository.ServiceModels.ObjectFileField, FE.Creator.ObjectRepository";
+            }
+
+            vm.currentGeneralObject.properties.push(property);
+        }
+
+        vm.setViewMode('edit');
+    }
+
+    function saveChanges() {
+        try{
+            ObjectRepositoryDataService.createOrUpdateServiceObject(vm.currentGeneralObject.objectID, vm.currentGeneralObject)
+            .then(function (data) {
+                if (data == null || data == "" || data.objectID != null) {
+                    Notification.success({
+                        message: 'Change Saved!',
+                        delay: 3000,
+                        positionY: 'bottom',
+                        positionX: 'right',
+                        title: 'Warn',
+                    });
+
+                    //update the object id.
+                    if (data != null && data != "") {
+                        vm.currentGeneralObject.objectID = data.objectID;
+                    }
+                }
+                else {
+                    //something error happend.
+                    Notification.error({
+                        message: 'Change Faild: ' + data.toString(),
+                        delay: 5000,
+                        positionY: 'bottom',
+                        positionX: 'right',
+                        title: 'Error'
+                    });
+                }
+            });
+        }
+        catch (e) {
+            Notification.error({
+                message: 'Change Faild: ' + e.message,
+                delay: 5000,
+                positionY: 'bottom',
+                positionX: 'right',
+                title: 'Error'
+            });
         }
     }
 }

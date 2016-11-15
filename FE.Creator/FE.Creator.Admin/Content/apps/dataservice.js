@@ -26,7 +26,9 @@
             deleteObjectDefintion: deleteObjectDefintion,
             deleteSingleSelectionFieldItem: deleteSingleSelectionFieldItem,
             getServiceObjects: getServiceObjects,
-            getServiceObject: getServiceObject
+            getServiceObject: getServiceObject,
+            createOrUpdateServiceObject: createOrUpdateServiceObject,
+            deleteServiceObject: deleteServiceObject
         };
 
         //get the object defintion groups
@@ -253,6 +255,41 @@
 
             function error(response) {
                 logger.error('XHR Failed for getServiceObject - ' + response.data);
+                return response.data;
+            }
+        }
+
+        function createOrUpdateServiceObject(id, svcObject) {
+            //create
+            if (id == null) {
+                return $http.post("/api/GeneralObject",
+                       svcObject)
+                    .then(complete)
+                    .catch(error);
+            }//update
+            else {
+                return $http.put("/api/GeneralObject/" + id, svcObject)
+                            .then(complete)
+                            .catch(error);
+            }
+
+            function complete(response) {
+                return response.data;
+            }
+
+            function error(response) {
+                logger.error('XHR Failed for createOrUpdateServiceObject - ' + response.data);
+                return response.data;
+            }
+        }
+
+        function deleteServiceObject(objectid) {
+            return $http.delete("/api/GeneralObject/" + objectid)
+                         .catch(error);
+
+            function error(response) {
+                logger.error('XHR Failed for deleteServiceObject - ' + response.data);
+
                 return response.data;
             }
         }
