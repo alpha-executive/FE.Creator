@@ -49,9 +49,14 @@ angular.module("ngObjectRepository")
                                 : '';
                             break;
                         case 2:
-                            var findItem = items[idx].selectionItems.find(function (item) {
-                                return item.selectItemID == items[idx].value.selectedItemID;
-                            });
+                            var findItem = null;
+                            for (var k = 0; k < items[idx].selectionItems.length; k++) {
+                                var item = items[idx].selectionItems[k];
+                                if (item.selectItemID == items[idx].value.selectedItemID) {
+                                    findItem = item;
+                                    break;
+                                }
+                            }
 
                             out = findItem == null ? '' : findItem.selectDisplayName;
                             break;
