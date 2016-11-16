@@ -1155,6 +1155,7 @@
     <Content Include="Content\apps\generalobjectcontroller.js" />
     <Content Include="Content\apps\objectdefinitioncontroller.js" />
     <Content Include="Content\apps\objectrepository.js" />
+    <Content Include="Content\apps\pageservice.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />

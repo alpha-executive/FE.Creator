@@ -21,17 +21,14 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             this.objectService = objectService;
         }
 
-        // GET: api/GeneralObject/5
-        public ServiceObject Get(int id)
-        {
-            var generalObj = objectService.GetServiceObjectById(id, null);
-
-            return generalObj;
+        [HttpGet]
+        public int CountObjectServices(int id) {
+            return objectService.GetGeneralObjectCount(id);
         }
 
-        private Task<IEnumerable<ServiceObject>> getAllServiceObjectAsync(int id, string[] properties = null)
+        private Task<IEnumerable<ServiceObject>> getAllServiceObjectAsync(int id, int pageIndex, int pageSize, string[] properties = null)
         {
-            var objectList = objectService.GetAllSerivceObjects(id, properties);
+            var objectList = objectService.GetServiceObjects(id, properties,pageIndex, pageSize);
 
             return Task.FromResult<IEnumerable<ServiceObject>>(objectList);
         }
@@ -39,9 +36,17 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         // GET: api/GeneralObjectList
         [ResponseType(typeof(IEnumerable<ServiceObject>))]
         [HttpGet]
-        public async Task<IHttpActionResult> FindServiceObjects(int id, string parameters)
+        public async Task<IHttpActionResult> FindServiceObjects(int id, string parameters, int pageIndex, int pageSize)
         {
+            if (pageIndex <= 0)
+                pageIndex = 1;
+
+            if (pageSize <= 0)
+                pageSize = int.MaxValue;
+
             var objectList = await getAllServiceObjectAsync(id,
+                pageIndex,
+                pageSize,
                 string.IsNullOrEmpty(parameters) ? null : parameters.Split(new char[] { ',' }));
 
             return this.Ok<IEnumerable<ServiceObject>>(objectList);

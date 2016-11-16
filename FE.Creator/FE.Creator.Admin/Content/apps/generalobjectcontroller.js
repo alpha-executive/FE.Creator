@@ -1,7 +1,13 @@
-﻿angular.module("ngObjectRepository").config(function (uiSelectConfig) {
+﻿//the object list page controller
+angular.module("ngObjectRepository")
+    .controller('GeneralObjectListController', GeneralObjectListController);
+
+//configure the ngselect as bootstrap UI.
+angular.module("ngObjectRepository").config(function (uiSelectConfig) {
     uiSelectConfig.theme = 'bootstrap';
 });
 
+//ngselect filter.
 angular.module("ngObjectRepository").filter('propsFilter', function () {
     return function (items, props) {
         var out = [];
@@ -33,6 +39,8 @@ angular.module("ngObjectRepository").filter('propsFilter', function () {
         return out;
     };
 });
+
+//object dynamic column filter.
 angular.module("ngObjectRepository")
 .filter('objectValueFilter', function () {
     return function (items, field) {
@@ -77,17 +85,116 @@ angular.module("ngObjectRepository")
     }
 });
 
-angular.module("ngObjectRepository")
-    .controller('GeneralObjectListController', GeneralObjectListController);
+//controller injection service.
+GeneralObjectListController.$inject = ["$scope", "ObjectRepositoryDataService", "Upload", "Notification", "PagerService"];
 
-GeneralObjectListController.$inject = ["$scope", "ObjectRepositoryDataService", "Upload", "Notification"];
-
-function GeneralObjectListController($scope, ObjectRepositoryDataService, Upload, Notification) {
+//controller main function.
+function GeneralObjectListController($scope, ObjectRepositoryDataService, Upload, Notification, PagerService) {
     var vm = this;
 
-    vm.disabled = undefined;
-    vm.searchEnabled = undefined;
-    vm.disabledNewObject = true;
+    vm.disabled = undefined; //enable ngselect
+    vm.searchEnabled = undefined; //disable ngselect search
+    vm.disabledNewObject = true; //disable the add new object
+    vm.viewMode = 'list';  //by default, the view is list.
+    vm.currentObjectDefinition = {}; //current object definition.
+    vm.ObjectDefintions = []; //all the available object definitions.
+    vm.ObjectDefGroups = [];  //all the available object definition groups.
+    vm.GetObjectDefinitionGroup = GetObjectDefinitionGroup; //get the group name of the object definition
+    vm.onDefinitionChanged = onDefinitionChanged; //object definition change event.
+    vm.viewObjectDetails = viewObjectDetails; //view service object.
+    vm.editObject = editObject; //edit service object.
+    vm.deleteObject = deleteObject; //delete service object.
+    vm.createObject = createObject; //create a service object.
+    vm.saveChanges = saveChanges;   //save the changes to service object
+    vm.loadReferedObjectList = loadReferedObjectList;   //load refered objects of the object reference field.
+    vm.getObjectFieldTemplateUrl = getObjectFieldTemplateUrl; //get the template of the specific field type.
+    vm.currentGeneralObject = {}; //current service object.
+    vm.onSelectObjectReference = onSelectObjectReference;  //select a new object reference event.
+    vm.ServiceObjectList = [];  //available object lists.
+    vm.pager = {};  //for page purpose.
+    vm.onPageClick = onPageClick;
+    vm.pageSize = 12;
+    vm.currentPageIndex = 0;
+    vm.displayedColumns = [];
+    vm.onColumnChange = onColumnChange;
+
+    function onColumnChange(column) {
+        var index = vm.displayedColumns.indexOf(column);
+        if (index < 0) {
+            vm.displayedColumns.push(column);
+            column.checked = true;
+        }
+        else {
+            vm.displayedColumns.splice(index, 1);
+            column.checked = undefined;
+        }
+    }
+
+    function onPageClick(pageIndex) {
+        if (pageIndex < 1 || pageIndex > vm.pager.totalPages || pageIndex == vm.currentPageIndex) {
+            return;
+        }
+
+        var searchColumns = [];
+        vm.currentObjectDefinition.objectFields.forEach(function (of, idx, ar) {
+            searchColumns.push(of.objectDefinitionFieldName);
+        });
+
+
+        ObjectRepositoryDataService.getServiceObjects(vm.currentObjectDefinition.objectDefinitionID, searchColumns.toString(), pageIndex, vm.pageSize)
+            .then(function (data) {
+                vm.ServiceObjectList = data;
+
+                ObjectRepositoryDataService.getServiceObjectCount(vm.currentObjectDefinition.objectDefinitionID)
+                    .then(function (data) {
+                        //page size and pager length is 10.
+                        // get pager object from service
+                        vm.pager = PagerService.createPager(data, pageIndex, vm.pageSize, 10);
+                        vm.pager.disabledLastPage = pageIndex > vm.pager.totalPages;
+                        vm.pager.disabledFirstPage = pageIndex == 1;
+                        vm.currentPageIndex = pageIndex;
+                    });
+                return vm.ServiceObjectList;
+            });
+    }
+
+    //for file upload handler.
+    vm.uploadFiles = function (file, errFiles, objfield) {
+        vm.f = file;
+        vm.errFile = errFiles && errFiles[0];
+        if (file) {
+            file.showprogress = true;
+
+            file.upload = Upload.upload({
+                url: '/api/Files',
+                data: { file: file }
+            });
+
+            file.upload.then(function (response) {
+                file.result = response.data;
+                if (file.result.files.length > 0){
+                    objfield.value.fileName = file.result.files[0].fileName;
+                    objfield.value.fileUrl = file.result.files[0].fileUrl;
+                    objfield.value.fileCRC = file.result.files[0].fileCRC;
+                    objfield.value.fileExtension = file.result.files[0].fileExtension;
+                    objfield.value.created = file.result.files[0].created;
+                    objfield.value.updated = file.result.files[0].updated;
+                    objfield.value.freated = file.result.files[0].created;
+                    objfield.value.fileSize = file.result.files[0].fileSize;
+                    objfield.value.fileFullPath = file.result.files[0].fileFullPath;
+                }
+
+                file.showprogress = false;
+            }, function (response) {
+                if (response.status > 0)
+                    vm.errorMsg = response.status + ': ' + response.data;
+            }, function (evt) {
+                file.progress = Math.min(100, parseInt(100.0 *
+                                         evt.loaded / evt.total));
+            });
+        }
+    }
+   
 
     vm.enable = function () {
         vm.disabled = false;
@@ -111,66 +218,13 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService, Upload
     vm.disableSearch = function () {
         vm.searchEnabled = false;
     };
-    
-    vm.viewMode = 'list';
-    vm.currentObjectDefinition = {};
-    vm.ObjectDefintions = [];
-    vm.ObjectDefGroups = [];
-    vm.disabled = false;
-    vm.GetObjectDefinitionGroup = GetObjectDefinitionGroup;
-    vm.onDefinitionChanged = onDefinitionChanged;
-    vm.viewObjectDetails = viewObjectDetails;
-    vm.editObject = editObject;
-    vm.deleteObject = deleteObject;
-    vm.createObject = createObject;
-    vm.saveChanges = saveChanges;
-    vm.loadReferedObjectList = loadReferedObjectList;
-    vm.getObjectFieldTemplateUrl = getObjectFieldTemplateUrl;
-    vm.uploadFiles = function (file, errFiles, objfield) {
-        vm.f = file;
-        vm.errFile = errFiles && errFiles[0];
-        if (file) {
-            file.showprogress = true;
-
-            file.upload = Upload.upload({
-                url: '/api/Files',
-                data: { file: file }
-            });
-
-            file.upload.then(function (response) {
-                file.result = response.data;
-
-                if (file.result.files.length > 0){
-                    objfield.value.fileName = file.result.files[0].fileName;
-                    objfield.value.fileUrl = file.result.files[0].fileUrl;
-                    objfield.value.fileCRC = file.result.files[0].fileCRC;
-                    objfield.value.fileExtension = file.result.files[0].fileExtension;
-                    objfield.value.created = file.result.files[0].created;
-                    objfield.value.updated = file.result.files[0].updated;
-                    objfield.value.freated = file.result.files[0].created;
-                    objfield.value.fileSize = file.result.files[0].fileSize;
-                    objfield.value.fileFullPath = file.result.files[0].fileFullPath;
-                }
-
-                file.showprogress = false;
-            }, function (response) {
-                if (response.status > 0)
-                    vm.errorMsg = response.status + ': ' + response.data;
-            }, function (evt) {
-                file.progress = Math.min(100, parseInt(100.0 *
-                                         evt.loaded / evt.total));
-            });
-        }
-    }
-    vm.currentGeneralObject = {};
-    vm.onSelectObjectReference = onSelectObjectReference;
-    vm.ServiceObjectList = [];
-
     vm.setViewMode = function (view) {
         vm.viewMode = view;
     }
 
+    //initialize the controller.
     Activate();
+
     function Activate() {
         ObjectRepositoryDataService.getObjectDefinitionGroups()
             .then(function (data) {
@@ -195,6 +249,7 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService, Upload
         findObjectAndSetView(objectid, 'edit');
     }
 
+
     function deleteObject(objectid) {
         ObjectRepositoryDataService.deleteServiceObject(objectid)
             .then(function (data) {
@@ -218,6 +273,7 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService, Upload
             });
     }
 
+    //find the service object by id and set the view mode.
     function findObjectAndSetView(objectid, view) {
         for (var idx = 0; idx < vm.ServiceObjectList.length; idx++) {
             if (vm.ServiceObjectList[idx].objectID == objectid) {
@@ -229,6 +285,7 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService, Upload
         }
     }
 
+    //load the refered objects for object refer field and single selection field.
     function loadReferedObjects(currSvcObj) {
         for (var i = 0; i < vm.currentObjectDefinition.objectFields.length; i++) {
             for (var idx = 0; idx < currSvcObj.properties.length; idx++) {
@@ -289,30 +346,19 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService, Upload
 
     function onDefinitionChanged($item, $model) {
         if ($item != null) {
-
             vm.enableNewObject();
 
-            var searchColumns = [];
-            vm.ObjectDefintions.forEach(function (item, index, arr) {
-                if ($item.objectDefinitionID == item.objectDefinitionID) {
-                    item.objectFields.forEach(function(of, idx, ar){
-                        searchColumns.push(of.objectDefinitionFieldName);
-                    });
-                }
-            });
-
-            ObjectRepositoryDataService.getServiceObjects($item.objectDefinitionID, searchColumns.toString())
-                .then(function (data) {
-                    vm.ServiceObjectList = data;
-
-                    return vm.ServiceObjectList;
-                });
+            vm.pager = {};
+            vm.currentPageIndex = 0;
+            //set to page 1.
+            vm.onPageClick(1);
         }
         else {
             vm.disabledNewObject()
         }
     }
     
+    //load the object general information by id.
     function loadObjectbyId(id) {
         return ObjectRepositoryDataService.getServiceObject(id)
               .then(function (data) {
@@ -345,6 +391,7 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService, Upload
         }
     }
 
+    //initialize the new service object instance.
     function createObject() {
         vm.currentGeneralObject = {};
         vm.currentGeneralObject.properties = [];
@@ -379,7 +426,8 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService, Upload
 
         vm.setViewMode('edit');
     }
-
+    
+    //save new/edit changes.
     function saveChanges() {
         try{
             ObjectRepositoryDataService.createOrUpdateServiceObject(vm.currentGeneralObject.objectID, vm.currentGeneralObject)
@@ -396,6 +444,16 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService, Upload
                     //update the object id.
                     if (data != null && data != "") {
                         vm.currentGeneralObject.objectID = data.objectID;
+
+                        //add the new created object to object list.
+                        ObjectRepositoryDataService.getServiceObject(data.objectID)
+                         .then(function (data) {
+                             if (data.objectID == vm.currentGeneralObject.objectID) {
+                                 vm.ServiceObjectList.splice(0, 0, data)
+                             }
+
+                             return data;
+                         });
                     }
                 }
                 else {
@@ -421,10 +479,3 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService, Upload
         }
     }
 }
-
-
-//file upload
-angular.module("ngObjectRepository")
-    .controller('fileUploadController', ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
-  
-}]);

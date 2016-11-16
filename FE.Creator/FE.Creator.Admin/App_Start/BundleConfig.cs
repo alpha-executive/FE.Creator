@@ -68,7 +68,8 @@ namespace FE.Creator.Admin
 
             bundles.Add(new ScriptBundle("~/js/adminapp").Include(
                   "~/Content/apps/objectrepository.js",
-                  "~/Content/apps/dataservice.js"
+                  "~/Content/apps/dataservice.js",
+                  "~/Content/apps/pageservice.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/js/adminapp/definitiongroup").Include(

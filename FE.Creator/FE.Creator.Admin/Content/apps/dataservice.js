@@ -27,6 +27,7 @@
             deleteSingleSelectionFieldItem: deleteSingleSelectionFieldItem,
             getServiceObjects: getServiceObjects,
             getServiceObject: getServiceObject,
+            getServiceObjectCount: getServiceObjectCount,
             createOrUpdateServiceObject: createOrUpdateServiceObject,
             deleteServiceObject: deleteServiceObject
         };
@@ -219,10 +220,10 @@
         }
 
         /*==========================Service Objects ===============================*/
-        function getServiceObjects(objectDefintionId, properties) {
+        function getServiceObjects(objectDefintionId, properties, pageIndex, pageSize) {
             var config = {
                 method: 'GET',
-                url: '/api/custom/GeneralObject/FindServiceObjects/' + objectDefintionId + "/" + properties,
+                url: '/api/custom/GeneralObject/FindServiceObjects/' + objectDefintionId + "/" + properties + "?pageIndex="+pageIndex + "&pageSize=" + pageSize,
             };
 
             return $http(config)
@@ -255,6 +256,26 @@
 
             function error(response) {
                 logger.error('XHR Failed for getServiceObject - ' + response.data);
+                return response.data;
+            }
+        }
+
+        function getServiceObjectCount(id) {
+            var config = {
+                method: 'GET',
+                url: '/api/custom/GeneralObject/CountObjectServices/' + id
+            };
+
+            return $http(config)
+              .then(complete)
+              .catch(error);
+
+            function complete(response) {
+                return response.data;
+            }
+
+            function error(response) {
+                logger.error('XHR Failed for getServiceObjectCount - ' + response.data);
                 return response.data;
             }
         }
