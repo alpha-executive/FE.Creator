@@ -199,6 +199,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ApiControllers\ObjectDefinitionController.cs" />
     <Compile Include="Controllers\ApiControllers\ObjectDefinitionGroupController.cs" />
+    <Compile Include="Controllers\ViewController\ErrorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1361,6 +1362,7 @@
     <Content Include="Views\AngularView\Client\ObjectRepository\GeneralObjectFileField.cshtml" />
     <Content Include="Views\AngularView\Client\ObjectRepository\GeneralObjectSSelectField.cshtml" />
     <Content Include="Views\AngularView\Client\ObjectRepository\GeneralObjectObjRefField.cshtml" />
+    <Content Include="Views\Error\ErrorPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\AngularView\Client\Common\" />

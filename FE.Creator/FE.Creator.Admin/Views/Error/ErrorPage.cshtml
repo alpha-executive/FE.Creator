@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Response.StatusCode = Model;
+}
+
+<div class="error-page">
+    <h2 class="headline text-yellow">@Model</h2>
+    <div class="error-content">
+        @if (Model == 404)
+        {
+            <h3><i class="fa fa-warning text-yellow"></i> Oops! Page not found.</h3>
+            <p>
+                We could not find the page you were looking for.
+                Meanwhile, you may <a href="/">return to Home</a>
+            </p>
+        }
+        else
+        {
+            <h3><i class="fa fa-warning text-red"></i> Oops! Error happend on the server.</h3>
+            <p>
+                There are error happened on the appliation server, please contact to your System administrator for help. 
+                Meanwhile, you may <a href="/">return to Home</a>
+            </p>
+        }
+    </div>
+    <!-- /.error-content -->
+</div>

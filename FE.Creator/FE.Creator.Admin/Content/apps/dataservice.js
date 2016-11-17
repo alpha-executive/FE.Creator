@@ -135,7 +135,7 @@
         }
 
         function getObjectDefinitionById(objectId) {
-            return $http.get('/api/ObjectDefinition/' + objectId)
+            return $http.get('/api/custom/ObjectDefinition/FindObjectDefinition/' + objectId)
                 .then(complete)
                 .catch(error);
 
@@ -150,7 +150,7 @@
         }
 
         function getLightWeightObjectDefinitions() {
-            return $http.get('/api/custom/ObjectDefinition/Get')
+            return $http.get('/api/custom/ObjectDefinition/GetAllDefinitions')
                 .then(complete)
                 .catch(error);
 
@@ -221,6 +221,14 @@
 
         /*==========================Service Objects ===============================*/
         function getServiceObjects(objectDefintionId, properties, pageIndex, pageSize) {
+            if (pageIndex == null)
+            {
+                pageIndex = 1;
+            }
+            if (pageSize == null) {
+                pageSize = Number.MAX_SAFE_INTEGER;
+            }
+
             var config = {
                 method: 'GET',
                 url: '/api/custom/GeneralObject/FindServiceObjects/' + objectDefintionId + "/" + properties + "?pageIndex="+pageIndex + "&pageSize=" + pageSize,

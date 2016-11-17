@@ -348,8 +348,10 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService, Upload
         if ($item != null) {
             vm.enableNewObject();
 
+            vm.displayedColumns = [];
             vm.pager = {};
             vm.currentPageIndex = 0;
+
             //set to page 1.
             vm.onPageClick(1);
         }

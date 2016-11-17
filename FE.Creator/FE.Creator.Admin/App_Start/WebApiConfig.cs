@@ -35,6 +35,19 @@ namespace FE.Creator.Admin
                    defaults: new { id = RouteParameter.Optional, parameters = RouteParameter.Optional }
                );
 
+            //mapping api/objects/{action}/{definitionName}/{parameters} to GeneralObject/{action}
+            config.Routes.MapHttpRoute(
+                    name: "ServiceObjectCustomApi",
+                    routeTemplate: "api/objects/{action}/{definitionname}/{parameters}",
+                    defaults: new { controller= "GeneralObject", parameters = RouteParameter.Optional}
+                );
+
+            //mapping api/objectdefinitions/{action}/{groupname} to ObjectDefinition/{action}
+            config.Routes.MapHttpRoute(
+                    name: "ObjectDefinitionCustomApi",
+                    routeTemplate: "api/objectdefinitions/{action}/{groupname}",
+                    defaults: new { controller = "ObjectDefinition", groupname = RouteParameter.Optional } 
+                );
 
             GlobalConfiguration.Configuration.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
 

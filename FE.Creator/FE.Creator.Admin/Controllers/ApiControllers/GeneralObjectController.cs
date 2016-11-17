@@ -21,6 +21,44 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             this.objectService = objectService;
         }
 
+
+        /// <summary>
+        /// api/objects/list/{definitionname}/{parameters}
+        /// </summary>
+        /// <param name="definitionname"></param>
+        /// <param name="parameters"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(IEnumerable<ServiceObject>))]
+        [HttpGet]
+        public async Task<IHttpActionResult> List(string definitionname, string parameters = null, int? pageIndex = 1, int? pageSize = int.MaxValue)
+        {
+            if (!pageIndex.HasValue || pageIndex <= 0)
+                pageIndex = 1;
+
+            if (!pageSize.HasValue && pageSize <= 0)
+                pageSize = int.MaxValue;
+
+            var objDefs =  objectService.GetAllObjectDefinitions();
+            var findObjDef = (from def in objDefs
+                              where def.ObjectDefinitionName.Equals(definitionname, StringComparison.InvariantCultureIgnoreCase)
+                              select def).FirstOrDefault();
+            
+            if(findObjDef != null)
+            {
+                return await this.FindServiceObjects(findObjDef.ObjectDefinitionID, parameters, pageIndex, pageSize);
+            }
+
+            return this.NotFound();
+        }
+
+        /// <summary>
+        ///  Get the count of General objects of the specific object definition.
+        ///  GET: api/custom/GeneralObject/CountObjectServices/{id}
+        /// </summary>
+        /// <param name="id">the id of the object definition</param>
+        /// <returns></returns>
         [HttpGet]
         public int CountObjectServices(int id) {
             return objectService.GetGeneralObjectCount(id);
@@ -33,25 +71,32 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             return Task.FromResult<IEnumerable<ServiceObject>>(objectList);
         }
 
-        // GET: api/GeneralObjectList
+        /// <summary>
+        ///     GET: api/custom/GeneralObject/FindServiceObjects/{id}/parameters?pageIndex=xxx&pageSize=xxx
+        /// </summary>
         [ResponseType(typeof(IEnumerable<ServiceObject>))]
         [HttpGet]
-        public async Task<IHttpActionResult> FindServiceObjects(int id, string parameters, int pageIndex, int pageSize)
+        public async Task<IHttpActionResult> FindServiceObjects(int id, string parameters = null, int? pageIndex = 1, int? pageSize = int.MaxValue)
         {
-            if (pageIndex <= 0)
+            if (!pageIndex.HasValue || pageIndex <= 0)
                 pageIndex = 1;
 
-            if (pageSize <= 0)
+            if (!pageSize.HasValue && pageSize <= 0)
                 pageSize = int.MaxValue;
 
             var objectList = await getAllServiceObjectAsync(id,
-                pageIndex,
-                pageSize,
+                pageIndex.Value,
+                pageSize.Value,
                 string.IsNullOrEmpty(parameters) ? null : parameters.Split(new char[] { ',' }));
 
             return this.Ok<IEnumerable<ServiceObject>>(objectList);
         }
 
+        /// <summary>
+        ///  GET: api/custom/GeneralObject/FindServiceObject/{id}
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ResponseType(typeof(ServiceObject))]
         [HttpGet]
         public IHttpActionResult FindServiceObject(int id)
@@ -61,7 +106,9 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             return this.Ok<ServiceObject>(obj);
         }
 
-        // POST: api/GeneralObject
+        /// <summary>
+        /// POST: api/GeneralObject
+        /// </summary>
         [ResponseType(typeof(ServiceObject))]
         public IHttpActionResult Post([FromBody]ServiceObject value)
         {
@@ -75,13 +122,21 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             return this.Created<ServiceObject>(Request.RequestUri, value);
         }
 
-        // PUT: api/GeneralObject/5
+        /// <summary>
+        /// PUT: api/GeneralObject/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="value"></param>
+
         public void Put(int id, [FromBody]ServiceObject value)
         {
             Post(value);
         }
 
-        // DELETE: api/GeneralObject/5
+        /// <summary>
+        /// DELETE: api/GeneralObject/5
+        /// </summary>
+        /// <param name="id"></param>
         public void Delete(int id)
         {
             objectService.DeleteServiceObject(id);

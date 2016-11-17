@@ -21,17 +21,6 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             this.objectService = service;
         }
 
-        // GET: api/ObjectDefinitionGroup
-        [ResponseType(typeof(IEnumerable<ObjectDefinitionGroup>))]
-        [HttpGet]
-        public async Task<IHttpActionResult> Get()
-        {
-            IEnumerable<ObjectDefinitionGroup> objDefGroups = await GetAllObjectDefinitionGroups(null);
-
-            return this.Ok<IEnumerable<ObjectDefinitionGroup>>(objDefGroups);
-        }
-
-
         [ResponseType(typeof(IEnumerable<ObjectDefinitionGroup>))]
         [HttpGet]
         public async Task<IHttpActionResult> GetByParentId(int? id = null)

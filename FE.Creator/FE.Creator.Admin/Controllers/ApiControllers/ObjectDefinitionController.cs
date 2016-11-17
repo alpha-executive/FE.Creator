@@ -27,10 +27,37 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             return Task.FromResult<IEnumerable<ObjectDefinition>>(objDefinitions);
         }
 
-        // GET: api/ObjectDefinition
+
+        /// <summary>
+        /// api/objectdefinitions/list/{groupname}
+        /// </summary>
+        /// <param name="groupname"></param>
+        /// <returns></returns>
         [ResponseType(typeof(IEnumerable<ObjectDefinition>))]
         [HttpGet]
-        public async Task<IHttpActionResult> Get()
+        public async Task<IHttpActionResult> List(string groupname = null)
+        {
+            int groupId = -1;
+            if (!string.IsNullOrEmpty(groupname))
+            {
+                var groups = objectService.GetObjectDefinitionGroups(null);
+                var foundGroup = (from g in groups
+                                  where g.GroupName.Equals(groupname, StringComparison.InvariantCultureIgnoreCase)
+                                  select g).FirstOrDefault();
+
+                groupId = foundGroup != null ? foundGroup.GroupID : -1;
+            }
+
+            if (groupId == -1)
+                return await this.FindObjectDefintionsByGroup();
+            else
+                return await this.FindObjectDefintionsByGroup(groupId);
+        }
+
+        // GET: api/custom/ObjectDefinition/GetAllDefinitions
+        [ResponseType(typeof(IEnumerable<ObjectDefinition>))]
+        [HttpGet]
+        public async Task<IHttpActionResult> GetAllDefinitions()
         {
             var objDefintions = await getObjectDefinitions();
             return this.Ok<IEnumerable<ObjectDefinition>>(objDefintions);
@@ -55,8 +82,9 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         }
 
         [ResponseType(typeof(ObjectDefinition))]
+        [HttpGet]
         // GET: api/ObjectDefinition/5
-        public async Task<IHttpActionResult> Get(int id)
+        public async Task<IHttpActionResult> FindObjectDefinition(int id)
         {
             var objDefinition = await getObjectDefinition(id);
 
@@ -73,7 +101,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
                objectId = objectService.CreateORUpdateObjectDefinition(value);
             }
 
-            return await this.Get(objectId);
+            return await this.FindObjectDefinition(objectId);
         }
 
         // PUT: api/ObjectDefinition/5
