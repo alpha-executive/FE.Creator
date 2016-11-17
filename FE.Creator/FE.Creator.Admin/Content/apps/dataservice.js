@@ -271,7 +271,7 @@
         function getServiceObjectCount(id) {
             var config = {
                 method: 'GET',
-                url: '/api/custom/GeneralObject/CountObjectServices/' + id
+                url: '/api/custom/GeneralObject/CountObjects/' + id
             };
 
             return $http(config)

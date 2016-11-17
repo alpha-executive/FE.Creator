@@ -12,6 +12,37 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
     using System.Threading.Tasks;
     using System.Web.Http.Description;
 
+    /// <summary>
+    /// API for service objects
+    ///  GET: api/objects/list/{definitionname}/{parameters}?pageSize=xx&pageIndex=xx
+    ///         {parameters}: optional, peroperties name, split by comma.
+    ///         {definitionname}: required, object definition name
+    ///         pageSize and PageIndex: optional
+    ///       return: the object list of the specific object definition, 
+    ///  GET: api/custom/GeneralObject/CountObjects/id
+    ///       return: the count of objects of the specific object definition, by definition id.
+    ///  GET:  api/objects/CountObjects/{definitionname}
+    ///       return: the count of objects of the specific object definition, by definition name.
+    ///  GET: api/custom/GeneralObject/FindServiceObjects/{id}/parameters?pageIndex=xxx&pageSize=xxx
+    ///         {parameters}: optional, peroperties name, split by comma.
+    ///         {id}: required, object definition id
+    ///         pageSize and PageIndex: optional
+    ///       return: the object list of the specific object definition.
+    ///  GET: api/custom/GeneralObject/FindServiceObject/{id}
+    ///       return: find the general object by object id.
+    ///       
+    ///  POST api/GeneralObject
+    ///       creat new service object
+    ///       required body parameter: ServiceObject value
+    ///  
+    ///  PUT: api/GeneralObject/{id}
+    ///       update the service object
+    ///       {id}, required service object id.
+    ///  DELETE: api/GeneralObject/{id}
+    ///        delete a service object
+    ///        {id}, required service object id
+    ///       
+    /// </summary>
     public class GeneralObjectController : ApiController
     {
         IObjectService objectService = null;
@@ -22,6 +53,15 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         }
 
 
+        private ObjectDefinition FindObjectDefinitionByName(string defname)
+        {
+            var objDefs = objectService.GetAllObjectDefinitions();
+            var findObjDef = (from def in objDefs
+                              where def.ObjectDefinitionName.Equals(defname, StringComparison.InvariantCultureIgnoreCase)
+                              select def).FirstOrDefault();
+
+            return findObjDef;
+        }
         /// <summary>
         /// api/objects/list/{definitionname}/{parameters}
         /// </summary>
@@ -40,14 +80,34 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             if (!pageSize.HasValue && pageSize <= 0)
                 pageSize = int.MaxValue;
 
-            var objDefs =  objectService.GetAllObjectDefinitions();
-            var findObjDef = (from def in objDefs
-                              where def.ObjectDefinitionName.Equals(definitionname, StringComparison.InvariantCultureIgnoreCase)
-                              select def).FirstOrDefault();
-            
-            if(findObjDef != null)
+
+            var findObjDef = FindObjectDefinitionByName(definitionname);
+
+            if (findObjDef != null)
             {
                 return await this.FindServiceObjects(findObjDef.ObjectDefinitionID, parameters, pageIndex, pageSize);
+            }
+
+            return this.NotFound();
+        }
+
+        /// <summary>
+        ///  api/objects/CountObjects/{definitionname}
+        /// </summary>
+        /// <param name="definitionname"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(int))]
+        [HttpGet]
+        public async Task<IHttpActionResult> CountObjects(string definitionname)
+        {
+            var findObjDef = FindObjectDefinitionByName(definitionname);
+
+            if (findObjDef != null)
+            {
+                Func<int> findObjectsCount = delegate(){
+                    return this.CountObjects(findObjDef.ObjectDefinitionID);
+                };
+                return this.Ok<int>(await Task.Run<int>(findObjectsCount));
             }
 
             return this.NotFound();
@@ -60,7 +120,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         /// <param name="id">the id of the object definition</param>
         /// <returns></returns>
         [HttpGet]
-        public int CountObjectServices(int id) {
+        public int CountObjects(int id) {
             return objectService.GetGeneralObjectCount(id);
         }
 
