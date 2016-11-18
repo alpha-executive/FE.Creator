@@ -22,33 +22,33 @@ namespace FE.Creator.Admin
             // Web API routes
             config.MapHttpAttributeRoutes();
 
-           
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                name: "DefaultCustomApi",
+                routeTemplate: "api/custom/{controller}/{action}/{id}/{parameters}",
+                defaults: new { id = RouteParameter.Optional, parameters = RouteParameter.Optional }
             );
-
-            config.Routes.MapHttpRoute(
-                   name: "DefaultCustomApi",
-                   routeTemplate: "api/custom/{controller}/{action}/{id}/{parameters}",
-                   defaults: new { id = RouteParameter.Optional, parameters = RouteParameter.Optional }
-               );
 
             //mapping api/objects/{action}/{definitionName}/{parameters} to GeneralObject/{action}
             config.Routes.MapHttpRoute(
                     name: "ServiceObjectCustomApi",
                     routeTemplate: "api/objects/{action}/{definitionname}/{parameters}",
-                    defaults: new { controller= "GeneralObject", parameters = RouteParameter.Optional}
+                    defaults: new { controller = "GeneralObject", parameters = RouteParameter.Optional }
                 );
 
             //mapping api/objectdefinitions/{action}/{groupname} to ObjectDefinition/{action}
             config.Routes.MapHttpRoute(
                     name: "ObjectDefinitionCustomApi",
                     routeTemplate: "api/objectdefinitions/{action}/{groupname}",
-                    defaults: new { controller = "ObjectDefinition", groupname = RouteParameter.Optional } 
+                    defaults: new { controller = "ObjectDefinition", groupname = RouteParameter.Optional }
                 );
 
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+                routeTemplate: "api/{controller}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+
+ 
             GlobalConfiguration.Configuration.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
 
             //uncomment this will avoid return xml serialization output to client.

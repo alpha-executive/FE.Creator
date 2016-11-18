@@ -12,6 +12,26 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
     using FE.Creator.ObjectRepository;
     using FE.Creator.ObjectRepository.ServiceModels;
 
+    /// <summary>
+    ///  GET api/objectdefinitions/list/{groupname}
+    ///      {groupname}: optional, group name, if not specified, return all the object defintions.
+    ///      return all the object defintions of current group specified by {groupname}
+    ///  GET  api/custom/ObjectDefinition/GetAllDefinitions
+    ///      return all the object definitions in the system.
+    ///  GET api/custom/ObjectDefinition/FindObjectDefintionsByGroup/{id}
+    ///      {id}: optional, group id, if not specified, return all the object definitions
+    ///      return:  return all the object defintions of current group specified by {id}: group id.
+    ///  GET: api/ObjectDefinition/{id}
+    ///      {id}: required, object definition id.
+    ///      return: return the specific definition by id.
+    ///  POST api/ObjectDefinition
+    ///     create a object definition instance, required ObjectDefinition json parameter in the body.
+    ///  PUT: api/ObjectDefinition/{id}
+    ///     {id}, required object definition id.
+    ///     update a object definition instance. required ObjectDefinition json parameter in the body.
+    ///  DELETE: api/ObjectDefinition/{id}
+    ///     delete a object definition by {id}
+    /// </summary>
     public class ObjectDefinitionController : ApiController
     {
         IObjectService objectService = null;
@@ -63,6 +83,11 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             return this.Ok<IEnumerable<ObjectDefinition>>(objDefintions);
         }
 
+        /// <summary>
+        ///  GET api/custom/ObjectDefinition/{id}
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ResponseType(typeof(IEnumerable<ObjectDefinition>))]
         [HttpGet]
         public async Task<IHttpActionResult> FindObjectDefintionsByGroup(int? id = null)

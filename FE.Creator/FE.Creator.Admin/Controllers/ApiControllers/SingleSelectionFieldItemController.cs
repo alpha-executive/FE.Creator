@@ -8,6 +8,10 @@ using System.Web.Http;
 
 namespace FE.Creator.Admin.Controllers.ApiControllers
 {
+    /// <summary>
+    /// DELETE: api/SingleSelectionFieldItem/{id}
+    ///      delete a selection item of the single selection field by id.
+    /// </summary>
     public class SingleSelectionFieldItemController : ApiController
     {
         IObjectService objectService = null;

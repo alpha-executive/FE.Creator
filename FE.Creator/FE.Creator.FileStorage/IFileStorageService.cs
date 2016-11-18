@@ -14,5 +14,7 @@ namespace FE.Creator.FileStorage
         byte[] getFileContent(string fileName);
 
         Task<byte[]> GetFileContentAsync(string fileName);
+
+        void DeleteFile(string fileName);
     }
 }

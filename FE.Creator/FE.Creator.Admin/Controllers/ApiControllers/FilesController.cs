@@ -8,10 +8,21 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
-
+using System.Web.Http.Description;
 
 namespace FE.Creator.Admin.Controllers.ApiControllers
 {
+    /// <summary>
+    ///  GET: /api/custom/Files/DownloadFile/{id}/{parameter}/
+    ///      {id}: required: file id
+    ///      {parameter}: optional, file name
+    ///      return: downloaded file
+    ///  POST: api/FileUpload
+    ///       upload a file, request must contains multipart/form-data.
+    ///  DELETE: api/FileUpload/{id}
+    ///       {id}: required string id.
+    ///       delete a file with given file {id}. 
+    /// </summary>
     public class FilesController : ApiController
     {
         IFileStorageService storageService = null;
@@ -22,9 +33,16 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
             this.storageService = storageService;
         }
 
+        /// <summary>
+        /// GET /api/custom/Files/DownloadFile/{0}/{1}/
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        [ResponseType(typeof(HttpResponseMessage))]
         [HttpGet]
         // GET: api/Files
-        public async Task<HttpResponseMessage> DownloadFile(string id, string parameters)
+        public async Task<HttpResponseMessage> DownloadFile(string id, string parameters = null)
         {
             HttpResponseMessage result = null;
 
@@ -94,8 +112,9 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
         }
 
         // DELETE: api/FileUpload/5
-        public void Delete(int id)
+        public void DeleteFile(string id)
         {
+            storageService.DeleteFile(id);
         }
     }
 }

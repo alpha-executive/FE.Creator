@@ -69,5 +69,14 @@ namespace FE.Creator.FileStorage
 
             return Task.FromResult<FileStorageInfo>(fileInfo);
         }
+
+        public void DeleteFile(string fileName)
+        {
+            string path = Path.Combine(StoreRoot, fileName);
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+        }
     }
 }

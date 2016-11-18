@@ -12,6 +12,22 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
     using ObjectRepository.ServiceModels;
     using System.Threading.Tasks;
 
+    /// <summary>
+    /// GET api/custom/ObjectDefinitionGroup/GetByParentId/{id}
+    ///     {id}: optional, the id of parent definition group.
+    ///     return list of the definition groups, if {id} is not provided, return all the groups.
+    /// GET: api/ObjectDefinitionGroup/{id}
+    ///     {id}: required, the id of parent definition group.
+    ///     return the specific object defintion group.
+    /// POST: api/ObjectDefinitionGroup
+    ///     create a new ObjectDefinitionGroup instance,required ObjectDefinitionGroup in the body.
+    /// PUT: api/ObjectDefinitionGroup/{id}
+    ///    {id}: required object definition group id.
+    ///    update a new object definition group by group id.
+    /// DELETE: api/ObjectDefinitionGroup/{id}
+    ///    {id}: required object definition group id.
+    ///    delete a object definition instance.
+    /// </summary>
     public class ObjectDefinitionGroupController : ApiController
     {
         IObjectService objectService = null;
@@ -21,6 +37,13 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             this.objectService = service;
         }
 
+        /// <summary>
+        /// GET api/custom/ObjectDefinitionGroup/GetByParentId/{id}
+        ///     {id}: optional, the id of parent definition group.
+        ///     return list of the definition groups, if {id} is not provided, return all the groups.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ResponseType(typeof(IEnumerable<ObjectDefinitionGroup>))]
         [HttpGet]
         public async Task<IHttpActionResult> GetByParentId(int? id = null)
@@ -35,7 +58,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             return Task.FromResult<IEnumerable<ObjectDefinitionGroup>>(objectService.GetObjectDefinitionGroups(parentGroupId));
         }
 
-        // GET: api/ObjectDefinitionGroup/5
+        
 
         private Task<ObjectDefinitionGroup> GetObjectDefinitionGroup(int id)
         {
@@ -44,6 +67,11 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
                 );
         }
 
+        /// <summary>
+        ///  GET: api/ObjectDefinitionGroup/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [ResponseType(typeof(ObjectDefinitionGroup))]
         public async Task<IHttpActionResult> Get(int id)
         {

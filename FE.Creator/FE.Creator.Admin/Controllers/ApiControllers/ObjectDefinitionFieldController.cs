@@ -8,6 +8,10 @@ using System.Web.Http;
 
 namespace FE.Creator.Admin.Controllers.ApiControllers
 {
+    /// <summary>
+    /// DELETE: api/ObjectDefinitionField/{id}
+    ///      delete a object definition field by id
+    /// </summary>
     public class ObjectDefinitionFieldController : ApiController
     {
         IObjectService objectService = null;
