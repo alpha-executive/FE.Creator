@@ -113,7 +113,7 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService, Upload
     vm.ServiceObjectList = [];  //available object lists.
     vm.pager = {};  //for page purpose.
     vm.onPageClick = onPageClick;
-    vm.pageSize = 12;
+    vm.pageSize = 11;
     vm.currentPageIndex = 0;
     vm.displayedColumns = [];
     vm.onColumnChange = onColumnChange;

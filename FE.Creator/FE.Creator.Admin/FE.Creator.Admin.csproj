@@ -1363,6 +1363,7 @@
     <Content Include="Views\AngularView\Client\ObjectRepository\GeneralObjectSSelectField.cshtml" />
     <Content Include="Views\AngularView\Client\ObjectRepository\GeneralObjectObjRefField.cshtml" />
     <Content Include="Views\Error\ErrorPage.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\AngularView\Client\Common\" />

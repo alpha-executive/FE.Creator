@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace FE.Creator.Admin.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         public ActionResult Index()
