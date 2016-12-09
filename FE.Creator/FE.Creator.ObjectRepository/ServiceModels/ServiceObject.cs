@@ -42,6 +42,30 @@ namespace FE.Creator.ObjectRepository.ServiceModels
             }
         }
 
+        public ServiceObject Create(int objectDefintionId, string owner, string user)
+        {
+            ServiceObject o = new ServiceObject();
+            o.Created = DateTime.UtcNow;
+            o.Updated = DateTime.UtcNow;
+            o.ObjectID = -1;
+            o.ObjectDefinitionId = objectDefintionId;
+            o.ObjectOwner = owner;
+            o.UpdatedBy = user;
+            o.CreatedBy = user;
+
+            return o;
+        }
+
+        public void InsertProperty(string fieldName, ServiceObjectField field)
+        {
+            this.Properties.Add(
+                    new ObjectKeyValuePair()
+                    {
+                      KeyName = fieldName,
+                      Value = field
+                    });
+        }
+
         public T GetPropertyValue<T>(string property)
         {
             var kvp = (from k in this.Properties

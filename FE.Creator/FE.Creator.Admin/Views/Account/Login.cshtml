@@ -12,9 +12,9 @@
     @Html.AntiForgeryToken()
     <div class="form-group has-feedback">
         <label for="Email">
-            Username or email address
+            Email
         </label>
-        <input name="Email" id="Email" type="text" class="form-control" placeholder="Email or User Name">
+        <input name="Email" id="Email" type="text" class="form-control" placeholder="Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
     </div>
     <div class="form-group has-feedback">
@@ -45,15 +45,40 @@
         </div>
         <!-- /.col -->
     </div>
+
+    if (Html.ValidationSummary(true) != null)
+    {
+        <div class="form-group has-error">
+            <label class="control-label" for="inputError">
+                <i class="fa fa-times-circle-o"></i>Invalid User name or Password
+            </label>
+        </div>
+    }
 }
 <!-- /.social-auth-links -->
 <section>
     <a href="@Url.Action("Register")" class="text-center">Register a new membership</a>
 </section>
+@using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    <div class="social-auth-links text-center">
+        <button class="btn btn-block btn-social btn-google btn-flat"  type="submit"  id="Google" name="provider" value="Google">
+            <i class="fa fa-google-plus"></i> Sign in using
+            Google+
+        </button>
+        <button class="btn btn-block btn-social btn-microsoft btn-flat" type="submit" id="Microsoft" name="provider" value="Microsoft">
+            <i class="fa fa-windows"></i> Sign in using
+            Microsoft Account
+        </button>
+    </div>
+  }
+
+    @*<section id="socialLoginForm">
+            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+        </section>*@
 </div>
-@*<section id="socialLoginForm">
-    @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-</section>*@
+
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

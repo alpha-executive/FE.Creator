@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace FE.Creator.Admin.ViewController.Controllers
 {
+    [Authorize]
     public class AngularViewController : Controller
     {
         public ActionResult ClientTemplate(string module, string name)

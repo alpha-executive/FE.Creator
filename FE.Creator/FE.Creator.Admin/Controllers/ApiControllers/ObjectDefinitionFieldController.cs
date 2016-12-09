@@ -12,6 +12,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
     /// DELETE: api/ObjectDefinitionField/{id}
     ///      delete a object definition field by id
     /// </summary>
+    [Authorize]
     public class ObjectDefinitionFieldController : ApiController
     {
         IObjectService objectService = null;

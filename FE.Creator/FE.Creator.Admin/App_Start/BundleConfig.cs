@@ -36,6 +36,7 @@ namespace FE.Creator.Admin
                    "~/Content/adminlte-2.3.6/dist/css/skins/_all-skins.min.css",
                    "~/Content/adminlte-2.3.6/plugins/pace/pace.min.css",
                    "~/Content/adminlte-2.3.6/plugins/ui-notification/angular-ui-notification.min.css",
+                   "~/Content/adminlte-2.3.6/plugins/iCheck/all.css",
                    "~/Content/adminlte-2.3.6/plugins/ui-select-master/select.min.css"
                ));
 
@@ -53,6 +54,7 @@ namespace FE.Creator.Admin
                     "~/Content/adminlte-2.3.6/plugins/slimScroll/jquery.slimscroll.min.js",
                     "~/Content/adminlte-2.3.6/plugins/fastclick/fastclick.js",
                     "~/Content/adminlte-2.3.6/plugins/pace/pace.min.js",
+                    "~/Content/adminlte-2.3.6/plugins/iCheck/icheck.min.js",
                     "~/Content/adminlte-2.3.6/dist/js/app.min.js"
                 ));
 

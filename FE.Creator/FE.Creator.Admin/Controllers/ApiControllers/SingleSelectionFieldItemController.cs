@@ -12,6 +12,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
     /// DELETE: api/SingleSelectionFieldItem/{id}
     ///      delete a selection item of the single selection field by id.
     /// </summary>
+    [Authorize]
     public class SingleSelectionFieldItemController : ApiController
     {
         IObjectService objectService = null;

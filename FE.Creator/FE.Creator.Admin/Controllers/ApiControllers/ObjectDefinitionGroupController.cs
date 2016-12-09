@@ -28,6 +28,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
     ///    {id}: required object definition group id.
     ///    delete a object definition instance.
     /// </summary>
+    [Authorize]
     public class ObjectDefinitionGroupController : ApiController
     {
         IObjectService objectService = null;

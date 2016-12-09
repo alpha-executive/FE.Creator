@@ -7,6 +7,7 @@ using System.Web.Http;
 
 namespace FE.Creator.Admin.ApiControllers.Controllers
 {
+    using ObjectRepository.EntityModels;
     using ObjectRepository;
     using ObjectRepository.ServiceModels;
     using System.Threading.Tasks;
@@ -43,6 +44,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
     ///        {id}, required service object id
     ///       
     /// </summary>
+    [Authorize]
     public class GeneralObjectController : ApiController
     {
         IObjectService objectService = null;
@@ -166,20 +168,93 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             return this.Ok<ServiceObject>(obj);
         }
 
+        private void EnsureServiceProperties(ServiceObject svcObject)
+        {
+            ObjectDefinition objDef =  objectService.GetObjectDefinitionById(svcObject.ObjectDefinitionId);
+            List<ObjectKeyValuePair> removedProperties = new List<ObjectKeyValuePair>();
+
+            for(int i=0; i<svcObject.Properties.Count; i++)
+            {
+                ObjectKeyValuePair property = svcObject.Properties[i];
+                var defField = (from f in objDef.ObjectFields
+                                where f.ObjectDefinitionFieldName.Equals(property.KeyName, StringComparison.InvariantCultureIgnoreCase)
+                                select f).FirstOrDefault();
+                if(defField != null)
+                {
+                    switch (defField.GeneralObjectDefinitionFiledType)
+                    {
+                        case GeneralObjectDefinitionFieldType.PrimeType:
+                            if(!(property.Value is PrimeObjectField))
+                            {
+                                removedProperties.Add(property);
+                            }
+                            ((PrimeObjectField)property.Value).PrimeDataType = ((PrimeDefinitionField)defField).PrimeDataType;
+                            break;
+                        case GeneralObjectDefinitionFieldType.File:
+                            if (!(property.Value is ObjectFileField))
+                            {
+                                removedProperties.Add(property);
+                            }
+                            break;
+                        case GeneralObjectDefinitionFieldType.ObjectReference:
+                            if (!(property.Value is ObjectReferenceField))
+                            {
+                                removedProperties.Add(property);
+                            }
+                            break;
+                        case GeneralObjectDefinitionFieldType.SingleSelection:
+                            if (!(property.Value is SingleSelectionField))
+                            {
+                                removedProperties.Add(property);
+                            }
+                            break;
+                        default:
+                            //not supported yet.
+                            removedProperties.Add(property);
+                            break;
+                    }
+                }
+                else
+                {
+                    removedProperties.Add(property);
+                }
+            }
+
+            foreach(var p in removedProperties)
+            {
+                svcObject.Properties.Remove(p);
+            }
+        }
+
+        private ServiceObject InsertOrUpdateServiceObject(ServiceObject value, bool isUpdate)
+        {
+            if (value != null)
+            {
+                //only for create
+                if (!isUpdate)
+                {
+                    value.CreatedBy = RequestContext.Principal.Identity.Name;
+                }
+           
+                value.UpdatedBy = RequestContext.Principal.Identity.Name;
+                EnsureServiceProperties(value);
+                int objectId = objectService.CreateORUpdateGeneralObject(value);
+                var properties = (from kv in value.Properties
+                                  select kv.KeyName).ToArray<string>();
+                
+               return objectService.GetServiceObjectById(objectId, properties);
+            }
+
+            return value;
+        }
         /// <summary>
         /// POST: api/GeneralObject
         /// </summary>
         [ResponseType(typeof(ServiceObject))]
         public IHttpActionResult Post([FromBody]ServiceObject value)
         {
-            if (value != null)
-            {
-                value.CreatedBy = "Administrator";
-                value.UpdatedBy = "Administrator";
-                value.ObjectID =  objectService.CreateORUpdateGeneralObject(value);
-            }
-
-            return this.Created<ServiceObject>(Request.RequestUri, value);
+            ServiceObject postResult = InsertOrUpdateServiceObject(value, false);
+            return this.Created<ServiceObject>(Request.RequestUri, postResult);
         }
 
         /// <summary>
@@ -187,11 +262,27 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <param name="value"></param>
-
-        public void Put(int id, [FromBody]ServiceObject value)
+        [ResponseType(typeof(ServiceObject))]
+        public IHttpActionResult Put(int id, [FromBody]ServiceObject value)
         {
-            Post(value);
+            ServiceObject putResult = InsertOrUpdateServiceObject(value, true);
+
+            return this.Ok<ServiceObject>(putResult);
         }
+
+        /// <summary>
+        /// POST:  api/objects/edit/{definitionname}
+        /// </summary>
+        /// <param name="definitionname"></param>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ResponseType(typeof(ServiceObject))]
+        public async Task<IHttpActionResult> Edit(string definitionname, [FromBody]ServiceObject obj)
+        {
+            return this.Ok<ServiceObject>(null);
+        }
+
 
         /// <summary>
         /// DELETE: api/GeneralObject/5

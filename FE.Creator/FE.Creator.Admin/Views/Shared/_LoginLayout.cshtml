@@ -24,13 +24,18 @@
 
     @Scripts.Render("~/js/adminlte")
 </head>
-<body class="hold-transition login-page">
+<body class="hold-transition login-page skin-blue-light">
+    
+
     <div class="login-box">
-        <div class="login-logo">
-            <a href="#" class="logo">
-                <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>FE</b>Console</span>
-            </a>
+        <div class="box-header bg-success">
+            <div class="login-logo">
+                <a href="#" class="logo">
+                    <i class="fa fa-paper-plane-o text-red"></i>
+                    <!-- logo for regular state and mobile devices -->
+                    <span class="logo-lg"><b>FE</b>Console</span>
+                </a>
+            </div>
         </div>
         <!-- /.login-logo -->
         @RenderBody()

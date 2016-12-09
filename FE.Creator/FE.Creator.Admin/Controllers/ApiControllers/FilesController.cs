@@ -23,6 +23,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
     ///       {id}: required string id.
     ///       delete a file with given file {id}. 
     /// </summary>
+    [Authorize]
     public class FilesController : ApiController
     {
         IFileStorageService storageService = null;
