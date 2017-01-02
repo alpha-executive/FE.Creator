@@ -341,6 +341,7 @@
 /// <reference path="../content/apps/objectdefinitioncontroller.js" />
 /// <reference path="../content/apps/objectrepository.js" />
 /// <reference path="../content/apps/pageservice.js" />
+/// <reference path="../content/apps/usercontroller.js" />
 /// <reference path="bootstrap.js" />
 /// <reference path="jquery.validate.js" />
 /// <reference path="jquery.validate.unobtrusive.js" />

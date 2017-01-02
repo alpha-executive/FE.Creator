@@ -29,7 +29,9 @@
             getServiceObject: getServiceObject,
             getServiceObjectCount: getServiceObjectCount,
             createOrUpdateServiceObject: createOrUpdateServiceObject,
-            deleteServiceObject: deleteServiceObject
+            deleteServiceObject: deleteServiceObject,
+            getUsers: getUsers,
+            resetPassword: resetPassword
         };
 
         //get the object defintion groups
@@ -319,6 +321,37 @@
             function error(response) {
                 logger.error('XHR Failed for deleteServiceObject - ' + response.data);
 
+                return response.data;
+            }
+        }
+
+        /*================User Service ==========================*/
+        function getUsers() {
+            return $http.get('/api/SystemUser/List')
+                .then(complete)
+                .catch(error);
+
+            function complete(response) {
+                return response.data;
+            }
+
+            function error(response) {
+                logger.error('XHR Failed for getUsers - ' + response.data);
+                return response.data;
+            }
+        }
+
+        function resetPassword(userid) {
+            return $http.post("/api/custom/SystemUser/ResetUserPassword/" + userid, userid)
+                    .then(complete)
+                    .catch(error);
+             
+            function complete(response) {
+                return response.data;
+            }
+
+            function error(response) {
+                logger.error('XHR Failed for resetPassword - ' + response.data);
                 return response.data;
             }
         }

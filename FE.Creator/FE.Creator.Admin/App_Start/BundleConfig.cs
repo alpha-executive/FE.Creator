@@ -86,6 +86,10 @@ namespace FE.Creator.Admin
                 "~/Content/apps/generalobjectcontroller.js"
                 ));
 
+            bundles.Add(new ScriptBundle("~/js/adminapp/sysusers").Include(
+                "~/Content/apps/usercontroller.js"
+                ));
+
         }
     }
 }

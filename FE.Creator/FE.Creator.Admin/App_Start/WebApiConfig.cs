@@ -65,6 +65,7 @@ namespace FE.Creator.Admin
 
             var container = new UnityContainer();
             container.RegisterType<IObjectService, DefaultObjectService>(new HierarchicalLifetimeManager());
+            container.RegisterType<ApplicationUserManager, ApplicationUserManager>(new HierarchicalLifetimeManager());
 
             string rootPath = System.IO.Path.Combine(System.Web.HttpRuntime.AppDomainAppPath, "App_Data");
             container.RegisterType<IFileStorageService, LocalFileSystemStorage>(new HierarchicalLifetimeManager(),new InjectionConstructor(rootPath));
