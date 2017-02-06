@@ -90,6 +90,10 @@ namespace FE.Creator.Admin
                 "~/Content/apps/usercontroller.js"
                 ));
 
+            bundles.Add(new ScriptBundle("~/js/adminapp/licensemgr").Include(
+                 "~/Content/apps/licensecontroller.js"
+                ));
+
         }
     }
 }

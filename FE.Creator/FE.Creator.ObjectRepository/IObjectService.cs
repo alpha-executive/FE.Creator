@@ -47,6 +47,13 @@ namespace FE.Creator.ObjectRepository
 
 
         /// <summary>
+        /// Retrieve Object definition by definition name.
+        /// </summary>
+        /// <param name="definitionName"></param>
+        /// <returns></returns>
+        ObjectDefinition GetObjectDefinitionByName(string definitionName);
+
+        /// <summary>
         /// Get the object definitions by definition group
         /// </summary>
         /// <param name="GroupId"></param>
@@ -117,6 +124,21 @@ namespace FE.Creator.ObjectRepository
         /// </summary>
         /// <returns></returns>
         List<ObjectDefinitionGroup> GetObjectDefinitionGroups(int? parentGroupId);
+
+        /// <summary>
+        /// Check whether the object definition group is exists.
+        /// </summary>
+        /// <param name="groupName">object definition group name</param>
+        /// <returns></returns>
+        bool IsObjectDefinitionGroupExists(string groupName);
+
+
+        /// <summary>
+        /// get the object definition group by name.
+        /// </summary>
+        /// <param name="groupName"></param>
+        /// <returns></returns>
+        ObjectDefinitionGroup GetObjectDefinitionGroupByName(string groupName);
 
         /// <summary>
         /// Get the ObjectDefintionGroup by ID.

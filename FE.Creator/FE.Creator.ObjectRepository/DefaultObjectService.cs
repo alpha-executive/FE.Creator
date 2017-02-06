@@ -886,5 +886,51 @@ namespace FE.Creator.ObjectRepository
                 }
             }
         }
+
+        public bool IsObjectDefinitionGroupExists(string groupName)
+        {
+            using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+            {
+                var groupCount = dboContext.GeneralObjectDefinitionGroups
+                         .Where(g => g.IsDeleted == false && g.GeneralObjectDefinitionGroupName.Equals(groupName, StringComparison.InvariantCultureIgnoreCase))
+                         .Count();
+
+                return groupCount > 0;
+            }
+        }
+
+        public ObjectDefinitionGroup GetObjectDefinitionGroupByName(string groupName)
+        {
+            using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+            {
+                var objDefGroupList = dboContext.GeneralObjectDefinitionGroups
+                         .Where(g => g.IsDeleted == false && g.GeneralObjectDefinitionGroupName.Equals(groupName, StringComparison.InvariantCultureIgnoreCase))
+                         .Include(g => g.ParentGroup)
+                         .Include(g => g.ChildrenGroups)
+                         .ToList();
+
+                var objList = ObjectConverter.Convert2ObjectDefinitionGroupList(objDefGroupList);
+
+                return objList.Count > 0 ? objList.First() : null;
+            }
+        }
+
+        public ObjectDefinition GetObjectDefinitionByName(string definitionName)
+        {
+            using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+            {
+                var objDefList = dboContext.GeneralObjectDefinitions
+                                 .Where(d => d.GeneralObjectDefinitionName.Equals(definitionName, StringComparison.InvariantCultureIgnoreCase))
+                                 .Include(d => d.GeneralObjectDefinitionFields)
+                                 .ToList();
+                if (objDefList.Count > 0)
+                {
+                    LoadSelctionItems(dboContext, objDefList);
+                }
+
+                return objDefList.Count > 0 ?
+                    ObjectConverter.ConvertToObjectDefinitionList(objDefList).First() : null;
+            }
+        }
     }
 }

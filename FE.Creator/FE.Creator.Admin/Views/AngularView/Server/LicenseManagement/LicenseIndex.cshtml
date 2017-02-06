@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Objects Management";
+}
+<div ng-app="ngObjectRepository">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">License Management</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body" ng-controller="LicenseController as ctrl">
+                    <button class="btn btn-warning" type="file" ngf-select="ctrl.uploadFiles($file, $invalidFiles)" ngf-max-height="1000" ngf-max-size="10MB">
+                        <i class="fa fa-upload"></i> Upload Your License <i class="fa fa-refresh fa-spin text-green" ng-if="ctrl.f.showprogress"></i>
+                    </button><span class="message">{{ctrl.errorMsg}}</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/js/adminapp/licensemgr")
+}
