@@ -8,7 +8,7 @@
       <property name="gender" key="FE_COL_GENDER" type="Integer" displayOrder="4"></property>
       <property name="ID" key="FE_COL_ID" type="String" displayOrder="5"></property>
       <property name="Image" key="FE_COL_IMAGE" type="File" displayOrder="6"></property>
-      <property name="referedBy" key="FE_COL_REF_BY" type="Integer"></property>
+      <property name="UserExternalId" key="FE_COL_EXTERNAL_ID" type="String"></property>
     </properties>
   </entity>
   <entity name="Contact" key="FE_SYS_CONTACT">
@@ -21,7 +21,7 @@
     <property name="linkedIn" key="FE_COL_LINKEDIN" type="String" displayOrder="7"></property>
     <property name="facebook" key="FE_COL_FACEBOOK" type="String" displayOrder="8"></property>
     <property name="freeNote" key="FE_COL_FREENOTE" type="String" displayOrder="9"></property>
-    <property name="referedBy" key="FE_COL_REF_BY" type="Integer"></property>
+    <property name="UserExternalId" key="FE_COL_EXTERNAL_ID" type="String"></property>
   </entity>
   <entity name="Address" key="FE_SYS_ADDRESS">
     <property name="country" key="FE_COL_COUNTRY" type="String" displayOrder="1"></property>
@@ -30,13 +30,13 @@
     <property name="address" key="FE_COL_ADDRESS" type="String" displayOrder=""></property>
     <property name="address1" key="FE_COL_ADDRESS1" type="String" displayOrder=""></property>
     <property name="postCode" key="FE_COL_POSTCODE" type="String" displayOrder=""></property>
-    <property name="referedBy" key="FE_COL_REF_BY" type="Integer"></property>
+    <property name="UserExternalId" key="FE_COL_EXTERNAL_ID" type="String"></property>
   </entity>
   <entity name="Skill" key="FE_SYS_SKILL">
     <property name="skillName" key="FE_COL_SKILLNAME" type="String" displayOrder="1"></property>
     <property name="skillDescription" key="FE_COL_SKILLDESCRIP" type="String" displayOrder=""></property>
     <property name="level" key="FE_COL_LEVEL" type="Integer" displayOrder=""></property>
-    <property name="referedBy" key="FE_COL_REF_BY" type="Integer"></property>
+    <property name="UserExternalId" key="FE_COL_EXTERNAL_ID" type="String"></property>
   </entity>
   <entity name="WorkExperience" key="FE_SYS_WORKEXPERIENCE">
     <property name="company" key="FE_COL_COMPANY" type="String" displayOrder="1"></property>
@@ -45,6 +45,14 @@
     <property name="startDate" key="FE_COL_STARTDATE" type="Datetime" displayOrder=""></property>
     <property name="endDate" key="FE_COL_ENDDATE" type="Datetime" displayOrder=""></property>
     <property name="eventDescription" key="FE_COL_EVENTDESCRIP" type="String" displayOrder=""></property>
-    <property name="referedBy" key="FE_COL_REF_BY" type="Integer"></property>
+    <property name="UserExternalId" key="FE_COL_EXTERNAL_ID" type="String"></property>
+  </entity>
+  <entity name="Education" key="FE_SYS_EDUCATION">
+    <property name="school" key="FE_COL_SCHOOL" type="String" displayOrder="1"></property>
+    <property name="grade" key="FE_COL_SCHOOL_GRADE" type="String" displayOrder=""></property>
+    <property name="enrollDate" key="FE_COL_ENROLLDATE" type="Datetime" displayOrder=""></property>
+    <property name="exitDate" key="FE_COL_EXITDATE" type="Datetime" displayOrder=""></property>
+    <property name="degree" key="FE_COL_SCHOOLDEGREE" type="String" displayOrder=""></property>
+    <property name="UserExternalId" key="FE_COL_EXTERNAL_ID" type="String"></property>
   </entity>
 </config>

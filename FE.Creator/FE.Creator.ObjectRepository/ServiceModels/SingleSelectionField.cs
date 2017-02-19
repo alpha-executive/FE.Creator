@@ -9,5 +9,10 @@ namespace FE.Creator.ObjectRepository.ServiceModels
     public class SingleSelectionField : ServiceObjectField
     {
         public int SelectedItemID { get; set; }
+
+        public override bool isFieldValueEqualAs(string v)
+        {
+            return SelectedItemID.ToString().Equals(v, StringComparison.InvariantCultureIgnoreCase);
+        }
     }
 }

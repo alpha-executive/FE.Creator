@@ -22,5 +22,12 @@ namespace FE.Creator.ObjectRepository.ServiceModels
         public DateTime Created { get; set; }
 
         public DateTime Updated { get; set; }
+
+        public override bool isFieldValueEqualAs(string v)
+        {
+            return (string.IsNullOrEmpty(this.FileName) && string.IsNullOrEmpty(v))
+                || 
+                (!string.IsNullOrEmpty(this.FileName) && this.FileName.Equals(v, StringComparison.InvariantCultureIgnoreCase));
+        }
     }
 }

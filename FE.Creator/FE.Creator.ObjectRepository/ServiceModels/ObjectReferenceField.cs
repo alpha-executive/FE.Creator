@@ -9,5 +9,10 @@ namespace FE.Creator.ObjectRepository.ServiceModels
    public class ObjectReferenceField : ServiceObjectField
     {
         public int ReferedGeneralObjectID { get; set; }
+
+        public override bool isFieldValueEqualAs(string v)
+        {
+            return ReferedGeneralObjectID.ToString().Equals(v, StringComparison.InvariantCultureIgnoreCase);
+        }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FE.Creator.ObjectRepository.ServiceModels
 {
-   public class ServiceObjectField
+   public abstract class ServiceObjectField
     {
         public ServiceObjectField()
         {
@@ -14,5 +14,7 @@ namespace FE.Creator.ObjectRepository.ServiceModels
         }
 
         public int ObjectFieldID { get; set; }
+
+        public abstract bool isFieldValueEqualAs(string v);
     }
 }

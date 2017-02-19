@@ -35,7 +35,7 @@ namespace FE.Creator.Admin.ViewController.Controllers
         }
 
 
-        public ActionResult EditOrDisplay(string module, string name, int Id)
+        public ActionResult EditOrDisplay(string module, string name, object Id)
         {
             if (name == null || !Regex.IsMatch(name, @"^[-\w]+$"))
                 throw new ArgumentException("Illegal template name", "name");

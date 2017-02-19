@@ -32,12 +32,12 @@ namespace FE.Creator.Admin
                    "~/Content/adminlte-2.3.6/plugins/datepicker/datepicker3.css",
                    "~/Content/adminlte-2.3.6/plugins/daterangepicker/daterangepicker.css",
                    "~/Content/adminlte-2.3.6/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css",
-                   "~/Content/adminlte-2.3.6/dist/css/AdminLTE.min.css",
-                   "~/Content/adminlte-2.3.6/dist/css/skins/_all-skins.min.css",
                    "~/Content/adminlte-2.3.6/plugins/pace/pace.min.css",
                    "~/Content/adminlte-2.3.6/plugins/ui-notification/angular-ui-notification.min.css",
                    "~/Content/adminlte-2.3.6/plugins/iCheck/all.css",
-                   "~/Content/adminlte-2.3.6/plugins/ui-select-master/select.min.css"
+                   "~/Content/adminlte-2.3.6/plugins/ui-select-master/select.min.css",
+                    "~/Content/adminlte-2.3.6/dist/css/AdminLTE.min.css",
+                   "~/Content/adminlte-2.3.6/dist/css/skins/_all-skins.min.css"
                ));
 
             bundles.Add(new ScriptBundle("~/js/adminlte").Include(
@@ -48,6 +48,7 @@ namespace FE.Creator.Admin
                     "~/Content/adminlte-2.3.6/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js",
                     "~/Content/adminlte-2.3.6/plugins/jvectormap/jquery-jvectormap-world-mill-en.js",
                     "~/Content/adminlte-2.3.6/plugins/knob/jquery.knob.js",
+                    "~/Content/adminlte-2.3.6/plugins/moment/moment-with-locales.min.js",
                      "~/Content/adminlte-2.3.6/plugins/datepicker/bootstrap-datepicker.js",
                     "~/Content/adminlte-2.3.6/plugins/daterangepicker/daterangepicker.js",
                     "~/Content/adminlte-2.3.6/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js",
@@ -71,7 +72,8 @@ namespace FE.Creator.Admin
             bundles.Add(new ScriptBundle("~/js/adminapp").Include(
                   "~/Content/apps/objectrepository.js",
                   "~/Content/apps/dataservice.js",
-                  "~/Content/apps/pageservice.js"
+                  "~/Content/apps/pageservice.js",
+                  "~/Content/apps/objectutilservice.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/js/adminapp/definitiongroup").Include(
@@ -92,6 +94,10 @@ namespace FE.Creator.Admin
 
             bundles.Add(new ScriptBundle("~/js/adminapp/licensemgr").Include(
                  "~/Content/apps/licensecontroller.js"
+                ));
+
+            bundles.Add(new ScriptBundle("~/js/adminapp/userprofile").Include(
+                    "~/Content/apps/userprofilecontroller.js"
                 ));
 
         }

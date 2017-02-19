@@ -25,7 +25,6 @@ namespace FE.Creator.Admin
                 url: "ngview/{action}/{module}/{name}/{Id}",
                defaults: new { controller = "AngularView", action = "EditOrDisplay", Id = UrlParameter.Optional });
 
-
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

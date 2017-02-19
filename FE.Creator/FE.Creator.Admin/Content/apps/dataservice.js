@@ -28,6 +28,7 @@
             getServiceObjects: getServiceObjects,
             getServiceObject: getServiceObject,
             getServiceObjectCount: getServiceObjectCount,
+            getServiceObjectsWithFilters: getServiceObjectsWithFilters,
             createOrUpdateServiceObject: createOrUpdateServiceObject,
             deleteServiceObject: deleteServiceObject,
             getUsers: getUsers,
@@ -286,6 +287,41 @@
 
             function error(response) {
                 logger.error('XHR Failed for getServiceObjectCount - ' + response.data);
+                return response.data;
+            }
+        }
+
+        function getServiceObjectsWithFilters(definitionName, parameters, pageIndex, pageSize, filters) {
+            var url = '/api/objects/FindServiceObjectsByFilter/'+ definitionName;
+            if (parameters != null)
+                url = url + '/' + parameters + "?";
+            else
+                url = url + "?";
+
+            if(pageIndex != null)
+                url = url + "&pageIndex=" + pageIndex;
+
+            if(pageSize != null)
+                url = url + "&pageSize=" + pageSize;
+
+            if(filters != null)
+                url = url + "&filters=" + filters;
+            
+            var config = {
+                method: 'GET',
+                url: url
+            };
+
+            return $http(config)
+              .then(complete)
+              .catch(error);
+
+            function complete(response) {
+                return response.data;
+            }
+
+            function error(response) {
+                logger.error('XHR Failed for getServiceObjectsWithFilters - ' + response.data);
                 return response.data;
             }
         }

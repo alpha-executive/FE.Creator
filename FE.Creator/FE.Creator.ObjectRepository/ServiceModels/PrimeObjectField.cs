@@ -31,5 +31,12 @@ namespace FE.Creator.ObjectRepository.ServiceModels
             return this.Value == null ? default(T) : 
                 (T)ConvertToTypeValue(typeof(T), this.Value.ToString());
         }
+
+        public override bool isFieldValueEqualAs(string v)
+        {
+            return (this.Value == null && string.IsNullOrEmpty(v)) 
+                ||
+                (this.Value != null && this.Value.ToString().Equals(v, StringComparison.InvariantCultureIgnoreCase));
+        }
     }
 }

@@ -31,6 +31,12 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
     ///       return: the object list of the specific object definition.
     ///  GET: api/custom/GeneralObject/FindServiceObject/{id}
     ///       return: find the general object by object id.
+    ///  
+    /// GET: api/objects/GeneralObject/FindServiceObjectsByFilter/{definitionname}/{parameters}?pageIndex=?&pageSize=?&filters=?
+    ///        {parameters}: optional, perperties name, splited by comma.
+    ///        {definitionname}: required, object defintion name
+    ///        filters: query parameters, property filters, key,value;key,value format.
+    ///       return: the founded general object list
     ///       
     ///  POST api/GeneralObject
     ///       creat new service object
@@ -79,7 +85,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             if (!pageIndex.HasValue || pageIndex <= 0)
                 pageIndex = 1;
 
-            if (!pageSize.HasValue && pageSize <= 0)
+            if (!pageSize.HasValue || pageSize <= 0)
                 pageSize = int.MaxValue;
 
 
@@ -87,7 +93,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
 
             if (findObjDef != null)
             {
-                return await this.FindServiceObjects(findObjDef.ObjectDefinitionID, parameters, pageIndex, pageSize);
+                return await this.FindServiceObjects(findObjDef.ObjectDefinitionID, parameters,pageIndex, pageSize, null);
             }
 
             return this.NotFound();
@@ -138,12 +144,12 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         /// </summary>
         [ResponseType(typeof(IEnumerable<ServiceObject>))]
         [HttpGet]
-        public async Task<IHttpActionResult> FindServiceObjects(int id, string parameters = null, int? pageIndex = 1, int? pageSize = int.MaxValue)
+        public async Task<IHttpActionResult> FindServiceObjects(int id, string parameters = null, int? pageIndex = 1, int? pageSize = int.MaxValue, List<ObjectKeyValuePair> filters = null)
         {
             if (!pageIndex.HasValue || pageIndex <= 0)
                 pageIndex = 1;
 
-            if (!pageSize.HasValue && pageSize <= 0)
+            if (!pageSize.HasValue || pageSize <= 0)
                 pageSize = int.MaxValue;
 
             var objectList = await getAllServiceObjectAsync(id,
@@ -151,7 +157,31 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
                 pageSize.Value,
                 string.IsNullOrEmpty(parameters) ? null : parameters.Split(new char[] { ',' }));
 
-            return this.Ok<IEnumerable<ServiceObject>>(objectList);
+            List<ServiceObject> foundObjects = new List<ServiceObject>();
+            if(filters != null){
+                foreach(var obj in objectList)
+                {
+                    bool isFilterMatched = false;
+                    foreach(var f in filters)
+                    {
+                        var kvp = (from k in obj.Properties
+                                   where k.KeyName.Equals(f.KeyName, StringComparison.InvariantCultureIgnoreCase)
+                                   select k).FirstOrDefault();
+
+                        isFilterMatched = f.Value == null || 
+                            (kvp != null && ((ServiceObjectField)kvp.Value).isFieldValueEqualAs(f.Value.ToString()));
+                    }
+
+                    if (isFilterMatched)
+                        foundObjects.Add(obj);
+                }
+            }
+            else
+            {
+                foundObjects.AddRange(objectList);
+            }
+
+            return this.Ok<IEnumerable<ServiceObject>>(foundObjects);
         }
 
         /// <summary>
@@ -166,6 +196,55 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             var obj = objectService.GetServiceObjectById(id, null);
 
             return this.Ok<ServiceObject>(obj);
+        }
+
+        /// <summary>
+        /// GET: api/custom/GeneralObject/FindServiceObjectsByFilter/{definitionname}/{parameters}?pageIndex=?&pageSize=?&filters=?
+        /// </summary>
+        /// <param name="definitionname"></param>
+        /// <param name="parameters"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="filters"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [ResponseType(typeof(ServiceObject))]
+        public async Task<IHttpActionResult> FindServiceObjectsByFilter(string definitionname, string parameters = null, int? pageIndex = 1, int? pageSize = int.MaxValue, string filters = null)
+        {
+            if (!pageIndex.HasValue || pageIndex <= 0)
+                pageIndex = 1;
+
+            if (!pageSize.HasValue && pageSize <= 0)
+                pageSize = int.MaxValue;
+
+            var findObjDef = FindObjectDefinitionByName(definitionname);
+            if (findObjDef != null)
+            {
+                List<ObjectKeyValuePair> filterKps = new List<ObjectKeyValuePair>();
+                if (!string.IsNullOrEmpty(filters))
+                {
+                    string []keyValues  = filters.Split(new char[] { ';' });
+                    foreach(string kv in keyValues)
+                    {
+                        if (string.IsNullOrEmpty(kv))
+                            continue;
+
+                        string []kpairs = kv.Split(new char[] { ','});
+                        ObjectKeyValuePair kvp = new ObjectKeyValuePair();
+                        kvp.KeyName = kpairs[0];
+                        kvp.Value = kpairs[1];
+                        filterKps.Add(kvp);
+                    }
+                }
+
+                return await this.FindServiceObjects(findObjDef.ObjectDefinitionID,
+                    parameters,
+                    pageIndex,
+                    pageSize,
+                    filterKps.Count > 0 ? filterKps : null);
+            }
+
+            return this.NotFound();
         }
 
         private void EnsureServiceProperties(ServiceObject svcObject)
