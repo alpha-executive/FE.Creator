@@ -86,17 +86,17 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button class="btn btn-warning" type="file" ngf-select="ctrl.uploadFiles($file, $invalidFiles,ctrl.basicinfo.properties.image)" ngf-max-height="1000" ngf-max-size="10MB">
+                            <button class="btn btn-warning" type="file" ngf-select="ctrl.uploadFiles($file, $invalidFiles,ctrl.basicinfo.properties.Image)" ngf-max-height="1000" ngf-max-size="10MB">
                                 <i class="fa fa-upload"></i> Upload Image <i class="fa fa-refresh fa-spin text-green" ng-if="ctrl.f.showprogress"></i>
                             </button><span class="message">{{ctrl.errorMsg}}</span>
                             <br />
                             <br />
-                            <div class="info-box" ng-if="ctrl.basicinfo.properties.image.fileName != null">
-                                <a class="info-box-icon bg-aqua" href="{{ctrl.basicinfo.properties.image.fileUrl}}"><i class="fa fa-cloud-download"></i></a>
+                            <div class="info-box" ng-if="ctrl.basicinfo.properties.Image.fileName != null">
+                                <a class="info-box-icon bg-aqua" href="{{ctrl.basicinfo.properties.Image.fileUrl}}"><i class="fa fa-cloud-download"></i></a>
                                 <div class="info-box-content text-black">
-                                    <span class="info-box-text">{{ ctrl.basicinfo.properties.image.fileName }}</span>
-                                    <span class="info-box-number">{{ctrl.basicinfo.properties.image.fileSize}} KB</span>
-                                    <span class="info-box-text">SHA: {{ctrl.basicinfo.properties.image.fileCRC}}</span>
+                                    <span class="info-box-text">{{ ctrl.basicinfo.properties.Image.fileName }}</span>
+                                    <span class="info-box-number">{{ctrl.basicinfo.properties.Image.fileSize}} KB</span>
+                                    <span class="info-box-text">SHA: {{ctrl.basicinfo.properties.Image.fileCRC}}</span>
                                 </div>
                                 <!-- /.info-box-content -->
                             </div>
