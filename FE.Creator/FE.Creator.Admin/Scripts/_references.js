@@ -346,6 +346,7 @@
 /// <reference path="../content/apps/pageservice.js" />
 /// <reference path="../content/apps/usercontroller.js" />
 /// <reference path="../content/apps/userprofilecontroller.js" />
+/// <reference path="../content/apps/usersimpleprofile.js" />
 /// <reference path="bootstrap.js" />
 /// <reference path="jquery.validate.js" />
 /// <reference path="jquery.validate.unobtrusive.js" />

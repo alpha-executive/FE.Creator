@@ -37,7 +37,8 @@ namespace FE.Creator.Admin
                    "~/Content/adminlte-2.3.6/plugins/iCheck/all.css",
                    "~/Content/adminlte-2.3.6/plugins/ui-select-master/select.min.css",
                     "~/Content/adminlte-2.3.6/dist/css/AdminLTE.min.css",
-                   "~/Content/adminlte-2.3.6/dist/css/skins/_all-skins.min.css"
+                   "~/Content/adminlte-2.3.6/dist/css/skins/_all-skins.min.css",
+                   "~/Content/apps/css/app.css"
                ));
 
             bundles.Add(new ScriptBundle("~/js/adminlte").Include(
@@ -73,7 +74,8 @@ namespace FE.Creator.Admin
                   "~/Content/apps/objectrepository.js",
                   "~/Content/apps/dataservice.js",
                   "~/Content/apps/pageservice.js",
-                  "~/Content/apps/objectutilservice.js"
+                  "~/Content/apps/objectutilservice.js",
+                  "~/Content/apps/usersimpleprofile.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/js/adminapp/definitiongroup").Include(

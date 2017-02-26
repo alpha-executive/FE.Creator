@@ -32,6 +32,7 @@
             createOrUpdateServiceObject: createOrUpdateServiceObject,
             deleteServiceObject: deleteServiceObject,
             getUsers: getUsers,
+            getUserIdByLoginName : getUserIdByLoginName,
             resetPassword: resetPassword
         };
 
@@ -363,7 +364,7 @@
 
         /*================User Service ==========================*/
         function getUsers() {
-            return $http.get('/api/SystemUser/List')
+            return $http.get('/api/custom/SystemUser/List')
                 .then(complete)
                 .catch(error);
 
@@ -377,6 +378,20 @@
             }
         }
 
+        function getUserIdByLoginName() {
+            return $http.get('/api/custom/SystemUser/GetUserIdByUserLoginName')
+               .then(complete)
+               .catch(error);
+
+            function complete(response) {
+                return response.data;
+            }
+
+            function error(response) {
+                logger.error('XHR Failed for getUserIdByLoginName - ' + response.data);
+                return response.data;
+            }
+        }
         function resetPassword(userid) {
             return $http.post("/api/custom/SystemUser/ResetUserPassword/" + userid, userid)
                     .then(complete)

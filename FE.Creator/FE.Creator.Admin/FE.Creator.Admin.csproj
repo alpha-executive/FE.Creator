@@ -1159,6 +1159,8 @@
     <Content Include="Content\apps\dataservice.js" />
     <Content Include="Content\apps\definitiongroupcontroller.js" />
     <Content Include="Content\apps\generalobjectcontroller.js" />
+    <Content Include="Content\apps\img\bgimage.jpg" />
+    <Content Include="Content\apps\img\userdefault.png" />
     <Content Include="Content\apps\licensecontroller.js" />
     <Content Include="Content\apps\objectdefinitioncontroller.js" />
     <Content Include="Content\apps\objectrepository.js" />
@@ -1166,12 +1168,13 @@
     <Content Include="Content\apps\pageservice.js" />
     <Content Include="Content\apps\userprofilecontroller.js" />
     <Content Include="Content\apps\usercontroller.js" />
+    <Content Include="Content\apps\usersimpleprofile.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\apps\css\app.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\adminlte-2.3.6\.gitignore" />
@@ -1376,6 +1379,7 @@
     <Content Include="Views\AngularView\Server\SystemUsers\UsersIndex.cshtml" />
     <Content Include="Views\AngularView\Server\LicenseManagement\LicenseIndex.cshtml" />
     <Content Include="Views\AngularView\Server\SystemUsers\UserProfileIndex.cshtml" />
+    <Content Include="Views\AngularView\Client\UserProfile\SimpleProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Config\Module\ValuableMemories\" />

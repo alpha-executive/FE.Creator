@@ -50,6 +50,17 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
                 );
         }
 
+        [HttpGet]
+        [ResponseType(typeof(string))]
+        public async Task<IHttpActionResult> GetUserIdByUserLoginName()
+        {
+            var userId = (from u in this.UserManager.Users
+                        where u.UserName.Equals(this.User.Identity.Name)
+                        select u.Id).FirstOrDefault();
+
+            return this.Ok<string>(userId);
+        }
+
         private String GetResetPassword()
         {
             return "1qaz!QAZ";
