@@ -66,6 +66,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -208,6 +209,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AngularViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\LicenseViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="MVCExtension\ObjectDefintionConverter.cs" />
     <Compile Include="MVCExtension\UnityDependencyResolver.cs" />
@@ -215,12 +217,14 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\License.xml" />
     <Content Include="App_Data\ObjectRepository.mdf" />
     <Content Include="App_Data\ObjectRepository_log.ldf">
       <DependentUpon>ObjectRepository.mdf</DependentUpon>
     </Content>
     <EmbeddedResource Include="Config\Module\UserProfile\UserProfile.xml" />
     <EmbeddedResource Include="Config\Module\LicenseMaps.xml" />
+    <EmbeddedResource Include="Config\Module\FileManagement\FileManagement.xml" />
     <Content Include="Content\adminlte-2.3.6\bootstrap\css\bootstrap.css" />
     <Content Include="Content\adminlte-2.3.6\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\adminlte-2.3.6\bootstrap\fonts\glyphicons-halflings-regular.svg" />

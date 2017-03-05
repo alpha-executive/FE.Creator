@@ -125,6 +125,11 @@
             vm.isEditBasicInfo = true;
         }
 
+        vm.cancelUserInfoEdit = function () {
+            reloadUserInfo(CurrentLoginUserID);
+            vm.isEditBasicInfo = false;
+        }
+
         vm.onContactEditing = function () {
             if (vm.contact.objectID == null) {
                 var tmpObj = {};
@@ -147,7 +152,10 @@
 
             vm.isEditContact = true;
         }
-
+        vm.cancelContactEdit = function () {
+            reloadContact(CurrentLoginUserID);
+            vm.isEditContact = false;
+        }
         vm.onAddressEditing = function () {
             vm.isEditAddress = true;
         }
@@ -204,6 +212,10 @@
             });
         }
 
+        vm.cancelAddressEdit = function () {
+            reloadAddresses(CurrentLoginUserID);
+            vm.isEditAddress = false;
+        }
         vm.onEducationEditing = function () {
             vm.isEditEducation = true;
         }
@@ -257,6 +269,11 @@
                 }
             });
         }
+        vm.cancelEducationsEdit = function () {
+            reloadEducations(CurrentLoginUserID);
+            vm.isEditEducation = false;
+        }
+
         vm.onSkillEditing = function () {
             vm.isEditSkills = true;
         }
@@ -306,6 +323,10 @@
         }
         vm.deleteSkill = function (skill) {
             deleteObjectFromArrary(vm.skills, skill, null);
+        }
+        vm.cancelSkillsEdit = function () {
+            reloadSkills(CurrentLoginUserID);
+            vm.isEditSkills = false;
         }
         vm.onWorkExperienceEditing = function () {
             vm.isEditWorkExperiences = true;
@@ -361,6 +382,10 @@
             deleteObjectFromArrary(vm.workexperiences, exp, null);
         }
 
+        vm.cancelWorkExperiencesEdit = function () {
+            vm.isEditWorkExperiences = false;
+            reloadWorkExperience(CurrentLoginUserID)
+        }
 
         vm.saveUserinfo = function () {
             saveServiceObject(vm.basicinfo,
@@ -523,6 +548,7 @@
                   "userExternalId," + userProfileId
               ).then(function (data) {
                   if (Array.isArray(data) && data.length > 0) {
+                      vm.educations.splice(0, vm.educations.length);
                       for (var i = 0; i < data.length; i++) {
                           var education = objectUtilService.parseServiceObject(data[i]);
                           vm.educations.push(education);
@@ -542,6 +568,7 @@
                   "userExternalId," + userProfileId
               ).then(function (data) {
                   if (Array.isArray(data) && data.length > 0) {
+                      vm.workexperiences.splice(0, vm.workexperiences.length);
                       for (var i = 0; i < data.length; i++) {
                           var workexperience = objectUtilService.parseServiceObject(data[i]);
                           //var workexperience = {};

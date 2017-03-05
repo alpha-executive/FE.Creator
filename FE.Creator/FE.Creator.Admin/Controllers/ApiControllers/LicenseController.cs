@@ -10,12 +10,15 @@ using System.Reflection;
 using FE.Creator.ObjectRepository;
 using System.Threading.Tasks;
 using FE.Creator.ObjectRepository.ServiceModels;
+using FE.Creator.Admin.Models;
+using System.Runtime.Caching;
 
 namespace FE.Creator.Admin.Controllers.ApiControllers
 {
     public class LicenseController : ApiController
     {
         IObjectService objectService = null;
+        MemoryCache licenseCache = MemoryCache.Default;
 
         public LicenseController(IObjectService objectService)
         {
@@ -154,6 +157,40 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
                 ProcessConfig(configureContent);
             }
         }
+        
+        private XDocument getCachedLicense()
+        {
+            XDocument license = licenseCache.Get("license") as XDocument;
+            if(license == null)
+            {
+                string rootPath = System.IO.Path.Combine(System.Web.HttpRuntime.AppDomainAppPath, "App_Data", "license.xml");
+                license = File.Exists(rootPath)?  XDocument.Load(rootPath) : null;
+
+                if (license != null)
+                {
+                    licenseCache.Add("license", license, DateTimeOffset.MaxValue);
+                }
+            }
+
+            return license;
+        }
+
+        private void UpdateLicenseStatus(IEnumerable<LicensedModule> licModules)
+        {
+            XDocument licenseDoc = getCachedLicense();
+            if (licenseDoc != null)
+            {
+                XElement licenseElement = licenseDoc.Descendants("license").FirstOrDefault();
+                var grantedList = from g in licenseDoc.Descendants("moudle")
+                                  select g.Value;
+
+                foreach (var lic in licModules)
+                {
+                    lic.ExpiredDate = DateTime.ParseExact(licenseElement.Attribute("expireddate").Value, "MM/dd/yyyy", System.Globalization.CultureInfo.InvariantCulture);
+                    lic.Licensed = grantedList.Contains(lic.ModuleId);
+                }
+            }
+        }
 
         [HttpPost]
         public async Task<IHttpActionResult> Post()
@@ -175,6 +212,26 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
             }
 
             return this.Ok();
+        }
+
+        [HttpGet]
+        public async Task<IHttpActionResult> GetLicenseRegisterList()
+        {
+            string licenseMap = ReadResourceContent("FE.Creator.Admin.Config.Module.LicenseMaps.xml");
+            XDocument document = XDocument.Parse(licenseMap);
+            var files = (from f in document.Descendants("module")
+                        select new LicensedModule
+                        {
+                            ModuleName = f.Attribute("name").Value,
+                            ModuleDescription = f.Attribute("Description").Value,
+                            ModuleId = f.Attribute("licenseId").Value,
+                            Licensed = false,
+                            ExpiredDate = DateTime.UtcNow
+                        }).ToList();
+
+            UpdateLicenseStatus(files);
+
+            return this.Ok<IEnumerable<LicensedModule>>(await Task.FromResult<IEnumerable<LicensedModule>>(files));
         }
     }
 }

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<config group="FESystem" name="FileManagement" displayName="File Management" key="FE_SYS_FILE_MANAGEMENT" licenseId ="85EB7327-D54F-4F7F-9256-249D8558186F" version="1.0">
+  <entity name="Documents" key="FE_SYS_DOCUMENTS">
+    <properties>
+    </properties>
+  </entity>
+  <entity name="Photos" key="FE_SYS_PHOTOS">
+    <properties>
+    </properties>
+  </entity>
+  <entity name="Books" key="FE_SYS_BOOKS">
+    <properties>
+    </properties>
+  </entity>
+</config>

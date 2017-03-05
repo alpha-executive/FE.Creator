@@ -9,6 +9,7 @@
     function LicenseController($scope, ObjectRepositoryDataService, Upload, Notification, PagerService) {
         var vm = this;
         vm.errorMsg = "";
+        vm.moduleList = [];
 
         //for file upload handler.
         vm.uploadFiles = function (file, errFiles) {
@@ -35,5 +36,16 @@
             }
         }
 
+        init();
+
+        function init(){
+            ObjectRepositoryDataService.getLicencedModules()
+                        .then(function (data) {
+                            if (data != null && Array.isArray(data)
+                                && data.length > 0) {
+                                vm.moduleList = data;
+                            }
+                        });
+        }
     }
 })();

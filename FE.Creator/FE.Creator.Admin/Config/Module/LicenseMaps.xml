@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <config>
   <modules>
-    <module licenseId="F67370D1-337C-473C-B64C-000C8D2D9EC4">FE.Creator.Admin.Config.Module.UserProfile.UserProfile.xml</module>
+    <module licenseId="F67370D1-337C-473C-B64C-000C8D2D9EC4" name="User Profile" Description="Enable user to create/edit/update the profile of system user.">FE.Creator.Admin.Config.Module.UserProfile.UserProfile.xml</module>
+    <module licenseId="85EB7327-D54F-4F7F-9256-249D8558186F" name="File Management" Description="Enable user to manage documents/photos/books.">FE.Creator.Admin.Config.Module.FileManagement.FileManagement.xml</module>
   </modules>
 </config>
