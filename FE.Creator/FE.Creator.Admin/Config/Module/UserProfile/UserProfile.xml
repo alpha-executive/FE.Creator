@@ -34,8 +34,8 @@
   </entity>
   <entity name="Skill" key="FE_SYS_SKILL">
     <property name="skillName" key="FE_COL_SKILLNAME" type="String" displayOrder="1"></property>
-    <property name="skillDescription" key="FE_COL_SKILLDESCRIP" type="String" displayOrder=""></property>
-    <property name="level" key="FE_COL_LEVEL" type="Integer" displayOrder=""></property>
+    <property name="skillDescription" key="FE_COL_SKILLDESCRIP" type="String" displayOrder="2"></property>
+    <property name="level" key="FE_COL_LEVEL" type="Integer" displayOrder="3"></property>
     <property name="UserExternalId" key="FE_COL_EXTERNAL_ID" type="String"></property>
   </entity>
   <entity name="WorkExperience" key="FE_SYS_WORKEXPERIENCE">
