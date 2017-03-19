@@ -139,12 +139,20 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             return Task.FromResult<IEnumerable<ServiceObject>>(objectList);
         }
 
-        /// <summary>
-        ///     GET: api/custom/GeneralObject/FindServiceObjects/{id}/parameters?pageIndex=xxx&pageSize=xxx
-        /// </summary>
-        [ResponseType(typeof(IEnumerable<ServiceObject>))]
-        [HttpGet]
-        public async Task<IHttpActionResult> FindServiceObjects(int id, string parameters = null, int? pageIndex = 1, int? pageSize = int.MaxValue, List<ObjectKeyValuePair> filters = null)
+        private bool IsFieldValueMatched(ServiceObjectField fieldValue, string value)
+        {
+            //if no filter value, then the record is matched.
+            if (string.IsNullOrEmpty(value))
+                return true;
+
+            //if the field properties is null, then not matched.
+            if (fieldValue == null)
+                return false;
+
+            return fieldValue.isFieldValueEqualAs(value);
+        }
+
+        private async Task<IHttpActionResult> FindServiceObjects(int id, string parameters = null, int? pageIndex = 1, int? pageSize = int.MaxValue, List<ObjectKeyValuePair> filters = null)
         {
             if (!pageIndex.HasValue || pageIndex <= 0)
                 pageIndex = 1;
@@ -158,18 +166,23 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
                 string.IsNullOrEmpty(parameters) ? null : parameters.Split(new char[] { ',' }));
 
             List<ServiceObject> foundObjects = new List<ServiceObject>();
-            if(filters != null){
-                foreach(var obj in objectList)
+            if (filters != null)
+            {
+                foreach (var obj in objectList)
                 {
-                    bool isFilterMatched = false;
-                    foreach(var f in filters)
+                    bool isFilterMatched = true;
+                    foreach (var f in filters)
                     {
                         var kvp = (from k in obj.Properties
                                    where k.KeyName.Equals(f.KeyName, StringComparison.InvariantCultureIgnoreCase)
                                    select k).FirstOrDefault();
 
-                        isFilterMatched = f.Value == null || 
-                            (kvp != null && ((ServiceObjectField)kvp.Value).isFieldValueEqualAs(f.Value.ToString()));
+                        isFilterMatched = kvp != null && isFilterMatched &&
+                                                    IsFieldValueMatched((ServiceObjectField)kvp.Value, (string)f.Value);
+
+                        //if there is a filter is not matched, then the complete record is not matched.
+                        if (!isFilterMatched)
+                            break;
                     }
 
                     if (isFilterMatched)
@@ -182,6 +195,15 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             }
 
             return this.Ok<IEnumerable<ServiceObject>>(foundObjects);
+        }
+        /// <summary>
+        ///     GET: api/custom/GeneralObject/FindServiceObjects/{id}/parameters?pageIndex=xxx&pageSize=xxx
+        /// </summary>
+        [ResponseType(typeof(IEnumerable<ServiceObject>))]
+        [HttpGet]
+        public async Task<IHttpActionResult> FindServiceObjects(int id, string parameters = null, int? pageIndex = 1, int? pageSize = int.MaxValue)
+        {
+            return await FindServiceObjects(id, parameters, pageIndex, pageSize, null);
         }
 
         /// <summary>
@@ -211,12 +233,6 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         [ResponseType(typeof(ServiceObject))]
         public async Task<IHttpActionResult> FindServiceObjectsByFilter(string definitionname, string parameters = null, int? pageIndex = 1, int? pageSize = int.MaxValue, string filters = null)
         {
-            if (!pageIndex.HasValue || pageIndex <= 0)
-                pageIndex = 1;
-
-            if (!pageSize.HasValue && pageSize <= 0)
-                pageSize = int.MaxValue;
-
             var findObjDef = FindObjectDefinitionByName(definitionname);
             if (findObjDef != null)
             {
@@ -313,6 +329,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
                 if (!isUpdate)
                 {
                     value.CreatedBy = RequestContext.Principal.Identity.Name;
+                    value.ObjectOwner = RequestContext.Principal.Identity.Name;
                 }
            
                 value.UpdatedBy = RequestContext.Principal.Identity.Name;

@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "Documents Management";
+}
+
+<div class="box box-primary" ng-app="ngObjectRepository" ng-controller="DocumentController as ctrl">
+    <div class="box-header with-border primary">
+        <div class="mailbox-controls">
+            <div class="btn-group">
+                <button class="btn btn-default" type="button" ng-click="ctrl.directorEditing(null)"><i class="fa fa-folder"></i></button>
+                <button class="btn btn-default" type="button"><i class="fa fa-file"></i></button>
+                <button class="btn btn-default" type="button"><i class="fa fa-trash"></i></button>
+            </div>
+            <div class="pull-right">
+                <div class="has-feedback">
+                    <input class="form-control input-sm" type="text" placeholder="Search Documents">
+                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                </div>
+                <!-- /.btn-group -->
+            </div>
+            <!-- /.pull-right -->
+        </div>
+    </div>
+    <div class="box-body">
+        <div class="box" ng-if="ctrl.displayMode == 'dirEditing'">
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="form-horizontal">
+                            <div class="box-body">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2"><i class="fa fa-tag"></i>Folder Name </label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" ng-model="ctrl.currentEditingDirectory.objectName" />
+                                    </div>
+                                </div>
+                                <ul class="list-inline">
+                                    <li class="pull-right">
+                                        <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveDirectory()"><i class="fa fa-save"></i> Save</button>
+                                        <button class="btn btn-box-tool" type="button" ng-click=""><i class="fa fa-close "></i> Cancel</button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="box" ng-if="ctrl.displayMode == 'list'">
+            <div class="box-body">
+                <table class="table no-margin">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Modified</th>
+                            <th>Owner</th>
+                            <th>Size</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="dir in ctrl.directories">
+                            <td><button type="button" class="btn btn-flat" ng-dblclick="ctrl.folderdbclick(dir)">{{dir.objectName}}</button></td>
+                            <td>{{dir.updated}}</td>
+                            <td>{{user.objectOwner}}</td>
+                            <td></td>
+                            <td>
+                                <button type="button" class="btn btn-primary btn-flat btn-xs" ng-click="ctrl.ResetPassword(user)">
+                                    <i class="fa  fa-refresh"></i>
+                                    Delete
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- /.box-body -->
+    <div class="box-footer">
+        <div class="mailbox-controls">
+            <div class="btn-group">
+                <button class="btn btn-default" type="button"><i class="fa fa-folder"></i></button>
+                <button class="btn btn-default" type="button"><i class="fa fa-file"></i></button>
+                <button class="btn btn-default" type="button"><i class="fa fa-trash"></i></button>
+            </div>
+            <div class="pull-right">
+                <div class="has-feedback">
+                    <input class="form-control input-sm" type="text" placeholder="Search Documents">
+                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                </div>
+                <!-- /.btn-group -->
+            </div>
+            <!-- /.pull-right -->
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/js/adminapp/document")
+}

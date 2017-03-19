@@ -102,6 +102,10 @@ namespace FE.Creator.Admin
                     "~/Content/apps/userprofilecontroller.js"
                 ));
 
+            bundles.Add(new ScriptBundle("~/js/adminapp/document").Include(
+                    "~/Content/apps/documentcontroller.js"
+                ));
+
         }
     }
 }

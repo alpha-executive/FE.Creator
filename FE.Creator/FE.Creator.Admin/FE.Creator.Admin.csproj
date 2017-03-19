@@ -1162,6 +1162,7 @@
     <Content Include="Content\angularjs\angular.min.js" />
     <Content Include="Content\apps\dataservice.js" />
     <Content Include="Content\apps\definitiongroupcontroller.js" />
+    <Content Include="Content\apps\documentcontroller.js" />
     <Content Include="Content\apps\generalobjectcontroller.js" />
     <Content Include="Content\apps\img\bgimage.jpg" />
     <Content Include="Content\apps\img\userdefault.png" />
@@ -1384,6 +1385,9 @@
     <Content Include="Views\AngularView\Server\LicenseManagement\LicenseIndex.cshtml" />
     <Content Include="Views\AngularView\Server\SystemUsers\UserProfileIndex.cshtml" />
     <Content Include="Views\AngularView\Client\UserProfile\SimpleProfile.cshtml" />
+    <Content Include="Views\AngularView\Server\Documents\DocumentIndex.cshtml" />
+    <Content Include="Views\AngularView\Server\Books\BookIndex.cshtml" />
+    <Content Include="Views\AngularView\Server\Photos\PhotoIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Config\Module\ValuableMemories\" />

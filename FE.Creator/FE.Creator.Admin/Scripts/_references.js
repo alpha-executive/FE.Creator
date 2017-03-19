@@ -338,6 +338,7 @@
 /// <reference path="../content/angularjs/angular-route.min.js" />
 /// <reference path="../content/apps/dataservice.js" />
 /// <reference path="../content/apps/definitiongroupcontroller.js" />
+/// <reference path="../content/apps/documentcontroller.js" />
 /// <reference path="../content/apps/generalobjectcontroller.js" />
 /// <reference path="../content/apps/licensecontroller.js" />
 /// <reference path="../content/apps/objectdefinitioncontroller.js" />

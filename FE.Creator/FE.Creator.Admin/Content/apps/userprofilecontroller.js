@@ -184,7 +184,7 @@
             if (vm.addresses.length <= 0)
                 return;
 
-            saveServiceObjects(vm.addresses, 0, function (data, currIdx) {
+            objectUtilService.saveServiceObjects(vm.addresses, 0, function (data, currIdx) {
                 if (currIdx >= vm.addresses.length)
                 {
                     vm.isEditAddress = false;
@@ -242,7 +242,7 @@
             if (vm.educations.length <= 0)
                 return;
 
-            saveServiceObjects(vm.educations, 0, function (data, currIdx) {
+            objectUtilService.saveServiceObjects(vm.educations, 0, function (data, currIdx) {
                 if (currIdx >= vm.educations.length)
                 {
                     vm.isEditEducation = false;
@@ -294,7 +294,7 @@
             if (vm.skills.length <= 0)
                 return;
 
-            saveServiceObjects(vm.skills, 0, function (data, currIdx) {
+            objectUtilService.saveServiceObjects(vm.skills, 0, function (data, currIdx) {
                 if (currIdx >= vm.skills.length) {
                     vm.isEditSkills = false;
 
@@ -335,7 +335,7 @@
             if (vm.workexperiences.length <= 0)
                 return;
 
-            saveServiceObjects(vm.workexperiences, 0, function (data, currIdx) {
+            objectUtilService.saveServiceObjects(vm.workexperiences, 0, function (data, currIdx) {
                 if (currIdx >= vm.workexperiences.length) {
                     vm.isEditWorkExperiences = false;
 
@@ -388,7 +388,7 @@
         }
 
         vm.saveUserinfo = function () {
-            saveServiceObject(vm.basicinfo,
+            objectUtilService.saveServiceObject(vm.basicinfo,
                 function (data) {
                     if (data == null || data == "" || data.objectID != null) {
                         Notification.success({
@@ -420,7 +420,7 @@
         }
 
         vm.saveContact = function () {
-            saveServiceObject(vm.contact,
+            objectUtilService.saveServiceObject(vm.contact,
                 function (data) {
                     if (data == null || data == "" || data.objectID != null) {
                         Notification.success({
@@ -451,39 +451,7 @@
                 }
             );
         }
-
-        function saveServiceObject(editingObject, callback) {
-            var svcObject = objectUtilService.convertAsServiceObject(editingObject);
-            ObjectRepositoryDataService.createOrUpdateServiceObject(
-                    svcObject.objectID,
-                    svcObject
-                ).then(function (data) {
-                    if(callback != null)
-                        callback(data);
-                });
-        }
-
-        function saveServiceObjects(objArrary, currIndex, callback) {
-            if (objArrary.length > 0) {
-                saveServiceObject(objArrary[currIndex],
-                function (data) {
-                    if (data != null && data != "" && data.objectID != null) {
-                        objArrary[currIndex].objectID = data.objectID;
-                        objArrary[currIndex].onlyUpdateProperties = true;
-                    }
-
-                    currIndex = currIndex + 1;
-                    if (currIndex < objArrary.length) {
-                        saveServiceObjects(objArrary, currIndex, callback);
-                    }
-
-                    if (callback != null) {
-                        callback(data, currIndex);
-                    }
-                })
-            }
-        }
-
+        
         function reloadUserInfo(userProfileId) {
             ObjectRepositoryDataService.getServiceObjectsWithFilters(
                     "UserInfo",
@@ -508,6 +476,8 @@
                   "userExternalId," + userProfileId
               ).then(function (data) {
                   if (Array.isArray(data) && data.length > 0) {
+                      vm.skills.splice(0, vm.skills.length);
+
                       for (var i = 0; i < data.length; i++) {
                           var skill = objectUtilService.parseServiceObject(data[i]);
                           vm.skills.push(skill);
@@ -571,15 +541,7 @@
                       vm.workexperiences.splice(0, vm.workexperiences.length);
                       for (var i = 0; i < data.length; i++) {
                           var workexperience = objectUtilService.parseServiceObject(data[i]);
-                          //var workexperience = {};
-                          //workexperience.company = objectUtilService.getStringPropertyValue(data[i], "company");
-                          //workexperience.companyUrl = objectUtilService.getStringPropertyValue(data[i], "companyUrl");
-                          //workexperience.jobTitle = objectUtilService.getStringPropertyValue(data[i], "jobTitle");
-                          //workexperience.startDate = objectUtilService.getDateTimePropertyValue(data[i], "startDate");
-                          //workexperience.endDate = objectUtilService.getDateTimePropertyValue(data[i], "endDate");
-                          //workexperience.eventDescription = objectUtilService.getStringPropertyValue(data[i], "eventDescription");
-                          //workexperience.userExternalId = objectUtilService.getStringPropertyValue(data[i], "userExternalId");
-
+                      
                           vm.workexperiences.push(workexperience);
                       }
                   }

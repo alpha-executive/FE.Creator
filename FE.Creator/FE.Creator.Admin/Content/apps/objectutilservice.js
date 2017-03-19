@@ -26,7 +26,9 @@
           addBinaryProperty: addBinaryProperty,
           addFileProperty: addFileProperty,
           addObjectRefProperty: addObjectRefProperty,
-          addSingleSPropery: addSingleSPropery
+          addSingleSPropery: addSingleSPropery,
+          saveServiceObject: saveServiceObject,
+          saveServiceObjects: saveServiceObjects
       }
 
       function getSimplePropertyValue(sourceObj, propName) {
@@ -265,6 +267,38 @@
           }
 
           return retObj;
+      }
+
+      function saveServiceObject(editingObject, callback) {
+          var svcObject = convertAsServiceObject(editingObject);
+          ObjectRepositoryDataService.createOrUpdateServiceObject(
+                  svcObject.objectID,
+                  svcObject
+              ).then(function (data) {
+                  if (callback != null)
+                      callback(data);
+              });
+      }
+
+      function saveServiceObjects(objArrary, currIndex, callback) {
+          if (objArrary.length > 0) {
+              saveServiceObject(objArrary[currIndex],
+              function (data) {
+                  if (data != null && data != "" && data.objectID != null) {
+                      objArrary[currIndex].objectID = data.objectID;
+                      objArrary[currIndex].onlyUpdateProperties = true;
+                  }
+
+                  currIndex = currIndex + 1;
+                  if (currIndex < objArrary.length) {
+                      saveServiceObjects(objArrary, currIndex, callback);
+                  }
+
+                  if (callback != null) {
+                      callback(data, currIndex);
+                  }
+              })
+          }
       }
   }
 })();
