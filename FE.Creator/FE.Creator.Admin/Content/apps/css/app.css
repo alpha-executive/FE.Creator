@@ -11,3 +11,18 @@
             padding:0;
             z-index: -1;
     }
+.site-navpath{
+    margin:0px 0px 10px 0px;
+    padding:0px;
+    background-color:transparent;
+}
+a.btn{
+    color:#000;
+}
+.mailbox-attachment-info {
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.mailbox-attachments li:hover{
+    border:1px #0094ff dashed;
+}

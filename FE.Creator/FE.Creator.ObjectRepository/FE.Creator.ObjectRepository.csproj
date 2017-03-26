@@ -55,8 +55,17 @@
       <HintPath>..\packages\Unity.4.0.1\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\packages\MySql.Data.Entity.6.9.9\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
@@ -79,6 +88,7 @@
     <Compile Include="EntityModels\EntityContextFactory.cs" />
     <Compile Include="EntityModels\GeneralObjectDefinitionField.cs" />
     <Compile Include="EntityModels\GeneralObjectDefinitionGroup.cs" />
+    <Compile Include="EntityModels\MySQLDBObjectContext.cs" />
     <Compile Include="EntityModels\ObjRefObjectDefinitionField.cs" />
     <Compile Include="EntityModels\PrimeGeneralObjectField.cs" />
     <Compile Include="EntityModels\PrimObjectDefintionField.cs" />

@@ -18,7 +18,7 @@
         vm.skills = [];
         vm.educations = [];
         vm.objectDefinitions = [];
-
+        vm.errorMsg = null;
         vm.isEditBasicInfo = false;
         vm.isEditContact = false;
         vm.isEditWorkExperiences = false;

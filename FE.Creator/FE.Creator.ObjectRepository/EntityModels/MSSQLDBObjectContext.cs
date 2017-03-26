@@ -10,26 +10,11 @@ namespace FE.Creator.ObjectRepository.EntityModels
 {
     internal class MSSQLDBObjectContext : DBObjectContext
     {
-        public MSSQLDBObjectContext() : base("mssqlconnection") { }
+        private MSSQLDBObjectContext(string connstr) : base(connstr) { }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        public static MSSQLDBObjectContext Create()
         {
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-
-            //define self reference group.
-            modelBuilder.Entity<GeneralObjectDefinitionGroup>()
-                .HasOptional(o => o.ParentGroup)
-                .WithMany(o => o.ChildrenGroups)
-                .Map(k => k.MapKey("ParentGroupID"));
-
-            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-
-            modelBuilder.Types().Configure(c => c.ToTable(c.ClrType.Name));
-
-            //turn off the lazy loading to avoid load complete database into memory.
-            this.Configuration.LazyLoadingEnabled = false;
+            return new MSSQLDBObjectContext("mssqlconnection");
         }
     }
 }

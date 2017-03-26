@@ -5,14 +5,14 @@ namespace FE.Creator.ObjectRepository.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<FE.Creator.ObjectRepository.EntityModels.MSSQLDBObjectContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<FE.Creator.ObjectRepository.EntityModels.DBObjectContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(FE.Creator.ObjectRepository.EntityModels.MSSQLDBObjectContext context)
+        protected override void Seed(FE.Creator.ObjectRepository.EntityModels.DBObjectContext context)
         {
             //  This method will be called after migrating to the latest version.
 

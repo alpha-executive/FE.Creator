@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using System.Configuration;
 
 namespace FE.Creator.Admin.Models
 {
@@ -20,14 +21,16 @@ namespace FE.Creator.Admin.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext()
-            : base("mssqlconnection", throwIfV1Schema: false)
+        private ApplicationDbContext(string connectionstr)
+            : base(connectionstr, throwIfV1Schema: false)
         {
         }
 
         public static ApplicationDbContext Create()
         {
-            return new ApplicationDbContext();
+            string dbProvider = ConfigurationManager.AppSettings["databaseprovider"];
+            string connstr = dbProvider.Equals("mysql") ? "mysqlconnection" : "mssqlconnection";
+            return new ApplicationDbContext(connstr);
         }
     }
 }

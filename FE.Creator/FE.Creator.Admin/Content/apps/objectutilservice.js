@@ -28,7 +28,8 @@
           addObjectRefProperty: addObjectRefProperty,
           addSingleSPropery: addSingleSPropery,
           saveServiceObject: saveServiceObject,
-          saveServiceObjects: saveServiceObjects
+          saveServiceObjects: saveServiceObjects,
+          cloneJsonObject : cloneJsonObject
       }
 
       function getSimplePropertyValue(sourceObj, propName) {
@@ -187,11 +188,11 @@
               keyName: propName,
               $type: "FE.Creator.ObjectRepository.ServiceModels.ObjectKeyValuePair, FE.Creator.ObjectRepository",
               value: {
-                  $type: "FE.Creator.ObjectRepository.ServiceModels.ObjectReferenceField, FE.Creator.ObjectRepository"
+                  $type: "FE.Creator.ObjectRepository.ServiceModels.ObjectReferenceField, FE.Creator.ObjectRepository",
+                  referedGeneralObjectID : propValue
               }
           };
 
-          assignProperties(propValue, property.value);
           sourceObj.properties.push(property);
       }
 
@@ -231,9 +232,11 @@
               properties: []
           };
 
-          for (var i = 0; i < sourceObj.properties.length; i++) {
-              var prop = sourceObj.properties[i];
-              retObj.properties[prop.keyName] = prop.value;
+          if (sourceObj.properties != null) {
+              for (var i = 0; i < sourceObj.properties.length; i++) {
+                  var prop = sourceObj.properties[i];
+                  retObj.properties[prop.keyName] = prop.value;
+              }
           }
 
           return retObj;
@@ -256,14 +259,16 @@
               properties: []
           };
 
-          for (var prop in sourceObj.properties) {
-              var svProperty = {
-                  keyName: prop,
-                  $type: "FE.Creator.ObjectRepository.ServiceModels.ObjectKeyValuePair, FE.Creator.ObjectRepository",
-                  value: sourceObj.properties[prop]
-              };
+          if (sourceObj.properties != null) {
+              for (var prop in sourceObj.properties) {
+                  var svProperty = {
+                      keyName: prop,
+                      $type: "FE.Creator.ObjectRepository.ServiceModels.ObjectKeyValuePair, FE.Creator.ObjectRepository",
+                      value: sourceObj.properties[prop]
+                  };
 
-              retObj.properties.push(svProperty);
+                  retObj.properties.push(svProperty);
+              }
           }
 
           return retObj;
@@ -299,6 +304,43 @@
                   }
               })
           }
+      }
+
+      function cloneJsonObject(obj) {
+          // Handle the 3 simple types, and null or undefined
+          if (null == obj || "object" != typeof obj) return obj;
+
+          // Handle Date
+          if (obj instanceof Date) {
+              var copy = new Date();
+              copy.setTime(obj.getTime());
+              return copy;
+          }
+
+          // Handle Array
+          if (obj instanceof Array) {
+              var copy = [];
+              for (var i = 0, len = obj.length; i < len; ++i) {
+                  copy[i] = cloneJsonObject(obj[i]);
+              }
+
+              //even for Arry, it may still has properties.
+              for (var attr in obj) {
+                  if (obj.hasOwnProperty(attr)) copy[attr] = cloneJsonObject(obj[attr]);
+              }
+              return copy;
+          }
+
+          // Handle Object
+          if (obj instanceof Object) {
+              var copy = {};
+              for (var attr in obj) {
+                  if (obj.hasOwnProperty(attr)) copy[attr] = cloneJsonObject(obj[attr]);
+              }
+              return copy;
+          }
+
+          throw new Error("Unable to copy obj! Its type isn't supported.");
       }
   }
 })();

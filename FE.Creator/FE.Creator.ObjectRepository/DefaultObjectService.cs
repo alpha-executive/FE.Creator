@@ -268,7 +268,7 @@ namespace FE.Creator.ObjectRepository
         {
             lock (SyncRoot)
             {
-                using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+                using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
                 {
                     using (var trans = dboContext.Database.BeginTransaction())
                     {
@@ -312,7 +312,7 @@ namespace FE.Creator.ObjectRepository
         {
             lock (SyncRoot)
             {
-                using (var dboContext = EntityContextFactory.GetSQLServerObjectContext())
+                using (var dboContext = EntityContextFactory.GetDBObjectContext())
                 {
                     using (var trans = dboContext.Database.BeginTransaction())
                     {
@@ -425,7 +425,7 @@ namespace FE.Creator.ObjectRepository
         public List<ObjectDefinition> GetAllObjectDefinitions()
         {
             List<ObjectDefinition> retObjList = null;
-            using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+            using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
             {
                 var objDefList = dboContext.GeneralObjectDefinitions
                     .Where(g => g.IsDeleted == false)
@@ -443,7 +443,7 @@ namespace FE.Creator.ObjectRepository
         public List<ObjectDefinition> GetObjectDefinitionsByGroup(int GroupId, int currentPage, int pageSize)
         {
             List<ObjectDefinition> retObjList = null;
-            using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+            using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
             {
                 var objDefList = dboContext.GeneralObjectDefinitions
                     .Where(g => g.IsDeleted == false && g.GeneralObjectDefinitionGroupID == GroupId)
@@ -474,7 +474,7 @@ namespace FE.Creator.ObjectRepository
         public List<ServiceObject> GetAllSerivceObjects(int ObjDefId, string[] properties)
         {
             List<ServiceObject> svsObjects = null;
-            using (var dbContext = EntityContextFactory.GetSQLServerObjectContext())
+            using (var dbContext = EntityContextFactory.GetDBObjectContext())
             {
                 var objectList = dbContext.GeneralObjects.Where(o => o.GeneralObjectDefinitionID == ObjDefId && o.IsDeleted == false)
                                                             .Include(o => o.GeneralObjectFields.Select(f=>f.GeneralObjectDefinitionField))
@@ -489,7 +489,7 @@ namespace FE.Creator.ObjectRepository
 
         public int GetGeneralObjectCount(int ObjDefId)
         {
-            using (var dbContext = EntityContextFactory.GetSQLServerObjectContext())
+            using (var dbContext = EntityContextFactory.GetDBObjectContext())
             {
                 var objectCount = dbContext.GeneralObjects
                                            .Where(o => o.GeneralObjectDefinitionID == ObjDefId && o.IsDeleted == false)
@@ -500,7 +500,7 @@ namespace FE.Creator.ObjectRepository
 
         public ObjectDefinition GetObjectDefinitionById(int objDefId)
         {
-            using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+            using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
             {
                 var objDefList = dboContext.GeneralObjectDefinitions
                                  .Where(d => d.GeneralObjectDefinitionID == objDefId)
@@ -518,7 +518,7 @@ namespace FE.Creator.ObjectRepository
 
         public int GetObjectDefinitionCount()
         {
-            using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+            using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
             {
                 var objDefCount = dboContext.GeneralObjectDefinitions
                                  .Where(g=>g.IsDeleted == false)
@@ -532,7 +532,7 @@ namespace FE.Creator.ObjectRepository
         {
             List<ObjectDefinition> retObjList = null;
             int skipCount = currentPage > 1 ? (currentPage - 1) * pageSize : 0;
-            using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+            using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
             {
                 var objDefList = dboContext.GeneralObjectDefinitions
                                             .Where(g=>g.IsDeleted == false)
@@ -553,7 +553,7 @@ namespace FE.Creator.ObjectRepository
         public ServiceObject GetServiceObjectById(int objectId, string[] properties)
         {
             List<ServiceObject> svsObjects = null;
-            using (var dbContext = EntityContextFactory.GetSQLServerObjectContext())
+            using (var dbContext = EntityContextFactory.GetDBObjectContext())
             {
                 var objectList = dbContext.GeneralObjects
                                             .Where(o => o.GeneralObjectID == objectId)
@@ -572,7 +572,7 @@ namespace FE.Creator.ObjectRepository
             List<ServiceObject> svsObjects = null;
             int skipCount = currentPage > 1 ? (currentPage - 1) * pageSize : 0;
 
-            using (var dbContext = EntityContextFactory.GetSQLServerObjectContext())
+            using (var dbContext = EntityContextFactory.GetDBObjectContext())
             {
                 var objectList = dbContext.GeneralObjects
                                             .Where(o => o.GeneralObjectDefinitionID == ObjDefId && o.IsDeleted == false)
@@ -592,7 +592,7 @@ namespace FE.Creator.ObjectRepository
         {
             lock (SyncRoot)
             {
-                using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+                using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
                 {
                     var objDef = dboContext.GeneralObjectDefinitions
                                      .Where(d => d.GeneralObjectDefinitionID == objDefId)
@@ -615,7 +615,7 @@ namespace FE.Creator.ObjectRepository
         {
             lock (SyncRoot)
             {
-                using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+                using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
                 {
                     var obj = dboContext.GeneralObjects
                                             .Where(o => o.GeneralObjectID == objectId)
@@ -637,7 +637,7 @@ namespace FE.Creator.ObjectRepository
         public List<ObjectDefinitionGroup> GetObjectDefinitionGroups(int? parentGroupId)
         {
             List<ObjectDefinitionGroup> objList = null;
-            using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+            using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
             {
                 var objDefGroupList = dboContext.GeneralObjectDefinitionGroups
                          .Where(g=>g.IsDeleted == false)
@@ -658,7 +658,7 @@ namespace FE.Creator.ObjectRepository
         {
             List<ObjectDefinitionGroup> objList = null;
 
-            using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+            using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
             {
                 var objDefGroupList = dboContext.GeneralObjectDefinitionGroups
                          .Where(g => g.GeneralObjectDefinitionGroupID == defId)
@@ -675,7 +675,7 @@ namespace FE.Creator.ObjectRepository
         {
             lock (SyncRoot)
             {
-                using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+                using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
                 {
                     var objDefGroup = dboContext.GeneralObjectDefinitionGroups
                              .Where(g => g.GeneralObjectDefinitionGroupID == objGroup.GroupID)
@@ -719,7 +719,7 @@ namespace FE.Creator.ObjectRepository
         {
             lock (SyncRoot)
             {
-                using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+                using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
                 {
                     var objDefGroup = dboContext.GeneralObjectDefinitionGroups
                              .Where(g => g.GeneralObjectDefinitionGroupID == defId)
@@ -742,7 +742,7 @@ namespace FE.Creator.ObjectRepository
         {
             lock (SyncRoot)
             {
-                using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+                using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
                 {
                     var generalObject = dboContext.GeneralObjects
                                                 .Where(o => o.GeneralObjectID == serviceObjectId)
@@ -764,7 +764,7 @@ namespace FE.Creator.ObjectRepository
         {
             lock (SyncRoot)
             {
-                using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+                using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
                 {
 
                     var field = dboContext.GeneralObjectFields.Find(objectFieldId);
@@ -782,7 +782,7 @@ namespace FE.Creator.ObjectRepository
         {
             lock (SyncRoot)
             {
-                using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+                using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
                 {
                     var objFields = dboContext.GeneralObjectFields
                                              .Include(f => f.GeneralObjectDefinitionField)
@@ -813,7 +813,7 @@ namespace FE.Creator.ObjectRepository
         {
             lock (SyncRoot)
             {
-                using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+                using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
                 {
 
 
@@ -873,7 +873,7 @@ namespace FE.Creator.ObjectRepository
         {
             lock (SyncRoot)
             {
-                using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+                using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
                 {
                     var selectionItem =  dboContext.GeneralObjectDefinitionSelectItems.Find(selectionItemId);
 
@@ -889,7 +889,7 @@ namespace FE.Creator.ObjectRepository
 
         public bool IsObjectDefinitionGroupExists(string groupName)
         {
-            using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+            using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
             {
                 var groupCount = dboContext.GeneralObjectDefinitionGroups
                          .Where(g => g.IsDeleted == false && g.GeneralObjectDefinitionGroupName.Equals(groupName, StringComparison.InvariantCultureIgnoreCase))
@@ -901,7 +901,7 @@ namespace FE.Creator.ObjectRepository
 
         public ObjectDefinitionGroup GetObjectDefinitionGroupByName(string groupName)
         {
-            using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+            using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
             {
                 var objDefGroupList = dboContext.GeneralObjectDefinitionGroups
                          .Where(g => g.IsDeleted == false && g.GeneralObjectDefinitionGroupName.Equals(groupName, StringComparison.InvariantCultureIgnoreCase))
@@ -917,7 +917,7 @@ namespace FE.Creator.ObjectRepository
 
         public ObjectDefinition GetObjectDefinitionByName(string definitionName)
         {
-            using (DBObjectContext dboContext = EntityContextFactory.GetSQLServerObjectContext())
+            using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
             {
                 var objDefList = dboContext.GeneralObjectDefinitions
                                  .Where(d => d.GeneralObjectDefinitionName.Equals(definitionName, StringComparison.InvariantCultureIgnoreCase))

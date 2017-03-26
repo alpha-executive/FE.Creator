@@ -106,14 +106,17 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
        private void ResolveEntity(int groupId, XElement entity)
         {
             ObjectDefinition definition = new ObjectDefinition();
-            definition.IsFeildsUpdateOnly = false;
+            
             definition.ObjectDefinitionKey = entity.Attribute("key").Value;
             definition.ObjectDefinitionGroupID = groupId;
             definition.ObjectDefinitionName = entity.Attribute("name").Value;
             definition.ObjectOwner = RequestContext.Principal.Identity.Name;
             definition.UpdatedBy = RequestContext.Principal.Identity.Name;
 
-            foreach(XElement prop in entity.Descendants("property"))
+            var currentObjectDefinition = this.objectService.GetObjectDefinitionByName(definition.ObjectDefinitionName);
+            definition.IsFeildsUpdateOnly = currentObjectDefinition != null;
+
+            foreach (XElement prop in entity.Descendants("property"))
             {
                 ObjectDefinitionField objDefField = ParseObjectDefinitionField(prop);
                 if (objDefField != null)
@@ -122,7 +125,11 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
                 }
             }
 
-            this.objectService.CreateORUpdateObjectDefinition(definition);
+            //if there is already a object there, do not register it.
+            if (currentObjectDefinition != null)
+            {
+                this.objectService.CreateORUpdateObjectDefinition(definition);
+            }
         }
 
         private void ProcessConfig(string config)

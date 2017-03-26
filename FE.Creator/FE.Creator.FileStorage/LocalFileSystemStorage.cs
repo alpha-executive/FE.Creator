@@ -17,9 +17,32 @@ namespace FE.Creator.FileStorage
             this.StoreRoot = storeRootPath;
         }
 
+        private string getFilePath(string fileName, DirectoryInfo searchRoot)
+        {
+            foreach(FileInfo file in searchRoot.GetFiles())
+            {
+                if(file.Name.Equals(fileName, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return file.FullName;
+                }
+            }
+
+            foreach(DirectoryInfo dir in searchRoot.GetDirectories())
+            {
+                string dirPath = getFilePath(fileName, dir);
+
+                if (!string.IsNullOrEmpty(dirPath))
+                {
+                    return dirPath;
+                }
+            }
+
+            return string.Empty;
+        }
+
         public byte[] getFileContent(string fileName)
         {
-            string path = Path.Combine(StoreRoot, fileName);
+            string path = getFilePath(fileName, new DirectoryInfo(StoreRoot));
             if (!File.Exists(path))
             {
                 throw new FileNotFoundException(fileName);
@@ -38,7 +61,11 @@ namespace FE.Creator.FileStorage
         public FileStorageInfo SaveFile(byte[] fileContents)
         {
             string fileName = Path.GetRandomFileName();
-            string path = Path.Combine(StoreRoot, fileName);
+            string path = Path.Combine(StoreRoot, DateTime.Now.ToString("yyyyMMdd"), fileName);
+
+            FileInfo file = new FileInfo(path);
+            //ensure the directory is exists.
+            file.Directory.Create();
 
             File.WriteAllBytes(path, fileContents);
 

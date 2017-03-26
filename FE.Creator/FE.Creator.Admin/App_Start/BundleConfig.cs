@@ -61,21 +61,37 @@ namespace FE.Creator.Admin
                 ));
 
             bundles.Add(new ScriptBundle("~/js/angularjs").Include(
-                "~/Content/angularjs/angular.min.js",
-                "~/Content/angularjs/angular-route.min.js",
-                "~/Content/angularjs/angular-messages.min.js",
-                "~/Content/adminlte-2.3.6/plugins/ui-notification/angular-ui-notification.min.js",
-                "~/Content/adminlte-2.3.6/plugins/ui-select-master/select.min.js",
-                "~/Content/adminlte-2.3.6/plugins/ng-file-upload-master/ng-file-upload-shim.min.js",
-                "~/Content/adminlte-2.3.6/plugins/ng-file-upload-master/ng-file-upload.min.js"
+                "~/Content/angularjs/angular.min.js"
              ));
+            bundles.Add(new ScriptBundle("~/js/angularroute").Include(
+               "~/Content/angularjs/angular-route.min.js"
+            ));
+            bundles.Add(new ScriptBundle("~/js/angularmessage").Include(
+              "~/Content/angularjs/angular-messages.min.js",
+              "~/Content/adminlte-2.3.6/plugins/ui-notification/angular-ui-notification.min.js"
+            ));
+            bundles.Add(new ScriptBundle("~/js/angularselect").Include(
+             "~/Content/adminlte-2.3.6/plugins/ui-select-master/select.min.js"
+          ));
+            bundles.Add(new ScriptBundle("~/js/angularupload").Include(
+           "~/Content/adminlte-2.3.6/plugins/ng-file-upload-master/ng-file-upload-shim.min.js",
+           "~/Content/adminlte-2.3.6/plugins/ng-file-upload-master/ng-file-upload.min.js"
+            ));
 
-            bundles.Add(new ScriptBundle("~/js/adminapp").Include(
-                  "~/Content/apps/objectrepository.js",
-                  "~/Content/apps/dataservice.js",
-                  "~/Content/apps/pageservice.js",
-                  "~/Content/apps/objectutilservice.js",
-                  "~/Content/apps/usersimpleprofile.js"
+            bundles.Add(new ScriptBundle("~/js/adminapp/objectrepository").Include(
+                  "~/Content/apps/objectrepository.js"
+                ));
+            bundles.Add(new ScriptBundle("~/js/adminapp/dataservice").Include(
+                  "~/Content/apps/dataservice.js"
+            ));
+            bundles.Add(new ScriptBundle("~/js/adminapp/pageservice").Include(
+                  "~/Content/apps/pageservice.js"
+            ));
+            bundles.Add(new ScriptBundle("~/js/adminapp/objectutilservice").Include(
+                "~/Content/apps/objectutilservice.js"
+            ));
+            bundles.Add(new ScriptBundle("~/js/adminapp/usersimpleprofile").Include(
+                     "~/Content/apps/usersimpleprofile.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/js/adminapp/definitiongroup").Include(
@@ -106,6 +122,9 @@ namespace FE.Creator.Admin
                     "~/Content/apps/documentcontroller.js"
                 ));
 
+            bundles.Add(new ScriptBundle("~/js/adminapp/book").Include(
+                    "~/Content/apps/bookscontroller.js"
+               ));
         }
     }
 }

@@ -336,6 +336,7 @@
 /// <reference path="../content/angularjs/angular.min.js" />
 /// <reference path="../content/angularjs/angular-messages.min.js" />
 /// <reference path="../content/angularjs/angular-route.min.js" />
+/// <reference path="../content/apps/bookscontroller.js" />
 /// <reference path="../content/apps/dataservice.js" />
 /// <reference path="../content/apps/definitiongroupcontroller.js" />
 /// <reference path="../content/apps/documentcontroller.js" />
