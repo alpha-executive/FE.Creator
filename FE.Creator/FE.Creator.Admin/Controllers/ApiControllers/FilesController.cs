@@ -101,7 +101,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
         }
         // POST: api/FileUpload
         [HttpPost]
-        public async Task<IHttpActionResult> Post()
+        public async Task<IHttpActionResult> Post([FromUri] bool thumbinal = false)
         {  
             // Check if the request contains multipart/form-data. 
             if (!Request.Content.IsMimeMultipartContent("form-data"))
@@ -129,7 +129,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
                     string extension = fileName.Substring(fileName.LastIndexOf('.'));
 
                     var fileBytes = await stream.ReadAsByteArrayAsync();
-                    FileStorageInfo info = await storageService.SaveFileAsync(fileBytes, extension);
+                    FileStorageInfo info = await storageService.SaveFileAsync(fileBytes, extension, thumbinal);
 
                     files.Add(new ObjectFileField()
                     {

@@ -29,3 +29,10 @@ a.btn{
 .products-list .product-description{
    white-space:normal;
 }
+.products-list .book-thumbinal-img img{
+    width:80px;
+    height:80px;
+}
+.content-center{
+    text-align:center;
+}

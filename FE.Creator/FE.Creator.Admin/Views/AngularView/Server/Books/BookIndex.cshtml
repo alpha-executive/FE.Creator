@@ -5,13 +5,16 @@
     <div class="col-md-3">
         <div class="box box-solid">
             <div class="box-header with-border">
-                <h3 class="box-title">Book Categories</h3>
+                <h3 class="box-title">Book Gallary</h3>
                 <div class="box-tools">
                     <button class="btn btn-box-tool" type="button" ng-click="ctrl.categoryEditing(null)">
                         <i class="fa fa-plus"></i>
                     </button>
                     <button class="btn btn-box-tool" type="button" ng-disabled="ctrl.currentBookCategory == null" ng-click="ctrl.categoryEditing(ctrl.currentBookCategory)">
                         <i class="fa fa-pencil"></i>
+                    </button>
+                    <button class="btn btn-box-tool" type="button" ng-disabled="ctrl.currentBookCategory == null" ng-click="ctrl.deleteCategory(ctrl.currentBookCategory)">
+                        <i class="fa fa-trash"></i>
                     </button>
                 </div>
             </div>
@@ -24,17 +27,14 @@
                         </a>
                     </li>
                     <li ng-repeat="category in ctrl.bookCategories" ng-click="ctrl.switchCategory(category)" ng-class="{'active': ctrl.currentBookCategory.objectID==category.objectID}">
-                        <a href="javascript:void(0);"><i class="fa fa-map-signs"></i> {{category.objectName}}
-                            <span class="btn btn-box-tool pull-right" type="button" ng-click="ctrl.deleteCategory(category)">
-                                <i class="fa fa-trash"></i>
-                            </span>
-                        </a>
+                        <a href="javascript:void(0);"><i class="fa fa-map-signs"></i> {{category.objectName}}</a>
                     </li>
                 </ul>
                 <div class="input-group" ng-if="ctrl.categoryEditMode != 'list'">
                     <input class="form-control" id="new-event" type="text" placeholder="New Category..." ng-model="ctrl.currentBookCategory.objectName">
                     <div class="input-group-btn">
-                        <button class="btn btn-primary btn-flat" id="add-new-event" type="button" ng-click="ctrl.saveBookCategory()">{{ctrl.categoryEditButtonLabel}}</button>
+                        <button class="btn btn-primary btn-flat btn-xm" id="add-new-event" type="button" ng-click="ctrl.saveBookCategory()"><i class="fa fa-save"></i></button>
+                        <button class="btn btn-primary btn-flat btn-xm" id="cancel-new-event" type="button" ng-click="ctrl.cancelCategoryEditing(ctrl.currentBookCategory)"><i class="fa fa-close"></i></button>
                     </div>
                     <!-- /btn-group -->
                 </div>
@@ -64,7 +64,10 @@
                             <div class="box-body box-primary">
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
-                                        <button class="btn btn-warning" type="file" ngf-select="ctrl.uploadFiles($file, $invalidFiles,ctrl.currentEditingBook)" ngf-max-height="1000" ngf-max-size="100MB">
+                                        <button class="btn btn-warning" type="file" ngf-select="ctrl.uploadFiles($file, $invalidFiles,ctrl.currentEditingBook)" ngf-max-height="1000" 
+                                                ngf-max-size="100MB" 
+                                                ngf-accept="'.pdf,.docx,.doc,.ppt,.pptx,.xsl,.xslx,.txt,.md,.epub,.html'"
+                                                ngf-pattern="'.pdf,.docx,.doc,.ppt,.pptx,.xsl,.xslx,.txt,.md,.epub,.html'">
                                             <i class="fa fa-upload"></i> Upload book <i class="fa fa-refresh fa-spin text-green" ng-if="ctrl.f.showprogress"></i>
                                         </button><span class="message">{{ctrl.errorMsg}}</span>
                                         <br />
@@ -142,8 +145,8 @@
 
                 <ul class="products-list product-list-in-box" ng-if="ctrl.displayMode == 'list'">
                     <li class="item" ng-repeat="book in ctrl.books | filter: ctrl.searchText">
-                        <div class="product-img">
-                            <img alt="Book Thumbinal" src="{{book.properties.bookFile.fileUrl + '?thumbinal=true'}}">
+                        <div class="product-img book-thumbinal-img">
+                            <a class="margin-r-5" href="{{book.properties.bookFile.fileUrl}}"><img alt="Book Thumbinal" src="{{book.properties.bookFile.fileUrl + '?thumbinal=true'}}"></a>
                         </div>
                         <div class="product-info">
                             <a class="product-title" href="{{book.properties.bookFile.fileUrl}}">
@@ -180,14 +183,19 @@
                     </div>
                 </div>
             </div>
-            <div class="footer" ng-if="ctrl.pager.pages.length > 0">
-                <ul class="pagination pagination-sm no-margin">
-                    <li><a href="javascript:void(0);" ng-click="ctrl.onPageClick(1)" ng-class="{disabled: ctrl.pager.disabledFirstPage}">«</a></li>
-                    <li ng-repeat="page in ctrl.pager.pages" ng-class="{active:ctrl.pager.currentPage === page}">
-                        <a href="javascript:void(0);" ng-click="ctrl.onPageClick(page)">{{page}}</a>
-                    </li>
-                    <li><a href="javascript:void(0);" ng-click="ctrl.onPageClick(ctrl.pager.totalPages)" ng-class="{disabled:ctrl.pager.disabledLastPage}">»</a></li>
-                </ul>
+            <div class="footer" ng-if="ctrl.pager.pages.length > 0 && ctrl.displayMode == 'list'">
+                <div class="row">
+                    <div class="col-md-12 content-center">
+                        <ul class="pagination pagination-sm no-margin">
+                            <li><a href="javascript:void(0);" ng-click="ctrl.onPageClick(1)" ng-class="{disabled: ctrl.pager.disabledFirstPage}">«</a></li>
+                            <li ng-repeat="page in ctrl.pager.pages" ng-class="{'active':ctrl.pager.currentPage === page}">
+                                <a href="javascript:void(0);" ng-click="ctrl.onPageClick(page)">{{page}}</a>
+                            </li>
+                            <li><a href="javascript:void(0);" ng-click="ctrl.onPageClick(ctrl.pager.totalPages)" ng-class="{disabled:ctrl.pager.disabledLastPage}">»</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>

@@ -7,9 +7,9 @@ namespace FE.Creator.FileStorage
 {
    public interface IFileStorageService
     {
-        FileStorageInfo SaveFile(byte[] fileContents, string fileExtension);
+        FileStorageInfo SaveFile(byte[] fileContents, string fileExtension, bool createThumbnial = false);
 
-        Task<FileStorageInfo> SaveFileAsync(byte[] fileContents, string fileExtension);
+        Task<FileStorageInfo> SaveFileAsync(byte[] fileContents, string fileExtension, bool createThumbnial = false);
 
         byte[] getFileContent(string fileName);
 

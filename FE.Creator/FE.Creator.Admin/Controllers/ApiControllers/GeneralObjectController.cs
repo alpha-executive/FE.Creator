@@ -188,8 +188,8 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         private async Task<List<ServiceObject>> FilterServiceObjects(int id, string parameters, int? pageIndex, int? pageSize, List<ObjectKeyValuePair> filters)
         {
             var objectList = await getAllServiceObjectAsync(id,
-                            pageIndex.Value,
-                            pageSize.Value,
+                            1,
+                            int.MaxValue,
                             string.IsNullOrEmpty(parameters) ? null : parameters.Split(new char[] { ',' }));
 
             List<ServiceObject> foundObjects = new List<ServiceObject>();
@@ -221,7 +221,10 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
                 foundObjects.AddRange(objectList);
             }
 
-            return foundObjects;
+            return foundObjects
+                .Skip((pageIndex.Value - 1) * pageSize.Value)
+                .Take(pageSize.Value)
+                .ToList();
         }
 
         /// <summary>

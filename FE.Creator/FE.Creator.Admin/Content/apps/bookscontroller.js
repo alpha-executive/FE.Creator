@@ -19,13 +19,11 @@
         vm.objectDefinitions = [];
         vm.categoryEditMode = "list";
         vm.displayMode = "list";
-        vm.viewMode = "listView";
         vm.cancelObject = {};
 
         vm.pager = {};  //for page purpose.
         vm.onPageClick = onPageClick;
-        vm.pageSize = 1;
-        vm.currentPageIndex = 0;
+        vm.pageSize = 25;
 
         init();
 
@@ -38,12 +36,19 @@
                 }).then(function (data) {
                     //get all the categories and books.
                     vm.reloadBookCategories();
-                    onPageClick(1);
+                    onPageChange(1);
                     vm.reCalculateBookNumbers();
                 });
         }
 
         function onPageClick(pageIndex) {
+            if (vm.pager.currentPage == pageIndex)
+                return;
+
+            onPageChange(pageIndex);
+        }
+
+        function onPageChange(pageIndex) {
             vm.reCalculatePager(pageIndex).then(function (data) {
                 if (pageIndex < 1) {
                     pageIndex = 1;
@@ -51,8 +56,9 @@
                 if (pageIndex > vm.pager.totalPages) {
                     pageIndex = vm.pager.totalPages;
                 }
+                vm.pager.currentPage = pageIndex;
 
-                vm.reloadBooks(pageIndex);
+                vm.reloadBooks();
             });
         }
 
@@ -84,9 +90,53 @@
             return tempObj;
         }
 
-        vm.setViewMode = function (viewMode) {
-            if (viewMode != vm.viewMode)
-                vm.viewMode = viewMode;
+        function deleteCatetoryItems(catBooks, category) {
+            if (catBooks != null && catBooks.length > 0) {
+                var f = catBooks.pop();
+                if (f.objectID != 0 && f.objectID != null) {
+                    ObjectRepositoryDataService
+                        .deleteServiceObject(f.objectID)
+                        .then(function (data) {
+                            //delete the next item in this category.
+                            deleteCatetoryItems(catBooks, category);
+
+                            return data;
+                        })
+                        .then(function(data){
+                            if (catBooks.length == 0 || catBooks.length == 0) {
+                                //delete category finally.
+                                deleteCategoryObject(category);
+                            }
+                        });
+                }
+            }
+            else {
+                deleteCategoryObject(category);
+            }
+        }
+        function deleteCategoryObject(category) {
+            if (category.objectID != null && category.objectID != 0) {
+                ObjectRepositoryDataService
+                    .deleteServiceObject(category.objectID)
+                    .then(function (data) {
+                        //delete the directory object from directory list.
+                        var index = vm.bookCategories.indexOf(category);
+                        if (index >= 0) {
+                            vm.bookCategories.splice(index, 1);
+                        }
+
+                        //swtich to the default category.
+                        if (category != null && category.objectID != 0 && category.objectID != null) {
+                            //switch to the original category.
+                            vm.switchCategory(null);
+                        }
+
+                        return data;
+                    })
+                    .then(function (data) {
+                        vm.reCalculateBookNumbers();
+                    });
+            }
         }
 
         vm.bookEditing = function (book) {
@@ -106,12 +156,12 @@
             if (book.objectID != 0 && book.objectID != null) {
                 ObjectRepositoryDataService.deleteServiceObject(book.objectID)
                 .then(function (data) {
-                    //recalculate the current page when a item is deleted in a full page.
-                    if (vm.books.length >= vm.pageSize) {
-                        var navPageIndex = vm.books.length - 1 <= 0 && vm.currentPageIndex > 1
-                            ? vm.currentPageIndex - 1 : vm.currentPageIndex;
-
-                           onPageClick(navPageIndex);
+                    //recalculate the current page when a item is deleted in a full page
+                    //escape the first page, it's no need to reload the first page.
+                    if (vm.pager.totalPages >= vm.pager.currentPage) {
+                        var navPageIndex = vm.books.length - 1 <= 0
+                               ? vm.pager.currentPage - 1 : vm.pager.currentPage;
+                        onPageChange(navPageIndex);
                     }
                     else {
                             var index = vm.books.indexOf(book);
@@ -128,13 +178,7 @@
         vm.switchCategory = function (category) {
             if (vm.currentBookCategory != category) {
                 vm.currentBookCategory = category;
-
-                if (vm.currentBookCategory == null)
-                {
-                    vm.categoryEditMode = "list";
-                }
-
-                onPageClick(1);
+                onPageChange(1);
             }
         }
 
@@ -144,33 +188,17 @@
                 var tempObj = createNewBookCategoryObject("New Category");
                 vm.currentBookCategory = tempObj;
                 vm.bookCategories.push(tempObj);
-                vm.categoryEditButtonLabel = "Add";
             }
             else {
                 vm.currentBookCategory = category;
-                vm.categoryEditButtonLabel = "Update";
             }
 
             vm.categoryEditMode = "edit";
-
-            //vm.cancelObject = objectUtilService.cloneJsonObject(vm.currentBookCategory);
+            vm.cancelObject = objectUtilService.cloneJsonObject(vm.currentBookCategory);
         }
 
         vm.deleteCategory = function (category) {
-            //skip the root directory.
-            if (category.objectID == null || category.objectID == 0) {
-                var index = vm.bookCategories.indexOf(category);
-                if (index >= 0) {
-                    vm.bookCategories.splice(index, 1);
-
-                    if (vm.currentBookCategory != null && vm.currentBookCategory.objectID == category.objectID) {
-                        //switch to the original category.
-                        vm.switchCategory(null);
-                    }
-                }
-                return;
-            }
-            //delete the files under this folder
+            //delete the books under this category
             ObjectRepositoryDataService.getServiceObjectsWithFilters(
                  "Books",
                  "bookCategory",
@@ -178,32 +206,27 @@
                  null,
                  "bookCategory," + category.objectID
              ).then(function (data) {
-                 if (Array.isArray(data) && data.length > 0) {
-                     for (var i = 0; i < data.length; i++) {
-                         var f = data[i];
-                         if (f.objectID != 0 && f.objectID != null) {
-                             ObjectRepositoryDataService.deleteServiceObject(f.objectID);
-                         }
-                     }
+                 if (Array.isArray(data)) {
+                     //recurvely delete the category.
+                     deleteCatetoryItems(data, category);
                  }
-             }).then(function (data) {
-                     if (category.objectID != null && category.objectID != 0) {
-                         ObjectRepositoryDataService.deleteServiceObject(category.objectID);
-                           }
+             });
+        }
 
-                     //delete the directory object from directory list.
-                     var index = vm.bookCategories.indexOf(category);
+        vm.cancelCategoryEditing = function (category) {
+            vm.categoryEditMode = "list";
 
-                     if (index >= 0) {
-                               vm.bookCategories.splice(index, 1);
-                         }
-                      
-                      //swtich to the default category.
-                     if (vm.currentBookCategory != null && vm.currentBookCategory.objectID == category.objectID) {
-                         //switch to the original category.
-                         vm.switchCategory(null);
-                     }
-                   });
+            if (category == null)
+                return;
+
+            var index = vm.bookCategories.indexOf(category);
+            if (index >= 0) {
+                if (category.objectID == null || category.objectID == 0) {
+                    vm.bookCategories.splice(index, 1);
+                } else {
+                    vm.bookCategories.splice(index, 1, vm.cancelObject);
+                }
+            }
         }
 
         vm.saveBookCategory = function () {
@@ -227,8 +250,12 @@
                         if (index >= 0) {
                             vm.bookCategories.splice(index, 1, tmpCategory);
                         }
+                        
+                        //switch to the new added category.
+                        if (vm.currentBookCategory.objectID == 0 || vm.currentBookCategory.objectID == null) {
+                            vm.switchCategory(tmpCategory);
+                        }
 
-                        vm.switchCategory(tmpCategory);
                         vm.categoryEditMode = "list";
                     }
                 }
@@ -253,8 +280,10 @@
                 file.showprogress = true;
 
                 file.upload = Upload.upload({
-                    url: '/api/Files',
-                    data: { file: file }
+                    url: '/api/Files?thumbinal=true',
+                    data: {
+                        file: file
+                    }
                 });
 
                 file.upload.then(function (response) {
@@ -286,30 +315,34 @@
         vm.saveBook = function () {
             objectUtilService.saveServiceObject(vm.currentEditingBook, function (data) {
                 if (data == null || data == "" || data.objectID != null) {
-                    Notification.success({
-                        message: 'Change Saved!',
-                        delay: 3000,
-                        positionY: 'bottom',
-                        positionX: 'right',
-                        title: 'Warn',
-                    });
-
                     //update the object id.
                     if (data != null && data != "") {
                         var tmpbook = objectUtilService.parseServiceObject(data);
-                        var index = vm.books.indexOf(vm.currentEditingBook);
-                        if (index >= 0) {
-                            vm.books.splice(index, 1, tmpbook);
+
+                        //if it's a new add operation.
+                        if ((vm.currentEditingBook.objectID == null || vm.currentEditingBook.objectID == 0)
+                            && vm.books.length >= vm.pager.pageSize) {
+                            //redirect to the first page.
+                            onPageChange(1);
+                        }
+                        else {
+                            //just update the saved changes,no need to refresh from server.
+                            var index = vm.books.indexOf(vm.currentEditingBook);
+                            if (index >= 0) {
+                                vm.books.splice(index, 1, tmpbook);
+                            }
                         }
 
                         vm.displayMode = "list";
-                        //recalculate the pager if page is full or current page index is not the first one.
-                        if (vm.books.length > vm.pageSize || vm.currentPageIndex == 0
-                        || vm.currentPageIndex == 1) {
-                            onPageClick(vm.currentPageIndex);
-                        }
-
                         vm.reCalculateBookNumbers();
+
+                        Notification.success({
+                            message: 'Change Saved!',
+                            delay: 3000,
+                            positionY: 'bottom',
+                            positionX: 'right',
+                            title: 'Warn',
+                        });
                     }
                 }
                 else {
@@ -355,14 +388,14 @@
               });
         }
 
-        vm.reloadBooks = function (pageIndex) {
+        vm.reloadBooks = function () {
             var categoryFilters = vm.currentBookCategory != null ?
                 "bookCategory," + vm.currentBookCategory.objectID : null;
 
             ObjectRepositoryDataService.getServiceObjectsWithFilters(
                  "Books",
                  ["bookFile", "bookDesc", "bookProfileImageUrl", "bookAuthor", "bookVersion", "bookSharedLevel", "bookCategory", "bookISBN"].join(),
-                 pageIndex,
+                 vm.pager.currentPage,
                  vm.pageSize,
                  categoryFilters
              ).then(function (data) {
@@ -404,7 +437,6 @@
                         vm.pager = PagerService.createPager(data, pageIndex, vm.pageSize, 10);
                         vm.pager.disabledLastPage = pageIndex > vm.pager.totalPages;
                         vm.pager.disabledFirstPage = pageIndex == 1;
-                        vm.currentPageIndex = pageIndex;
                     }
 
                     return data;

@@ -58,16 +58,29 @@ namespace FE.Creator.FileStorage
             return Task.FromResult<byte[]>(contents);
         }
 
-        public FileStorageInfo SaveFile(byte[] fileContents, string fileExtension)
+        public FileStorageInfo SaveFile(byte[] fileContents, string fileExtension, bool createThumbnial = false)
         {
             string fileName = Path.GetRandomFileName() + fileExtension;
             string path = Path.Combine(StoreRoot, DateTime.Now.ToString("yyyyMMdd"), fileName);
+            string thumbinalPath = Path.Combine(StoreRoot, DateTime.Now.ToString("yyyyMMdd"), fileName + ".thmb");
+            Task<FileStorageInfo> storeTask = SaveFileContent(fileContents, createThumbnial, fileName, path, thumbinalPath);
 
+            return storeTask.Result;
+        }
+
+        private async Task<FileStorageInfo> SaveFileContent(byte[] fileContents, bool createThumbnial, string fileName, string path, string thumbinalPath)
+        {
             FileInfo file = new FileInfo(path);
             //ensure the directory is exists.
             file.Directory.Create();
 
             File.WriteAllBytes(path, fileContents);
+
+            if (createThumbnial)
+            {
+                File.WriteAllBytes(thumbinalPath,
+                    await CreateThumbnialImage(path, true));
+            }
 
             return new FileStorageInfo()
             {
@@ -90,9 +103,9 @@ namespace FE.Creator.FileStorage
             }
         }
 
-        public Task<FileStorageInfo> SaveFileAsync(byte[] fileContents, string fileExtension)
+        public Task<FileStorageInfo> SaveFileAsync(byte[] fileContents, string fileExtension, bool createThumbnial = false)
         {
-            FileStorageInfo fileInfo = SaveFile(fileContents, fileExtension);
+            FileStorageInfo fileInfo = SaveFile(fileContents, fileExtension, createThumbnial);
 
             return Task.FromResult<FileStorageInfo>(fileInfo);
         }
@@ -108,22 +121,36 @@ namespace FE.Creator.FileStorage
 
         public Task<byte[]> GetFileThumbinalAsync(string fileName)
         {
+            return CreateThumbnialImage(fileName, false);
+        }
+
+        private Task<byte[]> CreateThumbnialImage(string fileName, bool isFullPathFileName)
+        {
             byte[] returnBytes = null;
-            string path = getFilePath(fileName, new DirectoryInfo(StoreRoot));
 
-            if (File.Exists(path))
+            string path = isFullPathFileName ? fileName : getFilePath(fileName, new DirectoryInfo(StoreRoot));
+            string thumbnialPath = Path.Combine(path, ".thmb");
+
+            if (File.Exists(thumbnialPath))
             {
-                using (System.IO.MemoryStream ms = new MemoryStream())
+                returnBytes = File.ReadAllBytes(thumbnialPath);
+            }
+            else
+            {
+                if (File.Exists(path))
                 {
-                    int THUMB_SIZE = 256;
-                    var thumbinal =  WindowsThumbnailProvider.GetThumbnail(path, THUMB_SIZE, THUMB_SIZE, ThumbnailOptions.BiggerSizeOk);
-                    thumbinal.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                    using (System.IO.MemoryStream ms = new MemoryStream())
+                    {
+                        int THUMB_SIZE = 256;
+                        var thumbinal = WindowsThumbnailProvider.GetThumbnail(path, THUMB_SIZE, THUMB_SIZE, ThumbnailOptions.None);
+                        thumbinal.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
 
-                    returnBytes = ms.ToArray();
+                        returnBytes = ms.ToArray();
+                    }
                 }
             }
 
-           return Task.FromResult<byte[]>(returnBytes);
+            return Task.FromResult<byte[]>(returnBytes);
         }
     }
 }
