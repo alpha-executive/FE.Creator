@@ -43,21 +43,62 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
         [ResponseType(typeof(HttpResponseMessage))]
         [HttpGet]
         // GET: api/Files
-        public async Task<HttpResponseMessage> DownloadFile(string id, string parameters = null)
+        public async Task<HttpResponseMessage> DownloadFile(string id, string parameters = null, bool thumbinal = false)
         {
             HttpResponseMessage result = null;
 
-            byte[] content = await storageService.GetFileContentAsync(id);
-
-            // Serve the file to the client
-            result = Request.CreateResponse(HttpStatusCode.OK);
-            result.Content = new ByteArrayContent(content);
-            result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
-            result.Content.Headers.ContentDisposition.FileName = string.IsNullOrEmpty(parameters) ?  id : parameters;
+            if (thumbinal)
+            {
+                result = await this.GetFileThumbinal(id, parameters);
+            }
+            else
+            {
+                result = await this.GetFileContent(id, parameters);
+            }
 
             return result;
         }
 
+        private async Task<HttpResponseMessage> GetFileContent(string id, string parameters = null)
+        {
+            HttpResponseMessage result = null;
+            byte[] content = await storageService.GetFileContentAsync(id);
+
+            if(content != null)
+            {
+                // Serve the file to the client
+                result = Request.CreateResponse(HttpStatusCode.OK);
+                result.Content = new ByteArrayContent(content);
+                result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+                result.Content.Headers.ContentDisposition.FileName = string.IsNullOrEmpty(parameters) ? id : parameters;
+            }
+            else
+            {
+                result = Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+           
+            return result;
+        }
+
+        private async Task<HttpResponseMessage> GetFileThumbinal(string id,string parameters = null)
+        {
+            HttpResponseMessage result = null;
+            byte[] content = await storageService.GetFileThumbinalAsync(id);
+
+            if(content != null)
+            {
+                result = Request.CreateResponse(HttpStatusCode.OK);
+                result.Content = new ByteArrayContent(content);
+                result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("Inline");
+                result.Content.Headers.ContentDisposition.FileName = "file_thumb.png";
+            }
+            else
+            {
+                result = Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+           
+            return result;
+        }
         // POST: api/FileUpload
         [HttpPost]
         public async Task<IHttpActionResult> Post()
@@ -76,11 +117,8 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
                 var filesReadToProvider = await Request.Content.ReadAsMultipartAsync();
                 foreach (var stream in filesReadToProvider.Contents)
                 {
-                    var fileBytes = await stream.ReadAsByteArrayAsync();
-                    FileStorageInfo info = await storageService.SaveFileAsync(fileBytes);
-
                     string fileName = !string.IsNullOrEmpty(stream.Headers.ContentDisposition.FileName) ?
-                                                stream.Headers.ContentDisposition.FileName : info.FileName;
+                                                stream.Headers.ContentDisposition.FileName : "file.unknown";
 
                     fileName = fileName.Replace("\"", "")
                                     .Replace("'", "")
@@ -88,8 +126,10 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
                                     .Replace("&", "_")
                                     .Replace(" ", "_");
 
-                    string extension = fileName.Substring(fileName.LastIndexOf('.')); 
-                                            
+                    string extension = fileName.Substring(fileName.LastIndexOf('.'));
+
+                    var fileBytes = await stream.ReadAsByteArrayAsync();
+                    FileStorageInfo info = await storageService.SaveFileAsync(fileBytes, extension);
 
                     files.Add(new ObjectFileField()
                     {

@@ -273,10 +273,13 @@
             }
         }
 
-        function getServiceObjectCount(id) {
+        function getServiceObjectCount(id, filter) {
+            var reqUrl = filter != null ? '/api/custom/GeneralObject/CountObjects/' + id + "?filters=" + filter
+                : '/api/custom/GeneralObject/CountObjects/' + id;
+
             var config = {
                 method: 'GET',
-                url: '/api/custom/GeneralObject/CountObjects/' + id
+                url: reqUrl
             };
 
             return $http(config)

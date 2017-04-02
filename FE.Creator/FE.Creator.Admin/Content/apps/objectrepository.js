@@ -17,4 +17,14 @@
             }
         };
     });
+    angular.module('ngObjectRepository').directive('autoFocus', function ($timeout) {
+        return {
+            restrict: 'A',
+            link: function (_scope, _element) {
+                $timeout(function () {
+                    _element[0].focus();
+                }, 0);
+            }
+        };
+    });
 })();

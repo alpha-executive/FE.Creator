@@ -577,7 +577,7 @@ namespace FE.Creator.ObjectRepository
                 var objectList = dbContext.GeneralObjects
                                             .Where(o => o.GeneralObjectDefinitionID == ObjDefId && o.IsDeleted == false)
                                             .Include(o => o.GeneralObjectFields.Select(f => f.GeneralObjectDefinitionField))
-                                            .OrderBy(o=>o.Created)
+                                            .OrderByDescending(o=>o.Created)
                                             .Skip(skipCount)
                                             .Take(pageSize)
                                             .ToList();

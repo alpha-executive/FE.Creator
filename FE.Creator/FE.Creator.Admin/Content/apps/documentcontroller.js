@@ -47,17 +47,6 @@
         };
     });
 
-    angular.module('ngObjectRepository').directive('autoFocus', function ($timeout) {
-        return {
-            restrict: 'A',
-            link: function (_scope, _element) {
-                $timeout(function () {
-                    _element[0].focus();
-                }, 0);
-            }
-        };
-    });
-
     angular
         .module('ngObjectRepository')
           .controller("DocumentController", DocumentController);
@@ -91,7 +80,7 @@
                     var rootFolder = createNewFolderObject("Home", vm.currentWorkingDirectoryId);
                     rootFolder.objectID = 0;
                     vm.currentEditingDirectory = rootFolder;
-                    vm.navpaths.push(rootFolder);
+                    vm.navpaths.unshift(rootFolder);
 
                     vm.reloadDirectories();
                     vm.reloadFiles();
@@ -139,7 +128,7 @@
             vm.currentEditingDocument = document;
             if (vm.currentEditingDocument == null) {
                 var tempObj = createNewFileObject("New Document", vm.currentWorkingDirectoryId);
-                vm.documents.push(tempObj);
+                vm.documents.unshift(tempObj);
                 vm.currentEditingDocument = tempObj;
             }
             

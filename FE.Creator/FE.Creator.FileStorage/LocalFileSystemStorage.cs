@@ -58,9 +58,9 @@ namespace FE.Creator.FileStorage
             return Task.FromResult<byte[]>(contents);
         }
 
-        public FileStorageInfo SaveFile(byte[] fileContents)
+        public FileStorageInfo SaveFile(byte[] fileContents, string fileExtension)
         {
-            string fileName = Path.GetRandomFileName();
+            string fileName = Path.GetRandomFileName() + fileExtension;
             string path = Path.Combine(StoreRoot, DateTime.Now.ToString("yyyyMMdd"), fileName);
 
             FileInfo file = new FileInfo(path);
@@ -90,20 +90,40 @@ namespace FE.Creator.FileStorage
             }
         }
 
-        public Task<FileStorageInfo> SaveFileAsync(byte[] fileContents)
+        public Task<FileStorageInfo> SaveFileAsync(byte[] fileContents, string fileExtension)
         {
-            FileStorageInfo fileInfo = SaveFile(fileContents);
+            FileStorageInfo fileInfo = SaveFile(fileContents, fileExtension);
 
             return Task.FromResult<FileStorageInfo>(fileInfo);
         }
 
         public void DeleteFile(string fileName)
         {
-            string path = Path.Combine(StoreRoot, fileName);
+            string path = getFilePath(fileName, new DirectoryInfo(StoreRoot));
             if (File.Exists(path))
             {
                 File.Delete(path);
             }
+        }
+
+        public Task<byte[]> GetFileThumbinalAsync(string fileName)
+        {
+            byte[] returnBytes = null;
+            string path = getFilePath(fileName, new DirectoryInfo(StoreRoot));
+
+            if (File.Exists(path))
+            {
+                using (System.IO.MemoryStream ms = new MemoryStream())
+                {
+                    int THUMB_SIZE = 256;
+                    var thumbinal =  WindowsThumbnailProvider.GetThumbnail(path, THUMB_SIZE, THUMB_SIZE, ThumbnailOptions.BiggerSizeOk);
+                    thumbinal.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+
+                    returnBytes = ms.ToArray();
+                }
+            }
+
+           return Task.FromResult<byte[]>(returnBytes);
         }
     }
 }

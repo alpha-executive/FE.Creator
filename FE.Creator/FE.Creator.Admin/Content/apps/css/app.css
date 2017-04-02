@@ -26,3 +26,6 @@ a.btn{
 .mailbox-attachments li:hover{
     border:1px #0094ff dashed;
 }
+.products-list .product-description{
+   white-space:normal;
+}

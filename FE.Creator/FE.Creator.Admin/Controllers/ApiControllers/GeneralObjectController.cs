@@ -112,10 +112,9 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
 
             if (findObjDef != null)
             {
-                Func<int> findObjectsCount = delegate(){
-                    return this.CountObjects(findObjDef.ObjectDefinitionID);
-                };
-                return this.Ok<int>(await Task.Run<int>(findObjectsCount));
+                int findObjectsCount = await this.CountObjects(findObjDef.ObjectDefinitionID);
+             
+                return this.Ok<int>(findObjectsCount);
             }
 
             return this.NotFound();
@@ -128,8 +127,29 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         /// <param name="id">the id of the object definition</param>
         /// <returns></returns>
         [HttpGet]
-        public int CountObjects(int id) {
-            return objectService.GetGeneralObjectCount(id);
+        public async Task<int> CountObjects(int id, string filters = null) {
+            int count = 0;
+
+            if (string.IsNullOrEmpty(filters))
+            {
+                count = objectService.GetGeneralObjectCount(id);
+            }
+           else
+            {
+                List<ObjectKeyValuePair> filterKps = ParseFilterKeyValuePairs(filters);
+                var fields = from kv in filterKps
+                             select kv.KeyName;
+
+                List<ServiceObject> foundObjects = await FilterServiceObjects(id, 
+                    string.Join(",", fields.ToArray()),
+                    1, 
+                    int.MaxValue,
+                    filterKps.Count > 0 ? filterKps : null);
+
+                count = foundObjects.Count;
+            }
+
+            return count;
         }
 
         private Task<IEnumerable<ServiceObject>> getAllServiceObjectAsync(int id, int pageIndex, int pageSize, string[] properties = null)
@@ -160,10 +180,17 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             if (!pageSize.HasValue || pageSize <= 0)
                 pageSize = int.MaxValue;
 
+            List<ServiceObject> foundObjects = await FilterServiceObjects(id, parameters, pageIndex, pageSize, filters);
+
+            return this.Ok<IEnumerable<ServiceObject>>(foundObjects);
+        }
+
+        private async Task<List<ServiceObject>> FilterServiceObjects(int id, string parameters, int? pageIndex, int? pageSize, List<ObjectKeyValuePair> filters)
+        {
             var objectList = await getAllServiceObjectAsync(id,
-                pageIndex.Value,
-                pageSize.Value,
-                string.IsNullOrEmpty(parameters) ? null : parameters.Split(new char[] { ',' }));
+                            pageIndex.Value,
+                            pageSize.Value,
+                            string.IsNullOrEmpty(parameters) ? null : parameters.Split(new char[] { ',' }));
 
             List<ServiceObject> foundObjects = new List<ServiceObject>();
             if (filters != null)
@@ -194,8 +221,9 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
                 foundObjects.AddRange(objectList);
             }
 
-            return this.Ok<IEnumerable<ServiceObject>>(foundObjects);
+            return foundObjects;
         }
+
         /// <summary>
         ///     GET: api/custom/GeneralObject/FindServiceObjects/{id}/parameters?pageIndex=xxx&pageSize=xxx
         /// </summary>
@@ -220,6 +248,28 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             return this.Ok<ServiceObject>(obj);
         }
 
+        private List<ObjectKeyValuePair> ParseFilterKeyValuePairs(string filters)
+        {
+            List<ObjectKeyValuePair> filterKps = new List<ObjectKeyValuePair>();
+            if (!string.IsNullOrEmpty(filters))
+            {
+                string[] keyValues = filters.Split(new char[] { ';' });
+                foreach (string kv in keyValues)
+                {
+                    if (string.IsNullOrEmpty(kv))
+                        continue;
+
+                    string[] kpairs = kv.Split(new char[] { ',' });
+                    ObjectKeyValuePair kvp = new ObjectKeyValuePair();
+                    kvp.KeyName = kpairs[0];
+                    kvp.Value = kpairs[1];
+                    filterKps.Add(kvp);
+                }
+            }
+
+            return filterKps;
+        }
+
         /// <summary>
         /// GET: api/custom/GeneralObject/FindServiceObjectsByFilter/{definitionname}/{parameters}?pageIndex=?&pageSize=?&filters=?
         /// </summary>
@@ -236,22 +286,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             var findObjDef = FindObjectDefinitionByName(definitionname);
             if (findObjDef != null)
             {
-                List<ObjectKeyValuePair> filterKps = new List<ObjectKeyValuePair>();
-                if (!string.IsNullOrEmpty(filters))
-                {
-                    string []keyValues  = filters.Split(new char[] { ';' });
-                    foreach(string kv in keyValues)
-                    {
-                        if (string.IsNullOrEmpty(kv))
-                            continue;
-
-                        string []kpairs = kv.Split(new char[] { ','});
-                        ObjectKeyValuePair kvp = new ObjectKeyValuePair();
-                        kvp.KeyName = kpairs[0];
-                        kvp.Value = kpairs[1];
-                        filterKps.Add(kvp);
-                    }
-                }
+                List<ObjectKeyValuePair> filterKps = ParseFilterKeyValuePairs(filters);
 
                 return await this.FindServiceObjects(findObjDef.ObjectDefinitionID,
                     parameters,

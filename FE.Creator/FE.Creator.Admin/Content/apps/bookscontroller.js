@@ -13,6 +13,7 @@
         vm.categoryEditButtonLabel = "New";
         vm.searchText = "";
         vm.books = [];
+        vm.totalBookNumber = 0;
         vm.bookCategories = [];
         vm.currentEditingBook = null;
         vm.objectDefinitions = [];
@@ -20,6 +21,11 @@
         vm.displayMode = "list";
         vm.viewMode = "listView";
         vm.cancelObject = {};
+
+        vm.pager = {};  //for page purpose.
+        vm.onPageClick = onPageClick;
+        vm.pageSize = 1;
+        vm.currentPageIndex = 0;
 
         init();
 
@@ -32,8 +38,22 @@
                 }).then(function (data) {
                     //get all the categories and books.
                     vm.reloadBookCategories();
-                    vm.reloadBooks();
+                    onPageClick(1);
+                    vm.reCalculateBookNumbers();
                 });
+        }
+
+        function onPageClick(pageIndex) {
+            vm.reCalculatePager(pageIndex).then(function (data) {
+                if (pageIndex < 1) {
+                    pageIndex = 1;
+                }
+                if (pageIndex > vm.pager.totalPages) {
+                    pageIndex = vm.pager.totalPages;
+                }
+
+                vm.reloadBooks(pageIndex);
+            });
         }
 
         function createNewBookCategoryObject(objectName) {
@@ -75,7 +95,7 @@
             vm.currentEditingBook = book;
             if (vm.currentEditingBook == null) {
                 var tempObj = createNewBookObject("New Book", vm.currentBookCategory);
-                vm.books.push(tempObj);
+                vm.books.unshift(tempObj);
                 vm.currentEditingBook = tempObj;
             }
 
@@ -84,12 +104,24 @@
 
         vm.bookDelete = function (book) {
             if (book.objectID != 0 && book.objectID != null) {
-                ObjectRepositoryDataService.deleteServiceObject(book.objectID);
-            }
+                ObjectRepositoryDataService.deleteServiceObject(book.objectID)
+                .then(function (data) {
+                    //recalculate the current page when a item is deleted in a full page.
+                    if (vm.books.length >= vm.pageSize) {
+                        var navPageIndex = vm.books.length - 1 <= 0 && vm.currentPageIndex > 1
+                            ? vm.currentPageIndex - 1 : vm.currentPageIndex;
 
-            var index = vm.books.indexOf(book);
-            if (index >= 0) {
-                vm.books.splice(index, 1);
+                           onPageClick(navPageIndex);
+                    }
+                    else {
+                            var index = vm.books.indexOf(book);
+                            if (index >= 0) {
+                                vm.books.splice(index, 1);
+                            }
+                    }
+
+                    vm.reCalculateBookNumbers();
+                });
             }
         }
 
@@ -102,7 +134,7 @@
                     vm.categoryEditMode = "list";
                 }
 
-                vm.reloadBooks();
+                onPageClick(1);
             }
         }
 
@@ -126,9 +158,18 @@
 
         vm.deleteCategory = function (category) {
             //skip the root directory.
-            if (category.objectID == null || category.objectID == 0)
-                return;
+            if (category.objectID == null || category.objectID == 0) {
+                var index = vm.bookCategories.indexOf(category);
+                if (index >= 0) {
+                    vm.bookCategories.splice(index, 1);
 
+                    if (vm.currentBookCategory != null && vm.currentBookCategory.objectID == category.objectID) {
+                        //switch to the original category.
+                        vm.switchCategory(null);
+                    }
+                }
+                return;
+            }
             //delete the files under this folder
             ObjectRepositoryDataService.getServiceObjectsWithFilters(
                  "Books",
@@ -150,11 +191,18 @@
                          ObjectRepositoryDataService.deleteServiceObject(category.objectID);
                            }
 
-                           //delete the directory object from directory list.
-                     var index = vm.directories.indexOf(category);
-                           if (index >= 0) {
-                               vm.directories.splice(index, 1);
-                           }
+                     //delete the directory object from directory list.
+                     var index = vm.bookCategories.indexOf(category);
+
+                     if (index >= 0) {
+                               vm.bookCategories.splice(index, 1);
+                         }
+                      
+                      //swtich to the default category.
+                     if (vm.currentBookCategory != null && vm.currentBookCategory.objectID == category.objectID) {
+                         //switch to the original category.
+                         vm.switchCategory(null);
+                     }
                    });
         }
 
@@ -180,7 +228,7 @@
                             vm.bookCategories.splice(index, 1, tmpCategory);
                         }
 
-                        vm.currentBookCategory = tmpCategory;
+                        vm.switchCategory(tmpCategory);
                         vm.categoryEditMode = "list";
                     }
                 }
@@ -253,7 +301,15 @@
                         if (index >= 0) {
                             vm.books.splice(index, 1, tmpbook);
                         }
+
                         vm.displayMode = "list";
+                        //recalculate the pager if page is full or current page index is not the first one.
+                        if (vm.books.length > vm.pageSize || vm.currentPageIndex == 0
+                        || vm.currentPageIndex == 1) {
+                            onPageClick(vm.currentPageIndex);
+                        }
+
+                        vm.reCalculateBookNumbers();
                     }
                 }
                 else {
@@ -291,7 +347,7 @@
 
                       for (var i = 0; i < data.length; i++) {
                           var bookCategory = objectUtilService.parseServiceObject(data[i]);
-                          vm.bookCategories.push(bookCategory);
+                          vm.bookCategories.unshift(bookCategory);
                       }
                   }
 
@@ -299,15 +355,15 @@
               });
         }
 
-        vm.reloadBooks = function () {
+        vm.reloadBooks = function (pageIndex) {
             var categoryFilters = vm.currentBookCategory != null ?
                 "bookCategory," + vm.currentBookCategory.objectID : null;
 
             ObjectRepositoryDataService.getServiceObjectsWithFilters(
                  "Books",
                  ["bookFile", "bookDesc", "bookProfileImageUrl", "bookAuthor", "bookVersion", "bookSharedLevel", "bookCategory", "bookISBN"].join(),
-                 null,
-                 null,
+                 pageIndex,
+                 vm.pageSize,
                  categoryFilters
              ).then(function (data) {
                  vm.books.splice(0, vm.books.length);
@@ -318,8 +374,41 @@
                          vm.books.push(book);
                      }
                  }
+
                  return vm.books;
              });
+        }
+
+        vm.reCalculateBookNumbers = function () {
+            var objDefinitionId = vm.getObjectDefintionIdByName("Books");
+            ObjectRepositoryDataService.getServiceObjectCount(objDefinitionId).then(function (data) {
+                if (!isNaN(data)) {
+                    vm.totalBookNumber = data;
+                }
+            });
+        }
+
+        vm.reCalculatePager = function (pageIndex) {
+            var objDefinitionId = vm.getObjectDefintionIdByName("Books");
+            var filter = vm.currentBookCategory != null ? "bookCategory," + vm.currentBookCategory.objectID : null;
+
+            return ObjectRepositoryDataService.getServiceObjectCount(
+                    objDefinitionId,
+                    filter
+                ).then(function (data) {
+                    if (!isNaN(data)) {
+                        //pager settings
+                        if (pageIndex == null || pageIndex < 1)
+                            pageIndex = 1;
+
+                        vm.pager = PagerService.createPager(data, pageIndex, vm.pageSize, 10);
+                        vm.pager.disabledLastPage = pageIndex > vm.pager.totalPages;
+                        vm.pager.disabledFirstPage = pageIndex == 1;
+                        vm.currentPageIndex = pageIndex;
+                    }
+
+                    return data;
+                });
         }
 
         vm.getObjectDefintionIdByName = function (definitionName) {
