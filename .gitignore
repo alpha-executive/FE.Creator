@@ -42,3 +42,8 @@
 /publish
 /CodeMirror/
 /FE.Creator/FE.Creator.Admin/obj/Release
+/.metadata
+/.recommenders
+/thymeleaf-site-admin
+/RemoteSystemsTempFiles
+/spring-petclinic/

@@ -1,3 +1,137 @@
 ﻿@{
     ViewBag.Title = "Photos Management";
 }
+<div class="row">
+    <div class="col-md-12" ng-app="ngObjectRepository" ng-controller="ImagesController as ctrl">
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li class="active" ng-click="ctrl.setDisplayMode('imageList')"><a aria-expanded="true" href="#allimages" data-toggle="tab">Images</a></li>
+                <li ng-click="ctrl.setDisplayMode('alburmList')"><a aria-expanded="false" href="#alburm" data-toggle="tab">Alburm</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="allimages">
+                    <div class="btn-group margin-bottom">
+                        <button type="button" class="btn btn-success" ng-click="ctrl.createOrEditImage(null)"><i class="fa fa-plus"></i></button>
+                        <button type="button" class="btn btn-success" ng-click="ctrl.importImages(null)"><i class="fa fa-upload"></i></button>
+                    </div>
+                    <div class="row" ng-if="ctrl.displayMode ==='imageEdit'">
+                        <div class="col-md-12">
+                            <div class="box box-primary">
+                                <div class="box-body no-border">
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <div class="col-sm-offset-2 col-sm-10">
+                                                <button class="btn btn-warning" type="file" ngf-select="ctrl.uploadFiles($file, $invalidFiles,ctrl.editingImageObject)" ngf-max-height="1000"
+                                                        ngf-max-size="100MB">
+                                                    <i class="fa fa-upload"></i> Upload Image <i class="fa fa-refresh fa-spin text-green" ng-if="ctrl.f.showprogress"></i>
+                                                </button><span class="message">{{ctrl.errorMsg}}</span>
+                                                <br />
+                                                <br />
+                                                <div class="info-box" ng-if="ctrl.editingImageObject.properties.imageFile.fileName != null">
+                                                    <a class="info-box-icon bg-aqua" href="{{ctrl.editingImageObject.properties.imageFile.fileUrl}}"><i class="fa fa-cloud-download"></i></a>
+                                                    <div class="info-box-content text-black">
+                                                        <span class="info-box-text">{{ ctrl.editingImageObject.properties.imageFile.fileName }}</span>
+                                                        <span class="info-box-number">{{ctrl.editingImageObject.properties.imageFile.fileSize}} KB</span>
+                                                        <span class="info-box-text">SHA: {{ctrl.editingImageObject.properties.imageFile.fileCRC}}</span>
+                                                    </div>
+                                                    <!-- /.info-box-content -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Image Title</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" ng-model="ctrl.editingImageObject.objectName" auto-focus />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2">
+                                                <i class="fa fa-tag"></i> Description
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <textarea rows="3" class="form-control" ng-model="ctrl.editingImageObject.properties.imageDesc.value"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2">
+                                                <i class="fa fa-tag"></i> Shared
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <div class="form-control">
+                                                    <input type="radio" ng-model="ctrl.editingImageObject.properties.imageSharedLevel.value" ng-value="0" ng-checked="ctrl.editingImageObject.properties.imageSharedLevel.value == 0" /> Private
+                                                    <input type="radio" ng-model="ctrl.editingImageObject.properties.imageSharedLevel.value" ng-value="1" ng-checked="ctrl.editingImageObject.properties.imageSharedLevel.value == 1" /> Shared
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="list-inline">
+                                            <li class="pull-right">
+                                                <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveEditingImage()"><i class="fa fa-save"></i> Save</button>
+                                                <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelEditingImage()"><i class="fa fa-close "></i> Cancel</button>
+                                            </li>
+                                        </ul>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-if="ctrl.displayMode ==='imageList'">
+                        <div class="col-sm-2" ng-repeat="img in ctrl.images">
+                            <a href="{{img.properties.imageFile.fileUrl}}"><img class="img-responsive" src="{{img.properties.imageFile.fileUrl}}?thumbinal=true" alt="{{img.objectName}}"></a>
+                        </div>
+                    </div>
+                </div>
+               
+                <!-- /.tab-pane -->
+                <div class="tab-pane" id="alburm">
+                    <div class="btn-group margin-bottom">
+                        <button type="button" class="btn btn-success" ng-click="ctrl.createOrEditImageAlburm(null)"><i class="fa fa-plus"></i></button>
+                    </div>
+                    <div class="row" ng-if="ctrl.displayMode ==='alburmEdit'">
+                        <div class="col-md-12">
+                            <div class="box box-primary">
+                                <div class="box-body">
+                                    <form class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Alburm Name</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" ng-model="ctrl.editingAlburmObject.objectName" auto-focus />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2">
+                                                <i class="fa fa-tag"></i> Shared
+                                            </label>
+                                            <div class="col-sm-10">
+                                                <div class="form-control">
+                                                    <input type="radio" ng-model="ctrl.editingAlburmObject.properties.categorySharedLevel.value" ng-value="0" ng-checked="ctrl.editingAlburmObject.properties.categorySharedLevel.value == 0" /> Private
+                                                    <input type="radio" ng-model="ctrl.editingAlburmObject.properties.categorySharedLevel.value" ng-value="1" ng-checked="ctrl.editingAlburmObject.properties.categorySharedLevel.value == 1" /> Shared
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <ul class="list-inline">
+                                            <li class="pull-right">
+                                                <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveEditingAlburm()"><i class="fa fa-save"></i> Save</button>
+                                                <button class="btn btn-box-tool" type="button" ng-click="ctrl.canceEditingAlburm()"><i class="fa fa-close "></i> Cancel</button>
+                                            </li>
+                                        </ul>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-if="ctrl.displayMode ==='alburmList'">
+                        <div class="col-md-2" ng-repeat="alburm in ctrl.alburms">
+                            {{alburm.objectName}}
+                        </div>
+                    </div>
+                </div>
+                <!-- /.tab-pane -->
+            </div>
+            <!-- /.tab-content -->
+        </div>
+
+    </div>
+</div>
+@section Scripts{ 
+    @Scripts.Render("~/js/adminapp/images")
+}

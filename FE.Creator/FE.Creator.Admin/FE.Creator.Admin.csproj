@@ -1173,6 +1173,7 @@
     <Content Include="Content\apps\definitiongroupcontroller.js" />
     <Content Include="Content\apps\documentcontroller.js" />
     <Content Include="Content\apps\generalobjectcontroller.js" />
+    <Content Include="Content\apps\imagescontroller.js" />
     <Content Include="Content\apps\img\bgimage.jpg" />
     <Content Include="Content\apps\img\userdefault.png" />
     <Content Include="Content\apps\licensecontroller.js" />

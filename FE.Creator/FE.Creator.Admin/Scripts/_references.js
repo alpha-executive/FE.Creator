@@ -341,6 +341,7 @@
 /// <reference path="../content/apps/definitiongroupcontroller.js" />
 /// <reference path="../content/apps/documentcontroller.js" />
 /// <reference path="../content/apps/generalobjectcontroller.js" />
+/// <reference path="../content/apps/imagescontroller.js" />
 /// <reference path="../content/apps/licensecontroller.js" />
 /// <reference path="../content/apps/objectdefinitioncontroller.js" />
 /// <reference path="../content/apps/objectrepository.js" />

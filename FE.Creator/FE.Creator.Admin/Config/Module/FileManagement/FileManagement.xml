@@ -15,8 +15,8 @@
   </entity>
   <entity name="ImageCategory" key="FE_SYS_IMAGECATEGORY">
     <properties>
-        <property name="ImageCategoryType" key="FE_COL_CATEGORYTYPE" type="Integer" displayOrder="1"></property>
-        <property name="ImageSharedLevel" key="FE_COL_SHAREDLEVEL" type="Integer" displayOrder="1"></property>
+        <property name="imageCategoryType" key="FE_COL_CATEGORYTYPE" type="Integer" displayOrder="1"></property>
+        <property name="categorySharedLevel" key="FE_COL_SHAREDLEVEL" type="Integer" displayOrder="1"></property>
     </properties>
   </entity>
   <entity name="Photos" key="FE_SYS_PHOTOS">

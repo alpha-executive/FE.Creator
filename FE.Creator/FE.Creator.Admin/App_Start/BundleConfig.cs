@@ -125,6 +125,9 @@ namespace FE.Creator.Admin
             bundles.Add(new ScriptBundle("~/js/adminapp/book").Include(
                     "~/Content/apps/bookscontroller.js"
                ));
+            bundles.Add(new ScriptBundle("~/js/adminapp/images").Include(
+                    "~/Content/apps/imagescontroller.js"
+                ));
         }
     }
 }

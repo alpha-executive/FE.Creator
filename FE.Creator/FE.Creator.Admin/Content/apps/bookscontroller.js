@@ -394,7 +394,7 @@
 
             ObjectRepositoryDataService.getServiceObjectsWithFilters(
                  "Books",
-                 ["bookFile", "bookDesc", "bookProfileImageUrl", "bookAuthor", "bookVersion", "bookSharedLevel", "bookCategory", "bookISBN"].join(),
+                 ["bookFile", "bookDesc", "bookAuthor", "bookVersion", "bookSharedLevel", "bookCategory", "bookISBN"].join(),
                  vm.pager.currentPage,
                  vm.pageSize,
                  categoryFilters

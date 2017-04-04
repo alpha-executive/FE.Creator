@@ -126,7 +126,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
             }
 
             //if there is already a object there, do not register it.
-            if (currentObjectDefinition != null)
+            if (currentObjectDefinition == null)
             {
                 this.objectService.CreateORUpdateObjectDefinition(definition);
             }
