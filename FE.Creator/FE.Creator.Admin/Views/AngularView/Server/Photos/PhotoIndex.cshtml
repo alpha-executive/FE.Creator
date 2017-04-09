@@ -12,7 +12,19 @@
                 <div class="tab-pane active" id="allimages">
                     <div class="btn-group margin-bottom">
                         <button type="button" class="btn btn-success" ng-click="ctrl.createOrEditImage(null)"><i class="fa fa-plus"></i></button>
-                        <button type="button" class="btn btn-success" ng-click="ctrl.importImages(null)"><i class="fa fa-upload"></i></button>
+                        <button type="button" class="btn btn-success" type="file" multiple ngf-select="ctrl.importImages($files, $invalidFiles)" ngf-max-size="20MB"><i class="fa fa-upload"></i></button>
+                    </div>
+                    <div class="row" ng-if="ctrl.displayMode ==='imageImport'">
+                        <div class="col-md-12">
+                            <div class="progress active">
+                                <div class="progress-bar progress-bar-success progress-bar-striped" ng-style="{width: ctrl.progress + '%'}">{{ctrl.progress}}</div>
+                            </div>
+                            <div class="alert alert-danger alert-dismissible" ng-if="ctrl.errorMsg != null">
+                                <button class="close" aria-hidden="true" type="button" data-dismiss="alert">×</button>
+                                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+                                {{ctrl.errorMsg}}
+                            </div>
+                        </div>
                     </div>
                     <div class="row" ng-if="ctrl.displayMode ==='imageEdit'">
                         <div class="col-md-12">
@@ -21,8 +33,9 @@
                                     <form class="form-horizontal">
                                         <div class="form-group">
                                             <div class="col-sm-offset-2 col-sm-10">
-                                                <button class="btn btn-warning" type="file" ngf-select="ctrl.uploadFiles($file, $invalidFiles,ctrl.editingImageObject)" ngf-max-height="1000"
-                                                        ngf-max-size="100MB">
+                                                <button class="btn btn-warning" type="file" ngf-select="ctrl.uploadImage($file, $invalidFiles,ctrl.editingImageObject)"
+                                                        accept="image/*"
+                                                        ngf-max-size="20MB">
                                                     <i class="fa fa-upload"></i> Upload Image <i class="fa fa-refresh fa-spin text-green" ng-if="ctrl.f.showprogress"></i>
                                                 </button><span class="message">{{ctrl.errorMsg}}</span>
                                                 <br />
@@ -75,16 +88,51 @@
                         </div>
                     </div>
                     <div class="row" ng-if="ctrl.displayMode ==='imageList'">
-                        <div class="col-sm-2" ng-repeat="img in ctrl.images">
-                            <a href="{{img.properties.imageFile.fileUrl}}"><img class="img-responsive" src="{{img.properties.imageFile.fileUrl}}?thumbinal=true" alt="{{img.objectName}}"></a>
+                        <div class="col-md-12">
+                            <div class="row" ng-repeat="imgrow in ctrl.imageRows">
+                                <div class="col-sm-3 margin-bottom" ng-repeat="img in imgrow">
+                                    <div class="image-card">
+                                        <img class="img-responsive" style="width:100%;" src="{{img.properties.imageFile.fileUrl}}?thumbinal=true" alt="{{img.objectName}}">
+                                        <div class="image-info-container">{{img.objectName}}</div>
+                                        <div class="box-tools text-left">
+                                            <a class="btn btn-box-tool" href="{{img.properties.imageFile.fileUrl}}">
+                                                <i class="fa fa-cloud-download"></i>
+                                            </a>
+                                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.createOrEditImage(img)">
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.deleteImage(img)">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+                    </div>
+                    <div class="footer" ng-if="ctrl.pager.pages.length > 0 && ctrl.displayMode == 'imageList'">
+                        <div class="row">
+                            <div class="col-md-12 content-center">
+                                <ul class="pagination pagination-sm no-margin">
+                                    <li><a href="javascript:void(0);" ng-click="ctrl.onPageClick(1)" ng-class="{disabled: ctrl.pager.disabledFirstPage}">«</a></li>
+                                    <li ng-repeat="page in ctrl.pager.pages" ng-class="{'active':ctrl.pager.currentPage === page}">
+                                        <a href="javascript:void(0);" ng-click="ctrl.onPageClick(page)">{{page}}</a>
+                                    </li>
+                                    <li><a href="javascript:void(0);" ng-click="ctrl.onPageClick(ctrl.pager.totalPages)" ng-class="{disabled:ctrl.pager.disabledLastPage}">»</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
                
                 <!-- /.tab-pane -->
                 <div class="tab-pane" id="alburm">
-                    <div class="btn-group margin-bottom">
+                    <div class="btn-group margin-bottom" ng-show="ctrl.displayMode == 'alburmList'">
                         <button type="button" class="btn btn-success" ng-click="ctrl.createOrEditImageAlburm(null)"><i class="fa fa-plus"></i></button>
+                    </div>
+                    <div class="btn-group margin-bottom" ng-show="ctrl.displayMode == 'standardImageList'">
+                        <button type="button" class="btn btn-success" ng-click="ctrl.importImagesToAlburm()"><i class="fa fa-upload"></i></button>
                     </div>
                     <div class="row" ng-if="ctrl.displayMode ==='alburmEdit'">
                         <div class="col-md-12">
@@ -95,6 +143,14 @@
                                             <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Alburm Name</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" ng-model="ctrl.editingAlburmObject.objectName" auto-focus />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Alburm Type</label>
+                                            <div class="col-sm-10">
+                                                <select tabindex="-1" class="form-control select2 select2-hidden-accessible" style="width: 100%;"  ng-init="ctrl.editingAlburmObject.properties.imageCategoryType.value = 1" ng-model="ctrl.editingAlburmObject.properties.imageCategoryType.value">
+                                                    <option ng-repeat="opt in ctrl.alburmTypes" value="{{opt.typeValue}}" ng-selected="ctrl.editingAlburmObject.properties.imageCategoryType.value == opt.typeValue" >{{opt.typeName}}</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -120,10 +176,47 @@
                         </div>
                     </div>
                     <div class="row" ng-if="ctrl.displayMode ==='alburmList'">
-                        <div class="col-md-2" ng-repeat="alburm in ctrl.alburms">
-                            {{alburm.objectName}}
+                        <div class="col-md-12">
+                            <ul class="mailbox-attachments clearfix">
+                                <li ng-repeat="alburm in ctrl.alburms">
+                                    <a class="mailbox-attachment-icon" href="javascript:void(0);" ng-dblclick="ctrl.onAlburmDbClick(alburm)"><i class="fa fa-folder text-yellow"></i></a>
+                                    <div class="mailbox-attachment-info">
+                                        <a class="mailbox-attachment-name ng-binding" href="javascript:void(0);">{{alburm.objectName}}</a>
+                                        <span class="mailbox-attachment-size ng-binding">
+                                        </span>
+                                        <span class="mailbox-attachment-size">
+                                            <button class="btn btn-default btn-xs pull-right" type="button" ng-click="ctrl.createOrEditImageAlburm(alburm)"><i class="fa fa-pencil"></i></button>
+                                            <button class="btn btn-default btn-xs pull-right" type="button" ng-click="ctrl.deleteAlburm(alburm)"><i class="fa fa-trash"></i></button>
+                                        </span>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
+                    <div class="row" ng-if="ctrl.displayMode ==='standardImageList'">
+                        <div class="col-md-12">
+                            <div class="row" ng-repeat="imgrow in ctrl.imageRows">
+                                <div class="col-sm-3 margin-bottom" ng-repeat="img in imgrow">
+                                    <div class="image-card">
+                                        <img class="img-responsive" style="width:100%;" src="{{img.properties.imageFile.fileUrl}}?thumbinal=true" alt="{{img.objectName}}">
+                                        <div class="image-info-container">{{img.objectName}}</div>
+                                        <div class="box-tools text-left">
+                                            <a class="btn btn-box-tool" href="{{img.properties.imageFile.fileUrl}}">
+                                                <i class="fa fa-cloud-download"></i>
+                                            </a>
+                                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.createOrEditImage(img)">
+                                                <i class="fa fa-pencil"></i>
+                                            </button>
+                                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.deleteImage(img)">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end ng-if="ctrl.displayMode ==='standardImageList'"-->
                 </div>
                 <!-- /.tab-pane -->
             </div>
