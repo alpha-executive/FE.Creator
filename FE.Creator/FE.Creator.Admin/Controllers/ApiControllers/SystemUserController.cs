@@ -9,9 +9,11 @@ using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Microsoft.AspNet.Identity.Owin;
+using FE.Creator.Admin.MVCExtension;
 
 namespace FE.Creator.Admin.Controllers.ApiControllers
 {
+    [UnknownErrorFilter]
     [Authorize]
     public class SystemUserController : ApiController
     {

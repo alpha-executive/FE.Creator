@@ -30,7 +30,7 @@
                 startPage = 1;
                 endPage = totalPages;
             } else {
-                var middlePageIndex = math.ceil(pagerPageLength / 2);
+                var middlePageIndex = Math.ceil(pagerPageLength / 2);
                 // more than total pages so calculate start and end pages
                 if (pageIndex <= middlePageIndex) {
                     startPage = 1;

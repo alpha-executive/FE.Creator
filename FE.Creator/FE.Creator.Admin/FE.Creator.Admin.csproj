@@ -73,6 +73,18 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.SQLite, Version=1.0.105.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.105.0\lib\net451\System.Data.SQLite.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.105.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.105.0\lib\net451\System.Data.SQLite.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.105.0, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.105.0\lib\net451\System.Data.SQLite.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Caching" />
     <Reference Include="System.Web.DynamicData" />
@@ -204,6 +216,7 @@
     <Compile Include="Controllers\ApiControllers\ObjectDefinitionFieldController.cs" />
     <Compile Include="Controllers\ApiControllers\SingleSelectionFieldItemController.cs" />
     <Compile Include="Controllers\ApiControllers\SystemUserController.cs" />
+    <Compile Include="Controllers\ApiControllers\UniqueIDGeneratorController.cs" />
     <Compile Include="Controllers\ViewController\AngularViewController.cs" />
     <Compile Include="Controllers\ApiControllers\GeneralObjectController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -221,6 +234,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="MVCExtension\ObjectDefintionConverter.cs" />
     <Compile Include="MVCExtension\UnityDependencyResolver.cs" />
+    <Compile Include="MVCExtension\UnknownErrorFilterAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -233,6 +247,10 @@
     <EmbeddedResource Include="Config\Module\UserProfile\UserProfile.xml" />
     <EmbeddedResource Include="Config\Module\LicenseMaps.xml" />
     <EmbeddedResource Include="Config\Module\FileManagement\FileManagement.xml" />
+    <EmbeddedResource Include="Config\Module\ContactManagement\Contact.xml" />
+    <EmbeddedResource Include="Config\Module\Efficiency\AccountManagement.xml" />
+    <EmbeddedResource Include="Config\Module\Efficiency\Content.xml" />
+    <EmbeddedResource Include="Config\Module\Efficiency\Task.xml" />
     <Content Include="Content\adminlte-2.3.6\bootstrap\css\bootstrap.css" />
     <Content Include="Content\adminlte-2.3.6\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\adminlte-2.3.6\bootstrap\fonts\glyphicons-halflings-regular.svg" />
@@ -1186,6 +1204,7 @@
     <Content Include="Content\apps\usersimpleprofile.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="database\sqlite-ddl.sql" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1399,10 +1418,17 @@
     <Content Include="Views\AngularView\Server\Documents\DocumentIndex.cshtml" />
     <Content Include="Views\AngularView\Server\Books\BookIndex.cshtml" />
     <Content Include="Views\AngularView\Server\Photos\PhotoIndex.cshtml" />
+    <Content Include="Views\AngularView\Client\Photos\ImportImages.cshtml" />
+    <Content Include="Views\AngularView\Client\Photos\ImageEditing.cshtml" />
+    <Content Include="Views\AngularView\Client\Photos\ImageList.cshtml" />
+    <Content Include="Views\AngularView\Client\Common\Pager.cshtml" />
+    <Content Include="Views\AngularView\Client\Common\Progress.cshtml" />
+    <Content Include="Views\AngularView\Client\Photos\WaterfallImageShow.cshtml" />
+    <Content Include="Views\AngularView\Client\Photos\ImageViewModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Config\Module\ValuableMemories\" />
-    <Folder Include="Views\AngularView\Client\Common\" />
+    <Folder Include="Views\AngularView\Server\Efficiency\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -1458,7 +1484,9 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
     <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.3.2\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.105.0\build\net451\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.105.0\build\net451\System.Data.SQLite.Core.targets'))" />
   </Target>
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.105.0\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.105.0\build\net451\System.Data.SQLite.Core.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

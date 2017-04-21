@@ -9,21 +9,24 @@
 
     function ImagesController($scope, $q, ObjectRepositoryDataService, Notification, PagerService, objectUtilService, Upload) {
         var vm = this;
-        vm.DEFAULT_IMAGE_ALBURM = 0;
+        vm.DEFAULT_IMAGE_album = 0;
         vm.displayMode = "imageList";
         vm.objectDefinitions = [];
         vm.cancelObject = null;
         vm.editingImageObject = null;
-        vm.editingAlburmObject = null;
+        vm.editingalbumObject = null;
         vm.images = [];
         vm.imageRows = [];
-        vm.alburms = [];
+        vm.albums = [];
         vm.pager = {};
-        vm.pageSize = 20;
+        vm.pageSize = 8;
         vm.onPageClick = onPageClick;
-        vm.alburmTypes = [];
+        vm.albumTypes = [];
+        vm.selectionImages = [];
         //by default, it's show all image mode.
-        vm.currentAlburm = null;
+        vm.currentalbum = null;
+        vm.displayLargeImage = false;
+        vm.viewingImage = null;
 
         init();
         function init() {
@@ -36,34 +39,34 @@
               }).then(function (data) {
                   //get all the categories and books.
                   //vm.reloadImages();
-                  initAlburmTypes();
+                  initalbumTypes();
                   onPageChange(1);
-                  vm.reloadAlburms();
+                  vm.reloadalbums();
               });
         }
 
-        function initAlburmTypes() {
-            vm.alburmTypes.push({
+        function initalbumTypes() {
+            vm.albumTypes.push({
                 typeName: "Standard List",
                 typeValue: 1
             });
-            vm.alburmTypes.push({
+            vm.albumTypes.push({
                 typeName: "Slide Show",
                 typeValue: 2
             });
-            vm.alburmTypes.push({
+            vm.albumTypes.push({
                 typeName: "Walter Flow",
                 typeValue: 3
             });
         }
-        function createImageServiceObject(alburm, imageTitle) {
+        function createImageServiceObject(album, imageTitle) {
             var tempObj = {};
             tempObj.objectDefinitionId = vm.getObjectDefintionIdByName("Photos");
             tempObj.objectName = imageTitle;
 
             objectUtilService.addFileProperty(tempObj, "imageFile", null);
             objectUtilService.addStringProperty(tempObj, "imageDesc", null);
-            objectUtilService.addObjectRefProperty(tempObj, "imageCategory", alburm);
+            objectUtilService.addObjectRefProperty(tempObj, "imageCategory", album);
             objectUtilService.addIntegerProperty(tempObj, "imageSharedLevel", 0);
 
             tempObj = objectUtilService.parseServiceObject(tempObj);
@@ -71,10 +74,10 @@
             return tempObj;
         }
 
-        function createAlburmServiceObject(alburmName){
+        function createalbumServiceObject(albumName){
             var tempObj = {};
             tempObj.objectDefinitionId = vm.getObjectDefintionIdByName("ImageCategory");
-            tempObj.objectName = alburmName;
+            tempObj.objectName = albumName;
 
             objectUtilService.addIntegerProperty(tempObj, "categorySharedLevel", 0);
             objectUtilService.addIntegerProperty(tempObj, "imageCategoryType", 1);
@@ -103,18 +106,74 @@
                     pageIndex = vm.pager.totalPages;
                 }
                 vm.pager.currentPage = pageIndex;
-
-                vm.reloadImages();
+                vm.reloadImages(null,vm.pager.currentPage, vm.pageSize);
             });
         }
 
-        function onPageClick(pageIndex) {
-            if (vm.pager.currentPage == pageIndex)
+        function onPageClick(pageIndex, force) {
+            if (vm.pager.currentPage == pageIndex && !force)
                 return;
 
             onPageChange(pageIndex);
         }
 
+        function changeImagesAlbum(album, images, isUpdateProgress) {
+            var defers = [];
+            var processedCount = 0;
+            if (Array.isArray(images) && images.length > 0) {
+                for (var i = 0; images != null && i < images.length; i++) {
+                    var promise = function (idx) {
+                        var defer = $q.defer();
+                        var img = images[idx];
+
+                        var referedObjectID = album == null ? 0 : album.objectID;
+                        //release this image from the album.
+                        img.properties.imageCategory.referedGeneralObjectID = referedObjectID;
+                        objectUtilService.saveServiceObject(img, function (data) {
+                            if (isUpdateProgress) {
+                                processedCount += 1;
+                            }
+
+                            defer.resolve(img);
+                        });
+
+                        return defer.promise;
+                    }
+
+                    var cachedPromise = isUpdateProgress ? promise(i).then(function (data) {
+                        vm.progress = Math.floor(processedCount * 100.0 / images.length);
+                    }) : promise(i);
+
+                    defers.push(cachedPromise);
+                }
+            }
+
+            return $q.all(defers);
+        }
+
+        //get the display mode by album status.
+        function getAlbumDisplayMode(album) {
+            if (album == null)
+                return "imageList";
+
+            if (album.properties.imageCategoryType.value == 2) {
+                return "carouselSlideImageshow";
+            }
+
+            if (album.properties.imageCategoryType.value == 3) {
+                return "walterFlowImageShow";
+            }
+
+            return "standardImageList";
+        }
+        function clearImagesData() {
+            if (vm.imageRows.length > 0) {
+                vm.imageRows.splice(0, vm.imageRows.length);
+            }
+            if (vm.images.length > 0) {
+                vm.images.splice(0, vm.images.length);
+            }
+        }
         vm.reCalculatePager = function (pageIndex) {
             var objDefinitionId = vm.getObjectDefintionIdByName("Photos");
             return ObjectRepositoryDataService.getServiceObjectCount(
@@ -134,37 +193,78 @@
                     return data;
                 });
         }
+        vm.switchTab = function (isalbum) {
+            //clear the image to avoid display flash.
+            clearImagesData();
 
-        vm.switchAlburm = function (alburm){
-            if (vm.currentAlburm != alburm) {
-                vm.currentAlburm = alburm;
+            //reset the current album.
+            vm.currentalbum = null;
+
+            //if it's album
+            if (isalbum) {
+                vm.setDisplayMode("albumList");
+                vm.reloadalbums();
+            }
+            else {
+                vm.setDisplayMode("imageList");
+
+                //force the page reload.
+                vm.onPageClick(1, true);
             }
         }
-        vm.onAlburmDbClick = function (alburm) {
-            vm.switchAlburm(alburm);
+
+        vm.switchalbum = function (album){
+            if (vm.currentalbum != album) {
+                vm.currentalbum = album;
+            }
+        }
+        vm.onalbumDbClick = function (album) {
+            vm.switchalbum(album);
             //if it's standard show.
-            if (alburm.properties.imageCategoryType.value == 1) {
-                vm.onPageClick(1);
-                vm.setDisplayMode("standardImageList");
+            if (album != null) {
+                vm.reloadAlbumImages(album);
+                album.currentIndex = 1;
+                album.viewIndex = 1;
+
+                if (album.properties.imageCategoryType.value == 1) {
+                    vm.setDisplayMode("standardImageList");
+                }
+
+                if (album.properties.imageCategoryType.value == 2) {
+                    vm.setDisplayMode("carouselSlideImageshow");
+                }
+
+                if (album.properties.imageCategoryType.value == 3) {
+                    vm.setDisplayMode("walterFlowImageShow");
+                }
             }
         }
+
+        vm.reloadAlbumImages = function (album) {
+            //always get all the images from a album.
+            vm.reloadImages(album, 1, null)
+              .then(function (images) {
+                  vm.loadMoreAlbumImages();
+              })
+        }
+
         vm.setDisplayMode = function (mode) {
             if (vm.displayMode != mode) {
                 vm.displayMode = mode;
             }
         }
-        vm.createOrEditImageAlburm = function (alburm) {
+        vm.createOrEditImagealbum = function (album) {
             var svcObj = null;
-            if (alburm == null) {
-                svcObj = createAlburmServiceObject("New Alburm");
+            if (album == null) {
+                svcObj = createalbumServiceObject("New album");
             }
             else {
-                svcObj = alburm;
+                svcObj = album;
             }
 
-            vm.editingAlburmObject = svcObj;
+            vm.editingalbumObject = svcObj;
             vm.cancelObject = objectUtilService.cloneJsonObject(svcObj);
-            vm.displayMode = "alburmEdit";
+            vm.displayMode = "albumEdit";
 
             return svcObj;
         }
@@ -172,7 +272,7 @@
         vm.createOrEditImage = function (image) {
             var svcObj = null;
             if (image == null) {
-                svcObj = createImageServiceObject(vm.DEFAULT_IMAGE_ALBURM, "New Image");
+                svcObj = createImageServiceObject(vm.DEFAULT_IMAGE_album, "New Image");
             }
             else {
                 svcObj = image;
@@ -180,7 +280,14 @@
 
             vm.editingImageObject = svcObj;
             vm.cancelObject = objectUtilService.cloneJsonObject(svcObj);
-            vm.displayMode = "imageEdit";
+
+            //editing a image in default image gallary.
+            if (vm.currentalbum == null) {
+                vm.displayMode = "imageEdit";
+            }
+            else {
+                vm.displayMode = "albumImageEdit";
+            }
         }
 
         vm.saveEditingImage = function () {
@@ -191,6 +298,7 @@
                         var tmpimg = objectUtilService.parseServiceObject(data);
 
                         //if it's a new add operation.
+                        //edit an image in album will always goes to else branch.
                         if ((vm.editingImageObject.objectID == null || vm.editingImageObject.objectID == 0)
                             && vm.images.length >= vm.pager.pageSize) {
                             //redirect to the first page.
@@ -201,11 +309,11 @@
                             if (index >= 0) {
                                 vm.images.splice(index, 1, tmpimg);
                             }
-
                             sliceImages(vm.images);
                         }
 
-                        vm.displayMode = "imageList";
+                        vm.displayMode = getAlbumDisplayMode(vm.currentalbum);
+
                         Notification.success({
                             message: 'Change Saved!',
                             delay: 3000,
@@ -233,25 +341,26 @@
             if (index >= 0) {
                 vm.images.splice(index, 1, vm.cancelObject);
             }
-            vm.displayMode = "imageList";
+
+            vm.displayMode = getAlbumDisplayMode(vm.currentalbum);
         }
         
-        vm.saveEditingAlburm = function () {
-            objectUtilService.saveServiceObject(vm.editingAlburmObject, function (data) {
+        vm.saveEditingalbum = function () {
+            objectUtilService.saveServiceObject(vm.editingalbumObject, function (data) {
                 if (data == null || data == "" || data.objectID != null) {
                     //update the object id.
                     if (data != null && data != "") {
-                        var tmpalburm = objectUtilService.parseServiceObject(data);
+                        var tmpalbum = objectUtilService.parseServiceObject(data);
 
-                        var index = vm.alburms.indexOf(vm.editingAlburmObject);
+                        var index = vm.albums.indexOf(vm.editingalbumObject);
                         if (index >= 0) {
-                            vm.alburms.splice(index, 1, tmpalburm);
+                            vm.albums.splice(index, 1, tmpalbum);
                         }
                         else {
-                            vm.alburms.unshift(tmpalburm);
+                            vm.albums.unshift(tmpalbum);
                         }
 
-                        vm.displayMode = "alburmList";
+                        vm.displayMode = "albumList";
                         Notification.success({
                             message: 'Change Saved!',
                             delay: 3000,
@@ -274,23 +383,34 @@
             });
         }
 
-        vm.canceEditingAlburm = function () {
-            var index = vm.alburms.indexOf(vm.editingAlburmObject);
+        vm.canceEditingalbum = function () {
+            var index = vm.albums.indexOf(vm.editingalbumObject);
             if (index >= 0) {
-                vm.alburms.splice(index, 1, vm.cancelObject);
+                vm.albums.splice(index, 1, vm.cancelObject);
             }
 
-            vm.displayMode = "alburmList";
+            vm.displayMode = "albumList";
         }
 
-        vm.deleteAlburm = function (alburm) {
-
+        vm.deletealbum = function (album) {
+            vm.reloadImages(album, 1, null)
+              .then(function (images) {
+                  changeImagesAlbum(null, images, false)
+                    .then(function (data) {
+                          ObjectRepositoryDataService.deleteServiceObject(album.objectID)
+                          .then(function (data) {
+                              var currIndex = vm.albums.indexOf(album);
+                              if (currIndex >= 0) {
+                                  vm.albums.splice(currIndex, 1);
+                              }
+                          });
+                  });
+              });
         }
 
         vm.deleteImage = function (image) {
             ObjectRepositoryDataService.deleteServiceObject(image.objectID).then(function (data) {
-
-                if (vm.pager.totalPages >= vm.pager.currentPage) {
+                if (vm.currentalbum == null && vm.pager.totalPages >= vm.pager.currentPage) {
                     var navPageIndex = vm.images.length - 1 <= 0
                            ? vm.pager.currentPage - 1 : vm.pager.currentPage;
                     onPageChange(navPageIndex);
@@ -306,7 +426,8 @@
         }
 
         vm.importImages = function (files, errFiles) {
-            vm.displayMode = "imageImport";
+            //import can be directly from alburm or from the default image gallary.
+            vm.displayMode = vm.currentalbum == null ? "imageImport" : "albumImageImport";
             vm.files = files;
             vm.errorFiles = errFiles;
             vm.progress = 0;
@@ -320,8 +441,14 @@
                 vm.progress = Math.floor(uploadCount * 60.0 / files.length) +
                                                  Math.floor(creationCount * 40.0 / files.length);
                 if (vm.progress == 100 && !reloaded) {
-                    vm.displayMode = "imageList";
-                    vm.reloadImages();
+                    vm.displayMode = getAlbumDisplayMode(vm.currentalbum);
+                    if (vm.displayMode == "imageList") {
+                        vm.reloadImages(vm.currentalbum, 1, vm.pageSize);
+                    } else {
+                        //all image is required when the image is not in standard display mode.
+                        vm.reloadAlbumImages(vm.currentalbum);
+                    }
+
                     reloaded = true;
                 }
             }
@@ -336,7 +463,8 @@
 
                 var objCreationPromise = uploadPromise.then(function (response) {
                     file.result = response.data;
-                    var imageobj = createImageServiceObject(vm.DEFAULT_IMAGE_ALBURM, "New Image");
+                    var albumObjectId = vm.currentalbum == null ? vm.DEFAULT_IMAGE_album : vm.currentalbum.objectID;
+                    var imageobj = createImageServiceObject(albumObjectId, "New Image");
                     if (file.result.files.length > 0) {
                         uploadcount += 1;
                         calculateProgress(uploadcount, objectCreationCount);
@@ -417,18 +545,49 @@
             }
         }
 
-        vm.importImagesToAlburm = function () {
-            vm.setDisplayMode("imageSelectionList");
-        }
-        vm.reloadImages = function () {
-            var filter = vm.currentAlburm != null ?
-                 "imageCategory," + vm.currentAlburm.objectID : null;
+        vm.saveSelectedImagesToAlbum = function () {
+            var selectedImgs = [];
+            if (vm.currentalbum == null)
+                return;
 
-            ObjectRepositoryDataService.getServiceObjectsWithFilters(
+            //filter the selected images
+            for (var i = 0; i < vm.selectionImages.length; i++) {
+                if (vm.selectionImages[i].selected) {
+                    selectedImgs.push(vm.selectionImages[i]);
+                }
+            }
+
+            changeImagesAlbum(vm.currentalbum, selectedImgs, true)
+                .then(function (data) {
+                    //return to the alburm view.
+                    vm.onalbumDbClick(vm.currentalbum);
+                });
+        }
+
+        vm.cancelAlbumImageSelection = function () {
+            vm.onalbumDbClick(vm.currentalbum);
+        }
+
+        vm.viewLargeImage = function (img) {
+            vm.viewingImage = img;
+            $('#viewImageModal').modal('show');
+        }
+
+        vm.addImages2album = function () {
+            vm.setDisplayMode("imageSelectionList");
+            vm.progress = 0;
+            album.currentSelectionIndex = 1;
+            vm.reloadSelectionImages(1, vm.pageSize);
+        }
+        vm.reloadImages = function (album, pageIndex, pageSize) {
+            var filter = album != null ?
+                 "imageCategory," + album.objectID : null;
+
+            return ObjectRepositoryDataService.getServiceObjectsWithFilters(
                  "Photos",
                  ["imageFile", "imageDesc", "imageCategory", "imageSharedLevel"].join(),
-                 vm.pager.currentPage,
-                 vm.pageSize,
+                 pageIndex,
+                 pageSize,
                  filter
              ).then(function (data) {
                  vm.images.splice(0, vm.images.length);
@@ -439,8 +598,9 @@
                      }
                  }
 
-                 //group the images into rows.
-                 if (vm.currentAlburm == null || vm.currentAlburm.typeValue == 1) {
+                 //slice is not required for album view mode.
+                 if (vm.currentalbum == null) {
+                     //group the images into rows.
                      sliceImages(vm.images);
                  }
 
@@ -448,7 +608,57 @@
              });
         }
 
-        vm.reloadAlburms = function () {
+        vm.loadMoreSelectionImages = function (album) {
+            if (album.currentSelectionIndex == null) {
+                //first page already been loaded
+                album.currentSelectionIndex = 2;
+            }
+            else {
+                album.currentSelectionIndex += 1;
+            }
+
+            vm.reloadSelectionImages(album.currentSelectionIndex, vm.pageSize);
+        }
+
+        vm.loadMoreAlbumImages = function () {
+            if (vm.currentalbum == null)
+                return;
+
+            if (vm.currentalbum.viewIndex == null) {
+                vm.currentalbum.viewIndex = 1;
+            }
+
+            var images = vm.images.slice(0, vm.currentalbum.viewIndex * vm.pageSize);
+            sliceImages(images);
+
+            //set view index to next page.
+            vm.currentalbum.viewIndex += 1;
+        }
+
+        vm.reloadSelectionImages = function (startIndex, pageSize) {
+           return ObjectRepositoryDataService.getServiceObjectsWithFilters(
+                "Photos",
+                ["imageFile", "imageCategory"].join(),
+                startIndex,
+                pageSize,
+                "imageCategory,0"
+            ).then(function (data) {
+                if (startIndex == 1) {
+                    vm.selectionImages.splice(0, vm.selectionImages.length);
+                }
+
+                if (Array.isArray(data) && data.length > 0) {
+                    for (var i = 0; i < data.length; i++) {
+                        var image = objectUtilService.parseServiceObject(data[i]);
+                        vm.selectionImages.push(image);
+                    }
+                }
+
+                return vm.selectionImages;
+            });
+        }
+
+        vm.reloadalbums = function () {
             ObjectRepositoryDataService.getServiceObjectsWithFilters(
                  "ImageCategory",
                  ["imageCategoryType", "categorySharedLevel"].join(),
@@ -456,15 +666,15 @@
                  null,
                  null
              ).then(function (data) {
-                 vm.alburms.splice(0, vm.alburms.length);
+                 vm.albums.splice(0, vm.albums.length);
                  if (Array.isArray(data) && data.length > 0) {
                      for (var i = 0; i < data.length; i++) {
-                         var alburm = objectUtilService.parseServiceObject(data[i]);
-                         vm.alburms.push(alburm);
+                         var album = objectUtilService.parseServiceObject(data[i]);
+                         vm.albums.push(album);
                      }
                  }
 
-                 return vm.alburms
+                 return vm.albums
              });
         }
 

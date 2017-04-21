@@ -12,6 +12,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
     using ObjectRepository.ServiceModels;
     using System.Threading.Tasks;
     using System.Web.Http.Description;
+    using MVCExtension;
 
     /// <summary>
     /// API for service objects
@@ -50,6 +51,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
     ///        {id}, required service object id
     ///       
     /// </summary>
+    [UnknownErrorFilter]
     [Authorize]
     public class GeneralObjectController : ApiController
     {

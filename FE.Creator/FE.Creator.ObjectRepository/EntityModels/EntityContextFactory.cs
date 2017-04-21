@@ -16,6 +16,8 @@ namespace FE.Creator.ObjectRepository.EntityModels
             {
                 case "mysql":
                     return MySQLDBObjectContext.Create();
+                case "sqlite":
+                    return SQLiteDBObjectContext.Create();
                 default:
                     return MSSQLDBObjectContext.Create();
             }

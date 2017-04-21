@@ -8,6 +8,7 @@ using System.Web.Http.Description;
 
 namespace FE.Creator.Admin.ApiControllers.Controllers
 {
+    using MVCExtension;
     using ObjectRepository;
     using ObjectRepository.ServiceModels;
     using System.Threading.Tasks;
@@ -28,6 +29,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
     ///    {id}: required object definition group id.
     ///    delete a object definition instance.
     /// </summary>
+    [UnknownErrorFilter]
     [Authorize]
     public class ObjectDefinitionGroupController : ApiController
     {

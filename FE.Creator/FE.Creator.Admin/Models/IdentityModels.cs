@@ -29,7 +29,20 @@ namespace FE.Creator.Admin.Models
         public static ApplicationDbContext Create()
         {
             string dbProvider = ConfigurationManager.AppSettings["databaseprovider"];
-            string connstr = dbProvider.Equals("mysql") ? "mysqlconnection" : "mssqlconnection";
+            string connstr = string.Empty;
+            switch (dbProvider.ToLower())
+            {
+                case "mysql":
+                    connstr = "mysqlconnection";
+                    break;
+                case "sqlite":
+                    connstr = "sqliteconnection";
+                    break;
+                default:
+                    connstr = "mssqlconnection";
+                    break;
+            }
+
             return new ApplicationDbContext(connstr);
         }
     }

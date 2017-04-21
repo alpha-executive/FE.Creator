@@ -2,11 +2,11 @@
     ViewBag.Title = "Photos Management";
 }
 <div class="row">
-    <div class="col-md-12" ng-app="ngObjectRepository" ng-controller="ImagesController as ctrl">
+    <div class="col-md-12" ng-app="ngObjectRepository" ng-controller="ImagesController as ctrl" ng-cloak>
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-                <li class="active" ng-click="ctrl.setDisplayMode('imageList')"><a aria-expanded="true" href="#allimages" data-toggle="tab">Images</a></li>
-                <li ng-click="ctrl.setDisplayMode('alburmList')"><a aria-expanded="false" href="#alburm" data-toggle="tab">Alburm</a></li>
+                <li class="active" ng-click="ctrl.switchTab(false)"><a aria-expanded="true" href="#allimages" data-toggle="tab">Images</a></li>
+                <li ng-click="ctrl.switchTab(true)"><a aria-expanded="false" href="#album" data-toggle="tab">album</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="allimages">
@@ -15,141 +15,93 @@
                         <button type="button" class="btn btn-success" type="file" multiple ngf-select="ctrl.importImages($files, $invalidFiles)" ngf-max-size="20MB"><i class="fa fa-upload"></i></button>
                     </div>
                     <div class="row" ng-if="ctrl.displayMode ==='imageImport'">
-                        <div class="col-md-12">
-                            <div class="progress active">
-                                <div class="progress-bar progress-bar-success progress-bar-striped" ng-style="{width: ctrl.progress + '%'}">{{ctrl.progress}}</div>
-                            </div>
-                            <div class="alert alert-danger alert-dismissible" ng-if="ctrl.errorMsg != null">
-                                <button class="close" aria-hidden="true" type="button" data-dismiss="alert">×</button>
-                                <h4><i class="icon fa fa-ban"></i> Alert!</h4>
-                                {{ctrl.errorMsg}}
-                            </div>
-                        </div>
+                        @Html.Partial("~/Views/AngularView/Client/Photos/ImportImages.cshtml")
                     </div>
                     <div class="row" ng-if="ctrl.displayMode ==='imageEdit'">
-                        <div class="col-md-12">
-                            <div class="box box-primary">
-                                <div class="box-body no-border">
-                                    <form class="form-horizontal">
-                                        <div class="form-group">
-                                            <div class="col-sm-offset-2 col-sm-10">
-                                                <button class="btn btn-warning" type="file" ngf-select="ctrl.uploadImage($file, $invalidFiles,ctrl.editingImageObject)"
-                                                        accept="image/*"
-                                                        ngf-max-size="20MB">
-                                                    <i class="fa fa-upload"></i> Upload Image <i class="fa fa-refresh fa-spin text-green" ng-if="ctrl.f.showprogress"></i>
-                                                </button><span class="message">{{ctrl.errorMsg}}</span>
-                                                <br />
-                                                <br />
-                                                <div class="info-box" ng-if="ctrl.editingImageObject.properties.imageFile.fileName != null">
-                                                    <a class="info-box-icon bg-aqua" href="{{ctrl.editingImageObject.properties.imageFile.fileUrl}}"><i class="fa fa-cloud-download"></i></a>
-                                                    <div class="info-box-content text-black">
-                                                        <span class="info-box-text">{{ ctrl.editingImageObject.properties.imageFile.fileName }}</span>
-                                                        <span class="info-box-number">{{ctrl.editingImageObject.properties.imageFile.fileSize}} KB</span>
-                                                        <span class="info-box-text">SHA: {{ctrl.editingImageObject.properties.imageFile.fileCRC}}</span>
-                                                    </div>
-                                                    <!-- /.info-box-content -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Image Title</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" ng-model="ctrl.editingImageObject.objectName" auto-focus />
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-sm-2">
-                                                <i class="fa fa-tag"></i> Description
-                                            </label>
-                                            <div class="col-sm-10">
-                                                <textarea rows="3" class="form-control" ng-model="ctrl.editingImageObject.properties.imageDesc.value"></textarea>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label class="control-label col-sm-2">
-                                                <i class="fa fa-tag"></i> Shared
-                                            </label>
-                                            <div class="col-sm-10">
-                                                <div class="form-control">
-                                                    <input type="radio" ng-model="ctrl.editingImageObject.properties.imageSharedLevel.value" ng-value="0" ng-checked="ctrl.editingImageObject.properties.imageSharedLevel.value == 0" /> Private
-                                                    <input type="radio" ng-model="ctrl.editingImageObject.properties.imageSharedLevel.value" ng-value="1" ng-checked="ctrl.editingImageObject.properties.imageSharedLevel.value == 1" /> Shared
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <ul class="list-inline">
-                                            <li class="pull-right">
-                                                <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveEditingImage()"><i class="fa fa-save"></i> Save</button>
-                                                <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelEditingImage()"><i class="fa fa-close "></i> Cancel</button>
-                                            </li>
-                                        </ul>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                        @Html.Partial("~/Views/AngularView/Client/Photos/ImageEditing.cshtml")
                     </div>
                     <div class="row" ng-if="ctrl.displayMode ==='imageList'">
+                        @Html.Partial("~/Views/AngularView/Client/Photos/ImageList.cshtml")
+                    </div>
+                    <div class="footer" ng-if="ctrl.pager.pages.length > 0 && ctrl.displayMode == 'imageList'">
+                        @Html.Partial("~/Views/AngularView/Client/Common/Pager.cshtml")
+                    </div>
+                </div>
+               
+                <!-- /.tab-pane -->
+                <div class="tab-pane" id="album">
+                    <div class="btn-group margin-bottom" ng-show="ctrl.displayMode == 'albumList'">
+                        <button type="button" class="btn btn-success" ng-click="ctrl.createOrEditImagealbum(null)"><i class="fa fa-plus"></i></button>
+                    </div>
+                    <div class="row" ng-show="ctrl.currentalbum != null && ctrl.displayMode != 'imageSelectionList'">
                         <div class="col-md-12">
-                            <div class="row" ng-repeat="imgrow in ctrl.imageRows">
-                                <div class="col-sm-3 margin-bottom" ng-repeat="img in imgrow">
-                                    <div class="image-card">
-                                        <img class="img-responsive" style="width:100%;" src="{{img.properties.imageFile.fileUrl}}?thumbinal=true" alt="{{img.objectName}}">
-                                        <div class="image-info-container">{{img.objectName}}</div>
-                                        <div class="box-tools text-left">
-                                            <a class="btn btn-box-tool" href="{{img.properties.imageFile.fileUrl}}">
-                                                <i class="fa fa-cloud-download"></i>
-                                            </a>
-                                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.createOrEditImage(img)">
-                                                <i class="fa fa-pencil"></i>
-                                            </button>
-                                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.deleteImage(img)">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
+                            <div class="btn-group margin-bottom">
+                                <button type="button" class="btn btn-success pull-left" ng-click="ctrl.addImages2album()"><i class="fa fa-ellipsis-h"></i> </button>
+                                <button type="button" class="btn btn-success" type="file" multiple ngf-select="ctrl.importImages($files, $invalidFiles)" ngf-max-size="20MB"><i class="fa fa-upload"></i></button>
+                            </div>
+                            <ol class="breadcrumb site-navpath pull-right">
+                                <li><a ng-click="ctrl.switchTab(true)" href="javascript:void(0);"><i class="fa fa-home text-warning"></i> Alburms</a></li>
+                                <li class="active"><a href="javascript:void(0);" ng-switch="ctrl.currentalbum.properties.imageCategoryType.value">
+                                                       <i class="fa fa-file-powerpoint-o text-warning" ng-switch-when="2"></i>
+                                                       <i class="fa fa-file-image-o text-success" ng-switch-when="3"></i>
+                                                       <i class="fa fa-th text-primary" ng-switch-default></i> {{ctrl.currentalbum.objectName}}</a>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="row" ng-if="ctrl.displayMode ==='albumImageImport'">
+                        @Html.Partial("~/Views/AngularView/Client/Photos/ImportImages.cshtml")
+                    </div>
+                    <div class="row" ng-if="ctrl.displayMode == 'imageSelectionList'">
+                        <div class="col-md-12">
+                            <div class="box box-primary">
+                                <div class="box-header with-border">
+                                    <div class="mailbox-controls">
+                                        <div class="btn-group">
+                                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveSelectedImagesToAlbum()"><i class="fa fa-save text-green"></i> Confirm</button>
+                                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelAlbumImageSelection()"><i class="fa fa-save text-green"></i> Cancel</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box-body no-padding">
+                                    @Html.Partial("~/Views/AngularView/Client/Common/Progress.cshtml")
+                                    <div class="row image-selection">
+                                        <div class="col-md-3 text-center" ng-repeat="selImage in ctrl.selectionImages" ng-class="{'image-selected': selImage.selected}" ng-click="selImage.selected = !selImage.selected">
+                                            <img src="{{selImage.properties.imageFile.fileUrl + '?thumbinal=true'}}" alt="User Image">
+                                            <a class="users-list-name" href="javascript:void(0);"><i ng-if="selImage.selected" class="fa fa-check-square-o text-green"></i> {{selImage.objectName}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="box-footer text-center" ng-if="ctrl.selectionImages.length % ctrl.pageSize == 0">
+                                    <a class="uppercase" href="javascript:void(0)" ng-click="ctrl.loadMoreSelectionImages(ctrl.currentalbum)">View More Images</a>
+                                </div>
+                                <div class="box-footer">
+                                    <div class="mailbox-controls">
+                                        <div class="btn-group">
+                                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveSelectedImagesToAlbum()"><i class="fa fa-save text-green"></i> Confirm</button>
+                                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelAlbumImageSelection()"><i class="fa fa-save text-green"></i> Cancel</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="footer" ng-if="ctrl.pager.pages.length > 0 && ctrl.displayMode == 'imageList'">
-                        <div class="row">
-                            <div class="col-md-12 content-center">
-                                <ul class="pagination pagination-sm no-margin">
-                                    <li><a href="javascript:void(0);" ng-click="ctrl.onPageClick(1)" ng-class="{disabled: ctrl.pager.disabledFirstPage}">«</a></li>
-                                    <li ng-repeat="page in ctrl.pager.pages" ng-class="{'active':ctrl.pager.currentPage === page}">
-                                        <a href="javascript:void(0);" ng-click="ctrl.onPageClick(page)">{{page}}</a>
-                                    </li>
-                                    <li><a href="javascript:void(0);" ng-click="ctrl.onPageClick(ctrl.pager.totalPages)" ng-class="{disabled:ctrl.pager.disabledLastPage}">»</a></li>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-               
-                <!-- /.tab-pane -->
-                <div class="tab-pane" id="alburm">
-                    <div class="btn-group margin-bottom" ng-show="ctrl.displayMode == 'alburmList'">
-                        <button type="button" class="btn btn-success" ng-click="ctrl.createOrEditImageAlburm(null)"><i class="fa fa-plus"></i></button>
-                    </div>
-                    <div class="btn-group margin-bottom" ng-show="ctrl.displayMode == 'standardImageList'">
-                        <button type="button" class="btn btn-success" ng-click="ctrl.importImagesToAlburm()"><i class="fa fa-upload"></i></button>
-                    </div>
-                    <div class="row" ng-if="ctrl.displayMode ==='alburmEdit'">
+                    <div class="row" ng-if="ctrl.displayMode ==='albumEdit'">
                         <div class="col-md-12">
                             <div class="box box-primary">
                                 <div class="box-body">
                                     <form class="form-horizontal">
                                         <div class="form-group">
-                                            <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Alburm Name</label>
+                                            <label class="control-label col-sm-2"><i class="fa fa-tag"></i> album Name</label>
                                             <div class="col-sm-10">
-                                                <input type="text" class="form-control" ng-model="ctrl.editingAlburmObject.objectName" auto-focus />
+                                                <input type="text" class="form-control" ng-model="ctrl.editingalbumObject.objectName" auto-focus />
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Alburm Type</label>
+                                            <label class="control-label col-sm-2"><i class="fa fa-tag"></i> album Type</label>
                                             <div class="col-sm-10">
-                                                <select tabindex="-1" class="form-control select2 select2-hidden-accessible" style="width: 100%;"  ng-init="ctrl.editingAlburmObject.properties.imageCategoryType.value = 1" ng-model="ctrl.editingAlburmObject.properties.imageCategoryType.value">
-                                                    <option ng-repeat="opt in ctrl.alburmTypes" value="{{opt.typeValue}}" ng-selected="ctrl.editingAlburmObject.properties.imageCategoryType.value == opt.typeValue" >{{opt.typeName}}</option>
+                                                <select tabindex="-1" class="form-control select2 select2-hidden-accessible" style="width: 100%;"  ng-model="ctrl.editingalbumObject.properties.imageCategoryType.value" convert-to-number>
+                                                    <option ng-repeat="opt in ctrl.albumTypes" value="{{opt.typeValue}}">{{opt.typeName}}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -159,15 +111,15 @@
                                             </label>
                                             <div class="col-sm-10">
                                                 <div class="form-control">
-                                                    <input type="radio" ng-model="ctrl.editingAlburmObject.properties.categorySharedLevel.value" ng-value="0" ng-checked="ctrl.editingAlburmObject.properties.categorySharedLevel.value == 0" /> Private
-                                                    <input type="radio" ng-model="ctrl.editingAlburmObject.properties.categorySharedLevel.value" ng-value="1" ng-checked="ctrl.editingAlburmObject.properties.categorySharedLevel.value == 1" /> Shared
+                                                    <input type="radio" ng-model="ctrl.editingalbumObject.properties.categorySharedLevel.value" ng-value="0" ng-checked="ctrl.editingalbumObject.properties.categorySharedLevel.value == 0" /> Private
+                                                    <input type="radio" ng-model="ctrl.editingalbumObject.properties.categorySharedLevel.value" ng-value="1" ng-checked="ctrl.editingalbumObject.properties.categorySharedLevel.value == 1" /> Shared
                                                 </div>
                                             </div>
                                         </div>
                                         <ul class="list-inline">
                                             <li class="pull-right">
-                                                <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveEditingAlburm()"><i class="fa fa-save"></i> Save</button>
-                                                <button class="btn btn-box-tool" type="button" ng-click="ctrl.canceEditingAlburm()"><i class="fa fa-close "></i> Cancel</button>
+                                                <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveEditingalbum()"><i class="fa fa-save"></i> Save</button>
+                                                <button class="btn btn-box-tool" type="button" ng-click="ctrl.canceEditingalbum()"><i class="fa fa-close "></i> Cancel</button>
                                             </li>
                                         </ul>
                                     </form>
@@ -175,54 +127,71 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" ng-if="ctrl.displayMode ==='alburmList'">
-                        <div class="col-md-12">
-                            <ul class="mailbox-attachments clearfix">
-                                <li ng-repeat="alburm in ctrl.alburms">
-                                    <a class="mailbox-attachment-icon" href="javascript:void(0);" ng-dblclick="ctrl.onAlburmDbClick(alburm)"><i class="fa fa-folder text-yellow"></i></a>
-                                    <div class="mailbox-attachment-info">
-                                        <a class="mailbox-attachment-name ng-binding" href="javascript:void(0);">{{alburm.objectName}}</a>
-                                        <span class="mailbox-attachment-size ng-binding">
-                                        </span>
-                                        <span class="mailbox-attachment-size">
-                                            <button class="btn btn-default btn-xs pull-right" type="button" ng-click="ctrl.createOrEditImageAlburm(alburm)"><i class="fa fa-pencil"></i></button>
-                                            <button class="btn btn-default btn-xs pull-right" type="button" ng-click="ctrl.deleteAlburm(alburm)"><i class="fa fa-trash"></i></button>
-                                        </span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+                    <div class="row" ng-if="ctrl.displayMode ==='albumImageEdit'">
+                        @Html.Partial("~/Views/AngularView/Client/Photos/ImageEditing.cshtml")
                     </div>
-                    <div class="row" ng-if="ctrl.displayMode ==='standardImageList'">
-                        <div class="col-md-12">
-                            <div class="row" ng-repeat="imgrow in ctrl.imageRows">
-                                <div class="col-sm-3 margin-bottom" ng-repeat="img in imgrow">
-                                    <div class="image-card">
-                                        <img class="img-responsive" style="width:100%;" src="{{img.properties.imageFile.fileUrl}}?thumbinal=true" alt="{{img.objectName}}">
-                                        <div class="image-info-container">{{img.objectName}}</div>
-                                        <div class="box-tools text-left">
-                                            <a class="btn btn-box-tool" href="{{img.properties.imageFile.fileUrl}}">
-                                                <i class="fa fa-cloud-download"></i>
-                                            </a>
-                                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.createOrEditImage(img)">
-                                                <i class="fa fa-pencil"></i>
-                                            </button>
-                                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.deleteImage(img)">
-                                                <i class="fa fa-trash"></i>
-                                            </button>
+                        <div class="row" ng-if="ctrl.displayMode ==='albumList'">
+                            <div class="col-md-12">
+                                <ul class="mailbox-attachments clearfix">
+                                    <li ng-repeat="album in ctrl.albums">
+                                        <a class="mailbox-attachment-icon album-icon" href="javascript:void(0);" ng-click="ctrl.onalbumDbClick(album)" ng-switch="album.properties.imageCategoryType.value">
+                                            <i class="fa fa-file-powerpoint-o text-warning" ng-switch-when="2"></i>
+                                            <i class="fa fa-file-image-o text-success" ng-switch-when="3"></i>
+                                            <i class="fa fa-th text-primary" ng-switch-default></i>
+                                        </a>
+                                        <div class="mailbox-attachment-info">
+                                            <a class="mailbox-attachment-name ng-binding" href="javascript:void(0);">{{album.objectName}}</a>
+                                            <span class="mailbox-attachment-size ng-binding">
+                                            </span>
+                                            <span class="mailbox-attachment-size">
+                                                <button class="btn btn-default btn-xs pull-right" type="button" ng-click="ctrl.createOrEditImagealbum(album)"><i class="fa fa-pencil"></i></button>
+                                                <button class="btn btn-default btn-xs pull-right" type="button" ng-click="ctrl.deletealbum(album)"><i class="fa fa-trash"></i></button>
+                                            </span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row" ng-if="ctrl.displayMode ==='standardImageList'">
+                            @Html.Partial("~/Views/AngularView/Client/Photos/ImageList.cshtml")
+                            <div class="box-footer text-center" ng-if="(ctrl.currentalbum.viewIndex - 1) * ctrl.pageSize < ctrl.images.length">
+                                <a class="uppercase" href="javascript:void(0)" ng-click="ctrl.loadMoreAlbumImages()">View More Images</a>
+                            </div>
+                        </div>
+                        <!--end ng-if="ctrl.displayMode ==='standardImageList'"-->
+                        <div class="row" ng-if="ctrl.displayMode ==='carouselSlideImageshow' && ctrl.images.length > 0">
+                            <div class="col-md-12">
+                                <div class="carousel slide" id="carousel-image-view" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        <li data-target="#carousel-image-view" ng-repeat="img in ctrl.images" data-slide-to="{{$index}}" ng-class="{'active': $index == 0}"></li>
+                                    </ol>
+                                    <div class="carousel-inner">
+                                        <div class="item" ng-repeat="img in ctrl.images" ng-class="{'active': $index == 0}">
+                                            <img alt="{{img.objectName}}" src="{{img.properties.imageFile.fileUrl}}">
+                                            <div class="carousel-caption">
+                                                {{img.properties.imageDesc.value}}
+                                            </div>
                                         </div>
                                     </div>
+                                    <a class="left carousel-control" href="#carousel-image-view" data-slide="prev">
+                                        <span class="fa fa-angle-left prev-to-right"></span>
+                                    </a>
+                                    <a class="right carousel-control" href="#carousel-image-view" data-slide="next">
+                                        <span class="fa fa-angle-right"></span>
+                                    </a>
                                 </div>
                             </div>
                         </div>
+                        <div class="row" ng-if="ctrl.displayMode == 'walterFlowImageShow' && ctrl.images.length > 0">
+                            <div class="col-md-12">
+                                @Html.Partial("~/Views/AngularView/Client/Photos/WaterfallImageShow.cshtml")
+                            </div>
+                        </div>
                     </div>
-                    <!--end ng-if="ctrl.displayMode ==='standardImageList'"-->
-                </div>
                 <!-- /.tab-pane -->
             </div>
             <!-- /.tab-content -->
         </div>
-
     </div>
 </div>
 @section Scripts{ 

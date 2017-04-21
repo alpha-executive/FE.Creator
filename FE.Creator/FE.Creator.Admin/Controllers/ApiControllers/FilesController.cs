@@ -1,4 +1,5 @@
-﻿using FE.Creator.FileStorage;
+﻿using FE.Creator.Admin.MVCExtension;
+using FE.Creator.FileStorage;
 using FE.Creator.ObjectRepository.ServiceModels;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
     ///       {id}: required string id.
     ///       delete a file with given file {id}. 
     /// </summary>
+    [UnknownErrorFilter]
     [Authorize]
     public class FilesController : ApiController
     {

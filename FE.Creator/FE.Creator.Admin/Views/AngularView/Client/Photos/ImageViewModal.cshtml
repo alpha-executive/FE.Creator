@@ -1,0 +1,14 @@
+﻿<div class="modal fade" id="viewImageModal" tabindex="-1" role="dialog" aria-labelledby="viewImageModal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="image-wrapper">
+                    <img class="img-responsive" src="{{ctrl.viewingImage.properties.imageFile.fileUrl}}" alt="{{img.objectName}}">
+                    <div class="image-desc" style="white-space:normal;" ng-if="ctrl.viewingImage.properties.imageDesc.value != null && ctrl.viewingImage.properties.imageDesc.value!= ''">
+                        {{ctrl.viewingImage.properties.imageDesc.value}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

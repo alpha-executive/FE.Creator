@@ -3,5 +3,9 @@
   <modules>
     <module licenseId="F67370D1-337C-473C-B64C-000C8D2D9EC4" name="User Profile" Description="Enable user to create/edit/update the profile of system user.">FE.Creator.Admin.Config.Module.UserProfile.UserProfile.xml</module>
     <module licenseId="85EB7327-D54F-4F7F-9256-249D8558186F" name="File Management" Description="Enable user to manage documents/photos/books.">FE.Creator.Admin.Config.Module.FileManagement.FileManagement.xml</module>
+    <module licenseId="EC6A7449-92B7-4694-8413-E255D38F2CBE" name="Task Management" Description="Enable user to manage target and task.">FE.Creator.Admin.Config.Module.Efficiency.Task.xml</module>
+    <module licenseId="50E26B03-C78B-4BC2-8D5A-CBC2F70F0E9A" name="Content Management" Description="Enable user to manage their content such as diary and article.">FE.Creator.Admin.Config.Module.Efficiency.Content.xml</module>
+    <module licenseId="5849EA67-3126-4765-AB80-87E9C9442774" name="Account Management" Description="Enable user to manage their security account information.">FE.Creator.Admin.Config.Module.Efficiency.AccountManagement.xml</module>
+    <module licenseId="5D040545-2DB6-4A35-B7F5-A12C33E95E1A" name="Account Management" Description="Enable user to manage their security account information.">FE.Creator.Admin.Config.Module.Efficiency.Contact.xml</module>
   </modules>
 </config>

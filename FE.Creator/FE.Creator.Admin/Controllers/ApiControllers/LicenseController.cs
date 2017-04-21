@@ -12,9 +12,12 @@ using System.Threading.Tasks;
 using FE.Creator.ObjectRepository.ServiceModels;
 using FE.Creator.Admin.Models;
 using System.Runtime.Caching;
+using FE.Creator.Admin.MVCExtension;
 
 namespace FE.Creator.Admin.Controllers.ApiControllers
 {
+    [UnknownErrorFilter]
+    [Authorize]
     public class LicenseController : ApiController
     {
         IObjectService objectService = null;

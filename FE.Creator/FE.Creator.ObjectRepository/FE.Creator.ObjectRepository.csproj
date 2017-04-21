@@ -94,6 +94,7 @@
     <Compile Include="EntityModels\PrimObjectDefintionField.cs" />
     <Compile Include="EntityModels\SingleSelectionDefinitionField.cs" />
     <Compile Include="EntityModels\SingleSelectionGeneralObjectField.cs" />
+    <Compile Include="EntityModels\SQLiteDBObjectContext.cs" />
     <Compile Include="IObjectService.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

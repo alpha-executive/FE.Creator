@@ -17,19 +17,50 @@ namespace FE.Creator.FileStorage
             this.StoreRoot = storeRootPath;
         }
 
-        private string getFilePath(string fileName, DirectoryInfo searchRoot)
+        private string searchFileInFileIndex(string fileName)
         {
-            foreach(FileInfo file in searchRoot.GetFiles())
+            using (SqliteLocalFileIndexDBContext dbContext = new SqliteLocalFileIndexDBContext())
             {
-                if(file.Name.Equals(fileName, StringComparison.InvariantCultureIgnoreCase))
+                try
+                {
+                    var fileInfo = (from f in dbContext.Files
+                                    where f.fileName.Equals(fileName)
+                                    select f).FirstOrDefault();
+
+                    if (fileInfo != null)
+                        return fileInfo.fileFullName;
+                }
+                catch(Exception e)
+                {
+
+                }
+            }
+
+            return string.Empty;
+        }
+        private string getFilePath(string fileName, DirectoryInfo searchRoot, bool fileIndexFailed = false)
+        {
+            if (!fileIndexFailed)
+            {
+                string searchResult = searchFileInFileIndex(fileName);
+
+                //if hit the cache, just return the value.
+                if (!string.IsNullOrEmpty(searchResult))
+                    return searchResult;
+            }
+
+            foreach (FileInfo file in searchRoot.GetFiles())
+            {
+                if (file.Name.Equals(fileName, StringComparison.InvariantCultureIgnoreCase))
                 {
                     return file.FullName;
                 }
             }
 
-            foreach(DirectoryInfo dir in searchRoot.GetDirectories())
+            foreach (DirectoryInfo dir in searchRoot.GetDirectories())
             {
-                string dirPath = getFilePath(fileName, dir);
+                //if we go here, the sqllite file cache failed.
+                string dirPath = getFilePath(fileName, dir, true);
 
                 if (!string.IsNullOrEmpty(dirPath))
                 {
@@ -68,19 +99,50 @@ namespace FE.Creator.FileStorage
             return storeTask.Result;
         }
 
+        private void saveLocalFileIndex(LocalFileIndex indexInfo)
+        {
+            if (indexInfo == null || string.IsNullOrEmpty(indexInfo.fileFullName))
+                return;
+
+            using (SqliteLocalFileIndexDBContext dbContext = new SqliteLocalFileIndexDBContext())
+            {
+                try
+                {
+                    dbContext.Files.Add(indexInfo);
+                    dbContext.SaveChanges();
+                }
+                catch(Exception ex)
+                {
+                }
+               
+            }
+        }
+
+
         private async Task<FileStorageInfo> SaveFileContent(byte[] fileContents, bool createThumbnial, string fileName, string path, string thumbinalPath)
         {
+            LocalFileIndex indexInfo = new LocalFileIndex();
             FileInfo file = new FileInfo(path);
+            string fileCrc = CalculateCRC(fileContents);
             //ensure the directory is exists.
             file.Directory.Create();
 
             File.WriteAllBytes(path, fileContents);
 
+
             if (createThumbnial)
             {
                 File.WriteAllBytes(thumbinalPath,
                     await CreateThumbnialImage(path, true));
+
+                indexInfo.fileThumbinalFullName = thumbinalPath;
             }
+
+            indexInfo.fileName = fileName;
+            indexInfo.fileFullName = path;
+            indexInfo.fileCRC = fileCrc;
+            indexInfo.fileSize = fileContents.Length;
+            saveLocalFileIndex(indexInfo);
 
             return new FileStorageInfo()
             {
@@ -89,7 +151,7 @@ namespace FE.Creator.FileStorage
                 Creation = DateTime.Now,
                 LastUpdated = DateTime.Now,
                 Size = fileContents.Length,
-                CRC = CalculateCRC(fileContents)
+                CRC = fileCrc
             };
         }
 

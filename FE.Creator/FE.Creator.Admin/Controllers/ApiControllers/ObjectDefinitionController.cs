@@ -11,6 +11,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
     using System.Web.Http.Description;
     using FE.Creator.ObjectRepository;
     using FE.Creator.ObjectRepository.ServiceModels;
+    using MVCExtension;
 
     /// <summary>
     ///  GET api/objectdefinitions/list/{groupname}
@@ -32,6 +33,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
     ///  DELETE: api/ObjectDefinition/{id}
     ///     delete a object definition by {id}
     /// </summary>
+    [UnknownErrorFilter]
     [Authorize]
     public class ObjectDefinitionController : ApiController
     {

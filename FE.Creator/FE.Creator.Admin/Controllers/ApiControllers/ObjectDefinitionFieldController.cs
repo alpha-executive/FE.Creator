@@ -1,4 +1,5 @@
-﻿using FE.Creator.ObjectRepository;
+﻿using FE.Creator.Admin.MVCExtension;
+using FE.Creator.ObjectRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
     /// DELETE: api/ObjectDefinitionField/{id}
     ///      delete a object definition field by id
     /// </summary>
+    [UnknownErrorFilter]
     [Authorize]
     public class ObjectDefinitionFieldController : ApiController
     {
