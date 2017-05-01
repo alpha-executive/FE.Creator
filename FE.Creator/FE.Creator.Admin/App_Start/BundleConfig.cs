@@ -128,6 +128,12 @@ namespace FE.Creator.Admin
             bundles.Add(new ScriptBundle("~/js/adminapp/images").Include(
                     "~/Content/apps/imagescontroller.js"
                 ));
+            bundles.Add(new ScriptBundle("~/js/adminapp/task").Include(
+                    "~/Content/apps/taskcontroller.js"
+                ));
+            bundles.Add(new ScriptBundle("~/js/adminapp/contacts").Include(
+                    "~/Content/apps/contactcontroller.js"
+                ));
         }
     }
 }

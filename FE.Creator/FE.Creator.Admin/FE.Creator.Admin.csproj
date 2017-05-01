@@ -247,7 +247,7 @@
     <EmbeddedResource Include="Config\Module\UserProfile\UserProfile.xml" />
     <EmbeddedResource Include="Config\Module\LicenseMaps.xml" />
     <EmbeddedResource Include="Config\Module\FileManagement\FileManagement.xml" />
-    <EmbeddedResource Include="Config\Module\ContactManagement\Contact.xml" />
+    <EmbeddedResource Include="Config\Module\ContactManagement\GeneralContact.xml" />
     <EmbeddedResource Include="Config\Module\Efficiency\AccountManagement.xml" />
     <EmbeddedResource Include="Config\Module\Efficiency\Content.xml" />
     <EmbeddedResource Include="Config\Module\Efficiency\Task.xml" />
@@ -1187,6 +1187,7 @@
     <Content Include="Content\angularjs\angular-route.min.js" />
     <Content Include="Content\angularjs\angular.min.js" />
     <Content Include="Content\apps\bookscontroller.js" />
+    <Content Include="Content\apps\contactcontroller.js" />
     <Content Include="Content\apps\dataservice.js" />
     <Content Include="Content\apps\definitiongroupcontroller.js" />
     <Content Include="Content\apps\documentcontroller.js" />
@@ -1199,6 +1200,7 @@
     <Content Include="Content\apps\objectrepository.js" />
     <Content Include="Content\apps\objectutilservice.js" />
     <Content Include="Content\apps\pageservice.js" />
+    <Content Include="Content\apps\taskcontroller.js" />
     <Content Include="Content\apps\userprofilecontroller.js" />
     <Content Include="Content\apps\usercontroller.js" />
     <Content Include="Content\apps\usersimpleprofile.js" />
@@ -1342,6 +1344,8 @@
     <Content Include="Content\adminlte-2.3.6\plugins\ui-select-master\LICENSE" />
     <Content Include="Content\adminlte-2.3.6\plugins\ui-notification\LICENSE" />
     <Content Include="Content\adminlte-2.3.6\plugins\ng-file-upload-master\LICENSE" />
+    <Content Include="App_Data\ObjectRepository.sqlite" />
+    <Content Include="App_Data\localfileindex.sqlite" />
     <None Include="Properties\PublishProfiles\LocalIIS.pubxml" />
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -1425,10 +1429,23 @@
     <Content Include="Views\AngularView\Client\Common\Progress.cshtml" />
     <Content Include="Views\AngularView\Client\Photos\WaterfallImageShow.cshtml" />
     <Content Include="Views\AngularView\Client\Photos\ImageViewModal.cshtml" />
+    <Content Include="Views\AngularView\Server\Efficiency\TaskIndex.cshtml" />
+    <Content Include="Views\AngularView\Server\AccountManagement\AccountIndex.cshtml" />
+    <Content Include="Views\AngularView\Server\Efficiency\DiaryIndex.cshtml" />
+    <Content Include="Views\AngularView\Server\Efficiency\ArticleIndex.cshtml" />
+    <Content Include="Views\AngularView\Client\Efficiency\TaskList.cshtml" />
+    <Content Include="Views\AngularView\Client\Efficiency\TaskEditing.cshtml" />
+    <Content Include="Views\AngularView\Server\Contacts\ContactsIndex.cshtml" />
+    <Content Include="Views\AngularView\Client\UserProfile\BasicProfile.cshtml" />
+    <Content Include="Views\AngularView\Client\UserProfile\ContactInfo.cshtml" />
+    <Content Include="Views\AngularView\Client\UserProfile\AddressInfo.cshtml" />
+    <Content Include="Views\AngularView\Client\UserProfile\EducationInfo.cshtml" />
+    <Content Include="Views\AngularView\Client\UserProfile\SkillInfo.cshtml" />
+    <Content Include="Views\AngularView\Client\UserProfile\WorkExperienceInfo.cshtml" />
+    <Content Include="Views\AngularView\Server\Contacts\ContactEditing.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Config\Module\ValuableMemories\" />
-    <Folder Include="Views\AngularView\Server\Efficiency\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

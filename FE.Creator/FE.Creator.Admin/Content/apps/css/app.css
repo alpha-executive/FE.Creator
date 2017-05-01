@@ -22,6 +22,9 @@
 a.btn{
     color:#000;
 }
+.cursor-pointer{
+    cursor:pointer;
+}
 .mailbox-attachment-info {
     overflow:hidden;
     text-overflow:ellipsis;

@@ -1,0 +1,97 @@
+﻿<div class="box box-primary" ng-init="ctrl.init(CurrentUserProfileId)" ng-controller="AddressController as ctrl">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-location-arrow margin-r-5"></i> Address</h3>
+    </div>
+    <div class="box-body" ng-if="!ctrl.isEditAddress">
+        <div ng-class="row">
+            <div class="col-md-12" ng-repeat="addr in ctrl.addresses">
+                <strong><i class="fa fa-map-marker  margin-r-5"></i> Location</strong>
+                <p class="text-muted">
+                    {{addr.properties.country.value}}
+                    {{addr.properties.province.value}}
+                    {{addr.properties.city.value}}
+                    {{addr.properties.address.value}}
+                    {{addr.properties.address1.value}} - {{addr.properties.postCode.value}}
+                </p>
+                <hr />
+            </div>
+        </div>
+        <ul class="list-inline">
+            <li class="pull-right">
+                <button class="btn btn-box-tool" type="button" ng-click="ctrl.onAddressEditing()"><i class="fa fa-pencil"></i> Edit</button>
+            </li>
+        </ul>
+    </div>
+
+    <form class="form-horizontal" ng-if="ctrl.isEditAddress">
+        <div class="box-body">
+            <div class="box box-warning" ng-repeat="addr in ctrl.addresses">
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Country</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" ng-model="addr.properties.country.value" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Province</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" ng-model="addr.properties.province.value" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> City</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" ng-model="addr.properties.city.value" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Street</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" ng-model="addr.properties.address.value" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Address</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" ng-model="addr.properties.address1.value" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> PostCode</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" ng-model="addr.properties.postCode.value" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="list-inline">
+                        <li class="pull-right">
+                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.deleteAddress(addr)"><i class="fa fa-trash"></i> Delete</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <ul class="list-inline">
+                <li class="pull-right">
+                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.onAddNewAddress()"><i class="fa fa-plus"></i> Add</button>
+                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveAddress()"><i class="fa fa-save"></i> Save</button>
+                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelAddressEdit()"><i class="fa fa-close "></i> Cancel</button>
+                </li>
+            </ul>
+        </div>
+    </form>
+</div>

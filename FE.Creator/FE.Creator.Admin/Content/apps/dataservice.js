@@ -34,7 +34,8 @@
             getUsers: getUsers,
             getUserIdByLoginName : getUserIdByLoginName,
             resetPassword: resetPassword,
-            getLicencedModules: getLicencedModules
+            getLicencedModules: getLicencedModules,
+            getUUID: getUUID
         };
 
         //get the object defintion groups
@@ -415,6 +416,21 @@
             return $http.get('/api/custom/License/GetLicenseRegisterList')
               .then(complete)
               .catch(error);
+
+            function complete(response) {
+                return response.data;
+            }
+
+            function error(response) {
+                logger.error('XHR Failed for getLicencedModules - ' + response.data);
+                return response.data;
+            }
+        }
+
+        function getUUID() {
+            return $http.get('/api/UniqueIDGenerator')
+                          .then(complete)
+                          .catch(error);
 
             function complete(response) {
                 return response.data;

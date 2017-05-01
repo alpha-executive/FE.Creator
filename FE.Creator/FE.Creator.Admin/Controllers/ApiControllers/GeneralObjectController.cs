@@ -161,7 +161,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             return Task.FromResult<IEnumerable<ServiceObject>>(objectList);
         }
 
-        private bool IsFieldValueMatched(ServiceObjectField fieldValue, string value)
+        private bool IsFieldValueMatched(ServiceObjectField fieldValue, string value, bool isArrayValue)
         {
             //if no filter value, then the record is matched.
             if (string.IsNullOrEmpty(value))
@@ -171,8 +171,19 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             if (fieldValue == null)
                 return false;
 
+            if (isArrayValue)
+            {
+                string[] fieldValues = value.Split(new char[] { ',' });
+                var found = (from v in fieldValues
+                             where fieldValue.isFieldValueEqualAs(v)
+                             select v).Count();
+
+                return found > 0;
+            }
+
             return fieldValue.isFieldValueEqualAs(value);
         }
+
 
         private async Task<IHttpActionResult> FindServiceObjects(int id, string parameters = null, int? pageIndex = 1, int? pageSize = int.MaxValue, List<ObjectKeyValuePair> filters = null)
         {
@@ -187,7 +198,10 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             return this.Ok<IEnumerable<ServiceObject>>(foundObjects);
         }
 
-        private async Task<List<ServiceObject>> FilterServiceObjects(int id, string parameters, int? pageIndex, int? pageSize, List<ObjectKeyValuePair> filters)
+        private async Task<List<ServiceObject>> FilterServiceObjects(int id, string parameters,
+            int? pageIndex,
+            int? pageSize,
+            List<ObjectKeyValuePair> filters)
         {
             var objectList = await getAllServiceObjectAsync(id,
                             1,
@@ -206,8 +220,8 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
                                    where k.KeyName.Equals(f.KeyName, StringComparison.InvariantCultureIgnoreCase)
                                    select k).FirstOrDefault();
 
-                        isFilterMatched = kvp != null && isFilterMatched &&
-                                                    IsFieldValueMatched((ServiceObjectField)kvp.Value, (string)f.Value);
+                        isFilterMatched = kvp != null && isFilterMatched 
+                            && IsFieldValueMatched((ServiceObjectField)kvp.Value, (string)f.Value, f.IsArray);
 
                         //if there is a filter is not matched, then the complete record is not matched.
                         if (!isFilterMatched)
@@ -267,7 +281,8 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
                     string[] kpairs = kv.Split(new char[] { ',' });
                     ObjectKeyValuePair kvp = new ObjectKeyValuePair();
                     kvp.KeyName = kpairs[0];
-                    kvp.Value = kpairs[1];
+                    kvp.Value = string.Join(",", kpairs.Skip(1).ToArray());
+                    kvp.IsArray = kpairs.Length > 2;
                     filterKps.Add(kvp);
                 }
             }

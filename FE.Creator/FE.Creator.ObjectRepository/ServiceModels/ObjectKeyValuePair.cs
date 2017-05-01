@@ -11,5 +11,7 @@ namespace FE.Creator.ObjectRepository.ServiceModels
         public string KeyName { get; set; }
 
         public object Value { get; set; }
+
+        public bool IsArray { get; set; }
     }
 }

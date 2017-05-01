@@ -1,0 +1,137 @@
+﻿     <!-- Contact Box -->
+<div class="box box-primary" ng-init="ctrl.init(CurrentUserProfileId)" ng-controller="ContactController as ctrl">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-phone margin-r-5"></i> Contact</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body" ng-if="!ctrl.isEditContact">
+        <div class="row">
+            <div class="col-md-4">
+                <strong><i class="fa fa-phone margin-r-5"></i> Telephone</strong>
+                <p class="text-muted">
+                    {{ctrl.contact.properties.phone.value}}
+                </p>
+            </div>
+            <div class="col-md-4">
+                <strong><i class="fa fa-mobile-phone margin-r-5"></i> Mobile Phone</strong>
+                <p class="text-muted">
+                    {{ctrl.contact.properties.mobile.value}}
+                </p>
+            </div>
+            <div class="col-md-4">
+                <strong><i class="fa fa-envelope-o margin-r-5"></i> Email</strong>
+                <p class="text-muted">
+                    {{ctrl.contact.properties.eMail.value}}
+                </p>
+            </div>
+            <div class="col-md-4">
+                <strong><i class="fa fa-weixin margin-r-5"></i> WeChat</strong>
+                <p class="text-muted">
+                    {{ctrl.contact.properties.weChat.value}}
+                </p>
+            </div>
+            <div class="col-md-4">
+                <strong><i class="fa fa-qq margin-r-5"></i> QQ</strong>
+                <p class="text-muted">
+                    {{ctrl.contact.properties.QQ.value}}
+                </p>
+            </div>
+            <div class="col-md-4">
+                <strong><i class="fa fa-twitter margin-r-5"></i> Twitter</strong>
+                <p class="text-muted">
+                    {{ctrl.contact.properties.tweet.value}}
+                </p>
+            </div>
+            <div class="col-md-4">
+                <strong><i class="fa fa-linkedin margin-r-5"></i> LinkedIn</strong>
+                <p class="text-muted">
+                    {{ctrl.contact.properties.linkedIn.value}}
+                </p>
+            </div>
+            <div class="col-md-4">
+                <strong><i class="fa fa-facebook margin-r-5"></i> Facebook</strong>
+                <p class="text-muted">
+                    {{ctrl.contact.properties.facebook.value}}
+                </p>
+            </div>
+            <div class="col-md-4">
+                <strong><i class="fa fa-file-text-o margin-r-5"></i> Other Contact</strong>
+                <p class="text-muted">
+                    {{ctrl.contact.properties.freeNote.value}}
+                </p>
+            </div>
+        </div>
+        <ul class="list-inline">
+            <li class="pull-right">
+                <button class="btn btn-box-tool" type="button" ng-click="ctrl.onContactEditing()"><i class="fa fa-pencil"></i> Edit</button>
+            </li>
+        </ul>
+    </div>
+
+    <form class="form-horizontal" ng-if="ctrl.isEditContact">
+        <div class="box-body">
+            <div class="form-group">
+                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Telephone</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="ctrl.contact.properties.phone.value" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Mobile Phone</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="ctrl.contact.properties.mobile.value" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Email</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="ctrl.contact.properties.eMail.value" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> WeChat</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="ctrl.contact.properties.weChat.value" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> QQ</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="ctrl.contact.properties.qQ.value" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Tweet</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="ctrl.contact.properties.tweet.value" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> LinkedIn</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="ctrl.contact.properties.linkedIn.value" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Facebook</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="ctrl.contact.properties.facebook.value" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Other Contact</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="ctrl.contact.properties.freeNote.value" />
+                </div>
+            </div>
+            <ul class="list-inline">
+                <li class="pull-right">
+                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveContact()"><i class="fa fa-save"></i> Save</button>
+                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelContactEdit()"><i class="fa fa-close "></i> Cancel</button>
+                </li>
+            </ul>
+        </div>
+    </form>
+    <!-- /.box-body -->
+</div>
+<!-- /.box -->

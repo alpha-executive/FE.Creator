@@ -1,0 +1,91 @@
+﻿<div class="box box-primary" ng-init="ctrl.init(CurrentUserProfileId)" ng-controller="WorkExperiencesController as ctrl">
+    <div class="box-header with-border">
+        <h3 class="box-title"><i class="fa fa-clock-o margin-r-5"></i> Work Experience</h3>
+    </div>
+    <div class="box-body" ng-if="!ctrl.isEditWorkExperiences">
+        <div class="row">
+            <div class="col-md-12" ng-repeat="we in ctrl.workexperiences">
+                <p>
+                    <a class="label label-success" href="{{we.properties.companyUrl.value}}">{{we.properties.company.value}}</a>
+                    {{we.properties.jobTitle.value}}
+                </p>
+                <p class="text-muted">
+                    {{we.properties.startDate.value}} - {{we.properties.endDate.value}}
+                </p>
+                <p class="text-muted">
+                    {{we.properties.eventDescription.value}}
+                </p>
+                <hr />
+            </div>
+        </div>
+        <ul class="list-inline">
+            <li class="pull-right">
+                <button class="btn btn-box-tool" type="button" ng-click="ctrl.onWorkExperienceEditing()"><i class="fa fa-pencil"></i> Edit</button>
+            </li>
+        </ul>
+    </div>
+    <form class="form-horizontal" ng-if="ctrl.isEditWorkExperiences">
+        <div class="box-body">
+            <div class="box box-warning" ng-repeat="exp in ctrl.workexperiences">
+                <div class="box-body box-warning">
+                    <div class="form-group">
+                        <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Company</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="exp.properties.company.value" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Company Url</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="exp.properties.companyUrl.value" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Job Title</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="exp.properties.jobTitle.value" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Start Date</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control field-datepicker" ng-model="exp.properties.startDate.value" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2"><i class="fa fa-tag"></i> End Date</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control field-datepicker" ng-model="exp.properties.endDate.value" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Job Description</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" ng-model="exp.properties.eventDescription.value" />
+                        </div>
+                    </div>
+                    <ul class="list-inline">
+                        <li class="pull-right">
+                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.deleteWorkExperience(exp)"><i class="fa fa-trash"></i> Delete</button>
+                        </li>
+                    </ul>
+                </div>
+                <script type="text/javascript">
+                            $(function () {
+                                $(".field-datepicker").datepicker({
+                                   autoclose : true
+                                })
+                            });
+                </script>
+            </div>
+            <ul class="list-inline">
+                <li class="pull-right">
+                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.onAddWorkExperience()"><i class="fa fa-plus"></i> Add</button>
+                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.onSaveWorkExperiences()"><i class="fa fa-save"></i> Save</button>
+                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelWorkExperiencesEdit()"><i class="fa fa-close "></i> Cancel</button>
+                </li>
+            </ul>
+
+        </div>
+    </form>
+</div>

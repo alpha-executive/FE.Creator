@@ -29,7 +29,8 @@
           addSingleSPropery: addSingleSPropery,
           saveServiceObject: saveServiceObject,
           saveServiceObjects: saveServiceObjects,
-          cloneJsonObject : cloneJsonObject
+          cloneJsonObject: cloneJsonObject,
+          deleteObjectFromArrary: deleteObjectFromArrary
       }
 
       function getSimplePropertyValue(sourceObj, propName) {
@@ -276,7 +277,7 @@
 
       function saveServiceObject(editingObject, callback) {
           var svcObject = convertAsServiceObject(editingObject);
-          ObjectRepositoryDataService.createOrUpdateServiceObject(
+          return ObjectRepositoryDataService.createOrUpdateServiceObject(
                   svcObject.objectID,
                   svcObject
               ).then(function (data) {
@@ -287,7 +288,7 @@
 
       function saveServiceObjects(objArrary, currIndex, callback) {
           if (objArrary.length > 0) {
-              saveServiceObject(objArrary[currIndex],
+             return saveServiceObject(objArrary[currIndex],
               function (data) {
                   if (data != null && data != "" && data.objectID != null) {
                       objArrary[currIndex].objectID = data.objectID;
@@ -341,6 +342,27 @@
           }
 
           throw new Error("Unable to copy obj! Its type isn't supported.");
+      }
+
+      function deleteObjectFromArrary(objectArrary, tObj, callback) {
+          var idx = objectArrary.indexOf(tObj);
+          if (idx >= 0) {
+              if (tObj.objectID != null) {
+                  ObjectRepositoryDataService.deleteServiceObject(tObj.objectID).then(function (data) {
+                      if (data != null && data != "" && data.status == 204) {
+                          if (idx >= 0)
+                              objectArrary.splice(idx, 1);
+                      }
+
+                      if (callback != null)
+                          callback(data);
+                  })
+              }
+              else {
+                  if (idx >= 0)
+                      objectArrary.splice(idx, 1);
+              }
+          }
       }
   }
 })();

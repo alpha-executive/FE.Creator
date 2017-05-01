@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Contact Editing";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-body" ng-if="CurrentUserProfileId ！= null">
+                <!-- Profile Image -->
+                @Html.Partial("~/Views/AngularView/Client/UserProfile/BasicProfile.cshtml")
+                <!-- /.box -->
+                <!-- Contact Box -->
+                @Html.Partial("~/Views/AngularView/Client/UserProfile/ContactInfo.cshtml")
+                <!-- /.box -->
+                <!-- Address Box -->
+                @Html.Partial("~/Views/AngularView/Client/UserProfile/AddressInfo.cshtml")
+                <!-- /.box -->
+                <!-- Education -->
+                @Html.Partial("~/Views/AngularView/Client/UserProfile/EducationInfo.cshtml")
+                <!-- Skill Box -->
+                @Html.Partial("~/Views/AngularView/Client/UserProfile/SkillInfo.cshtml")
+                <!-- /.Skill Box -->
+                <!--Work Experience-->
+                @Html.Partial("~/Views/AngularView/Client/UserProfile/WorkExperienceInfo.cshtml")
+                <!--./Work experience box-->
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @Scripts.Render("~/js/adminapp/userprofile")
+}

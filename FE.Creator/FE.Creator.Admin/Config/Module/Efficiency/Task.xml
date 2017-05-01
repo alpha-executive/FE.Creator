@@ -4,9 +4,9 @@
     <properties>
       <property name="targetDesc" key="FE_COL_TARGET_DESC" type="String" displayOrder="1"></property>
       <property name="targetType" key="FE_COL_TARGET_TYPE" type="Integer" displayOrder="2"></property>
-      <property name="targetStartDate" key="FE_COL_TARGET_STARTDATE" type="DateTime" displayOrder="3"></property>
+      <property name="targetStartDate" key="FE_COL_TARGET_STARTDATE" type="Datetime" displayOrder="3"></property>
       <property name="targetStatus" key="FE_COL_TARGET_STATUS" type="Integer" displayOrder="4"></property>
-      <property name="targetCompleteDate" key="FE_COL_TARGET_COMPLETEDATE" type="DateTime" displayOrder="5"></property>
+      <property name="targetCompleteDate" key="FE_COL_TARGET_COMPLETEDATE" type="Datetime" displayOrder="5"></property>
     </properties>
   </entity>
   <entity name="Task" key="FE_SYS_TASK">
