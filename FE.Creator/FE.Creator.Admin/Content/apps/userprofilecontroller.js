@@ -47,7 +47,7 @@
             });
 
             //UserProfile
-            reloadUserInfo(userProfileId);
+            reloadUserInfo(vm.currentUserProfileId);
         }
 
 
@@ -191,7 +191,7 @@
                 });
 
             //Contact
-            reloadContact(userProfileId);
+            reloadContact(vm.currentUserProfileId);
         }
 
         vm.getObjectDefintionIdByName = function (definitionName) {
@@ -300,7 +300,7 @@
                 });
 
              //addresses
-            reloadAddresses(userProfileId);
+            reloadAddresses(vm.currentUserProfileId);
         }
 
         vm.getObjectDefintionIdByName = function (definitionName) {
@@ -412,7 +412,7 @@
                 });
 
             //workexperiences
-            reloadWorkExperience(userProfileId);
+            reloadWorkExperience(vm.currentUserProfileId);
         }
 
         vm.getObjectDefintionIdByName = function (definitionName) {
@@ -524,8 +524,7 @@
                 });
 
             //skills
-            reloadSkills(userProfileId);
-
+            reloadSkills(vm.currentUserProfileId);
         }
 
         vm.getObjectDefintionIdByName = function (definitionName) {
@@ -549,7 +548,7 @@
 
             objectUtilService.addStringProperty(skill, "skillName", null);
             objectUtilService.addStringProperty(skill, "skillDescription", null);
-            objectUtilService.addIntegerProperty(skill, "level", null);
+            objectUtilService.addIntegerProperty(skill, "level", 0);
             objectUtilService.addStringProperty(skill, "userExternalId", vm.currentUserProfileId);
 
             vm.skills.push(objectUtilService.parseServiceObject(skill));
@@ -633,7 +632,7 @@
                 });
 
             //Education
-            reloadEducations(userProfileId);
+            reloadEducations(vm.currentUserProfileId);
         }
 
         vm.getObjectDefintionIdByName = function (definitionName) {
@@ -668,7 +667,6 @@
             vm.educations.push(objectUtilService.parseServiceObject(education));
         }
         vm.saveEductions = function () {
-
             if (vm.educations.length <= 0)
                 return;
 

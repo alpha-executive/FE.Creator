@@ -36,8 +36,10 @@ namespace FE.Creator.Admin
                    "~/Content/adminlte-2.3.6/plugins/ui-notification/angular-ui-notification.min.css",
                    "~/Content/adminlte-2.3.6/plugins/iCheck/all.css",
                    "~/Content/adminlte-2.3.6/plugins/ui-select-master/select.min.css",
+                   "~/Content/adminlte-2.3.6/plugins/angularjs-slider/angular-slider.min.css",
                     "~/Content/adminlte-2.3.6/dist/css/AdminLTE.min.css",
                    "~/Content/adminlte-2.3.6/dist/css/skins/_all-skins.min.css",
+                   "~/Content/apps/css/angular-rating.css",
                    "~/Content/apps/css/app.css"
                ));
 
@@ -77,6 +79,10 @@ namespace FE.Creator.Admin
            "~/Content/adminlte-2.3.6/plugins/ng-file-upload-master/ng-file-upload-shim.min.js",
            "~/Content/adminlte-2.3.6/plugins/ng-file-upload-master/ng-file-upload.min.js"
             ));
+
+            bundles.Add(new ScriptBundle("~/js/angular-rating").Include(
+                "~/Content/apps/lib/angular-rating.js"
+           ));
 
             bundles.Add(new ScriptBundle("~/js/adminapp/objectrepository").Include(
                   "~/Content/apps/objectrepository.js"

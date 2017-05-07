@@ -442,9 +442,18 @@
                                                  Math.floor(creationCount * 40.0 / files.length);
                 if (vm.progress == 100 && !reloaded) {
                     vm.displayMode = getAlbumDisplayMode(vm.currentalbum);
-                    if (vm.displayMode == "imageList") {
-                        vm.reloadImages(vm.currentalbum, 1, vm.pageSize);
-                    } else {
+                    if (vm.displayMode == "imageList" || vm.displayMode == "standardImageList") {
+                        //for all images list
+                        if (vm.currentalbum == null) {
+                            onPageChange(1);
+                        }
+                        else {
+                            //for standard image list.
+                            vm.onalbumDbClick(vm.currentalbum);
+                            //vm.reloadAlbumImages(vm.currentalbum);
+                        }
+                    }
+                    else {
                         //all image is required when the image is not in standard display mode.
                         vm.reloadAlbumImages(vm.currentalbum);
                     }

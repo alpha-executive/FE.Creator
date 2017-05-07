@@ -372,6 +372,10 @@
     <Content Include="Content\adminlte-2.3.6\pages\UI\sliders.html" />
     <Content Include="Content\adminlte-2.3.6\pages\UI\timeline.html" />
     <Content Include="Content\adminlte-2.3.6\pages\widgets.html" />
+    <Content Include="Content\adminlte-2.3.6\plugins\angularjs-slider\angular-slider.css" />
+    <Content Include="Content\adminlte-2.3.6\plugins\angularjs-slider\angular-slider.js" />
+    <Content Include="Content\adminlte-2.3.6\plugins\angularjs-slider\angular-slider.min.css" />
+    <Content Include="Content\adminlte-2.3.6\plugins\angularjs-slider\angular-slider.min.js" />
     <Content Include="Content\adminlte-2.3.6\plugins\bootstrap-slider\bootstrap-slider.js" />
     <Content Include="Content\adminlte-2.3.6\plugins\bootstrap-slider\slider.css" />
     <Content Include="Content\adminlte-2.3.6\plugins\bootstrap-wysihtml5\bootstrap3-wysihtml5.all.js" />
@@ -1184,6 +1188,8 @@
     <Content Include="Content\adminlte-2.3.6\plugins\ui-select-master\select.min.js" />
     <Content Include="Content\adminlte-2.3.6\starter.html" />
     <Content Include="Content\angularjs\angular-messages.min.js" />
+    <Content Include="Content\apps\css\angular-rating.css" />
+    <Content Include="Content\apps\lib\angular-rating.js" />
     <Content Include="Content\angularjs\angular-route.min.js" />
     <Content Include="Content\angularjs\angular.min.js" />
     <Content Include="Content\apps\bookscontroller.js" />
@@ -1346,6 +1352,7 @@
     <Content Include="Content\adminlte-2.3.6\plugins\ng-file-upload-master\LICENSE" />
     <Content Include="App_Data\ObjectRepository.sqlite" />
     <Content Include="App_Data\localfileindex.sqlite" />
+    <Content Include="Content\adminlte-2.3.6\plugins\angularjs-slider\LICENSE" />
     <None Include="Properties\PublishProfiles\LocalIIS.pubxml" />
     <None Include="Scripts\jquery-1.10.2-vsdoc.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -1442,7 +1449,7 @@
     <Content Include="Views\AngularView\Client\UserProfile\EducationInfo.cshtml" />
     <Content Include="Views\AngularView\Client\UserProfile\SkillInfo.cshtml" />
     <Content Include="Views\AngularView\Client\UserProfile\WorkExperienceInfo.cshtml" />
-    <Content Include="Views\AngularView\Server\Contacts\ContactEditing.cshtml" />
+    <Content Include="Views\AngularView\Client\UserProfile\GeneralProfile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Config\Module\ValuableMemories\" />

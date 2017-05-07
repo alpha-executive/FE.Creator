@@ -4,8 +4,22 @@
     </div>
     <div class="box-body" ng-if="!ctrl.isEditSkills">
         <div class="row">
-            <div class="col-md-12" ng-repeat="skill in ctrl.skills">
-                <p><span class="label label-primary">{{skill.properties.skillName.value}}</span> {{skill.properties.skillDescription.value}}</p>
+            <div class="col-md-4" ng-repeat="skill in ctrl.skills" ng-switch="skill.properties.level.value">
+                <p ng-switch-when="10">
+                    <span class="label label-danger">{{skill.properties.skillName.value}}</span> {{skill.properties.skillDescription.value}}
+                </p>
+                <p ng-switch-when="9">
+                    <span class="label label-warning">{{skill.properties.skillName.value}}</span> {{skill.properties.skillDescription.value}}
+                </p>
+                <p ng-switch-when="8">
+                    <span class="label label-success">{{skill.properties.skillName.value}}</span> {{skill.properties.skillDescription.value}}
+                </p>
+                <p ng-switch-when="7">
+                    <span class="label label-primary">{{skill.properties.skillName.value}}</span> {{skill.properties.skillDescription.value}}
+                </p>
+                <p ng-switch-default>
+                        <span class="label label-default">{{skill.properties.skillName.value}}</span> {{skill.properties.skillDescription.value}}
+                </p>
             </div>
         </div>
         <ul class="list-inline">
@@ -34,7 +48,8 @@
                     <div class="form-group">
                         <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Level</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" ng-model="skill.properties.level.value" />
+                            <star-rating max="10" ng-model="skill.properties.level.value"></star-rating>
+                            @*<input type="text" class="form-control" ng-model="skill.properties.level.value" />*@
                         </div>
                     </div>
                     <ul class="list-inline">

@@ -1,6 +1,5 @@
-﻿<div class="box box-primary" ng-init="ctrl.init(CurrentUserProfileId)" ng-controller="BasicInfoController as ctrl">
+﻿<div class="box box-primary" ng-init="ctrl.init(CurrentUserProfileId)" ng-controller="GeneralContactProfileController as ctrl">
     <div class="box-body box-profile" ng-if="!ctrl.isEditBasicInfo">
-        <img ng-if="ctrl.basicinfo.properties.Image.fileUrl != null" style="height:150px; width:150px;" class="profile-user-img img-responsive img-circle" alt="User profile picture" src="{{ctrl.basicinfo.properties.Image.fileUrl}}">
         <div ng-if="ctrl.basicinfo.properties.Image.fileUrl == null" class="profile-user-img img-responsive img-circle">
             <i class="ion ion-person-add"></i>
         </div>
@@ -15,8 +14,7 @@
             <div class="col-md-4">
                 <strong><i class="fa fa-genderless margin-r-5"></i> Gender</strong>
                 <p class="text-muted">
-                    <span ng-if="ctrl.basicinfo.properties.gender.value  == 0">Male</span>
-                    <span ng-if="ctrl.basicinfo.properties.gender.value  == 1">Female</span>
+                    {{ctrl.basicinfo.properties.gender.value}}
                 </p>
             </div>
             <div class="col-md-4">
