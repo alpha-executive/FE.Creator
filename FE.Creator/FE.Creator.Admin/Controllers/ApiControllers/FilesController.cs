@@ -103,7 +103,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
         }
         // POST: api/FileUpload
         [HttpPost]
-        public async Task<IHttpActionResult> Post([FromUri] bool thumbinal = false)
+        public async Task<IHttpActionResult> Post([FromUri] bool thumbinal = false, [FromUri] bool forContent = false)
         {  
             // Check if the request contains multipart/form-data. 
             if (!Request.Content.IsMimeMultipartContent("form-data"))
@@ -146,7 +146,10 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
                     });
                 }
 
-                return Ok(new { status = "success", files = files });
+                IHttpActionResult result = forContent ? this.Ok<object>(new { uploaded = 1,  fileName =files[0].FileName, url=files[0].FileUrl})
+                    : this.Ok<object>(new { status = "success", files = files });
+
+                return result;
             }
             catch (Exception ex)
             {

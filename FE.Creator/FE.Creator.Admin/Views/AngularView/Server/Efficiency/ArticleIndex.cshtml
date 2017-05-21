@@ -1,3 +1,44 @@
 ﻿@{
     ViewBag.Title = "Article Management";
 }
+<div class="row" ng-app="ngObjectRepository" ng-controller="ArticleController as ctrl">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header">
+                <ul class="nav navbar-nav">
+                    <!-- Messages: style can be found in dropdown.less-->
+                    <li class="dropdown messages-menu">
+                        <a class="dropdown-toggle" aria-expanded="false" href="#" data-toggle="dropdown">
+                            <i class="fa fa-envelope-o"></i>
+                            All Articles
+                        </a>
+                    </li>
+                    <!-- Notifications: style can be found in dropdown.less -->
+                    <li class="dropdown notifications-menu">
+                        <a class="dropdown-toggle" aria-expanded="false" href="#" data-toggle="dropdown">
+                            <i class="fa fa-bell-o"></i>
+                            Technologies
+                        </a>
+                    </li>
+                    <!-- Tasks: style can be found in dropdown.less -->
+                    <li class="dropdown tasks-menu">
+                        <a class="dropdown-toggle" aria-expanded="false" href="#" data-toggle="dropdown">
+                            <i class="fa fa-flag-o"></i>
+                            Nature
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="box-body">
+
+            </div>
+            <div class="box-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @Scripts.Render("~/js/apputilities")
+    @Scripts.Render("~/js/adminapp/diary")
+}

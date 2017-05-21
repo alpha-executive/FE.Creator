@@ -162,6 +162,12 @@ a.btn{
     padding-top:5px;
 	margin: 0;
 }
+.dropdown-menu-weather > li{
+    padding-left: 5px;
+}
+.dropdown-menu-weather li:hover{
+    background-color:#f8f8f8;
+}
 @media (min-width: 960px) {
 	.waterfall-columns {
 		-webkit-column-count: 3;

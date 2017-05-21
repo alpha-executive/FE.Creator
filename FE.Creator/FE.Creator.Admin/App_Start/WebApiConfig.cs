@@ -70,7 +70,6 @@ namespace FE.Creator.Admin
             string rootPath = System.IO.Path.Combine(System.Web.HttpRuntime.AppDomainAppPath, "App_Data");
             container.RegisterType<IFileStorageService, LocalFileSystemStorage>(new HierarchicalLifetimeManager(),new InjectionConstructor(rootPath));
             config.DependencyResolver = new UnityDependencyResolver(container);
-
         }
     }
 }

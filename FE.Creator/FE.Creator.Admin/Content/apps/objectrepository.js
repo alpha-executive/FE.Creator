@@ -2,7 +2,7 @@
     "use strict";
 
     //for object defintion group
-    angular.module('ngObjectRepository', ['ngRoute', 'ngMessages', 'ui-notification', 'ui.select', 'ngFileUpload']);
+    angular.module('ngObjectRepository', ['ngRoute', "ngSanitize", 'ngMessages', 'ui-notification', 'ui.select', 'ngFileUpload']);
 
     angular.module('ngObjectRepository').directive('convertToNumber', function () {
         return {
@@ -57,9 +57,12 @@
                 scope.toggle = function (index) {
                     if (scope.readonly == undefined || scope.readonly === false) {
                         scope.ratingValue = index + 1;
-                        scope.onRatingSelect({
-                            rating: index + 1
-                        });
+
+                        if(scope.onRatingSelect != null){
+                            scope.onRatingSelect({
+                                rating: index + 1
+                            });
+                        }
                     }
                 };
                 scope.$watch('ratingValue', function (oldValue, newValue) {

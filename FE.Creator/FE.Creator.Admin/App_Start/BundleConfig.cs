@@ -8,20 +8,23 @@ namespace FE.Creator.Admin
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+            //            "~/Scripts/jquery-{version}.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/Scripts/jquery.validate*"));
+            //bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+            //            "~/Scripts/jquery.validate*"));
 
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
+                        "~/Content/base/modernizr-*"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/Scripts/bootstrap.js",
-                      "~/Scripts/respond.js"));
+            bundles.Add(new ScriptBundle("~/bundles/respond").Include(
+                        "~/Content/base/respond.min.js"));
+
+            //bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+            //          "~/Scripts/bootstrap.js",
+            //          "~/Scripts/respond.js"));
 
             //adminlte
             bundles.Add(new StyleBundle("~/css/adminlte").Include(
@@ -42,7 +45,10 @@ namespace FE.Creator.Admin
                    "~/Content/apps/css/angular-rating.css",
                    "~/Content/apps/css/app.css"
                ));
-
+            bundles.Add(new StyleBundle("~/css/bootstrap-weather").Include(
+                "~/Content/adminlte-2.3.6/bootstrap/css/weather-icons.min.css",
+                "~/Content/adminlte-2.3.6/bootstrap/css/weather-icons-wind.min.css"
+                ));
             bundles.Add(new ScriptBundle("~/js/adminlte").Include(
                     "~/Content/adminlte-2.3.6/plugins/jQuery/jquery-2.2.3.min.js",
                     "~/Content/adminlte-2.3.6/bootstrap/js/bootstrap.min.js",
@@ -62,8 +68,20 @@ namespace FE.Creator.Admin
                     "~/Content/adminlte-2.3.6/dist/js/app.min.js"
                 ));
 
+            bundles.Add(new ScriptBundle("~/js/ckeditor").Include(
+                    "~/Content/adminlte-2.3.6/plugins/ckeditor/ckeditor.js" 
+                ));
+
+            bundles.Add(new ScriptBundle("~/js/ckeditor-jquery").Include(
+                   "~/Content/adminlte-2.3.6/plugins/ckeditor/adapters/jquery.js"
+              ));
+
+            bundles.Add(new ScriptBundle("~/js/apputilities").Include(
+                    "~/Content/apps/apputilities.js"
+                ));
             bundles.Add(new ScriptBundle("~/js/angularjs").Include(
-                "~/Content/angularjs/angular.min.js"
+                "~/Content/angularjs/angular.min.js",
+                "~/Content/angularjs/angular-sanitize.min.js"
              ));
             bundles.Add(new ScriptBundle("~/js/angularroute").Include(
                "~/Content/angularjs/angular-route.min.js"
@@ -79,10 +97,6 @@ namespace FE.Creator.Admin
            "~/Content/adminlte-2.3.6/plugins/ng-file-upload-master/ng-file-upload-shim.min.js",
            "~/Content/adminlte-2.3.6/plugins/ng-file-upload-master/ng-file-upload.min.js"
             ));
-
-            bundles.Add(new ScriptBundle("~/js/angular-rating").Include(
-                "~/Content/apps/lib/angular-rating.js"
-           ));
 
             bundles.Add(new ScriptBundle("~/js/adminapp/objectrepository").Include(
                   "~/Content/apps/objectrepository.js"
@@ -140,6 +154,12 @@ namespace FE.Creator.Admin
             bundles.Add(new ScriptBundle("~/js/adminapp/contacts").Include(
                     "~/Content/apps/contactcontroller.js"
                 ));
+            bundles.Add(new ScriptBundle("~/js/adminapp/diary").Include(
+                   "~/Content/apps/diarycontroller.js"
+               ));
+            bundles.Add(new ScriptBundle("~/js/adminapp/article").Include(
+                   "~/Content/apps/articlecontroller.js"
+               ));
         }
     }
 }

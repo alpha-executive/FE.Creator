@@ -5,21 +5,22 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>@ViewBag.Title - Admin Console</title>
     @Styles.Render("~/css/adminlte")
-
+    @Styles.Render("~/css/bootstrap-weather")   
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-
     @Scripts.Render("~/bundles/modernizr")
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    @Scripts.Render("~/bundles/respond")
     <![endif]-->
 
     @Scripts.Render("~/js/adminlte")
+    @Scripts.Render("~/js/ckeditor")
+    @Scripts.Render("~/js/ckeditor-jquery")
     @Scripts.Render("~/js/angularjs")
     @Scripts.Render("~/js/angularroute")
     @Scripts.Render("~/js/angularmessage")
@@ -244,8 +245,8 @@
                         </a>
                         <ul class="treeview-menu">
                             <li><a href="/ngview/Index/Efficiency/TaskIndex"><i class="fa fa-tasks"></i> Task Management</a></li>
-                            <li><a href="/ngview/Index/LicenseManagement/LicenseIndex"><i class="fa fa-edit"></i>Diary</a></li>
-                            <li><a href="/ngview/Index/LicenseManagement/LicenseIndex"><i class="fa fa-lightbulb-o"></i>Posts</a></li>
+                            <li><a href="/ngview/Index/Efficiency/DiaryIndex"><i class="fa fa-edit"></i>Diary</a></li>
+                            <li><a href="/ngview/Index/Efficiency/ArticleIndex"><i class="fa fa-lightbulb-o"></i>Posts</a></li>
                         </ul>
                     </li>
                     <li>

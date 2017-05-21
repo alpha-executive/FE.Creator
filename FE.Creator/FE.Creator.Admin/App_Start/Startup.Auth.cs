@@ -57,7 +57,7 @@ namespace FE.Creator.Admin
             //app.UseFacebookAuthentication(
             //   appId: "",
             //   appSecret: "");
-
+            
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
                 ClientId = System.Configuration.ConfigurationManager.AppSettings["googleClientId"],
