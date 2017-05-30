@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+@using FE.Creator.ObjectRepository.ServiceModels
+@model FE.Creator.ObjectRepository.ServiceModels.ServiceObject
+@{ 
+    Layout = null;
+}
+<html>
+<head>
+    @Styles.Render("~/css/adminlte")
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    @Scripts.Render("~/bundles/modernizr")
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    @Scripts.Render("~/bundles/respond")
+    <![endif]-->
+</head>
+<body onload="window.print();">
+    @{
+                var articleDesc = Model.GetPropertyValue<PrimeObjectField>("articleDesc").GetStrongTypeValue<string>();
+                var articleContent = Model.GetPropertyValue<PrimeObjectField>("articleContent").GetStrongTypeValue<string>();
+                var sharedLevel = Model.GetPropertyValue<PrimeObjectField>("articleSharedLevel").GetStrongTypeValue<int>();
+                var isOriginal = Model.GetPropertyValue<PrimeObjectField>("isOriginal").GetStrongTypeValue<int>();
+     }
+    <div class="mailbox-read-info">
+        <h3 class="text-center"><i class="fa fa-file-text-o text-warning"></i> @Model.ObjectName</h3>
+    </div>
+    <h5>
+        <span class="label label-primary"><i class="fa fa-clock-o"></i>@Model.Created.ToString()</span>
+        @if(sharedLevel == 1)
+        {
+            <span class="label label-warning"><i class="fa fa-shared"></i> Shared</span>
+        }
+        @if (isOriginal == 1)
+        {
+            <span class="label label-success"><i class="fa fa-user"></i> Original</span>
+        }
+    </h5>
+    <div class="callout bg-gray-light article-read-message">
+        <p>
+            @articleDesc
+        </p>
+    </div>
+    <div class="article-read-message">
+        @Html.Raw(articleContent)
+    </div>
+</body>
+</html>

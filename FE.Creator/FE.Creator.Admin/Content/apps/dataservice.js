@@ -254,10 +254,12 @@
             }
         }
 
-        function getServiceObject(id) {
+        function getServiceObject(id, properties) {
+            var url = properties != null ? '/api/custom/GeneralObject/FindServiceObject/' + id + "/" + properties
+                : '/api/custom/GeneralObject/FindServiceObject/' + id;
             var config = {
                 method: 'GET',
-                url: '/api/custom/GeneralObject/FindServiceObject/' + id
+                url: url
             };
 
             return $http(config)

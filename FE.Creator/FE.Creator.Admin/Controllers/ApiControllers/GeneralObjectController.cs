@@ -260,9 +260,11 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         /// <returns></returns>
         [ResponseType(typeof(ServiceObject))]
         [HttpGet]
-        public IHttpActionResult FindServiceObject(int id)
+        public IHttpActionResult FindServiceObject(int id, string parameters = null)
         {
-            var obj = objectService.GetServiceObjectById(id, null);
+            var obj = objectService.GetServiceObjectById(id, 
+                string.IsNullOrEmpty(parameters) 
+                ? null : parameters.Split(new char[] { ',' }));
 
             return this.Ok<ServiceObject>(obj);
         }

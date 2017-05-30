@@ -10,10 +10,10 @@
   <entity name="ArticleGroup" key="FE_SYS_ARTICLE_GROUP"></entity>
   <entity name="Article" key="FE_SYS_ARTICLE">
     <properties>
-      <property name="articleDesc" key="FE_COL_ARTICLE_DESC" type="Integer" displayOrder="1"></property>
-      <property name="isOriginal" key="FE_COL_IS_ORIGINAL" type="Boolean" displayOrder="2"></property>
+      <property name="articleDesc" key="FE_COL_ARTICLE_DESC" type="String" displayOrder="1"></property>
+      <property name="isOriginal" key="FE_COL_IS_ORIGINAL" type="Integer" displayOrder="2"></property>
       <property name="articleImage" key="FE_COL_ARTICLE_IMAGE" type="File" displayOrder="3"></property>
-      <property name="articleContent" key="FE_COL_ARTICLE_CONTENT" type="File" displayOrder="4"></property>
+      <property name="articleContent" key="FE_COL_ARTICLE_CONTENT" type="String" displayOrder="4"></property>
       <property name="articleSharedLevel" key="FE_COL_ARTICLE_SHAREDLEVEL" type="Integer" displayOrder="5"></property>
       <property name="articleGroup" key="FE_COL_ARTICLE_GROUP" type="ObjRef" refName="ArticleGroup" displayOrder="6"></property>
     </properties>

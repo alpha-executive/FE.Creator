@@ -63,13 +63,8 @@ namespace FE.Creator.Admin
                 ContractResolver = new CamelCasePropertyNamesContractResolver()
             };
 
-            var container = new UnityContainer();
-            container.RegisterType<IObjectService, DefaultObjectService>(new HierarchicalLifetimeManager());
-            container.RegisterType<ApplicationUserManager, ApplicationUserManager>(new HierarchicalLifetimeManager());
-
-            string rootPath = System.IO.Path.Combine(System.Web.HttpRuntime.AppDomainAppPath, "App_Data");
-            container.RegisterType<IFileStorageService, LocalFileSystemStorage>(new HierarchicalLifetimeManager(),new InjectionConstructor(rootPath));
-            config.DependencyResolver = new UnityDependencyResolver(container);
+            //set the dependency resolver for webapi controller.
+            config.DependencyResolver = new UnityDependencyResolver(UnityConfig.getUnityContainer());
         }
     }
 }

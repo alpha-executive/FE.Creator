@@ -12,11 +12,16 @@ namespace FE.Creator.Admin.Controllers.ckEditorUploadController
 {
     public class FileUploadController : Controller
     {
+        IFileStorageService storageService = null;
+        public FileUploadController(IFileStorageService storageService)
+        {
+            this.storageService = storageService;
+        }
         // post: Upload File
         public async Task<ActionResult> CKEditorUpload(HttpPostedFileWrapper upload)
         {
-            string rootPath = System.IO.Path.Combine(System.Web.HttpRuntime.AppDomainAppPath, "App_Data");
-            IFileStorageService storageService = new LocalFileSystemStorage(rootPath);
+            //string rootPath = System.IO.Path.Combine(System.Web.HttpRuntime.AppDomainAppPath, "App_Data");
+            //IFileStorageService storageService = new LocalFileSystemStorage(rootPath);
 
             CKUploadModels model = new CKUploadModels();
             model.FunctionNumber = ControllerContext.RequestContext.HttpContext.Request["CKEditorFuncNum"];

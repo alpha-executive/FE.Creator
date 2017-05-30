@@ -24,7 +24,7 @@
                     <!-- /.timeline-label -->
                     <!-- timeline item -->
                     <li ng-repeat-end>
-                        <i class="fa fa-envelope bg-blue"></i>
+                        <i class="ion ion-clipboard bg-blue"></i>
                         <div class="timeline-item" style="background-color:transparent;">
                             <span class="time"><i class="fa fa-clock-o"></i> {{diary.created | dateformatFilter : 'dddd'}}</span>
                             <h3 class="timeline-header"><i class="wi text-yellow" ng-class="ctrl.getWeatherStatusById(diary.properties.weatherStatus.value).cssclass"></i> {{ctrl.getWeatherStatusById(diary.properties.weatherStatus.value).label}}</h3>
