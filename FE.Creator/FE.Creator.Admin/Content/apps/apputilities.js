@@ -118,3 +118,9 @@
         evt.stop();
     });
 }
+
+function highlightCode(selector) {
+    $(selector).each(function(i, block) {
+        hljs.highlightBlock(block);
+    });
+}

@@ -43,6 +43,7 @@ namespace FE.Creator.Admin
                     "~/Content/adminlte-2.3.6/dist/css/AdminLTE.min.css",
                    "~/Content/adminlte-2.3.6/dist/css/skins/_all-skins.min.css",
                    "~/Content/apps/css/angular-rating.css",
+                    "~/Content/adminlte-2.3.6/plugins/ckeditor/plugins/codesnippet/lib/highlight/styles/vs.css",
                    "~/Content/apps/css/app.css"
                ));
             bundles.Add(new StyleBundle("~/css/bootstrap-weather").Include(
@@ -75,7 +76,10 @@ namespace FE.Creator.Admin
             bundles.Add(new ScriptBundle("~/js/ckeditor-jquery").Include(
                    "~/Content/adminlte-2.3.6/plugins/ckeditor/adapters/jquery.js"
               ));
-
+           
+             bundles.Add(new ScriptBundle("~/js/highlight").Include(
+                    "~/Content/adminlte-2.3.6/plugins/ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"
+                ));
             bundles.Add(new ScriptBundle("~/js/apputilities").Include(
                     "~/Content/apps/apputilities.js"
                 ));
@@ -159,6 +163,9 @@ namespace FE.Creator.Admin
                ));
             bundles.Add(new ScriptBundle("~/js/adminapp/article").Include(
                    "~/Content/apps/articlecontroller.js"
+               ));
+            bundles.Add(new ScriptBundle("~/js/adminapp/accountrecord").Include(
+                   "~/Content/apps/accountrecordscontroller.js"
                ));
         }
     }

@@ -167,7 +167,7 @@
 
             $timeout(function () {
                 initializeckEditor('editor1');
-            }, 100)
+            }, 100);
         }
 
         vm.cancelDiaryEdit = function () {
@@ -247,6 +247,10 @@
                  }
 
                  return vm.diaries;
+             }).then(function(data){
+                 $timeout(function () {
+                     highlightCode("pre code");
+                 }, 1000);
              });
         }
 

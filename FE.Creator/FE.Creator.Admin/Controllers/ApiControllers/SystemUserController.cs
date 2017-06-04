@@ -65,7 +65,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
 
         private String GetResetPassword()
         {
-            return "1qaz!QAZ";
+            return System.Web.Security.Membership.GeneratePassword(8, 1);
         }
         [HttpPost]
         public async void ResetUserPassword(string id)

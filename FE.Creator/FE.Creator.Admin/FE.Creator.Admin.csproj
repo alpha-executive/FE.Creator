@@ -220,6 +220,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ApiControllers\CryptographyController.cs" />
     <Compile Include="Controllers\ApiControllers\FilesController.cs" />
     <Compile Include="Controllers\ApiControllers\LicenseController.cs" />
     <Compile Include="Controllers\ApiControllers\ObjectDefinitionFieldController.cs" />
@@ -263,6 +264,7 @@
     <EmbeddedResource Include="Config\Module\Efficiency\AccountManagement.xml" />
     <EmbeddedResource Include="Config\Module\Efficiency\Content.xml" />
     <EmbeddedResource Include="Config\Module\Efficiency\Task.xml" />
+    <Content Include="Config\Module\SystemConfig\AppConfig.xml" />
     <Content Include="Content\adminlte-2.3.6\bootstrap\css\bootstrap.css" />
     <Content Include="Content\adminlte-2.3.6\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\adminlte-2.3.6\bootstrap\css\weather-icons-wind.css" />
@@ -1206,6 +1208,7 @@
     <Content Include="Content\adminlte-2.3.6\starter.html" />
     <Content Include="Content\angularjs\angular-messages.min.js" />
     <Content Include="Content\angularjs\angular-sanitize.min.js" />
+    <Content Include="Content\apps\accountrecordscontroller.js" />
     <Content Include="Content\apps\apputilities.js" />
     <Content Include="Content\apps\articlecontroller.js" />
     <Content Include="Content\apps\css\angular-rating.css" />
@@ -1465,15 +1468,17 @@
     <Content Include="Views\AngularView\Client\Efficiency\ArticleDisplayView.cshtml" />
     <Content Include="Views\Print\PrintArticle.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Config\Module\ValuableMemories\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FE.Creator.Cryptography\FE.Creator.Cryptography.csproj">
+      <Project>{49dbe775-5db9-486d-8fd2-02e1db3dba3f}</Project>
+      <Name>FE.Creator.Cryptography</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FE.Creator.FileStorage\FE.Creator.FileStorage.csproj">
       <Project>{7c9aa71d-9792-475b-891b-4eaa816c5562}</Project>
       <Name>FE.Creator.FileStorage</Name>

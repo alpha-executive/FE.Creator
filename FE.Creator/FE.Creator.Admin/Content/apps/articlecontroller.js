@@ -149,10 +149,19 @@
 
                                       vm.currentViewArticle = article;
                                       vm.setDisplayMode("articleView");
+                                       
+                                      return data;
+                                  }).then(function(data){
+                                      $timeout(function () {
+                                          highlightCode("pre code");
+                                      }, 100);
                                   });
             } else {
                 vm.currentViewArticle = article;
                 vm.setDisplayMode("articleView");
+                $timeout(function () {
+                    highlightCode("pre code");
+                }, 100);
             }
         }
 

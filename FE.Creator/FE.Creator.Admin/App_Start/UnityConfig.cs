@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using FE.Creator.Admin.Models;
 using Microsoft.AspNet.Identity.EntityFramework;
+using FE.Creator.Cryptography;
 
 namespace FE.Creator.Admin
 {
@@ -23,6 +24,11 @@ namespace FE.Creator.Admin
             container.RegisterType<IFileStorageService, LocalFileSystemStorage>(
                 new InjectionFactory(
                     c => new LocalFileSystemStorage(rootPath)));
+
+            //register the cryptography service.
+            container.RegisterType<ICryptographyService>(new InjectionFactory(
+                   f => CryptographyServiceFactory.RSAEncryptionService
+                ));
 
             //register the ownin context.
             container.RegisterType<HttpContextBase>(new InjectionFactory(c => new HttpContextWrapper(HttpContext.Current)));
