@@ -94,7 +94,7 @@
         function displayEditArticleView(article) {
             vm.currentEditingArticle = article;
             vm.cancelObject = objectUtilService.cloneJsonObject(article);
-
+            vm.cancelObject.properties.articleContent.value = article.properties.articleContent.value;
             vm.setDisplayMode("articleEditing");
             $timeout(function () {
                 initializeckEditor('articleEditor');

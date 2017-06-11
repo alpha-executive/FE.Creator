@@ -49,15 +49,40 @@
             });
         }
 
+        function saveCurrentEditingRecord() {
+            objectUtilService.saveServiceObject(vm.currentAccountRecord, function (data) {
+                if ((vm.currentAccountRecord.objectID == null || vm.currentAccountRecord.objectID == 0)
+                   && vm.accountRecords.length >= vm.pager.pageSize) {
+                    onPageChange(1);
+                } else {
+                    var account = objectUtilService.parseServiceObject(data);
+                    var index = vm.accountRecords.indexOf(vm.currentAccountRecord);
+                    if (index >= 0) {
+                        vm.accountRecords.splice(index, 1, account);
+                    } else {
+                        vm.accountRecords.unshift(account);
+                    }
+                }
+                vm.displayMode = "accountRecordsList";
+                Notification.success({
+                    message: 'Change Saved!',
+                    delay: 3000,
+                    positionY: 'bottom',
+                    positionX: 'right',
+                    title: 'Warn',
+                });
+            });
+        }
         function createNewAccountRecord(objectName) {
             var tempObj = {};
             tempObj.objectDefinitionId = vm.getObjectDefintionIdByName("AccountRecord");
             tempObj.objectName = objectName;
+            tempObj.passDisplayVal = "******";
 
             objectUtilService.addStringProperty(tempObj, "accountDesc", null);
             objectUtilService.addIntegerProperty(tempObj, "accountType", 0);
             objectUtilService.addStringProperty(tempObj, "accountNumber", null);
-            objectUtilService.addStringProperty(tempObj, "accountPassword", 0);
+            objectUtilService.addStringProperty(tempObj, "accountPassword", null);
 
             tempObj = objectUtilService.parseServiceObject(tempObj);
 
@@ -96,28 +121,37 @@
         }
 
         vm.saveAccountRecord = function () {
-            objectUtilService.saveServiceObject(vm.currentAccountRecord, function (data) {
-                if ((vm.currentAccountRecord.objectID == null || vm.currentAccountRecord.objectID == 0)
-                   && vm.accountRecords.length >= vm.pager.pageSize) {
-                    onPageChange(1);
-                } else {
-                    var account = objectUtilService.parseServiceObject(data);
-                    var index = vm.accountRecords.indexOf(vm.currentAccountRecord);
-                    if (index >= 0) {
-                        vm.accountRecords.splice(index, 1, account);
-                    } else {
-                        vm.accountRecords.unshift(account);
-                    }
-                }
-                vm.displayMode = "accountRecordsList";
-                Notification.success({
-                    message: 'Change Saved!',
-                    delay: 3000,
-                    positionY: 'bottom',
-                    positionX: 'right',
-                    title: 'Warn',
+            if (vm.cancelObject != null
+                && vm.cancelObject.properties.accountPassword.value != vm.currentAccountRecord.properties.accountPassword.value) {
+                var sendData = {
+                    $type: "FE.Creator.Admin.Models.GenericDataModel, FE.Creator.Admin",
+                    stringData: vm.currentAccountRecord.properties.accountPassword.value
+                };
+
+                ObjectRepositoryDataService.encryptData(sendData)
+                .then(function (data) {
+                    vm.currentAccountRecord.properties.accountPassword.value = data.stringData;
+                    saveCurrentEditingRecord();
                 });
-            });
+            } else {
+                saveCurrentEditingRecord();
+            }
+        }
+        vm.showPassword = function (record) {
+            if (record.passDisplayVal == "******") {
+                var sendData = {
+                    $type: "FE.Creator.Admin.Models.GenericDataModel, FE.Creator.Admin",
+                    stringData: record.properties.accountPassword.value
+                };
+
+                ObjectRepositoryDataService.decryptData(sendData)
+                .then(function (data) {
+                    record.passDisplayVal = data.stringData;
+                });
+            }
+            else {
+                record.passDisplayVal = "******";
+            }
         }
         vm.deleteAccountRecord = function (accountRecord) {
             ObjectRepositoryDataService.deleteServiceObject(accountRecord.objectID)
@@ -157,6 +191,7 @@
                if (Array.isArray(data) && data.length > 0) {
                    for (var i = 0; i < data.length; i++) {
                        var account = objectUtilService.parseServiceObject(data[i]);
+                       account.passDisplayVal = "******";
                        vm.accountRecords.push(account);
                    }
                }

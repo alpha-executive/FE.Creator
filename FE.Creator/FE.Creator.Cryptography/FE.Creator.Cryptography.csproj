@@ -41,9 +41,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CryptographyServiceFactory.cs" />
-    <Compile Include="ICryptographyService.cs" />
+    <Compile Include="IRSACryptographyService.cs" />
+    <Compile Include="ISHAService.cs" />
+    <Compile Include="ISymmetricCryptographyService.cs" />
+    <Compile Include="SymmetricCryptographyService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RSACryptographyService.cs" />
+    <Compile Include="SHAService.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

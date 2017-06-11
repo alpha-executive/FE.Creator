@@ -13,6 +13,9 @@ using FE.Creator.ObjectRepository.ServiceModels;
 using FE.Creator.Admin.Models;
 using System.Runtime.Caching;
 using FE.Creator.Admin.MVCExtension;
+using FE.Creator.Cryptography;
+using FE.Creator.ObjectRepository.EntityModels;
+using System.Text;
 
 namespace FE.Creator.Admin.Controllers.ApiControllers
 {
@@ -20,12 +23,25 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
     [Authorize]
     public class LicenseController : ApiController
     {
+        private static string SYS_RSA_PUBLIC_KEY = "BgIAAACkAABSU0ExAAQAAAEAAQBPkHSfs7Ukfng9Dz4EZZ1bDw5wCo4zKglQDlzOx01/b69bvLqxg2COkfKpegMJH8uDSGd8fvSSBKoWFu1RGnTomNUMHB7FRrbDAYQ0VAyUNfUcrZps8YlqgAjFGt3pF5GSoT7vGVVt3dKaRinvcPmlF3mk9qM/DHtqPfp4oA2Hqw==";
+        private static string SYS_DEFAULT_LANGUAGE = "en_us";
+        private static string SYS_DEFAULT_DATEFORMAT = "MM/dd/yyyy";
+        private static string SYS_DEFAULT_THEME = "skin-blue-light";
+        private static int SYS_PULL_PUBLISHER_MESSAGE = 1;
+        private static string SYS_PUBLISHER_URL = "http://localhost";
+        private static string SYS_EMPTY_LICENSE_FILE = @"<?xml version=""1.0"" encoding=""utf-8""?><license></license>";
         IObjectService objectService = null;
+        IRSACryptographyService cryptoGraphysvc = null;
+        ISymmetricCryptographyService symmetricCryptoService = null;
         MemoryCache licenseCache = MemoryCache.Default;
 
-        public LicenseController(IObjectService objectService)
+        public LicenseController(IObjectService objectService,
+            IRSACryptographyService cryptographysvc,
+            ISymmetricCryptographyService symmetricCryptoService)
         {
             this.objectService = objectService;
+            this.cryptoGraphysvc = cryptographysvc;
+            this.symmetricCryptoService = symmetricCryptoService;
         }
 
         private string ReadResourceContent(string path)
@@ -150,6 +166,137 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
                 }
             }
         }
+
+        private bool IsValidLicense(string license)
+        {
+            try
+            {
+                XDocument licenseDoc = XDocument.Load(new StringReader(license));
+                string grantlist = licenseDoc.Descendants("grantlist").FirstOrDefault().ToString();
+                string productKey = licenseDoc.Descendants("productkey").FirstOrDefault().Value;
+
+                byte[] contentToVerified = UTF8Encoding.Default.GetBytes(grantlist);
+                bool isValid = cryptoGraphysvc.VerifySignedHash(contentToVerified,
+                    Convert.FromBase64String(productKey),
+                    SYS_RSA_PUBLIC_KEY);
+
+                return isValid;
+            }
+            catch(Exception ex)
+            {   
+            }
+
+            return false;
+        }
+
+        private int GetAppObjectDefintionIdByName(string defName)
+        {
+            var objDefs = objectService.GetAllObjectDefinitions();
+            var findObjDef = (from def in objDefs
+                              where def.ObjectDefinitionName.Equals(defName, StringComparison.InvariantCultureIgnoreCase)
+                              select def).FirstOrDefault();
+
+            return findObjDef.ObjectDefinitionID;
+        }
+        private void UpdateSystemConfig(string license)
+        {
+            ServiceObject svObject = new ServiceObject();
+            svObject.ObjectName = "FE Configuration";
+            svObject.ObjectOwner = RequestContext.Principal.Identity.Name;
+            svObject.OnlyUpdateProperties = false;
+            svObject.UpdatedBy = RequestContext.Principal.Identity.Name;
+            svObject.CreatedBy = RequestContext.Principal.Identity.Name;
+            svObject.ObjectDefinitionId = GetAppObjectDefintionIdByName("AppConfig");
+
+            //language
+            svObject.Properties.Add(new ObjectKeyValuePair()
+            {
+                KeyName = "language",
+                Value = new PrimeObjectField()
+                {
+                    PrimeDataType = PrimeFieldDataType.String,
+                    Value = SYS_DEFAULT_LANGUAGE
+                }
+            });
+
+            //dateTimeFormat
+            svObject.Properties.Add(new ObjectKeyValuePair()
+            {
+                KeyName = "dateTimeFormat",
+                Value = new PrimeObjectField()
+                {
+                    PrimeDataType = PrimeFieldDataType.String,
+                    Value = SYS_DEFAULT_DATEFORMAT
+                }
+            });
+
+            //rsa key.
+            svObject.Properties.Add(new ObjectKeyValuePair()
+            {
+                KeyName = "cryptoSecurityKey",
+                Value = new PrimeObjectField()
+                {
+                    PrimeDataType = PrimeFieldDataType.String,
+                    Value = Convert.ToBase64String(symmetricCryptoService.getEncryptionKeys())
+                }
+            });
+
+            //systemTheme.
+            svObject.Properties.Add(new ObjectKeyValuePair()
+            {
+                KeyName = "systemTheme",
+                Value = new PrimeObjectField()
+                {
+                    PrimeDataType = PrimeFieldDataType.String,
+                    Value = SYS_DEFAULT_THEME
+                }
+            });
+
+            //pullMessageFromPublisher.
+            svObject.Properties.Add(new ObjectKeyValuePair()
+            {
+                KeyName = "pullMessageFromPublisher",
+                Value = new PrimeObjectField()
+                {
+                    PrimeDataType = PrimeFieldDataType.Integer,
+                    Value = SYS_PULL_PUBLISHER_MESSAGE
+                }
+            });
+            //pullMessagePublisherUrl.
+            svObject.Properties.Add(new ObjectKeyValuePair()
+            {
+                KeyName = "pullMessagePublisherUrl",
+                Value = new PrimeObjectField()
+                {
+                    PrimeDataType = PrimeFieldDataType.String,
+                    Value = SYS_PUBLISHER_URL
+                }
+            });
+            //systemVersion.
+            svObject.Properties.Add(new ObjectKeyValuePair()
+            {
+                KeyName = "systemVersion",
+                Value = new PrimeObjectField()
+                {
+                    PrimeDataType = PrimeFieldDataType.String,
+                    Value = Assembly.GetExecutingAssembly().GetName().Version.ToString(4)
+                }
+            });
+
+            //license.
+            svObject.Properties.Add(new ObjectKeyValuePair()
+            {
+                KeyName = "license",
+                Value = new PrimeObjectField()
+                {
+                    PrimeDataType = PrimeFieldDataType.String,
+                    Value = license
+                }
+            });
+
+            objectService.CreateORUpdateGeneralObject(svObject);
+        }
+
         private void RegistApplication(string license)
         {
             string licenseMap = ReadResourceContent("FE.Creator.Admin.Config.Module.LicenseMaps.xml");
@@ -166,15 +313,33 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
                 string configureContent = ReadResourceContent(f.FileUrl);
                 ProcessConfig(configureContent);
             }
+
+            UpdateSystemConfig(license);
         }
         
+        private string LoadLicenseFromConfig()
+        {
+           var objects =  objectService.GetServiceObjects(
+                    GetAppObjectDefintionIdByName("AppConfig"),
+                    new string[] {"license" },
+                    1,
+                    1);
+
+            var licenseData = objects
+                .FirstOrDefault()
+                .GetPropertyValue<PrimeObjectField>("license")
+                .GetStrongTypeValue<string>();
+
+            return IsValidLicense(licenseData)? licenseData : SYS_EMPTY_LICENSE_FILE;
+        }
+
         private XDocument getCachedLicense()
         {
             XDocument license = licenseCache.Get("license") as XDocument;
             if(license == null)
             {
-                string rootPath = System.IO.Path.Combine(System.Web.HttpRuntime.AppDomainAppPath, "App_Data", "license.xml");
-                license = File.Exists(rootPath)?  XDocument.Load(rootPath) : null;
+                string licenseContent = LoadLicenseFromConfig();
+                license = XDocument.Load(new StringReader(licenseContent));
 
                 if (license != null)
                 {
@@ -190,7 +355,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
             XDocument licenseDoc = getCachedLicense();
             if (licenseDoc != null)
             {
-                XElement licenseElement = licenseDoc.Descendants("license").FirstOrDefault();
+                XElement licenseElement = licenseDoc.Descendants("grantlist").FirstOrDefault();
                 var grantedList = from g in licenseDoc.Descendants("moudle")
                                   select g.Value;
 
@@ -205,7 +370,6 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
         [HttpPost]
         public async Task<IHttpActionResult> Post()
         {
-            //150 9337 8913
             // Check if the request contains multipart/form-data. 
             if (!Request.Content.IsMimeMultipartContent("form-data"))
             {
@@ -213,12 +377,16 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
             }
 
             var filesReadToProvider = await Request.Content.ReadAsMultipartAsync();
-            foreach (var stream in filesReadToProvider.Contents)
+            if(filesReadToProvider.Contents.Count > 0)
             {
+                var stream = filesReadToProvider.Contents[0];
                 var fileBytes = await stream.ReadAsByteArrayAsync();
                 string license = System.Text.UTF8Encoding.Default.GetString(fileBytes);
 
-                RegistApplication(license);
+                if (IsValidLicense(license))
+                {
+                    RegistApplication(license);
+                }
             }
 
             return this.Ok();

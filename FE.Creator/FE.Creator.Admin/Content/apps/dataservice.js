@@ -35,7 +35,9 @@
             getUserIdByLoginName : getUserIdByLoginName,
             resetPassword: resetPassword,
             getLicencedModules: getLicencedModules,
-            getUUID: getUUID
+            getUUID: getUUID,
+            encryptData: encryptData,
+            decryptData: decryptData
         };
 
         //get the object defintion groups
@@ -440,6 +442,38 @@
 
             function error(response) {
                 logger.error('XHR Failed for getLicencedModules - ' + response.data);
+                return response.data;
+            }
+        }
+
+        function encryptData(data) {
+            return $http.post("/api/custom/Cryptography/EncryptData",
+                     data)
+                  .then(complete)
+                  .catch(error);
+
+            function complete(response) {
+                return response.data;
+            }
+
+            function error(response) {
+                logger.error('XHR Failed for encryptData - ' + response.data);
+                return response.data;
+            }
+        }
+
+        function decryptData(data) {
+            return $http.post("/api/custom/Cryptography/DecryptData",
+                     data)
+                  .then(complete)
+                  .catch(error);
+
+            function complete(response) {
+                return response.data;
+            }
+
+            function error(response) {
+                logger.error('XHR Failed for decryptData - ' + response.data);
                 return response.data;
             }
         }

@@ -9,20 +9,55 @@ namespace FE.Creator.Cryptography
     public class CryptographyServiceFactory
     {
         private static object SyncRoot = new object();
-        private static ICryptographyService rsaEncryptionService = null;
-        public static ICryptographyService RSAEncryptionService
+        private static IRSACryptographyService rsaCryptoService = null;
+        private static ISHAService shaService = null;
+        private static ISymmetricCryptographyService symmetricCryptoService = null;
+
+        public static IRSACryptographyService RSACryptoService
         {
             get
             {
                 lock (SyncRoot)
                 {
-                    if (rsaEncryptionService == null)
+                    if (rsaCryptoService == null)
                     {
-                        rsaEncryptionService = new RSACryptographyService();
+                        rsaCryptoService = new RSACryptographyService();
                     }
                 }
 
-                return rsaEncryptionService;
+                return rsaCryptoService;
+            }
+        }
+
+        public static ISHAService SHAService
+        {
+            get
+            {
+                lock (SyncRoot)
+                {
+                    if (shaService == null)
+                    {
+                        shaService = new SHAService();
+                    }
+                }
+
+                return shaService;
+            }
+        }
+
+        public static ISymmetricCryptographyService SymmetricCryptoService
+        {
+            get
+            {
+                lock (SyncRoot)
+                {
+                    if(symmetricCryptoService == null)
+                    {
+                        symmetricCryptoService = new SymmetricCryptographyService();
+                    }
+                }
+
+                return symmetricCryptoService;
             }
         }
     }

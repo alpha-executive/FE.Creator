@@ -44,6 +44,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -61,6 +63,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="FileStorageTest.cs" />
+    <Compile Include="LicenseTest.cs" />
     <Compile Include="ObjectRepositoryTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -69,6 +72,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FE.Creator.Cryptography\FE.Creator.Cryptography.csproj">
+      <Project>{49dbe775-5db9-486d-8fd2-02e1db3dba3f}</Project>
+      <Name>FE.Creator.Cryptography</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FE.Creator.FileStorage\FE.Creator.FileStorage.csproj">
       <Project>{7c9aa71d-9792-475b-891b-4eaa816c5562}</Project>
       <Name>FE.Creator.FileStorage</Name>

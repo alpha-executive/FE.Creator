@@ -21,19 +21,26 @@
                     <tbody>
                         <tr>
                             <th style="width:5%;"></th>
-                            <th style="width:25%;">Account Title</th>
-                            <th style="width:10%;">Account No./Name</th>
+                            <th style="width:15%;">Account Title</th>
+                            <th style="width:20%;">Account No./Name</th>
                             <th>Password</th>
                             <th style="width:25%;">Description</th>
                             <th style="width:20%;">Action</th>
                         </tr>
                         <tr ng-repeat="record in ctrl.accountRecords">
-                            <td><div class="badge" ng-class="{'bg-red': record.properties.accountType.value == 0, 'bg-yellow': record.properties.accountType.value == 1, 'bg-blue': record.properties.accountType.value == 2}">Generic</div></td>
+                            <td><div class="badge" ng-class="{'bg-yellow': record.properties.accountType.value == 0, 'bg-red': record.properties.accountType.value == 1, 'bg-blue': record.properties.accountType.value == 2}">
+                                    <i class="fa" ng-class="{'fa-envelope-o': record.properties.accountType.value == 0, 'fa-cc-visa': record.properties.accountType.value == 1, 'fa-mobile': record.properties.accountType.value == 2}"></i>
+                                </div></td>
                             <td ng-bind="record.objectName"></td>
-                            <td>******</td>
-                            <td>******</td>
+                            <td>{{record.properties.accountNumber.value}}</td>
+                            <td><span ng-if="record.passDisplayVal == '******'" ng-repeat="i in [1,2,3,4,5,6]"><i class="fa fa-asterisk"></i></span> 
+                                <span ng-if="record.passDisplayVal != '******'" ng-bind="record.passDisplayVal"></span>
+                            </td>
                             <td ng-bind="record.properties.accountDesc.value"></td>
                             <td>
+                                <button class="btn btn-success btn-flat btn-xs" ng-click="ctrl.showPassword(record)">
+                                    <i class="fa fa-eye"></i>
+                                </button>
                                 <button type="button" class="btn btn-primary btn-flat btn-xs" ng-click="ctrl.createOrEditAccountRecord(record)">
                                     <i class="fa fa-pencil"></i>
                                 </button>

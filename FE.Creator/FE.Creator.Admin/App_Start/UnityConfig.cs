@@ -26,8 +26,13 @@ namespace FE.Creator.Admin
                     c => new LocalFileSystemStorage(rootPath)));
 
             //register the cryptography service.
-            container.RegisterType<ICryptographyService>(new InjectionFactory(
-                   f => CryptographyServiceFactory.RSAEncryptionService
+            container.RegisterType<IRSACryptographyService>(new InjectionFactory(
+                   f => CryptographyServiceFactory.RSACryptoService
+                ));
+
+            //register the symmetric crypto service.
+            container.RegisterType<ISymmetricCryptographyService>(new InjectionFactory(
+                    f=> CryptographyServiceFactory.SymmetricCryptoService
                 ));
 
             //register the ownin context.

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FE.Creator.Cryptography
 {
-   public interface ICryptographyService
+   public interface IRSACryptographyService
     {
         byte[] getEncryptionKeys();
 
@@ -18,5 +18,9 @@ namespace FE.Creator.Cryptography
         byte[] ExtractPrivateKey(byte[] keys);
 
         byte[] ExtractPublicKey(byte[] keys);
+
+        byte[] HashAndSignBytes(byte[] DataToSign, string privateKey);
+
+        bool VerifySignedHash(byte[] DataToVerify, byte[] SignedData, string publicKey);
     }
 }
