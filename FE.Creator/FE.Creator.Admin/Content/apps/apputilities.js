@@ -124,3 +124,161 @@ function highlightCode(selector) {
         hljs.highlightBlock(block);
     });
 }
+
+function createChart(graphicContainer, option, theme) {
+    var echart = echarts.init(graphicContainer, theme);
+    window.onresize = echart.resize;
+    echart.setOption(option, true)
+}
+function getCarGaugesOption(leftGaugeName, rightGaugeName) {
+    var option = {
+        title: {
+            text: '',
+            subtext: ''
+        },
+        tooltip: {
+            formatter: "{a} <br/>{c} {b}"
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                mark: { show: true },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        series: [
+            {
+                name: leftGaugeName,
+                type: 'gauge',
+                center: ['25%', '55%'],    // 默认全局居中
+                min: 0,
+                max: 100,
+                splitNumber: 10,
+                axisLine: {            // 坐标轴线
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        width: 10
+                    }
+                },
+                axisTick: {            // 坐标轴小标记
+                    length: 15,        // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: 'auto'
+                    }
+                },
+                splitLine: {           // 分隔线
+                    length: 20,        // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                        color: 'auto'
+                    }
+                },
+                title: {
+                    textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                        fontWeight: 'bolder',
+                        fontSize: 20,
+                        fontStyle: 'italic'
+                    }
+                },
+                detail: {
+                    textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                        fontWeight: 'bolder'
+                    }
+                },
+                data: [{ value: 0, name: leftGaugeName + '%' }]
+            },
+            {
+                name: rightGaugeName,
+                type: 'gauge',
+                center: ['75%', '55%'],    // 默认全局居中
+                min: 0,
+                max: 100,
+                splitNumber: 10,
+                axisLine: {            // 坐标轴线
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        width: 10
+                    }
+                },
+                axisTick: {            // 坐标轴小标记
+                    length: 15,        // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle控制线条样式
+                        color: 'auto'
+                    }
+                },
+                splitLine: {           // 分隔线
+                    length: 20,        // 属性length控制线长
+                    lineStyle: {       // 属性lineStyle（详见lineStyle）控制线条样式
+                        color: 'auto'
+                    }
+                },
+                title: {
+                    textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                        fontWeight: 'bolder',
+                        fontSize: 20,
+                        fontStyle: 'italic'
+                    }
+                },
+                detail: {
+                    textStyle: {       // 其余属性默认使用全局文本样式，详见TEXTSTYLE
+                        fontWeight: 'bolder'
+                    }
+                },
+                data: [{ value: 0, name: rightGaugeName + '%' }]
+            }
+        ]
+    };
+
+    return option;
+}
+
+function getColumnChartOption(xaxisData, legend) {
+    var option = {
+        title: {
+            text: '',
+            subtext: ''
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data: legend
+        },
+        toolbox: {
+            show: true,
+            feature: {
+                mark: { show: true },
+                magicType: { show: true, type: ['line', 'bar'] },
+                restore: { show: true },
+                saveAsImage: { show: true }
+            }
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                data: xaxisData
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
+        series: []
+    };
+
+    return option;
+}
+
+function getYoYMonths() {
+    var dateOfLastYear = new Date();
+    var currentDate = new Date();
+    dateOfLastYear.setMonth(dateOfLastYear.getMonth() - 11);
+
+    var dates = [];
+    while (dateOfLastYear <= currentDate){
+        dates.push((dateOfLastYear.getMonth() + 1) + "/" + dateOfLastYear.getFullYear());
+        dateOfLastYear.setMonth(dateOfLastYear.getMonth() + 1);
+    }
+
+    return dates;
+}

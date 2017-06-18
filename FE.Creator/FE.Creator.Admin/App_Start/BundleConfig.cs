@@ -73,6 +73,10 @@ namespace FE.Creator.Admin
                     "~/Content/adminlte-2.3.6/plugins/ckeditor/ckeditor.js" 
                 ));
 
+            bundles.Add(new ScriptBundle("~/js/echarts").Include(
+                    "~/Content/adminlte-2.3.6/plugins/echarts/echarts.min.js"
+                ));
+
             bundles.Add(new ScriptBundle("~/js/ckeditor-jquery").Include(
                    "~/Content/adminlte-2.3.6/plugins/ckeditor/adapters/jquery.js"
               ));
@@ -167,6 +171,9 @@ namespace FE.Creator.Admin
             bundles.Add(new ScriptBundle("~/js/adminapp/accountrecord").Include(
                    "~/Content/apps/accountrecordscontroller.js"
                ));
+            bundles.Add(new ScriptBundle("~/js/adminapp/dashboard").Include(
+                    "~/Content/apps/dashboardcontroller.js"
+                ));
         }
     }
 }

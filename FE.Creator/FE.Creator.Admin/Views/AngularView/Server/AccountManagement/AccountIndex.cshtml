@@ -29,7 +29,7 @@
                         </tr>
                         <tr ng-repeat="record in ctrl.accountRecords">
                             <td><div class="badge" ng-class="{'bg-yellow': record.properties.accountType.value == 0, 'bg-red': record.properties.accountType.value == 1, 'bg-blue': record.properties.accountType.value == 2}">
-                                    <i class="fa" ng-class="{'fa-envelope-o': record.properties.accountType.value == 0, 'fa-cc-visa': record.properties.accountType.value == 1, 'fa-mobile': record.properties.accountType.value == 2}"></i>
+                                    <i class="fa" ng-class="{'fa-internet-explorer': record.properties.accountType.value == 0, 'fa-cc-visa': record.properties.accountType.value == 1, 'fa-laptop': record.properties.accountType.value == 2}"></i>
                                 </div></td>
                             <td ng-bind="record.objectName"></td>
                             <td>{{record.properties.accountNumber.value}}</td>
@@ -39,7 +39,7 @@
                             <td ng-bind="record.properties.accountDesc.value"></td>
                             <td>
                                 <button class="btn btn-success btn-flat btn-xs" ng-click="ctrl.showPassword(record)">
-                                    <i class="fa fa-eye"></i>
+                                    <i class="fa" ng-class="{'fa-unlock': record.passDisplayVal == '******', 'fa-lock': record.passDisplayVal != '******'}"></i>
                                 </button>
                                 <button type="button" class="btn btn-primary btn-flat btn-xs" ng-click="ctrl.createOrEditAccountRecord(record)">
                                     <i class="fa fa-pencil"></i>
@@ -51,6 +51,9 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            <div class="box-footer" ng-if="ctrl.pager.totalPages > 1">
+                @Html.Partial("~/Views/AngularView/Client/Common/Pager.cshtml")
             </div>
         </div>
         <div class="box box-warning" ng-if="ctrl.displayMode == 'accountRecordEditing'">

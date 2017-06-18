@@ -56,6 +56,7 @@
                     onPageChange(1);
                 } else {
                     var account = objectUtilService.parseServiceObject(data);
+                    account.passDisplayVal = "******";
                     var index = vm.accountRecords.indexOf(vm.currentAccountRecord);
                     if (index >= 0) {
                         vm.accountRecords.splice(index, 1, account);

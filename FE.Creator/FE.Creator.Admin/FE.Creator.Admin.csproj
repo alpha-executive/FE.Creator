@@ -224,6 +224,7 @@
     <Compile Include="Controllers\ApiControllers\FilesController.cs" />
     <Compile Include="Controllers\ApiControllers\LicenseController.cs" />
     <Compile Include="Controllers\ApiControllers\ObjectDefinitionFieldController.cs" />
+    <Compile Include="Controllers\ApiControllers\ReportController.cs" />
     <Compile Include="Controllers\ApiControllers\SingleSelectionFieldItemController.cs" />
     <Compile Include="Controllers\ApiControllers\SystemUserController.cs" />
     <Compile Include="Controllers\ApiControllers\UniqueIDGeneratorController.cs" />
@@ -950,6 +951,7 @@
     <Content Include="Content\adminlte-2.3.6\plugins\daterangepicker\daterangepicker.js" />
     <Content Include="Content\adminlte-2.3.6\plugins\daterangepicker\moment.js" />
     <Content Include="Content\adminlte-2.3.6\plugins\daterangepicker\moment.min.js" />
+    <Content Include="Content\adminlte-2.3.6\plugins\echarts\echarts.min.js" />
     <Content Include="Content\adminlte-2.3.6\plugins\fastclick\fastclick.js" />
     <Content Include="Content\adminlte-2.3.6\plugins\fastclick\fastclick.min.js" />
     <Content Include="Content\adminlte-2.3.6\plugins\flot\excanvas.js" />
@@ -1213,6 +1215,7 @@
     <Content Include="Content\apps\apputilities.js" />
     <Content Include="Content\apps\articlecontroller.js" />
     <Content Include="Content\apps\css\angular-rating.css" />
+    <Content Include="Content\apps\dashboardcontroller.js" />
     <Content Include="Content\apps\diarycontroller.js" />
     <Content Include="Content\angularjs\angular-route.min.js" />
     <Content Include="Content\angularjs\angular.min.js" />
@@ -1468,6 +1471,7 @@
     <Content Include="Views\AngularView\Client\Efficiency\ArticleList.cshtml" />
     <Content Include="Views\AngularView\Client\Efficiency\ArticleDisplayView.cshtml" />
     <Content Include="Views\Print\PrintArticle.cshtml" />
+    <Content Include="Views\AngularView\Server\Settings\AppSettingsIndex.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
