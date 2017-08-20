@@ -8,7 +8,7 @@
                 <div class="info-box">
                     <span class="info-box-icon bg-aqua"><i class="fa fa-lightbulb-o"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">TOTAL POSTS</span>
+                        <span class="info-box-text">@FE.Creator.Admin.lang.AppLang.INDEX_TOTAL_POSTS</span>
                         <span class="info-box-number" ng-bind="ctrl.totalPostCount"></span>
                     </div>
                     <!-- /.info-box-content -->
@@ -20,7 +20,7 @@
                 <div class="info-box">
                     <span class="info-box-icon bg-red"><i class="fa fa-image"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">TOTAL IMAGES</span>
+                        <span class="info-box-text">@FE.Creator.Admin.lang.AppLang.INDEX_TOTAL_IMAGES</span>
                         <span class="info-box-number" ng-bind="ctrl.totalPhotosCount"></span>
                     </div>
                     <!-- /.info-box-content -->
@@ -34,7 +34,7 @@
                 <div class="info-box">
                     <span class="info-box-icon bg-green"><i class="fa fa-user"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">TOTAL CONTACTS</span>
+                        <span class="info-box-text">@FE.Creator.Admin.lang.AppLang.INDEX_TOTAL_CONTACTS</span>
                         <span class="info-box-number" ng-bind="ctrl.totalContactsCount"></span>
                     </div>
                     <!-- /.info-box-content -->
@@ -46,7 +46,7 @@
                 <div class="info-box">
                     <span class="info-box-icon bg-yellow"><i class="fa fa-book"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">TOTAL BOOKS</span>
+                        <span class="info-box-text">@FE.Creator.Admin.lang.AppLang.INDEX_TOTAL_BOOKS</span>
                         <span class="info-box-number" ng-bind="ctrl.totalBooksCount"></span>
                     </div>
                     <!-- /.info-box-content -->
@@ -77,15 +77,15 @@
             <div class="col-md-6 table-responsive">
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title"><i class="fa fa-lightbulb-o"></i> Posts</h3>
+                        <h3 class="box-title"><i class="fa fa-lightbulb-o"></i> @FE.Creator.Admin.lang.AppLang.INDEX_REPORT_POSTS</h3>
                     </div>
                     <div class="box-body table-responsive">
                         <table class="table table-hover">
                             <tbody>
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Author</th>
-                                    <th>Date</th>
+                                    <th>@FE.Creator.Admin.lang.AppLang.INDEX_REPORT_COL_TITLE</th>
+                                    <th>@FE.Creator.Admin.lang.AppLang.INDEX_REPORT_COL_AUTHOR</th>
+                                    <th>@FE.Creator.Admin.lang.AppLang.INDEX_REPORT_COL_DATE</th>
                                 </tr>
                                 <tr ng-repeat="post in ctrl.posts">
                                     <td>
@@ -100,22 +100,22 @@
                         </table>
                     </div>
                     <div class="box-footer text-center">
-                        <a class="uppercase" href="/ngview/Index/Efficiency/ArticleIndex">View All Posts</a>
+                        <a class="uppercase" href="/ngview/Index/Efficiency/ArticleIndex">@FE.Creator.Admin.lang.AppLang.INDEX_REPORT_VIEW_ALLPOSTS</a>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="box box-primary">
                     <div class="box-header">
-                        <h3 class="box-title"><i class="fa fa-book"></i> Books</h3>
+                        <h3 class="box-title"><i class="fa fa-book"></i> @FE.Creator.Admin.lang.AppLang.INDEX_REPORT_BOOKS</h3>
                     </div>
                     <div class="box-body">
                         <table class="table">
                             <tbody>
                                 <tr>
-                                    <th>Title</th>
-                                    <th>Author</th>
-                                    <th>Version</th>
+                                    <th>@FE.Creator.Admin.lang.AppLang.INDEX_REPORT_COL_TITLE</th>
+                                    <th>@FE.Creator.Admin.lang.AppLang.INDEX_REPORT_COL_AUTHOR</th>
+                                    <th>@FE.Creator.Admin.lang.AppLang.INDEX_REPORT_COL_VERSION</th>
                                 </tr>
                                 <tr ng-repeat="book in ctrl.books">
                                     <td>
@@ -130,7 +130,7 @@
                         </table>
                     </div>
                     <div class="box-footer text-center">
-                        <a class="uppercase" href="/ngview/Index/Books/BookIndex">View All Books</a>
+                        <a class="uppercase" href="/ngview/Index/Books/BookIndex">@FE.Creator.Admin.lang.AppLang.INDEX_REPORT_VIEW_ALLBOOKS</a>
                     </div>
                 </div>
             </div>
@@ -140,7 +140,7 @@
             <div class="col-md-12">
                 <div class="box box-success">
                     <div class="box-header">
-                        <h3 class="box-title"><i class="fa fa-image"></i> Latest Images</h3>
+                        <h3 class="box-title"><i class="fa fa-image"></i> @FE.Creator.Admin.lang.AppLang.INDEX_REPORT_LATEST_IMAGES</h3>
                     </div>
                     <div class="box-body">
                         <div class="row">
@@ -150,7 +150,7 @@
                         </div>
                     </div>
                     <div class="box-footer text-center">
-                        <a class="uppercase" href="/ngview/Index/Photos/PhotoIndex">View All Images</a>
+                        <a class="uppercase" href="/ngview/Index/Photos/PhotoIndex">@FE.Creator.Admin.lang.AppLang.INDEX_REPORT_VIEW_ALLIMGS</a>
                     </div>
                     <div class="box-body">
                         <div class="row">
@@ -177,9 +177,9 @@
             dataType: "json",
             success: function (data) {
                 if (Array.isArray(data) && data.length == 2) {
-                    var option = getCarGaugesOption("Target", "Task");
-                    option.title.text = 'Average Progress Report';
-                    option.title.subtext = 'Target and Task';
+                    var option = getCarGaugesOption(AppLang.INDEX_REPORT_NAME_TARGET, AppLang.INDEX_REPORT_NAME_TASK);
+                    option.title.text = AppLang.INDEX_AVG_PROGRESS_REPORT;
+                    option.title.subtext = AppLang.INDEX_SUBTXT_TT;
                     option.series[0].data[0].value = data[0].toFixed(2);
                     option.series[1].data[0].value = data[1].toFixed(2);
 
@@ -197,39 +197,39 @@
             dataType: "json",
             success: function (data) {
                 if (Array.isArray(data) && data.length > 0) {
-                    var option = getColumnChartOption(getYoYMonths(), ['Post', 'Diary', 'Books']);
-                    option.title.text = 'YOY Statics Report';
-                    option.title.subtext = 'Post, Diary and Books';
+                    var option = getColumnChartOption(getYoYMonths(), [AppLang.INDEX_REPORT_NAME_POST, AppLang.INDEX_REPORT_NAME_DIARY, AppLang.INDEX_REPORT_NAME_BOOK]);
+                    option.title.text = AppLang.INDEX_YOY_STATICS_REPORT;
+                    option.title.subtext = AppLang.INDEX_SUBTXT_PBD;
                     option.series.push({
-                        name: 'Post',
+                        name: AppLang.INDEX_REPORT_NAME_POST,
                         type: 'line',
                         smooth: true,
                         data: data[0],
                         markLine: {
                             data: [
-                                { type: 'average', name: 'Average' }
+                                { type: 'average', name: AppLang.INDEX_REPORT_NAME_AVG }
                             ]
                         }
                     });
                     option.series.push({
-                        name: 'Diary',
+                        name: AppLang.INDEX_REPORT_NAME_DIARY,
                         type: 'line',
                         smooth: true,
                         data: data[1],
                         markLine: {
                             data: [
-                                { type: 'average', name: '平均值' }
+                                { type: 'average', name: AppLang.INDEX_REPORT_NAME_AVG }
                             ]
                         }
                     });
                     option.series.push({
-                        name: 'Books',
+                        name: AppLang.INDEX_REPORT_NAME_BOOK,
                         type: 'line',
                         smooth: true,
                         data: data[2],
                         markLine: {
                             data: [
-                                { type: 'average', name: '平均值' }
+                                { type: 'average', name: AppLang.INDEX_REPORT_NAME_AVG }
                             ]
                         }
                     });
@@ -248,18 +248,18 @@
             dataType: "json",
             success: function (data) {
                 if (Array.isArray(data) && data.length > 0) {
-                    var option = getColumnChartOption(getYoYMonths(), ['Images']);
-                    option.title.text = 'YOY Statics Report';
-                    option.title.subtext = 'Images';
+                    var option = getColumnChartOption(getYoYMonths(), [AppLang.INDEX_REPORT_NAME_IMGS]);
+                    option.title.text = AppLang.INDEX_YOY_STATICS_REPORT;
+                    option.title.subtext = AppLang.INDEX_SUBTXT_IMG;
                     option.series.push({
-                        name: 'Images',
+                        name: AppLang.INDEX_REPORT_NAME_IMGS,
                         type: 'line',
                         smooth: true,
                         data: data[0],
                         itemStyle: { normal: { areaStyle: { type: 'default' } } },
                         markLine: {
                             data: [
-                                { type: 'average', name: 'Average' }
+                                { type: 'average', name: AppLang.INDEX_REPORT_NAME_AVG }
                             ]
                         }
                     });

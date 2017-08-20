@@ -13,13 +13,13 @@
             </span>
         </div>
         <div class="product-info">
-            <span class="label label-warning" ng-if="article.properties.isOriginal.value == 1"><i class="fa fa-user"></i> Original</span>
-            <span class="label label-danger" ng-if="article.properties.articleSharedLevel.value == 1"><i class="fa fa-share"></i> Shared</span>
+            <span class="label label-warning" ng-if="article.properties.isOriginal.value == 1"><i class="fa fa-user"></i> @FE.Creator.Admin.lang.AppLang.POST_LBL_ORIGINAL</span>
+            <span class="label label-danger" ng-if="article.properties.articleSharedLevel.value == 1"><i class="fa fa-share"></i> @FE.Creator.Admin.lang.AppLang.POST_LBL_SHARED</span>
             <span class="label label-primary"><i class="fa fa-clock"></i> {{article.created}}</span>
             <div class="btn-group pull-right">
-                <button class="btn btn-box-tool" type="button" ng-click="ctrl.viewArticle(article)"><i class="fa fa-search text-primary"></i> View</button>
-                <button class="btn btn-box-tool" type="button" ng-click="ctrl.createOrEditArticle(article)"><i class="fa fa-pencil text-primary"></i> Edit</button>
-                <button class="btn btn-box-tool" type="button" ng-click="ctrl.deleteArticle(article)"><i class="fa fa-trash text-primary"></i> Delete</button>
+                <button class="btn btn-box-tool" type="button" ng-click="ctrl.viewArticle(article)"><i class="fa fa-search text-primary"></i> @FE.Creator.Admin.lang.AppLang.POST_BTN_VIEW</button>
+                <button class="btn btn-box-tool" type="button" ng-click="ctrl.createOrEditArticle(article)"><i class="fa fa-pencil text-primary"></i> @FE.Creator.Admin.lang.AppLang.POST_BTN_EDIT</button>
+                <button class="btn btn-box-tool" type="button" ng-click="ctrl.deleteArticle(article)"><i class="fa fa-trash text-primary"></i> @FE.Creator.Admin.lang.AppLang.POST_BTN_DELETE</button>
             </div>
         </div>
     </li>

@@ -10,7 +10,7 @@
     function BooksController($scope, ObjectRepositoryDataService, Notification, PagerService, objectUtilService, Upload) {
         var vm = this;
         vm.currentBookCategory = null;
-        vm.categoryEditButtonLabel = "New";
+        vm.categoryEditButtonLabel = AppLang.BOOK_BTN_NEW_CATEGORY;
         vm.searchText = "";
         vm.books = [];
         vm.totalBookNumber = 0;
@@ -144,7 +144,7 @@
 
             vm.currentEditingBook = book;
             if (vm.currentEditingBook == null) {
-                var tempObj = createNewBookObject("New Book", vm.currentBookCategory);
+                var tempObj = createNewBookObject(AppLang.BOOK_LBL_NEW_BOOK, vm.currentBookCategory);
                 vm.books.unshift(tempObj);
                 vm.currentEditingBook = tempObj;
             }
@@ -185,7 +185,7 @@
         vm.categoryEditing = function (category) {
             //it's a new create directory
             if (category == null) {
-                var tempObj = createNewBookCategoryObject("New Category");
+                var tempObj = createNewBookCategoryObject(AppLang.BOOK_LBL_NEWCATEGORY);
                 vm.currentBookCategory = tempObj;
                 vm.bookCategories.push(tempObj);
             }
@@ -236,7 +236,7 @@
             objectUtilService.saveServiceObject(vm.currentBookCategory, function (data) {
                 if (data == null || data == "" || data.objectID != null) {
                     Notification.success({
-                        message: 'Change Saved!',
+                        message: AppLang.COMMON_EDIT_SAVE_SUCCESS,
                         delay: 3000,
                         positionY: 'bottom',
                         positionX: 'right',
@@ -262,7 +262,7 @@
                 else {
                     //something error happend.
                     Notification.error({
-                        message: 'Change Faild: ' + data.toString(),
+                        message: AppLang.COMMON_EDIT_SAVE_FAILED + data.toString(),
                         delay: 5000,
                         positionY: 'bottom',
                         positionX: 'right',

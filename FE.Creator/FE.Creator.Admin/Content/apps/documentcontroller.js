@@ -77,7 +77,7 @@
 
                     return vm.objectDefinitions;
                 }).then(function(data){
-                    var rootFolder = createNewFolderObject("Home", vm.currentWorkingDirectoryId);
+                    var rootFolder = createNewFolderObject(AppLang.BOOK_INDEX_ROOT_FOLDER, vm.currentWorkingDirectoryId);
                     rootFolder.objectID = 0;
                     vm.currentEditingDirectory = rootFolder;
                     vm.navpaths.unshift(rootFolder);
@@ -127,7 +127,7 @@
 
             vm.currentEditingDocument = document;
             if (vm.currentEditingDocument == null) {
-                var tempObj = createNewFileObject("New Document", vm.currentWorkingDirectoryId);
+                var tempObj = createNewFileObject(AppLang.BOOK_INDEX_NEW_DOCUMENT, vm.currentWorkingDirectoryId);
                 vm.documents.unshift(tempObj);
                 vm.currentEditingDocument = tempObj;
             }
@@ -149,7 +149,7 @@
             vm.displayMode = "dirEditing";
             //it's a new create directory
             if (dir == null) {
-                var tempObj = createNewFolderObject("New Folder", vm.currentWorkingDirectoryId);
+                var tempObj = createNewFolderObject(AppLang.BOOK_INDEX_NEW_FOLDER, vm.currentWorkingDirectoryId);
                 vm.currentEditingDirectory = tempObj;
                 vm.directories.push(tempObj);
             }

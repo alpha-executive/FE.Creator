@@ -1,4 +1,6 @@
-﻿using FE.Creator.Admin.Models;
+﻿using FE.Creator.Admin.Controllers;
+using FE.Creator.Admin.Models;
+using FE.Creator.ObjectRepository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +11,9 @@ using System.Web.Mvc;
 namespace FE.Creator.Admin.ViewController.Controllers
 {
     [Authorize]
-    public class AngularViewController : Controller
+    public class AngularViewController : BaseController
     {
+        public AngularViewController(IObjectService objectService) : base(objectService) { }
         public ActionResult ClientTemplate(string module, string name)
         {
             if (name == null || !Regex.IsMatch(name, @"^[-\w]+$"))

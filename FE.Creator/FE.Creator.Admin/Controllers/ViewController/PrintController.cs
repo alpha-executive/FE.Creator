@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace FE.Creator.Admin.Controllers.ViewController
 {
-    public class PrintController : Controller
+    public class PrintController : BaseController
     {
         IObjectService objectService = null;
 
@@ -16,7 +16,7 @@ namespace FE.Creator.Admin.Controllers.ViewController
         //    this.objectService = new DefaultObjectService();
         //}
 
-        public PrintController(IObjectService objectService)
+        public PrintController(IObjectService objectService):base(objectService)
         {
             this.objectService = objectService;
         }

@@ -1,12 +1,12 @@
 ﻿@{
-    ViewBag.Title = "Task Management";
+    ViewBag.Title = FE.Creator.Admin.lang.AppLang.TASKMGR_TITLE;
 }
 <div class="row" ng-app="ngObjectRepository" ng-controller="TaskController as ctrl">
     <div class="col-md-12">
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-                <li class="active" ng-click="ctrl.switchTab(true)"><a aria-expanded="true" href="#targets" data-toggle="tab">Targets</a></li>
-                <li ng-click="ctrl.switchTab(false)"><a aria-expanded="false" href="#tasks" data-toggle="tab">Tasks</a></li>
+                <li class="active" ng-click="ctrl.switchTab(true)"><a aria-expanded="true" href="#targets" data-toggle="tab">@FE.Creator.Admin.lang.AppLang.TASKMGR_TAB_TARGETS</a></li>
+                <li ng-click="ctrl.switchTab(false)"><a aria-expanded="false" href="#tasks" data-toggle="tab">@FE.Creator.Admin.lang.AppLang.TASKMGR_TAB_TASKS</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="targets">
@@ -16,14 +16,14 @@
                                 <div class="box-body no-border">
                                     <form class="form-horizontal">
                                         <div class="form-group">
-                                            <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Target Title</label>
+                                            <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.TASKMGR_LBL_TGTTITLE</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" ng-model="ctrl.currentTarget.objectName" auto-focus />
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-sm-2">
-                                                <i class="fa fa-tag"></i> Description
+                                                <i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.TASKMGR_LBL_DESC
                                             </label>
                                             <div class="col-sm-10">
                                                 <textarea rows="3" class="form-control" ng-model="ctrl.currentTarget.properties.targetDesc.value"></textarea>
@@ -31,19 +31,19 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-sm-2">
-                                                <i class="fa fa-tag"></i> Target Type
+                                                <i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.TASKMGR_LBL_TGTTYPE
                                             </label>
                                             <div class="col-sm-10">
                                                 <div class="form-control">
-                                                    <input type="radio" ng-model="ctrl.currentTarget.properties.targetType.value" ng-value="0" ng-checked="ctrl.currentTarget.properties.targetType.value == 0" /> Important
-                                                    <input type="radio" ng-model="ctrl.currentTarget.properties.targetType.value" ng-value="1" ng-checked="ctrl.currentTarget.properties.targetType.value == 1" /> Medium
-                                                    <input type="radio" ng-model="ctrl.currentTarget.properties.targetType.value" ng-value="2" ng-checked="ctrl.currentTarget.properties.targetType.value == 2" /> Low
+                                                    <input type="radio" ng-model="ctrl.currentTarget.properties.targetType.value" ng-value="0" ng-checked="ctrl.currentTarget.properties.targetType.value == 0" /> @FE.Creator.Admin.lang.AppLang.TASKMGR_RDO_IMPORTANT
+                                                    <input type="radio" ng-model="ctrl.currentTarget.properties.targetType.value" ng-value="1" ng-checked="ctrl.currentTarget.properties.targetType.value == 1" /> @FE.Creator.Admin.lang.AppLang.TASKMGR_RDO_MEDIUM
+                                                    <input type="radio" ng-model="ctrl.currentTarget.properties.targetType.value" ng-value="2" ng-checked="ctrl.currentTarget.properties.targetType.value == 2" /> @FE.Creator.Admin.lang.AppLang.TASKMGR_RDO_LOW
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-sm-2">
-                                                <i class="fa fa-tag"></i> Start Date
+                                                <i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.TASKMGR_LBL_STARTDATE
                                             </label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control field-datepicker" ng-model="ctrl.currentTarget.properties.targetStartDate.value" />
@@ -51,7 +51,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-sm-2">
-                                                <i class="fa fa-tag"></i> Completed Date
+                                                <i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.TASKMGR_LBL_COMP_DATE
                                             </label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control field-datepicker" ng-model="ctrl.currentTarget.properties.targetCompleteDate.value" />
@@ -59,21 +59,19 @@
                                         </div>
                                         <ul class="list-inline">
                                             <li class="pull-right">
-                                                <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveTarget()"><i class="fa fa-save"></i> Save</button>
-                                                <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelTarget()"><i class="fa fa-close "></i> Cancel</button>
+                                                <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveTarget()"><i class="fa fa-save"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_SAVE</button>
+                                                <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelTarget()"><i class="fa fa-close "></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_CANCEL</button>
                                             </li>
                                         </ul>
                                     </form>
                                 </div>
                             </div>
-                            <script type="text/javascript">
-                                $(function () {
-                                    $(".field-datepicker").datepicker({
-                                       autoclose : true
-                                    })
-                                });
-                            </script>
                         </div>
+                        <script type="text/javascript">
+                                $(function () {
+                                    applySystemDateFormat();
+                                });
+                        </script>
                     </div>
                     <div class="row" ng-if="ctrl.displayMode == 'targetTaskEditing'">
                         <div class="col-md-12">
@@ -146,5 +144,6 @@
    </div>
 </div>
 @section Scripts{
+    @Scripts.Render("~/js/apputilities")
     @Scripts.Render("~/js/adminapp/task")
 }

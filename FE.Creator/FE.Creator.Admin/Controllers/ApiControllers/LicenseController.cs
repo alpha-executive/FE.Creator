@@ -24,7 +24,9 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
     public class LicenseController : ApiController
     {
         private static string SYS_RSA_PUBLIC_KEY = "BgIAAACkAABSU0ExAAQAAAEAAQBPkHSfs7Ukfng9Dz4EZZ1bDw5wCo4zKglQDlzOx01/b69bvLqxg2COkfKpegMJH8uDSGd8fvSSBKoWFu1RGnTomNUMHB7FRrbDAYQ0VAyUNfUcrZps8YlqgAjFGt3pF5GSoT7vGVVt3dKaRinvcPmlF3mk9qM/DHtqPfp4oA2Hqw==";
-        private static string SYS_DEFAULT_LANGUAGE = "en_us";
+        private static string SYS_DEFAULT_LANGUAGE = "en-US";
+        private static string SYS_LANG_CHINESE = "zh-CN";
+        private static string SYS_LANG_ENGLISH = "en-US";
         private static string SYS_DEFAULT_DATEFORMAT = "MM/dd/yyyy";
         private static string SYS_DEFAULT_THEME = "skin-blue-light";
         private static int SYS_PULL_PUBLISHER_MESSAGE = 1;
@@ -215,7 +217,9 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
                 Value = new PrimeObjectField()
                 {
                     PrimeDataType = PrimeFieldDataType.String,
-                    Value = SYS_DEFAULT_LANGUAGE
+                    Value = System.Threading.Thread.CurrentThread.CurrentUICulture
+                    .TwoLetterISOLanguageName
+                    .Equals(SYS_LANG_CHINESE, StringComparison.InvariantCultureIgnoreCase) ? SYS_LANG_CHINESE : SYS_LANG_ENGLISH
                 }
             });
 

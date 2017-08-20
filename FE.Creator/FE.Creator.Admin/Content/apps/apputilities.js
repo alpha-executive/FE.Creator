@@ -282,3 +282,44 @@ function getYoYMonths() {
 
     return dates;
 }
+
+function getServiceObjectPropertyValue(svcObj, propName) {
+    if (svcObj == null || svcObj.properties == null || svcObj.properties.length == 0)
+        return null;
+
+    for (var i = 0; i < svcObj.properties.length; i++) {
+        var prop = svcObj.properties[i];
+        if (prop.keyName.toUpperCase() == propName.toUpperCase()) {
+            return prop.value;
+        }
+    }
+
+    return null;
+}
+
+function applySystemDateFormat() {
+    $.ajax({
+        url: "/api/objects/FindServiceObjectsByFilter/AppConfig/"
+           + ["dateTimeFormat"].join(),
+        dataType: "json",
+        success: function (data) {
+            if (Array.isArray(data) && data.length == 1) {
+                var dateFormat = getServiceObjectPropertyValue(data[0], "dateTimeFormat");
+                if (dateFormat != null
+                    && dateFormat.value != null
+                    && dateFormat.value != "") {
+                    //with format.
+                    $(".field-datepicker").datepicker({
+                        autoclose: true,
+                        format: dateFormat.value
+                    });
+                } else {
+                    //without format
+                    $(".field-datepicker").datepicker({
+                        autoclose: true
+                    });
+                }
+            }
+        }
+    });
+}

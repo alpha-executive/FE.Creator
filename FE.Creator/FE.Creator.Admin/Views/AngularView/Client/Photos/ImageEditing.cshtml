@@ -7,7 +7,7 @@
                         <button class="btn btn-warning" type="file" ngf-select="ctrl.uploadImage($file, $invalidFiles,ctrl.editingImageObject)"
                                 accept="image/*"
                                 ngf-max-size="20MB">
-                            <i class="fa fa-upload"></i> Upload Image <i class="fa fa-refresh fa-spin text-green" ng-if="ctrl.f.showprogress"></i>
+                            <i class="fa fa-upload"></i> @FE.Creator.Admin.lang.AppLang.IMAGEMGR_BTN_UPLOADIMG<i class="fa fa-refresh fa-spin text-green" ng-if="ctrl.f.showprogress"></i>
                         </button><span class="message">{{ctrl.errorMsg}}</span>
                         <br />
                         <br />
@@ -23,14 +23,14 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Image Title</label>
+                    <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.IMAGEMGR_LBL_IMGTITLE</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control" ng-model="ctrl.editingImageObject.objectName" auto-focus />
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2">
-                        <i class="fa fa-tag"></i> Description
+                        <i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.IMAGEMGR_LBL_DESC
                     </label>
                     <div class="col-sm-10">
                         <textarea rows="3" class="form-control" ng-model="ctrl.editingImageObject.properties.imageDesc.value"></textarea>
@@ -38,19 +38,19 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label col-sm-2">
-                        <i class="fa fa-tag"></i> Shared
+                        <i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.IMAGEMGR_LBL_SHARED
                     </label>
                     <div class="col-sm-10">
                         <div class="form-control">
-                            <input type="radio" ng-model="ctrl.editingImageObject.properties.imageSharedLevel.value" ng-value="0" ng-checked="ctrl.editingImageObject.properties.imageSharedLevel.value == 0" /> Private
-                            <input type="radio" ng-model="ctrl.editingImageObject.properties.imageSharedLevel.value" ng-value="1" ng-checked="ctrl.editingImageObject.properties.imageSharedLevel.value == 1" /> Shared
+                            <input type="radio" ng-model="ctrl.editingImageObject.properties.imageSharedLevel.value" ng-value="0" ng-checked="ctrl.editingImageObject.properties.imageSharedLevel.value == 0" /> @FE.Creator.Admin.lang.AppLang.IMAGEMGR_RDO_PRIVATE
+                            <input type="radio" ng-model="ctrl.editingImageObject.properties.imageSharedLevel.value" ng-value="1" ng-checked="ctrl.editingImageObject.properties.imageSharedLevel.value == 1" /> @FE.Creator.Admin.lang.AppLang.IMAGEMGR_RDO_SHARED
                         </div>
                     </div>
                 </div>
                 <ul class="list-inline">
                     <li class="pull-right">
-                        <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveEditingImage()"><i class="fa fa-save"></i> Save</button>
-                        <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelEditingImage()"><i class="fa fa-close "></i> Cancel</button>
+                        <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveEditingImage()"><i class="fa fa-save"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_SAVE</button>
+                        <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelEditingImage()"><i class="fa fa-close "></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_CANCEL</button>
                     </li>
                 </ul>
             </form>

@@ -174,6 +174,9 @@ namespace FE.Creator.Admin
             bundles.Add(new ScriptBundle("~/js/adminapp/dashboard").Include(
                     "~/Content/apps/dashboardcontroller.js"
                 ));
+            bundles.Add(new ScriptBundle("~/js/adminapp/appsettings").Include(
+                    "~/Content/apps/appsettingscontroller.js"
+                ));
         }
     }
 }

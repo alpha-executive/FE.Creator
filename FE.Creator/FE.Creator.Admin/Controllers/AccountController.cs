@@ -9,20 +9,23 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FE.Creator.Admin.Models;
+using FE.Creator.ObjectRepository;
 
 namespace FE.Creator.Admin.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public AccountController()
+        public AccountController(IObjectService objectService):base(objectService)
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager,
+            ApplicationSignInManager signInManager,
+            IObjectService objectService):base(objectService)
         {
             UserManager = userManager;
             SignInManager = signInManager;

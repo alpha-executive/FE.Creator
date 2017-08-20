@@ -1,10 +1,10 @@
 ﻿<div class="box box-primary">
     <div class="box-header">
-        <h3 class="box-title">Task List</h3>
+        <h3 class="box-title">@FE.Creator.Admin.lang.AppLang.TASKMGR_TASKLIST</h3>
         <div class="box-tools pull-right">
-            <label class="badge bg-red">Important</label>
-            <label class="badge bg-yellow">Medium</label>
-            <label class="badge bg-blue">Low</label>
+            <label class="badge bg-red">@FE.Creator.Admin.lang.AppLang.TASKMGR_RDO_IMPORTANT</label>
+            <label class="badge bg-yellow">@FE.Creator.Admin.lang.AppLang.TASKMGR_RDO_MEDIUM</label>
+            <label class="badge bg-blue">@FE.Creator.Admin.lang.AppLang.TASKMGR_RDO_LOW</label>
         </div>
     </div>
     <!-- /.box-header -->
@@ -13,10 +13,10 @@
             <tbody>
                 <tr>
                     <th style="width:5%;"></th>
-                    <th style="width:25%;">Task</th>
-                    <th>Description</th>
-                    <th style="width:10%;">Progress</th>
-                    <th style="width:120px;">Action</th>
+                    <th style="width:25%;">@FE.Creator.Admin.lang.AppLang.TASKMGR_TH_TASK</th>
+                    <th>@FE.Creator.Admin.lang.AppLang.TASKMGR_TH_DESC</th>
+                    <th style="width:10%;">@FE.Creator.Admin.lang.AppLang.TASKMGR_TH_PROGRESS</th>
+                    <th style="width:120px;">@FE.Creator.Admin.lang.AppLang.TASKMGR_TH_ACTION</th>
                 </tr>
                 <tr ng-repeat="task in ctrl.tasks">
                     <td><div class="badge" ng-class="{'bg-red': task.properties.taskType.value == 0, 'bg-yellow': task.properties.taskType.value == 1, 'bg-blue': task.properties.taskType.value == 2}" ng-bind="task.properties.taskStatus.value + '%'"></div></td>

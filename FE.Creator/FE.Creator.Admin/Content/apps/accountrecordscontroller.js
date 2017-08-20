@@ -66,7 +66,7 @@
                 }
                 vm.displayMode = "accountRecordsList";
                 Notification.success({
-                    message: 'Change Saved!',
+                    message: AppLang.COMMON_EDIT_SAVE_SUCCESS,
                     delay: 3000,
                     positionY: 'bottom',
                     positionX: 'right',
@@ -113,7 +113,7 @@
         vm.createOrEditAccountRecord = function (accountRecord) {
             vm.currentAccountRecord = accountRecord;
             if (vm.currentAccountRecord == null) {
-                vm.currentAccountRecord = createNewAccountRecord("New Account Record");
+                vm.currentAccountRecord = createNewAccountRecord(AppLang.ACCOUNT_FIELD_NEW_REC);
             }
 
             vm.cancelObject = objectUtilService.cloneJsonObject(vm.currentAccountRecord);

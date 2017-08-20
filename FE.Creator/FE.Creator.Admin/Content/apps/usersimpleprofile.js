@@ -1,4 +1,6 @@
 ﻿$(function () {
+    loadApplicationTheme();
+
     $.ajax({
         url: "/api/custom/SystemUser/GetUserIdByUserLoginName",
         dataType: "json",
@@ -24,7 +26,28 @@
 
         return null;
     }
-
+    function applyTheme(theme) {
+        $("BODY").removeClass("skin-blue-light");
+        $("BODY").addClass(theme);
+       
+    }
+    function loadApplicationTheme() {
+        $.ajax({
+            url: "/api/objects/FindServiceObjectsByFilter/AppConfig/"
+               + ["systemTheme"].join(),
+            dataType: "json",
+            success: function (data) {
+                if (Array.isArray(data) && data.length == 1) {
+                    var theme = getServiceObjectPropertyValue(data[0], "systemTheme");
+                    if (theme != null
+                        && theme.value != null 
+                        && theme.value != "") {
+                        applyTheme(theme.value);
+                    }
+                }
+            }
+        });
+    }
     function loadUserRecentTasks() {
         $.ajax({
             url: "/api/objects/FindServiceObjectsByFilter/Task/"

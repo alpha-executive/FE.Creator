@@ -31,42 +31,42 @@
             vm.weatherstatus.push({
                 wsindex : 0,
                 cssclass: 'wi-day-sunny',
-                label: 'sunny' 
+                label: AppLang.DIARY_WEATHER_SUNNY
             });
             vm.weatherstatus.push({
                 wsindex: 1,
                 cssclass: 'wi-day-cloudy',
-                label: 'cloudy'
+                label: AppLang.DIARY_WEATHER_CLOUDY
             });
             vm.weatherstatus.push({
                 wsindex: 2,
                 cssclass: 'wi-day-cloudy-gusts',
-                label: 'cloudy gusts'
+                label: AppLang.DIARY_WEATHER_CLOUDY_GUSTS
             });
             vm.weatherstatus.push({
                 wsindex: 3,
                 cssclass: 'wi-day-cloudy-windy',
-                label: 'cloudy windy'
+                label: AppLang.DIARY_WEATHER_CLOUDY_WINDY
             });
             vm.weatherstatus.push({
                 wsindex: 4,
                 cssclass: 'wi-day-fog',
-                label: 'fog'
+                label: AppLang.DIARY_WEATHER_FOG
             });
             vm.weatherstatus.push({
                 wsindex: 5,
                 cssclass: 'wi-day-rain',
-                label: 'rain'
+                label: AppLang.DIARY_WEATHER_RAIN
             });
             vm.weatherstatus.push({
                 wsindex: 6,
                 cssclass: 'wi-day-windy',
-                label: 'windy'
+                label: AppLang.DIARY_WEATHER_WINDY
             });
             vm.weatherstatus.push({
                 wsindex: 7,
                 cssclass: 'wi-day-thunderstorm',
-                label: 'thunder storm'
+                label: AppLang.DIARY_WEATHER_STORM
             });
         }
         function init() {
@@ -104,7 +104,7 @@
         function createNewDiary(){
             var tempObj = {};
             tempObj.objectDefinitionId = vm.getObjectDefintionIdByName("Diary");
-            tempObj.objectName = 'Diary ' + (new Date()).toString();
+            tempObj.objectName = AppLang.DIARY_PREFIX_DIARY + (new Date()).toString();
 
             objectUtilService.addIntegerProperty(tempObj, "weatherStatus", 0);
             objectUtilService.addStringProperty(tempObj, "diaryContent", "&nbsp");
@@ -200,7 +200,7 @@
                 }
 
                 Notification.success({
-                    message: 'Change Saved!',
+                    message: AppLang.COMMON_EDIT_SAVE_SUCCESS,
                     delay: 3000,
                     positionY: 'bottom',
                     positionX: 'right',

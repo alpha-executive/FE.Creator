@@ -1,12 +1,12 @@
 ﻿@{
-    ViewBag.Title = "Photos Management";
+    ViewBag.Title = FE.Creator.Admin.lang.AppLang.IMAGEMGR_TITLE;
 }
 <div class="row">
     <div class="col-md-12" ng-app="ngObjectRepository" ng-controller="ImagesController as ctrl" ng-cloak>
         <div class="nav-tabs-custom">
             <ul class="nav nav-tabs">
-                <li class="active" ng-click="ctrl.switchTab(false)"><a aria-expanded="true" href="#allimages" data-toggle="tab">Images</a></li>
-                <li ng-click="ctrl.switchTab(true)"><a aria-expanded="false" href="#album" data-toggle="tab">album</a></li>
+                <li class="active" ng-click="ctrl.switchTab(false)"><a aria-expanded="true" href="#allimages" data-toggle="tab">@FE.Creator.Admin.lang.AppLang.IMAGEMGR_IMAGES</a></li>
+                <li ng-click="ctrl.switchTab(true)"><a aria-expanded="false" href="#album" data-toggle="tab">@FE.Creator.Admin.lang.AppLang.IMAGEMGR_ALBUM</a></li>
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="allimages">
@@ -73,13 +73,13 @@
                                     </div>
                                 </div>
                                 <div class="box-footer text-center" ng-if="ctrl.selectionImages.length % ctrl.pageSize == 0">
-                                    <a class="uppercase" href="javascript:void(0)" ng-click="ctrl.loadMoreSelectionImages(ctrl.currentalbum)">View More Images</a>
+                                    <a class="uppercase" href="javascript:void(0)" ng-click="ctrl.loadMoreSelectionImages(ctrl.currentalbum)">@FE.Creator.Admin.lang.AppLang.IMAGEMGR_VIEW_MORE_IMGS</a>
                                 </div>
                                 <div class="box-footer">
                                     <div class="mailbox-controls">
                                         <div class="btn-group">
-                                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveSelectedImagesToAlbum()"><i class="fa fa-save text-green"></i> Confirm</button>
-                                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelAlbumImageSelection()"><i class="fa fa-save text-green"></i> Cancel</button>
+                                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveSelectedImagesToAlbum()"><i class="fa fa-save text-green"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_CONFIRM</button>
+                                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelAlbumImageSelection()"><i class="fa fa-save text-green"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_CANCEL</button>
                                         </div>
                                     </div>
                                 </div>
@@ -92,13 +92,13 @@
                                 <div class="box-body">
                                     <form class="form-horizontal">
                                         <div class="form-group">
-                                            <label class="control-label col-sm-2"><i class="fa fa-tag"></i> album Name</label>
+                                            <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.IMAGEMGR_LBL_NAME</label>
                                             <div class="col-sm-10">
                                                 <input type="text" class="form-control" ng-model="ctrl.editingalbumObject.objectName" auto-focus />
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label col-sm-2"><i class="fa fa-tag"></i> album Type</label>
+                                            <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.IMAGEMGR_LBL_TYPE</label>
                                             <div class="col-sm-10">
                                                 <select tabindex="-1" class="form-control select2 select2-hidden-accessible" style="width: 100%;"  ng-model="ctrl.editingalbumObject.properties.imageCategoryType.value" convert-to-number>
                                                     <option ng-repeat="opt in ctrl.albumTypes" value="{{opt.typeValue}}">{{opt.typeName}}</option>
@@ -107,19 +107,19 @@
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label col-sm-2">
-                                                <i class="fa fa-tag"></i> Shared
+                                                <i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.IMAGEMGR_LBL_SHARED
                                             </label>
                                             <div class="col-sm-10">
                                                 <div class="form-control">
-                                                    <input type="radio" ng-model="ctrl.editingalbumObject.properties.categorySharedLevel.value" ng-value="0" ng-checked="ctrl.editingalbumObject.properties.categorySharedLevel.value == 0" /> Private
-                                                    <input type="radio" ng-model="ctrl.editingalbumObject.properties.categorySharedLevel.value" ng-value="1" ng-checked="ctrl.editingalbumObject.properties.categorySharedLevel.value == 1" /> Shared
+                                                    <input type="radio" ng-model="ctrl.editingalbumObject.properties.categorySharedLevel.value" ng-value="0" ng-checked="ctrl.editingalbumObject.properties.categorySharedLevel.value == 0" /> @FE.Creator.Admin.lang.AppLang.IMAGEMGR_RDO_PRIVATE
+                                                    <input type="radio" ng-model="ctrl.editingalbumObject.properties.categorySharedLevel.value" ng-value="1" ng-checked="ctrl.editingalbumObject.properties.categorySharedLevel.value == 1" /> @FE.Creator.Admin.lang.AppLang.IMAGEMGR_RDO_SHARED
                                                 </div>
                                             </div>
                                         </div>
                                         <ul class="list-inline">
                                             <li class="pull-right">
-                                                <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveEditingalbum()"><i class="fa fa-save"></i> Save</button>
-                                                <button class="btn btn-box-tool" type="button" ng-click="ctrl.canceEditingalbum()"><i class="fa fa-close "></i> Cancel</button>
+                                                <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveEditingalbum()"><i class="fa fa-save"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_SAVE</button>
+                                                <button class="btn btn-box-tool" type="button" ng-click="ctrl.canceEditingalbum()"><i class="fa fa-close "></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_CANCEL</button>
                                             </li>
                                         </ul>
                                     </form>
@@ -155,7 +155,7 @@
                         <div class="row" ng-if="ctrl.displayMode ==='standardImageList'">
                             @Html.Partial("~/Views/AngularView/Client/Photos/ImageList.cshtml")
                             <div class="box-footer text-center" ng-if="(ctrl.currentalbum.viewIndex - 1) * ctrl.pageSize < ctrl.images.length">
-                                <a class="uppercase" href="javascript:void(0)" ng-click="ctrl.loadMoreAlbumImages()">View More Images</a>
+                                <a class="uppercase" href="javascript:void(0)" ng-click="ctrl.loadMoreAlbumImages()">@FE.Creator.Admin.lang.AppLang.IMAGEMGR_VIEW_MORE_IMGS</a>
                             </div>
                         </div>
                         <!--end ng-if="ctrl.displayMode ==='standardImageList'"-->

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Post Management";
+    ViewBag.Title = FE.Creator.Admin.lang.AppLang.POST_TITLE;
 }
 <div class="row" ng-app="ngObjectRepository" ng-controller="ArticleController as ctrl">
     <div class="col-md-12">
@@ -10,7 +10,7 @@
                     <li class="messages-menu" ng-class="{'tab-active' : ctrl.currentArticleGroup == null}">
                         <a href="javascript:void(0);" ng-click="ctrl.switchArticleGroup(null)">
                             <i class="fa fa-lightbulb-o"></i>
-                            All Posts
+                            @FE.Creator.Admin.lang.AppLang.POST_ALL_POSTS
                         </a>
                     </li>
                     <!-- Tasks: style can be found in dropdown.less -->
@@ -23,16 +23,16 @@
                 </ul>
                 <div class="box-tools" ng-if="ctrl.displayMode == 'articleList'" >
                     <button class="btn btn-box-tool" type="button" ng-click="ctrl.createOrEditArticle(null)">
-                        <i class="fa fa-plus text-green"></i> New Post
+                        <i class="fa fa-plus text-green"></i> @FE.Creator.Admin.lang.AppLang.POST_NEW_POST
                     </button>
                     <button class="btn btn-box-tool" type="button" ng-click="ctrl.createOrEditArticleGroup(null)">
-                        <i class="fa fa-plus text-primary"></i> Add Group
+                        <i class="fa fa-plus text-primary"></i> @FE.Creator.Admin.lang.AppLang.POST_ADD_GROUP
                     </button>
                     <button class="btn btn-box-tool" type="button" ng-if="ctrl.currentArticleGroup != null" ng-click="ctrl.createOrEditArticleGroup(ctrl.currentArticleGroup)">
-                        <i class="fa fa-pencil text-blue"></i> Edit Group
+                        <i class="fa fa-pencil text-blue"></i> @FE.Creator.Admin.lang.AppLang.POST_EDIT_GROUP
                     </button>
                     <button class="btn btn-box-tool" type="button" ng-if="ctrl.currentArticleGroup != null" ng-click="ctrl.deleteArticleGroup(ctrl.currentArticleGroup)">
-                        <i class="fa fa-trash text-red"></i> Delete Group
+                        <i class="fa fa-trash text-red"></i> @FE.Creator.Admin.lang.AppLang.POST_DELETE_GROUP
                     </button>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                     <div class="box-body">
                         <form class="form-horizontal">
                             <div class="form-group">
-                                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Title</label>
+                                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.POST_LBL_TITLE</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" ng-model="ctrl.currentEditingArticle.objectName" />
                                 </div>
@@ -61,7 +61,7 @@
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <button class="btn btn-warning" type="file" ngf-select="ctrl.uploadFiles($file, $invalidFiles,ctrl.currentEditingArticle.properties.articleImage)" ngf-max-size="10MB">
-                                        <i class="fa fa-upload"></i> Upload Post Image <i class="fa fa-refresh fa-spin text-green" ng-if="ctrl.f.showprogress"></i>
+                                        <i class="fa fa-upload"></i> @FE.Creator.Admin.lang.AppLang.POST_BTN_UPLOAD_IMG <i class="fa fa-refresh fa-spin text-green" ng-if="ctrl.f.showprogress"></i>
                                     </button><span class="message">{{ctrl.errorMsg}}</span>
                                     <br />
                                     <br />
@@ -78,7 +78,7 @@
                             </div>
                             <div class="form-group">
                                 <label class="control-label col-md-2">
-                                    <i class="fa fa-heart-o"></i> Introduction
+                                    <i class="fa fa-heart-o"></i> @FE.Creator.Admin.lang.AppLang.POST_LBL_INTRODUCTION
                                 </label>
                                 <div class="col-md-10">
                                     <textarea id="articleDesc" class="form-control" ng-model="ctrl.currentEditingArticle.properties.articleDesc.value" rows="3"></textarea>
@@ -87,30 +87,30 @@
                             <div class="form-group">
                                 <div class="col-md-6">
                                     <label class="control-label col-sm-4">
-                                        <i class="fa fa-shared"></i> Shared
+                                        <i class="fa fa-shared"></i> @FE.Creator.Admin.lang.AppLang.POST_LBL_SHARED
                                     </label>
                                     <div class="col-sm-8">
                                         <div class="form-control">
-                                            <input type="radio" ng-model="ctrl.currentEditingArticle.properties.articleSharedLevel.value" ng-value="0" ng-checked="ctrl.currentEditingArticle.properties.articleSharedLevel.value == 0" /> Private
-                                            <input type="radio" ng-model="ctrl.currentEditingArticle.properties.articleSharedLevel.value" ng-value="1" ng-checked="ctrl.currentEditingArticle.properties.articleSharedLevel.value == 1" /> Shared
+                                            <input type="radio" ng-model="ctrl.currentEditingArticle.properties.articleSharedLevel.value" ng-value="0" ng-checked="ctrl.currentEditingArticle.properties.articleSharedLevel.value == 0" /> @FE.Creator.Admin.lang.AppLang.POST_RDO_PRIVATE
+                                            <input type="radio" ng-model="ctrl.currentEditingArticle.properties.articleSharedLevel.value" ng-value="1" ng-checked="ctrl.currentEditingArticle.properties.articleSharedLevel.value == 1" /> @FE.Creator.Admin.lang.AppLang.POST_RDO_SHARED
                                         </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label class="control-label col-sm-4">
-                                        <i class="fa fa-heart-o"></i> Is Original
+                                        <i class="fa fa-heart-o"></i> @FE.Creator.Admin.lang.AppLang.POST_LBL_ISORIGINAL
                                     </label>
                                     <div class="col-sm-8">
                                         <div class="form-control">
-                                            <input type="radio" ng-model="ctrl.currentEditingArticle.properties.isOriginal.value" ng-value="0" ng-checked="ctrl.currentEditingArticle.properties.isOriginal.value == 0" /> Private
-                                            <input type="radio" ng-model="ctrl.currentEditingArticle.properties.isOriginal.value" ng-value="1" ng-checked="ctrl.currentEditingArticle.properties.isOriginal.value == 1" /> Shared
+                                            <input type="radio" ng-model="ctrl.currentEditingArticle.properties.isOriginal.value" ng-value="0" ng-checked="ctrl.currentEditingArticle.properties.isOriginal.value == 0" /> @FE.Creator.Admin.lang.AppLang.POST_RDO_YES
+                                            <input type="radio" ng-model="ctrl.currentEditingArticle.properties.isOriginal.value" ng-value="1" ng-checked="ctrl.currentEditingArticle.properties.isOriginal.value == 1" /> @FE.Creator.Admin.lang.AppLang.POST_RDO_NO
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group margin-bottom">
                                 <label class="control-label col-md-2">
-                                    <i class="fa fa-heart-o"></i> Content
+                                    <i class="fa fa-heart-o"></i> @FE.Creator.Admin.lang.AppLang.POST_LBL_CONTENT
                                 </label>
                                 <div class="col-md-10">
                                     <textarea id="articleEditor" ng-bind-html="ctrl.currentEditingArticle.properties.articleContent.value"></textarea>
@@ -118,10 +118,10 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12 text-center">
-                                    <button class="btn btn-success" type="button" ng-click="ctrl.saveArticle()"><i class="fa fa-save"></i> Save</button>
-                                    <button class="btn btn-default" type="button" ng-click="ctrl.cancelArticleEditing()"><i class="fa fa-close "></i> Cancel</button>
-                                    <button class="btn btn-primary" type="button" ng-click="ctrl.viewArticle(ctrl.currentEditingArticle)"><i class="fa fa-search"></i> Preview</button>
-                                    <button class="btn btn-warning" type="button" ng-click="ctrl.return2List()"><i class="fa fa-reply"></i> Return to List</button>
+                                    <button class="btn btn-success" type="button" ng-click="ctrl.saveArticle()"><i class="fa fa-save"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_SAVE</button>
+                                    <button class="btn btn-default" type="button" ng-click="ctrl.cancelArticleEditing()"><i class="fa fa-close "></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_CANCEL</button>
+                                    <button class="btn btn-primary" type="button" ng-click="ctrl.viewArticle(ctrl.currentEditingArticle)"><i class="fa fa-search"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_PREVIEW</button>
+                                    <button class="btn btn-warning" type="button" ng-click="ctrl.return2List()"><i class="fa fa-reply"></i> @FE.Creator.Admin.lang.AppLang.POST_BTN_RETURN_TO_LIST</button>
                                 </div>
                             </div>
                         </form>

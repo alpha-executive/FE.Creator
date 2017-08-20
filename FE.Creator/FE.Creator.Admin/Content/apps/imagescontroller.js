@@ -47,15 +47,15 @@
 
         function initalbumTypes() {
             vm.albumTypes.push({
-                typeName: "Standard List",
+                typeName: AppLang.IMAGEMGR_STD_LIST,
                 typeValue: 1
             });
             vm.albumTypes.push({
-                typeName: "Slide Show",
+                typeName:  AppLang.IMAGEMGR_SLD_SHOW,
                 typeValue: 2
             });
             vm.albumTypes.push({
-                typeName: "Walter Flow",
+                typeName: AppLang.IMAGEMGR_WATER_FLOW,
                 typeValue: 3
             });
         }
@@ -256,7 +256,7 @@
         vm.createOrEditImagealbum = function (album) {
             var svcObj = null;
             if (album == null) {
-                svcObj = createalbumServiceObject("New album");
+                svcObj = createalbumServiceObject(AppLang.IMAGEMGR_NEW_ALBUM);
             }
             else {
                 svcObj = album;
@@ -272,7 +272,7 @@
         vm.createOrEditImage = function (image) {
             var svcObj = null;
             if (image == null) {
-                svcObj = createImageServiceObject(vm.DEFAULT_IMAGE_album, "New Image");
+                svcObj = createImageServiceObject(vm.DEFAULT_IMAGE_album, AppLang.IMAGEMGR_NEW_IMAGE);
             }
             else {
                 svcObj = image;
@@ -315,7 +315,7 @@
                         vm.displayMode = getAlbumDisplayMode(vm.currentalbum);
 
                         Notification.success({
-                            message: 'Change Saved!',
+                            message: AppLang.COMMON_EDIT_SAVE_SUCCESS,
                             delay: 3000,
                             positionY: 'bottom',
                             positionX: 'right',
@@ -326,7 +326,7 @@
                 else {
                     //something error happend.
                     Notification.error({
-                        message: 'Change Faild: ' + data.toString(),
+                        message: AppLang.COMMON_EDIT_SAVE_FAILED + data.toString(),
                         delay: 5000,
                         positionY: 'bottom',
                         positionX: 'right',
@@ -362,7 +362,7 @@
 
                         vm.displayMode = "albumList";
                         Notification.success({
-                            message: 'Change Saved!',
+                            message: AppLang.COMMON_EDIT_SAVE_SUCCESS,
                             delay: 3000,
                             positionY: 'bottom',
                             positionX: 'right',
@@ -373,7 +373,7 @@
                 else {
                     //something error happend.
                     Notification.error({
-                        message: 'Change Faild: ' + data.toString(),
+                        message: AppLang.COMMON_EDIT_SAVE_FAILED + data.toString(),
                         delay: 5000,
                         positionY: 'bottom',
                         positionX: 'right',
@@ -494,7 +494,7 @@
                 }, function (response) {
                     errorCount += 1;
                     if (response.status > 0)
-                        vm.errorMsg = errorCount + " of " + totalfiles + " images was failed to be uploaded";
+                        vm.errorMsg = AppLang.getFormatString(IMAGEMGR_UPLOAD_ERR_MSG, [errorCount, totalfiles]);
                 }, function (evt) {
                 });
 

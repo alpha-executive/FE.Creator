@@ -167,7 +167,7 @@
 
         vm.createOrEditArticle = function (article) {
             if (article == null) {
-                var nArticle = createArticle("New Post");
+                var nArticle = createArticle(AppLang.POST_NEW_POST);
                 displayEditArticleView(nArticle);
             }
             else {
@@ -236,7 +236,7 @@
                 }
 
                 Notification.success({
-                    message: 'Change Saved!',
+                    message: AppLang.COMMON_EDIT_SAVE_SUCCESS,
                     delay: 3000,
                     positionY: 'bottom',
                     positionX: 'right',
@@ -278,7 +278,7 @@
 
         vm.createOrEditArticleGroup = function (articleGroup) {
             if (articleGroup == null) {
-                vm.currentArticleGroup = createArticleGroup("New Group");
+                vm.currentArticleGroup = createArticleGroup(AppLang.POST_NEW_GROUP);
             }
             else {
                 vm.currentArticleGroup = articleGroup;
@@ -303,7 +303,7 @@
                 //vm.groupDisplayMode = "groupList";
 
                 Notification.success({
-                    message: 'Change Saved!',
+                    message: AppLang.COMMON_EDIT_SAVE_SUCCESS,
                     delay: 3000,
                     positionY: 'bottom',
                     positionX: 'right',

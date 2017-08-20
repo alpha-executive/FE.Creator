@@ -195,6 +195,12 @@
         width:100%;
         height:300px;
     }
+   .theme-selector > .active-theme{
+        border:dashed 3px green;
+    }
+    .theme-selector > li{
+        border:dashed 3px #fff;
+    }
 }
 @media print {
     title *{

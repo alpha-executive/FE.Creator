@@ -228,6 +228,7 @@
     <Compile Include="Controllers\ApiControllers\SingleSelectionFieldItemController.cs" />
     <Compile Include="Controllers\ApiControllers\SystemUserController.cs" />
     <Compile Include="Controllers\ApiControllers\UniqueIDGeneratorController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ckEditorUploadController\FileUploadController.cs" />
     <Compile Include="Controllers\ViewController\AngularViewController.cs" />
     <Compile Include="Controllers\ApiControllers\GeneralObjectController.cs" />
@@ -239,6 +240,16 @@
     <Compile Include="Controllers\ViewController\PrintController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="lang\AppLang.zh-CN.Designer.cs">
+      <DependentUpon>AppLang.zh-CN.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="lang\AppLang.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppLang.resx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AngularViewModels.cs" />
@@ -1212,6 +1223,7 @@
     <Content Include="Content\angularjs\angular-messages.min.js" />
     <Content Include="Content\angularjs\angular-sanitize.min.js" />
     <Content Include="Content\apps\accountrecordscontroller.js" />
+    <Content Include="Content\apps\appsettingscontroller.js" />
     <Content Include="Content\apps\apputilities.js" />
     <Content Include="Content\apps\articlecontroller.js" />
     <Content Include="Content\apps\css\angular-rating.css" />
@@ -1380,9 +1392,19 @@
     <Content Include="Content\adminlte-2.3.6\bootstrap\fonts\weathericons-regular-webfont.ttf" />
     <Content Include="Content\adminlte-2.3.6\bootstrap\fonts\weathericons-regular-webfont.woff" />
     <Content Include="Content\adminlte-2.3.6\bootstrap\fonts\weathericons-regular-webfont.woff2" />
+    <EmbeddedResource Include="lang\AppLang.zh-CN.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppLang.zh-CN.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="lang\AppLang.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppLang.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="Properties\PublishProfiles\LocalIIS.pubxml" />
     <Content Include="Content\base\modernizr-2.6.2.js" />
     <Content Include="Content\base\respond.min.js" />
+    <Content Include="lang\applang.en_us.js" />
+    <Content Include="lang\applang.zh_cn.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1473,7 +1495,9 @@
     <Content Include="Views\Print\PrintArticle.cshtml" />
     <Content Include="Views\AngularView\Server\Settings\AppSettingsIndex.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Base\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config">
       <SubType>Designer</SubType>

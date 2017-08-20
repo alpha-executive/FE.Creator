@@ -1,19 +1,19 @@
 ﻿@{
-    ViewBag.Title = "Documents Management";
+    ViewBag.Title = FE.Creator.Admin.lang.AppLang.DOCUMENT_TITLE;
 }
 
 <div class="box box-primary" ng-app="ngObjectRepository" ng-controller="DocumentController as ctrl">
     <div class="box-header primary with-border">
         <div class="mailbox-controls">
             <div class="btn-group">
-                <button class="btn btn-box-tool" type="button" ng-click="ctrl.directorEditing(null)"><i class="fa fa-folder text-green"></i>  +Folder</button>
-                <button class="btn btn-box-tool" type="button" ng-click="ctrl.documentEditing(null)"><i class="fa fa-file text-green"></i> +Document</button>
-                <button class="btn btn-box-tool" ng-click="ctrl.setViewMode('listView')"><i class="fa fa-list text-primary"></i> List View</button>
-                <button class="btn btn-box-tool" ng-click="ctrl.setViewMode('gridView')"><i class="fa fa-th text-primary"></i> Grid View</button>
+                <button class="btn btn-box-tool" type="button" ng-click="ctrl.directorEditing(null)"><i class="fa fa-folder text-green"></i>  @FE.Creator.Admin.lang.AppLang.DOCUMENT_ADD_FOLDER</button>
+                <button class="btn btn-box-tool" type="button" ng-click="ctrl.documentEditing(null)"><i class="fa fa-file text-green"></i> @FE.Creator.Admin.lang.AppLang.DOCUMENT_ADD_DOCUMENT</button>
+                <button class="btn btn-box-tool" ng-click="ctrl.setViewMode('listView')"><i class="fa fa-list text-primary"></i> @FE.Creator.Admin.lang.AppLang.DOCUMENT_LIST_VIEW</button>
+                <button class="btn btn-box-tool" ng-click="ctrl.setViewMode('gridView')"><i class="fa fa-th text-primary"></i> @FE.Creator.Admin.lang.AppLang.DOCUMENT_GRID_VIEW</button>
             </div>
             <div class="pull-right">
                 <div class="has-feedback">
-                    <input class="form-control input-sm" type="text" ng-model="ctrl.searchText" placeholder="Search Documents">
+                    <input class="form-control input-sm" type="text" ng-model="ctrl.searchText" placeholder="@FE.Creator.Admin.lang.AppLang.DOCUMENT_SEARCH_TEXT_PLH">
                     <span class="glyphicon glyphicon-search form-control-feedback"></span>
                 </div>
             </div>
@@ -34,15 +34,15 @@
                         <form class="form-horizontal">
                             <div class="box-body">
                                 <div class="form-group">
-                                    <label class="control-label col-sm-2"><i class="fa fa-tag"></i>Folder Name </label>
+                                    <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.DOCUMENT_EDIT_FOLDER_NAME</label>
                                     <div class="col-sm-10">
                                         <input type="text" class="form-control" ng-model="ctrl.currentEditingDirectory.objectName" auto-focus />
                                     </div>
                                 </div>
                                 <ul class="list-inline">
                                     <li class="pull-right">
-                                        <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveDirectory()"><i class="fa fa-save"></i> Save</button>
-                                        <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelDirectoryEdit()"><i class="fa fa-close "></i> Cancel</button>
+                                        <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveDirectory()"><i class="fa fa-save"></i> @FE.Creator.Admin.lang.AppLang.DOCUMENT_BTN_SAVE</button>
+                                        <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelDirectoryEdit()"><i class="fa fa-close "></i> @FE.Creator.Admin.lang.AppLang.DOCUMENT_BTN_CANCEL</button>
                                     </li>
                                 </ul>
                             </div>
@@ -58,7 +58,7 @@
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button class="btn btn-warning" type="file" ngf-select="ctrl.uploadFiles($file, $invalidFiles,ctrl.currentEditingDocument)" ngf-max-height="1000" ngf-max-size="100MB">
-                                    <i class="fa fa-upload"></i> Upload File <i class="fa fa-refresh fa-spin text-green" ng-if="ctrl.f.showprogress"></i>
+                                    <i class="fa fa-upload"></i> @FE.Creator.Admin.lang.AppLang.DOCUMENT_BTN_UPLOAD <i class="fa fa-refresh fa-spin text-green" ng-if="ctrl.f.showprogress"></i>
                                 </button><span class="message">{{ctrl.errorMsg}}</span>
                                 <br />
                                 <br />
@@ -74,14 +74,14 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="control-label col-sm-2"><i class="fa fa-tag"></i> File Name</label>
+                            <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.DOCUMENT_LBL_FILENAME</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" ng-model="ctrl.currentEditingDocument.objectName" auto-focus />
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">
-                                <i class="fa fa-tag"></i> Version
+                                <i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.DOCUMENT_LBL_VERSION
                             </label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" ng-model="ctrl.currentEditingDocument.properties.documentVersion.value" />
@@ -89,19 +89,19 @@
                         </div>
                         <div class="form-group">
                             <label class="control-label col-sm-2">
-                                <i class="fa fa-tag"></i> Shared
+                                <i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.DOCUMENT_LBL_SHARED
                             </label>
                             <div class="col-sm-10">
                                 <div class="form-control">
-                                    <input type="radio" ng-model="ctrl.currentEditingDocument.properties.documentSharedLevel.value" ng-value="0" ng-checked="ctrl.currentEditingDocument.properties.documentSharedLevel.value == 0" /> Private
-                                    <input type="radio" ng-model="ctrl.currentEditingDocument.properties.documentSharedLevel.value" ng-value="1" ng-checked="ctrl.currentEditingDocument.properties.documentSharedLevel.value == 1" /> Shared
+                                    <input type="radio" ng-model="ctrl.currentEditingDocument.properties.documentSharedLevel.value" ng-value="0" ng-checked="ctrl.currentEditingDocument.properties.documentSharedLevel.value == 0" /> @FE.Creator.Admin.lang.AppLang.DOCUMENT_RDO_PRIVATE
+                                    <input type="radio" ng-model="ctrl.currentEditingDocument.properties.documentSharedLevel.value" ng-value="1" ng-checked="ctrl.currentEditingDocument.properties.documentSharedLevel.value == 1" /> @FE.Creator.Admin.lang.AppLang.DOCUMENT_RDO_SHARED
                                 </div>
                             </div>
                         </div>
                         <ul class="list-inline">
                             <li class="pull-right">
-                                <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveDocument()"><i class="fa fa-save"></i> Save</button>
-                                <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelDocumentEdit()"><i class="fa fa-close "></i> Cancel</button>
+                                <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveDocument()"><i class="fa fa-save"></i> @FE.Creator.Admin.lang.AppLang.DOCUMENT_BTN_SAVE</button>
+                                <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelDocumentEdit()"><i class="fa fa-close "></i> @FE.Creator.Admin.lang.AppLang.DOCUMENT_BTN_CANCEL</button>
                             </li>
                         </ul>
                     </div>
@@ -113,11 +113,11 @@
                 <table class="table no-margin">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Modified</th>
-                            <th>Owner</th>
-                            <th>Size (KB)</th>
-                            <th style="text-align:right;">Action</th>
+                            <th>@FE.Creator.Admin.lang.AppLang.DOCUMENT_TH_NAME</th>
+                            <th>@FE.Creator.Admin.lang.AppLang.DOCUMENT_TH_MODIFIED</th>
+                            <th>@FE.Creator.Admin.lang.AppLang.DOCUMENT_TH_OWNER</th>
+                            <th>@FE.Creator.Admin.lang.AppLang.DOCUMENT_TH_SIZE_KB</th>
+                            <th style="text-align:right;">@FE.Creator.Admin.lang.AppLang.DOCUMENT_TH_ACTION</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -193,14 +193,14 @@
     <div class="box-footer">
         <div class="mailbox-controls">
             <div class="btn-group">
-                <button class="btn btn-box-tool" type="button" ng-click="ctrl.directorEditing(null)"><i class="fa fa-folder text-green"></i>  +Folder</button>
-                <button class="btn btn-box-tool" type="button" ng-click="ctrl.documentEditing(null)"><i class="fa fa-file text-green"></i> +Document</button>
-                <button class="btn btn-box-tool" ng-click="ctrl.setViewMode('listView')"><i class="fa fa-list text-primary"></i> List View</button>
-                <button class="btn btn-box-tool" ng-click="ctrl.setViewMode('gridView')"><i class="fa fa-th text-primary"></i> Grid View</button>
+                <button class="btn btn-box-tool" type="button" ng-click="ctrl.directorEditing(null)"><i class="fa fa-folder text-green"></i>  @FE.Creator.Admin.lang.AppLang.DOCUMENT_ADD_FOLDER</button>
+                <button class="btn btn-box-tool" type="button" ng-click="ctrl.documentEditing(null)"><i class="fa fa-file text-green"></i> @FE.Creator.Admin.lang.AppLang.DOCUMENT_ADD_DOCUMENT</button>
+                <button class="btn btn-box-tool" ng-click="ctrl.setViewMode('listView')"><i class="fa fa-list text-primary"></i> @FE.Creator.Admin.lang.AppLang.DOCUMENT_LIST_VIEW</button>
+                <button class="btn btn-box-tool" ng-click="ctrl.setViewMode('gridView')"><i class="fa fa-th text-primary"></i> @FE.Creator.Admin.lang.AppLang.DOCUMENT_GRID_VIEW</button>
             </div>
             <div class="pull-right">
                 <div class="has-feedback">
-                    <input class="form-control input-sm" type="text" ng-model="ctrl.searchText" placeholder="Search Documents">
+                    <input class="form-control input-sm" type="text" ng-model="ctrl.searchText" placeholder="@FE.Creator.Admin.lang.AppLang.DOCUMENT_SEARCH_TEXT_PLH">
                     <span class="glyphicon glyphicon-search form-control-feedback"></span>
                 </div>
                 <!-- /.btn-group -->

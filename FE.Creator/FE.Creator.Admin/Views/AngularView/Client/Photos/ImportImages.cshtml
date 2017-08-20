@@ -2,7 +2,7 @@
     @Html.Partial("~/Views/AngularView/Client/Common/Progress.cshtml")
     <div class="alert alert-danger alert-dismissible" ng-if="ctrl.errorMsg != null">
         <button class="close" aria-hidden="true" type="button" data-dismiss="alert">×</button>
-        <h4><i class="icon fa fa-ban"></i> Alert!</h4>
+        <h4><i class="icon fa fa-ban"></i> @FE.Creator.Admin.lang.AppLang.IMAGEMGR_ERR_ALERT</h4>
         {{ctrl.errorMsg}}
     </div>
 </div>

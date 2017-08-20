@@ -2,14 +2,14 @@
     <div class="box-body no-border">
         <form class="form-horizontal">
             <div class="form-group">
-                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Task Name</label>
+                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.TASKMGR_LBL_TASKNAME</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" ng-model="ctrl.currentTask.objectName" auto-focus />
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">
-                    <i class="fa fa-tag"></i> Description
+                    <i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.TASKMGR_LBL_DESC
                 </label>
                 <div class="col-sm-10">
                     <textarea rows="3" class="form-control" ng-model="ctrl.currentTask.properties.taskDesc.value"></textarea>
@@ -17,19 +17,19 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">
-                    <i class="fa fa-tag"></i> Task Type
+                    <i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.TASKMGR_LBL_TASKTYPE
                 </label>
                 <div class="col-sm-10">
                     <div class="form-control">
-                        <input type="radio" ng-model="ctrl.currentTask.properties.taskType.value" ng-value="0" ng-checked="ctrl.currentTask.properties.taskType.value == 0" /> Important
-                        <input type="radio" ng-model="ctrl.currentTask.properties.taskType.value" ng-value="1" ng-checked="ctrl.currentTask.properties.taskType.value == 1" /> Medium
-                        <input type="radio" ng-model="ctrl.currentTask.properties.taskType.value" ng-value="2" ng-checked="ctrl.currentTask.properties.taskType.value == 2" /> Low
+                        <input type="radio" ng-model="ctrl.currentTask.properties.taskType.value" ng-value="0" ng-checked="ctrl.currentTask.properties.taskType.value == 0" /> @FE.Creator.Admin.lang.AppLang.TASKMGR_RDO_IMPORTANT
+                        <input type="radio" ng-model="ctrl.currentTask.properties.taskType.value" ng-value="1" ng-checked="ctrl.currentTask.properties.taskType.value == 1" /> @FE.Creator.Admin.lang.AppLang.TASKMGR_RDO_MEDIUM
+                        <input type="radio" ng-model="ctrl.currentTask.properties.taskType.value" ng-value="2" ng-checked="ctrl.currentTask.properties.taskType.value == 2" /> @FE.Creator.Admin.lang.AppLang.TASKMGR_RDO_LOW
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">
-                    <i class="fa fa-tag"></i> Start Date
+                    <i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.TASKMGR_LBL_STARTDATE
                 </label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control field-datepicker" ng-model="ctrl.currentTask.properties.taskStartDate.value" />
@@ -37,7 +37,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">
-                    <i class="fa fa-tag"></i> End Date
+                    <i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.TASKMGR_LBL_ENDDATE
                 </label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control field-datepicker" ng-model="ctrl.currentTask.properties.taskExpEndDate.value" />
@@ -45,17 +45,15 @@
             </div>
             <ul class="list-inline">
                 <li class="pull-right">
-                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveTask()"><i class="fa fa-save"></i> Save</button>
-                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelTask()"><i class="fa fa-close "></i> Cancel</button>
+                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveTask()"><i class="fa fa-save"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_SAVE</button>
+                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelTask()"><i class="fa fa-close "></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_CANCEL</button>
                 </li>
             </ul>
         </form>
     </div>
 </div>
 <script type="text/javascript">
-                                $(function () {
-                                    $(".field-datepicker").datepicker({
-                                       autoclose : true
-                                    })
-                                });
+    $(function () {
+        applySystemDateFormat();
+    });
 </script>
