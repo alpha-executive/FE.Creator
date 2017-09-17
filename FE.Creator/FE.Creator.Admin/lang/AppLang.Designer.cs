@@ -223,6 +223,60 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DateTime Format.
+        /// </summary>
+        public static string APPSETTINGS_DATEFMT {
+            get {
+                return ResourceManager.GetString("APPSETTINGS_DATEFMT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        public static string APPSETTINGS_LANG {
+            get {
+                return ResourceManager.GetString("APPSETTINGS_LANG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provider URL.
+        /// </summary>
+        public static string APPSETTINGS_PROVIDER_URL {
+            get {
+                return ResourceManager.GetString("APPSETTINGS_PROVIDER_URL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pull Message.
+        /// </summary>
+        public static string APPSETTINGS_PULLMSG {
+            get {
+                return ResourceManager.GetString("APPSETTINGS_PULLMSG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to System Theme.
+        /// </summary>
+        public static string APPSETTINGS_THEME {
+            get {
+                return ResourceManager.GetString("APPSETTINGS_THEME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to App Settings.
+        /// </summary>
+        public static string APPSETTINGS_TITLE {
+            get {
+                return ResourceManager.GetString("APPSETTINGS_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to +Book.
         /// </summary>
         public static string BOOK_ADD_BOOK {
@@ -367,6 +421,15 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string COMMON_BTN_ADD {
+            get {
+                return ResourceManager.GetString("COMMON_BTN_ADD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string COMMON_BTN_CANCEL {
@@ -417,6 +480,24 @@ namespace FE.Creator.Admin.lang {
         public static string COMMON_BTN_SAVE {
             get {
                 return ResourceManager.GetString("COMMON_BTN_SAVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        public static string COMMON_LBL_NO {
+            get {
+                return ResourceManager.GetString("COMMON_LBL_NO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        public static string COMMON_LBL_YES {
+            get {
+                return ResourceManager.GetString("COMMON_LBL_YES", resourceCulture);
             }
         }
         
@@ -1258,6 +1339,240 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Upload Your License.
+        /// </summary>
+        public static string LICMGR_BTN_UPLOADLIC {
+            get {
+                return ResourceManager.GetString("LICMGR_BTN_UPLOADLIC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string LICMGR_COL_DESC {
+            get {
+                return ResourceManager.GetString("LICMGR_COL_DESC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expired Date.
+        /// </summary>
+        public static string LICMGR_COL_EXPIRED {
+            get {
+                return ResourceManager.GetString("LICMGR_COL_EXPIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Module ID.
+        /// </summary>
+        public static string LICMGR_COL_ID {
+            get {
+                return ResourceManager.GetString("LICMGR_COL_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Licensed.
+        /// </summary>
+        public static string LICMGR_COL_LSD {
+            get {
+                return ResourceManager.GetString("LICMGR_COL_LSD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Module Name.
+        /// </summary>
+        public static string LICMGR_COL_NAME {
+            get {
+                return ResourceManager.GetString("LICMGR_COL_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Modules in System.
+        /// </summary>
+        public static string LICMGR_LBL_MODULES {
+            get {
+                return ResourceManager.GetString("LICMGR_LBL_MODULES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to License Management.
+        /// </summary>
+        public static string LICMGR_TITLE {
+            get {
+                return ResourceManager.GetString("LICMGR_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        public static string LOGIN_BTN_REGISTER {
+            get {
+                return ResourceManager.GetString("LOGIN_BTN_REGISTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send Email.
+        /// </summary>
+        public static string LOGIN_BTN_SENDEMAIL {
+            get {
+                return ResourceManager.GetString("LOGIN_BTN_SENDEMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sign in using Google+.
+        /// </summary>
+        public static string LOGIN_BTN_SIGNGOOGLE {
+            get {
+                return ResourceManager.GetString("LOGIN_BTN_SIGNGOOGLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sign In.
+        /// </summary>
+        public static string LOGIN_BTN_SIGNIN {
+            get {
+                return ResourceManager.GetString("LOGIN_BTN_SIGNIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sign in using Microsoft Account.
+        /// </summary>
+        public static string LOGIN_BTN_SIGNMICROSOFT {
+            get {
+                return ResourceManager.GetString("LOGIN_BTN_SIGNMICROSOFT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your email.
+        /// </summary>
+        public static string LOGIN_ENTER_EMAIL {
+            get {
+                return ResourceManager.GetString("LOGIN_ENTER_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forgot your password?.
+        /// </summary>
+        public static string LOGIN_FORGET_PASS_MSG {
+            get {
+                return ResourceManager.GetString("LOGIN_FORGET_PASS_MSG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I agree to the &lt;a href=&quot;#&quot;&gt;terms&lt;/a&gt;.
+        /// </summary>
+        public static string LOGIN_LBL_AGREE_TERM {
+            get {
+                return ResourceManager.GetString("LOGIN_LBL_AGREE_TERM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I already have a membership.
+        /// </summary>
+        public static string LOGIN_LBL_ALREADY_MEMBER {
+            get {
+                return ResourceManager.GetString("LOGIN_LBL_ALREADY_MEMBER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm Password.
+        /// </summary>
+        public static string LOGIN_LBL_CONFIRMPASS {
+            get {
+                return ResourceManager.GetString("LOGIN_LBL_CONFIRMPASS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string LOGIN_LBL_EMAIL {
+            get {
+                return ResourceManager.GetString("LOGIN_LBL_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I forgot my password.
+        /// </summary>
+        public static string LOGIN_LBL_FOGETPASS {
+            get {
+                return ResourceManager.GetString("LOGIN_LBL_FOGETPASS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Passowrd.
+        /// </summary>
+        public static string LOGIN_LBL_PASS {
+            get {
+                return ResourceManager.GetString("LOGIN_LBL_PASS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register a new membership.
+        /// </summary>
+        public static string LOGIN_LBL_REGISTERNEW {
+            get {
+                return ResourceManager.GetString("LOGIN_LBL_REGISTERNEW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remember Me.
+        /// </summary>
+        public static string LOGIN_LBL_REMBERME {
+            get {
+                return ResourceManager.GetString("LOGIN_LBL_REMBERME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid User name or Password.
+        /// </summary>
+        public static string LOGIN_MSG_INVALIDUSER {
+            get {
+                return ResourceManager.GetString("LOGIN_MSG_INVALIDUSER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sign in to start your session.
+        /// </summary>
+        public static string LOGIN_START_MSG {
+            get {
+                return ResourceManager.GetString("LOGIN_START_MSG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log in.
+        /// </summary>
+        public static string LOGIN_TITLE {
+            get {
+                return ResourceManager.GetString("LOGIN_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Group.
         /// </summary>
         public static string POST_ADD_GROUP {
@@ -1456,6 +1771,411 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Address.
+        /// </summary>
+        public static string PROFILE_ADDRESS {
+            get {
+                return ResourceManager.GetString("PROFILE_ADDRESS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Birth Date.
+        /// </summary>
+        public static string PROFILE_BIRTH_DATE {
+            get {
+                return ResourceManager.GetString("PROFILE_BIRTH_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile.
+        /// </summary>
+        public static string PROFILE_BTN_PROFILE {
+            get {
+                return ResourceManager.GetString("PROFILE_BTN_PROFILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sign out.
+        /// </summary>
+        public static string PROFILE_BTN_SIGNOUT {
+            get {
+                return ResourceManager.GetString("PROFILE_BTN_SIGNOUT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload Image.
+        /// </summary>
+        public static string PROFILE_BTN_UPLOADIMG {
+            get {
+                return ResourceManager.GetString("PROFILE_BTN_UPLOADIMG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Building.
+        /// </summary>
+        public static string PROFILE_BUILDING {
+            get {
+                return ResourceManager.GetString("PROFILE_BUILDING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to City.
+        /// </summary>
+        public static string PROFILE_CITY {
+            get {
+                return ResourceManager.GetString("PROFILE_CITY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company.
+        /// </summary>
+        public static string PROFILE_COMPANY {
+            get {
+                return ResourceManager.GetString("PROFILE_COMPANY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company Url.
+        /// </summary>
+        public static string PROFILE_COMPANYURL {
+            get {
+                return ResourceManager.GetString("PROFILE_COMPANYURL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact.
+        /// </summary>
+        public static string PROFILE_CONTACT {
+            get {
+                return ResourceManager.GetString("PROFILE_CONTACT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Country.
+        /// </summary>
+        public static string PROFILE_COUNTRY {
+            get {
+                return ResourceManager.GetString("PROFILE_COUNTRY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Degree.
+        /// </summary>
+        public static string PROFILE_DEGREE {
+            get {
+                return ResourceManager.GetString("PROFILE_DEGREE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Education.
+        /// </summary>
+        public static string PROFILE_EDUCATION {
+            get {
+                return ResourceManager.GetString("PROFILE_EDUCATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string PROFILE_EMAIL {
+            get {
+                return ResourceManager.GetString("PROFILE_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End Date.
+        /// </summary>
+        public static string PROFILE_ENDDATE {
+            get {
+                return ResourceManager.GetString("PROFILE_ENDDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enroll Date.
+        /// </summary>
+        public static string PROFILE_ENROLL_DATE {
+            get {
+                return ResourceManager.GetString("PROFILE_ENROLL_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exit Date.
+        /// </summary>
+        public static string PROFILE_EXIT_DATE {
+            get {
+                return ResourceManager.GetString("PROFILE_EXIT_DATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Facebook.
+        /// </summary>
+        public static string PROFILE_FACEBOOK {
+            get {
+                return ResourceManager.GetString("PROFILE_FACEBOOK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Female.
+        /// </summary>
+        public static string PROFILE_FEMALE {
+            get {
+                return ResourceManager.GetString("PROFILE_FEMALE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First Name.
+        /// </summary>
+        public static string PROFILE_FIRSTNAME {
+            get {
+                return ResourceManager.GetString("PROFILE_FIRSTNAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gender.
+        /// </summary>
+        public static string PROFILE_GENDER {
+            get {
+                return ResourceManager.GetString("PROFILE_GENDER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Grade.
+        /// </summary>
+        public static string PROFILE_GRADE {
+            get {
+                return ResourceManager.GetString("PROFILE_GRADE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID.
+        /// </summary>
+        public static string PROFILE_ID {
+            get {
+                return ResourceManager.GetString("PROFILE_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job Description.
+        /// </summary>
+        public static string PROFILE_JOBDESC {
+            get {
+                return ResourceManager.GetString("PROFILE_JOBDESC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Job Title.
+        /// </summary>
+        public static string PROFILE_JOBTITLE {
+            get {
+                return ResourceManager.GetString("PROFILE_JOBTITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Name.
+        /// </summary>
+        public static string PROFILE_LASTNAME {
+            get {
+                return ResourceManager.GetString("PROFILE_LASTNAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Level.
+        /// </summary>
+        public static string PROFILE_LEVEL {
+            get {
+                return ResourceManager.GetString("PROFILE_LEVEL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to LinkedIn.
+        /// </summary>
+        public static string PROFILE_LINKEDIN {
+            get {
+                return ResourceManager.GetString("PROFILE_LINKEDIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location.
+        /// </summary>
+        public static string PROFILE_LOCATION {
+            get {
+                return ResourceManager.GetString("PROFILE_LOCATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Male.
+        /// </summary>
+        public static string PROFILE_MALE {
+            get {
+                return ResourceManager.GetString("PROFILE_MALE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mobile Phone.
+        /// </summary>
+        public static string PROFILE_MOBPHONE {
+            get {
+                return ResourceManager.GetString("PROFILE_MOBPHONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other Contact.
+        /// </summary>
+        public static string PROFILE_OTHERCONTACT {
+            get {
+                return ResourceManager.GetString("PROFILE_OTHERCONTACT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PostCode.
+        /// </summary>
+        public static string PROFILE_POSTCODE {
+            get {
+                return ResourceManager.GetString("PROFILE_POSTCODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Province.
+        /// </summary>
+        public static string PROFILE_PROVINCE {
+            get {
+                return ResourceManager.GetString("PROFILE_PROVINCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to QQ.
+        /// </summary>
+        public static string PROFILE_QQ {
+            get {
+                return ResourceManager.GetString("PROFILE_QQ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to School.
+        /// </summary>
+        public static string PROFILE_SCHOOL {
+            get {
+                return ResourceManager.GetString("PROFILE_SCHOOL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string PROFILE_SKILLDESC {
+            get {
+                return ResourceManager.GetString("PROFILE_SKILLDESC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skill Name.
+        /// </summary>
+        public static string PROFILE_SKILLNAME {
+            get {
+                return ResourceManager.GetString("PROFILE_SKILLNAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skills.
+        /// </summary>
+        public static string PROFILE_SKILLS {
+            get {
+                return ResourceManager.GetString("PROFILE_SKILLS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Date.
+        /// </summary>
+        public static string PROFILE_STARTDATE {
+            get {
+                return ResourceManager.GetString("PROFILE_STARTDATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Street.
+        /// </summary>
+        public static string PROFILE_STREET {
+            get {
+                return ResourceManager.GetString("PROFILE_STREET", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Telephone.
+        /// </summary>
+        public static string PROFILE_TELEPHONE {
+            get {
+                return ResourceManager.GetString("PROFILE_TELEPHONE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twitter.
+        /// </summary>
+        public static string PROFILE_TWITTER {
+            get {
+                return ResourceManager.GetString("PROFILE_TWITTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WeChat.
+        /// </summary>
+        public static string PROFILE_WECHAT {
+            get {
+                return ResourceManager.GetString("PROFILE_WECHAT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Work Experience.
+        /// </summary>
+        public static string PROFILE_WKEXPRERIENCE {
+            get {
+                return ResourceManager.GetString("PROFILE_WKEXPRERIENCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Completed Date.
         /// </summary>
         public static string TASKMGR_LBL_COMP_DATE {
@@ -1623,6 +2343,96 @@ namespace FE.Creator.Admin.lang {
         public static string TASKMGR_TITLE {
             get {
                 return ResourceManager.GetString("TASKMGR_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile.
+        /// </summary>
+        public static string USERMGR_BTN_PROFILE {
+            get {
+                return ResourceManager.GetString("USERMGR_BTN_PROFILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset password.
+        /// </summary>
+        public static string USERMGR_BTN_RESETPASS {
+            get {
+                return ResourceManager.GetString("USERMGR_BTN_RESETPASS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Action.
+        /// </summary>
+        public static string USERMGR_COL_ACTION {
+            get {
+                return ResourceManager.GetString("USERMGR_COL_ACTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string USERMGR_COL_EMAIL {
+            get {
+                return ResourceManager.GetString("USERMGR_COL_EMAIL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string USERMGR_COL_STATUS {
+            get {
+                return ResourceManager.GetString("USERMGR_COL_STATUS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User ID.
+        /// </summary>
+        public static string USERMGR_COL_USERID {
+            get {
+                return ResourceManager.GetString("USERMGR_COL_USERID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string USERMGR_COL_USERNAME {
+            get {
+                return ResourceManager.GetString("USERMGR_COL_USERNAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Active.
+        /// </summary>
+        public static string USERMGR_LBL_ACTIVE {
+            get {
+                return ResourceManager.GetString("USERMGR_LBL_ACTIVE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Management.
+        /// </summary>
+        public static string USERMGR_TITLE {
+            get {
+                return ResourceManager.GetString("USERMGR_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Profile.
+        /// </summary>
+        public static string USERPROFILE_TITLE {
+            get {
+                return ResourceManager.GetString("USERPROFILE_TITLE", resourceCulture);
             }
         }
     }

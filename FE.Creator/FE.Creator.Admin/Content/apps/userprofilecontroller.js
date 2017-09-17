@@ -22,6 +22,43 @@
       .module('ngObjectRepository')
         .controller("EducationController", EducationController);
 
+    angular.module('ngObjectRepository').filter("formataddress", function () {
+        return function (address) {
+            if (address != null) {
+                var retaddr = "";
+                if (AppLang.lang == "English") {
+                    if (address.properties.address1.value != null)
+                        retaddr += address.properties.address1.value + ", ";
+                    if (address.properties.address.value != null)
+                        retaddr += address.properties.address.value + ", ";
+                    if (address.properties.postCode.value != null)
+                        retaddr += address.properties.postCode.value + " ";
+                    if (address.properties.city.value != null)
+                        retaddr += address.properties.city.value + ", ";
+                    if (address.properties.province.value != null)
+                        retaddr += address.properties.province.value + ", ";
+                    if (address.properties.country.value != null)
+                        retaddr += address.properties.country.value;
+                } else {
+                    if (address.properties.country.value != null)
+                        retaddr += address.properties.country.value;
+                    if (address.properties.province.value != null)
+                        retaddr += address.properties.province.value;
+                    if (address.properties.city.value != null)
+                        retaddr += address.properties.city.value;
+                    if (address.properties.address.value != null)
+                        retaddr += address.properties.address.value;
+                    if (address.properties.address1.value != null)
+                        retaddr += address.properties.address1.value;
+                    if (address.properties.postCode.value != null)
+                        retaddr += " " + address.properties.postCode.value;
+                }
+
+                return retaddr;
+            }
+        };
+    });
+
     BasicInfoController.$inject = ["$scope", "ObjectRepositoryDataService", "Notification", "PagerService", "objectUtilService", "Upload"];
     ContactController.$inject = ["$scope", "ObjectRepositoryDataService", "Notification", "PagerService", "objectUtilService"];
     AddressController.$inject = ["$scope", "ObjectRepositoryDataService", "Notification", "PagerService", "objectUtilService"];
@@ -129,7 +166,7 @@
                 function (data) {
                     if (data == null || data == "" || data.objectID != null) {
                         Notification.success({
-                            message: 'Change Saved!',
+                            message: AppLang.COMMON_EDIT_SAVE_SUCCESS,
                             delay: 3000,
                             positionY: 'bottom',
                             positionX: 'right',
@@ -145,7 +182,7 @@
                     else {
                         //something error happend.
                         Notification.error({
-                            message: 'Change Faild: ' + data.toString(),
+                            message: AppLang.getFormatString(AppLang.PROFILE_CHANGE_FAILED, [data.toString()]),
                             delay: 5000,
                             positionY: 'bottom',
                             positionX: 'right',
@@ -347,21 +384,21 @@
 
                     if (data != null && data != "" && data.objectID != null) {
                         Notification.success({
-                            message: 'Change Saved!',
+                            message: AppLang.COMMON_EDIT_SAVE_SUCCESS,
                             delay: 3000,
                             positionY: 'bottom',
                             positionX: 'right',
-                            title: 'Warn',
+                            title: AppLang.COMMON_DLG_TITLE_WARN,
                         });
                     }
                     else {
                         //something error happend.
                         Notification.error({
-                            message: 'Change Faild: ' + data.toString(),
+                            message: AppLang.COMMON_EDIT_SAVE_FAILED,
                             delay: 5000,
                             positionY: 'bottom',
                             positionX: 'right',
-                            title: 'Error'
+                            title: AppLang.COMMON_DLG_TITLE_ERROR
                         });
                     }
                 }
@@ -438,21 +475,21 @@
 
                     if (data != null && data != "" && data.objectID != null) {
                         Notification.success({
-                            message: 'Change Saved!',
+                            message: AppLang.COMMON_EDIT_SAVE_SUCCESS,
                             delay: 3000,
                             positionY: 'bottom',
                             positionX: 'right',
-                            title: 'Warn',
+                            title: AppLang.COMMON_DLG_TITLE_WARN,
                         });
                     }
                     else {
                         //something error happend.
                         Notification.error({
-                            message: 'Change Faild: ' + data.toString(),
+                            message: AppLang.getFormatString(AppLang.PROFILE_CHANGE_FAILED, [data.toString()]),
                             delay: 5000,
                             positionY: 'bottom',
                             positionX: 'right',
-                            title: 'Error'
+                            title: AppLang.COMMON_DLG_TITLE_ERROR
                         });
                     }
                 }
@@ -563,21 +600,21 @@
 
                     if (data != null && data != "" && data.objectID != null) {
                         Notification.success({
-                            message: 'Change Saved!',
+                            message: AppLang.COMMON_EDIT_SAVE_SUCCESS,
                             delay: 3000,
                             positionY: 'bottom',
                             positionX: 'right',
-                            title: 'Warn',
+                            title: AppLang.COMMON_DLG_TITLE_WARN,
                         });
                     }
                     else {
                         //something error happend.
                         Notification.error({
-                            message: 'Change Faild: ' + data.toString(),
+                            message: AppLang.getFormatString(AppLang.PROFILE_CHANGE_FAILED, [data.toString()]),
                             delay: 5000,
                             positionY: 'bottom',
                             positionX: 'right',
-                            title: 'Error'
+                            title: AppLang.COMMON_DLG_TITLE_ERROR
                         });
                     }
                 }
@@ -676,21 +713,21 @@
 
                     if (data != null && data != "" && data.objectID != null) {
                         Notification.success({
-                            message: 'Change Saved!',
+                            message: AppLang.COMMON_EDIT_SAVE_SUCCESS,
                             delay: 3000,
                             positionY: 'bottom',
                             positionX: 'right',
-                            title: 'Warn',
+                            title: AppLang.COMMON_DLG_TITLE_WARN
                         });
                     }
                     else {
                         //something error happend.
                         Notification.error({
-                            message: 'Change Faild: ' + data.toString(),
+                            message: AppLang.getFormatString(AppLang.PROFILE_CHANGE_FAILED, [data.toString()]),
                             delay: 5000,
                             positionY: 'bottom',
                             positionX: 'right',
-                            title: 'Error'
+                            title: AppLang.COMMON_DLG_TITLE_ERROR
                         });
                     }
                 }

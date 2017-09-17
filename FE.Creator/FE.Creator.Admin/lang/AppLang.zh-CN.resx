@@ -171,6 +171,24 @@
   <data name="ACCOUNTMGR_TITLE" xml:space="preserve">
     <value>账户管理</value>
   </data>
+  <data name="APPSETTINGS_DATEFMT" xml:space="preserve">
+    <value>时间格式</value>
+  </data>
+  <data name="APPSETTINGS_LANG" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="APPSETTINGS_PROVIDER_URL" xml:space="preserve">
+    <value>提供商连接</value>
+  </data>
+  <data name="APPSETTINGS_PULLMSG" xml:space="preserve">
+    <value>消息推送</value>
+  </data>
+  <data name="APPSETTINGS_THEME" xml:space="preserve">
+    <value>系统主题</value>
+  </data>
+  <data name="APPSETTINGS_TITLE" xml:space="preserve">
+    <value>系统设置</value>
+  </data>
   <data name="BOOK_ADD_BOOK" xml:space="preserve">
     <value>+书籍</value>
   </data>
@@ -219,6 +237,9 @@
   <data name="BOOK_TITLE" xml:space="preserve">
     <value>书籍管理</value>
   </data>
+  <data name="COMMON_BTN_ADD" xml:space="preserve">
+    <value>新建</value>
+  </data>
   <data name="COMMON_BTN_CANCEL" xml:space="preserve">
     <value>取消</value>
   </data>
@@ -236,6 +257,12 @@
   </data>
   <data name="COMMON_BTN_SAVE" xml:space="preserve">
     <value>保存</value>
+  </data>
+  <data name="COMMON_LBL_NO" xml:space="preserve">
+    <value>否</value>
+  </data>
+  <data name="COMMON_LBL_YES" xml:space="preserve">
+    <value>是</value>
   </data>
   <data name="COMMON_OPT_TOGGLE_DOWN" xml:space="preserve">
     <value>折叠</value>
@@ -442,7 +469,7 @@
     <value>控制台</value>
   </data>
   <data name="LAYOUT_COPYRIGHT" xml:space="preserve">
-    <value>Copyright &amp;copy; 2016</value>
+    <value>版权所有 2016</value>
   </data>
   <data name="LAYOUT_COPYRIGHT_STR" xml:space="preserve">
     <value>All rights reserved.</value>
@@ -513,6 +540,84 @@
   <data name="LAYOUT_VERSION" xml:space="preserve">
     <value>版本</value>
   </data>
+  <data name="LICMGR_BTN_UPLOADLIC" xml:space="preserve">
+    <value>上传注册码</value>
+  </data>
+  <data name="LICMGR_COL_DESC" xml:space="preserve">
+    <value>描述</value>
+  </data>
+  <data name="LICMGR_COL_EXPIRED" xml:space="preserve">
+    <value>过期时间</value>
+  </data>
+  <data name="LICMGR_COL_ID" xml:space="preserve">
+    <value>模块编号</value>
+  </data>
+  <data name="LICMGR_COL_LSD" xml:space="preserve">
+    <value>是否授权</value>
+  </data>
+  <data name="LICMGR_COL_NAME" xml:space="preserve">
+    <value>模块名称</value>
+  </data>
+  <data name="LICMGR_LBL_MODULES" xml:space="preserve">
+    <value>系统模块</value>
+  </data>
+  <data name="LICMGR_TITLE" xml:space="preserve">
+    <value>注册码管理</value>
+  </data>
+  <data name="LOGIN_BTN_REGISTER" xml:space="preserve">
+    <value>注册</value>
+  </data>
+  <data name="LOGIN_BTN_SENDEMAIL" xml:space="preserve">
+    <value>发送</value>
+  </data>
+  <data name="LOGIN_BTN_SIGNGOOGLE" xml:space="preserve">
+    <value>用Google+账号登陆</value>
+  </data>
+  <data name="LOGIN_BTN_SIGNIN" xml:space="preserve">
+    <value>登录</value>
+  </data>
+  <data name="LOGIN_BTN_SIGNMICROSOFT" xml:space="preserve">
+    <value>用Microsoft账号登陆</value>
+  </data>
+  <data name="LOGIN_ENTER_EMAIL" xml:space="preserve">
+    <value>输入邮件地址</value>
+  </data>
+  <data name="LOGIN_FORGET_PASS_MSG" xml:space="preserve">
+    <value>忘记了密码？</value>
+  </data>
+  <data name="LOGIN_LBL_AGREE_TERM" xml:space="preserve">
+    <value>我同意&lt;a href="#"&gt;注册条款&lt;/a&gt;</value>
+  </data>
+  <data name="LOGIN_LBL_ALREADY_MEMBER" xml:space="preserve">
+    <value>我已经注册为用户</value>
+  </data>
+  <data name="LOGIN_LBL_CONFIRMPASS" xml:space="preserve">
+    <value>确认密码</value>
+  </data>
+  <data name="LOGIN_LBL_EMAIL" xml:space="preserve">
+    <value>邮件</value>
+  </data>
+  <data name="LOGIN_LBL_FOGETPASS" xml:space="preserve">
+    <value>忘记密码</value>
+  </data>
+  <data name="LOGIN_LBL_PASS" xml:space="preserve">
+    <value>密码</value>
+  </data>
+  <data name="LOGIN_LBL_REGISTERNEW" xml:space="preserve">
+    <value>注册新用户</value>
+  </data>
+  <data name="LOGIN_LBL_REMBERME" xml:space="preserve">
+    <value>记住用户</value>
+  </data>
+  <data name="LOGIN_MSG_INVALIDUSER" xml:space="preserve">
+    <value>用户名或密码不正确</value>
+  </data>
+  <data name="LOGIN_START_MSG" xml:space="preserve">
+    <value>请登陆后再使用系统功能</value>
+  </data>
+  <data name="LOGIN_TITLE" xml:space="preserve">
+    <value>登陆</value>
+  </data>
   <data name="POST_ADD_GROUP" xml:space="preserve">
     <value>添加分组</value>
   </data>
@@ -579,6 +684,141 @@
   <data name="POST_TITLE" xml:space="preserve">
     <value>文章管理</value>
   </data>
+  <data name="PROFILE_ADDRESS" xml:space="preserve">
+    <value>地址</value>
+  </data>
+  <data name="PROFILE_BIRTH_DATE" xml:space="preserve">
+    <value>出生日期</value>
+  </data>
+  <data name="PROFILE_BTN_PROFILE" xml:space="preserve">
+    <value>用户资料</value>
+  </data>
+  <data name="PROFILE_BTN_SIGNOUT" xml:space="preserve">
+    <value>退出</value>
+  </data>
+  <data name="PROFILE_BTN_UPLOADIMG" xml:space="preserve">
+    <value>上传图片</value>
+  </data>
+  <data name="PROFILE_BUILDING" xml:space="preserve">
+    <value>小区地址</value>
+  </data>
+  <data name="PROFILE_CITY" xml:space="preserve">
+    <value>城市</value>
+  </data>
+  <data name="PROFILE_COMPANY" xml:space="preserve">
+    <value>公司</value>
+  </data>
+  <data name="PROFILE_COMPANYURL" xml:space="preserve">
+    <value>公司网址</value>
+  </data>
+  <data name="PROFILE_CONTACT" xml:space="preserve">
+    <value>联系人</value>
+  </data>
+  <data name="PROFILE_COUNTRY" xml:space="preserve">
+    <value>国家</value>
+  </data>
+  <data name="PROFILE_DEGREE" xml:space="preserve">
+    <value>学位</value>
+  </data>
+  <data name="PROFILE_EDUCATION" xml:space="preserve">
+    <value>学历</value>
+  </data>
+  <data name="PROFILE_EMAIL" xml:space="preserve">
+    <value>电子邮件</value>
+  </data>
+  <data name="PROFILE_ENDDATE" xml:space="preserve">
+    <value>结束时间</value>
+  </data>
+  <data name="PROFILE_ENROLL_DATE" xml:space="preserve">
+    <value>入学日期</value>
+  </data>
+  <data name="PROFILE_EXIT_DATE" xml:space="preserve">
+    <value>毕业日期</value>
+  </data>
+  <data name="PROFILE_FACEBOOK" xml:space="preserve">
+    <value>Facebook</value>
+  </data>
+  <data name="PROFILE_FEMALE" xml:space="preserve">
+    <value>女</value>
+  </data>
+  <data name="PROFILE_FIRSTNAME" xml:space="preserve">
+    <value>名字</value>
+  </data>
+  <data name="PROFILE_GENDER" xml:space="preserve">
+    <value>性别</value>
+  </data>
+  <data name="PROFILE_GRADE" xml:space="preserve">
+    <value>年级</value>
+  </data>
+  <data name="PROFILE_ID" xml:space="preserve">
+    <value>身份证号码</value>
+  </data>
+  <data name="PROFILE_JOBDESC" xml:space="preserve">
+    <value>工作描述</value>
+  </data>
+  <data name="PROFILE_JOBTITLE" xml:space="preserve">
+    <value>工作名称</value>
+  </data>
+  <data name="PROFILE_LASTNAME" xml:space="preserve">
+    <value>姓氏</value>
+  </data>
+  <data name="PROFILE_LEVEL" xml:space="preserve">
+    <value>技能级别</value>
+  </data>
+  <data name="PROFILE_LINKEDIN" xml:space="preserve">
+    <value>LinkedIn</value>
+  </data>
+  <data name="PROFILE_LOCATION" xml:space="preserve">
+    <value>位置</value>
+  </data>
+  <data name="PROFILE_MALE" xml:space="preserve">
+    <value>男</value>
+  </data>
+  <data name="PROFILE_MOBPHONE" xml:space="preserve">
+    <value>移动电话</value>
+  </data>
+  <data name="PROFILE_OTHERCONTACT" xml:space="preserve">
+    <value>其他联系方式</value>
+  </data>
+  <data name="PROFILE_POSTCODE" xml:space="preserve">
+    <value>邮政编码</value>
+  </data>
+  <data name="PROFILE_PROVINCE" xml:space="preserve">
+    <value>省份</value>
+  </data>
+  <data name="PROFILE_QQ" xml:space="preserve">
+    <value>QQ</value>
+  </data>
+  <data name="PROFILE_SCHOOL" xml:space="preserve">
+    <value>学校</value>
+  </data>
+  <data name="PROFILE_SKILLDESC" xml:space="preserve">
+    <value>技能描述</value>
+  </data>
+  <data name="PROFILE_SKILLNAME" xml:space="preserve">
+    <value>技能名称</value>
+  </data>
+  <data name="PROFILE_SKILLS" xml:space="preserve">
+    <value>技能</value>
+  </data>
+  <data name="PROFILE_STARTDATE" xml:space="preserve">
+    <value>开始时间</value>
+  </data>
+  <data name="PROFILE_STREET" xml:space="preserve">
+    <value>街道</value>
+  </data>
+  <data name="PROFILE_TELEPHONE" xml:space="preserve">
+    <value>电话</value>
+  </data>
+  <data name="PROFILE_TWITTER" xml:space="preserve">
+    <value>Twitter</value>
+  </data>
+  <data name="PROFILE_WECHAT" xml:space="preserve">
+    <value>微信</value>
+  </data>
+  <data name="PROFILE_WKEXPRERIENCE" xml:space="preserve">
+    <value>工作经验</value>
+  </data>
   <data name="TASKMGR_LBL_COMP_DATE" xml:space="preserve">
     <value>完成时间</value>
   </data>
@@ -635,5 +875,35 @@
   </data>
   <data name="TASKMGR_TITLE" xml:space="preserve">
     <value>任务管理</value>
+  </data>
+  <data name="USERMGR_BTN_PROFILE" xml:space="preserve">
+    <value>用户资料</value>
+  </data>
+  <data name="USERMGR_BTN_RESETPASS" xml:space="preserve">
+    <value>重置密码</value>
+  </data>
+  <data name="USERMGR_COL_ACTION" xml:space="preserve">
+    <value>操作</value>
+  </data>
+  <data name="USERMGR_COL_EMAIL" xml:space="preserve">
+    <value>邮件</value>
+  </data>
+  <data name="USERMGR_COL_STATUS" xml:space="preserve">
+    <value>状态</value>
+  </data>
+  <data name="USERMGR_COL_USERID" xml:space="preserve">
+    <value>用户编号</value>
+  </data>
+  <data name="USERMGR_COL_USERNAME" xml:space="preserve">
+    <value>用户名</value>
+  </data>
+  <data name="USERMGR_LBL_ACTIVE" xml:space="preserve">
+    <value>活动</value>
+  </data>
+  <data name="USERMGR_TITLE" xml:space="preserve">
+    <value>用户管理</value>
+  </data>
+  <data name="USERPROFILE_TITLE" xml:space="preserve">
+    <value>用户资料</value>
   </data>
 </root>

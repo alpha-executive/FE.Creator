@@ -13,6 +13,8 @@
     },
     COMMON_EDIT_SAVE_SUCCESS: "更改成功！",
     COMMON_EDIT_SAVE_FAILED: "更改失败: ",
+    COMMON_DLG_TITLE_ERROR: "错误",
+    COMMON_DLG_TITLE_WARN: "警告",
     INDEX_YOY_STATICS_REPORT: "YOY 统计报表",
     INDEX_SUBTXT_PBD: "文章, 日记和书籍",
     INDEX_AVG_PROGRESS_REPORT: "平均进度报表",
@@ -48,5 +50,7 @@
     DIARY_WEATHER_RAIN: "雨",
     DIARY_WEATHER_WINDY: "微风",
     DIARY_WEATHER_STORM: "暴风雨",
-    DIARY_PREFIX_DIARY: "日记 "
+    DIARY_PREFIX_DIARY: "日记 ",
+    PROFILE_CHANGE_FAILED: "更新失败: {0}",
+    USERMGR_PASS_SAVE_DONE: "密码更新完成!"
 }

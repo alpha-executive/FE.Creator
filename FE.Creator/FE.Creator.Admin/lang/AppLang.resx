@@ -171,6 +171,24 @@
   <data name="ACCOUNTMGR_TITLE" xml:space="preserve">
     <value>Account Management</value>
   </data>
+  <data name="APPSETTINGS_DATEFMT" xml:space="preserve">
+    <value>DateTime Format</value>
+  </data>
+  <data name="APPSETTINGS_LANG" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="APPSETTINGS_PROVIDER_URL" xml:space="preserve">
+    <value>Provider URL</value>
+  </data>
+  <data name="APPSETTINGS_PULLMSG" xml:space="preserve">
+    <value>Pull Message</value>
+  </data>
+  <data name="APPSETTINGS_THEME" xml:space="preserve">
+    <value>System Theme</value>
+  </data>
+  <data name="APPSETTINGS_TITLE" xml:space="preserve">
+    <value>App Settings</value>
+  </data>
   <data name="BOOK_ADD_BOOK" xml:space="preserve">
     <value>+Book</value>
   </data>
@@ -219,6 +237,9 @@
   <data name="BOOK_TITLE" xml:space="preserve">
     <value>Books Management</value>
   </data>
+  <data name="COMMON_BTN_ADD" xml:space="preserve">
+    <value>Add</value>
+  </data>
   <data name="COMMON_BTN_CANCEL" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -236,6 +257,12 @@
   </data>
   <data name="COMMON_BTN_SAVE" xml:space="preserve">
     <value>Save</value>
+  </data>
+  <data name="COMMON_LBL_NO" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="COMMON_LBL_YES" xml:space="preserve">
+    <value>Yes</value>
   </data>
   <data name="COMMON_OPT_TOGGLE_DOWN" xml:space="preserve">
     <value>Toggle Dropdown</value>
@@ -516,6 +543,84 @@
   <data name="LAYOUT_VERSION" xml:space="preserve">
     <value>Version</value>
   </data>
+  <data name="LICMGR_BTN_UPLOADLIC" xml:space="preserve">
+    <value>Upload Your License</value>
+  </data>
+  <data name="LICMGR_COL_DESC" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="LICMGR_COL_EXPIRED" xml:space="preserve">
+    <value>Expired Date</value>
+  </data>
+  <data name="LICMGR_COL_ID" xml:space="preserve">
+    <value>Module ID</value>
+  </data>
+  <data name="LICMGR_COL_LSD" xml:space="preserve">
+    <value>Licensed</value>
+  </data>
+  <data name="LICMGR_COL_NAME" xml:space="preserve">
+    <value>Module Name</value>
+  </data>
+  <data name="LICMGR_LBL_MODULES" xml:space="preserve">
+    <value>Modules in System</value>
+  </data>
+  <data name="LICMGR_TITLE" xml:space="preserve">
+    <value>License Management</value>
+  </data>
+  <data name="LOGIN_BTN_REGISTER" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="LOGIN_BTN_SENDEMAIL" xml:space="preserve">
+    <value>Send Email</value>
+  </data>
+  <data name="LOGIN_BTN_SIGNGOOGLE" xml:space="preserve">
+    <value>Sign in using Google+</value>
+  </data>
+  <data name="LOGIN_BTN_SIGNIN" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="LOGIN_BTN_SIGNMICROSOFT" xml:space="preserve">
+    <value>Sign in using Microsoft Account</value>
+  </data>
+  <data name="LOGIN_ENTER_EMAIL" xml:space="preserve">
+    <value>Enter your email</value>
+  </data>
+  <data name="LOGIN_FORGET_PASS_MSG" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
+  <data name="LOGIN_LBL_AGREE_TERM" xml:space="preserve">
+    <value>I agree to the &lt;a href="#"&gt;terms&lt;/a&gt;</value>
+  </data>
+  <data name="LOGIN_LBL_ALREADY_MEMBER" xml:space="preserve">
+    <value>I already have a membership</value>
+  </data>
+  <data name="LOGIN_LBL_CONFIRMPASS" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="LOGIN_LBL_EMAIL" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="LOGIN_LBL_FOGETPASS" xml:space="preserve">
+    <value>I forgot my password</value>
+  </data>
+  <data name="LOGIN_LBL_PASS" xml:space="preserve">
+    <value>Passowrd</value>
+  </data>
+  <data name="LOGIN_LBL_REGISTERNEW" xml:space="preserve">
+    <value>Register a new membership</value>
+  </data>
+  <data name="LOGIN_LBL_REMBERME" xml:space="preserve">
+    <value>Remember Me</value>
+  </data>
+  <data name="LOGIN_MSG_INVALIDUSER" xml:space="preserve">
+    <value>Invalid User name or Password</value>
+  </data>
+  <data name="LOGIN_START_MSG" xml:space="preserve">
+    <value>Sign in to start your session</value>
+  </data>
+  <data name="LOGIN_TITLE" xml:space="preserve">
+    <value>Log in</value>
+  </data>
   <data name="POST_ADD_GROUP" xml:space="preserve">
     <value>Add Group</value>
   </data>
@@ -582,6 +687,141 @@
   <data name="POST_TITLE" xml:space="preserve">
     <value>Post Management</value>
   </data>
+  <data name="PROFILE_ADDRESS" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="PROFILE_BIRTH_DATE" xml:space="preserve">
+    <value>Birth Date</value>
+  </data>
+  <data name="PROFILE_BTN_PROFILE" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="PROFILE_BTN_SIGNOUT" xml:space="preserve">
+    <value>Sign out</value>
+  </data>
+  <data name="PROFILE_BTN_UPLOADIMG" xml:space="preserve">
+    <value>Upload Image</value>
+  </data>
+  <data name="PROFILE_BUILDING" xml:space="preserve">
+    <value>Building</value>
+  </data>
+  <data name="PROFILE_CITY" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="PROFILE_COMPANY" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="PROFILE_COMPANYURL" xml:space="preserve">
+    <value>Company Url</value>
+  </data>
+  <data name="PROFILE_CONTACT" xml:space="preserve">
+    <value>Contact</value>
+  </data>
+  <data name="PROFILE_COUNTRY" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="PROFILE_DEGREE" xml:space="preserve">
+    <value>Degree</value>
+  </data>
+  <data name="PROFILE_EDUCATION" xml:space="preserve">
+    <value>Education</value>
+  </data>
+  <data name="PROFILE_EMAIL" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="PROFILE_ENDDATE" xml:space="preserve">
+    <value>End Date</value>
+  </data>
+  <data name="PROFILE_ENROLL_DATE" xml:space="preserve">
+    <value>Enroll Date</value>
+  </data>
+  <data name="PROFILE_EXIT_DATE" xml:space="preserve">
+    <value>Exit Date</value>
+  </data>
+  <data name="PROFILE_FACEBOOK" xml:space="preserve">
+    <value>Facebook</value>
+  </data>
+  <data name="PROFILE_FEMALE" xml:space="preserve">
+    <value>Female</value>
+  </data>
+  <data name="PROFILE_FIRSTNAME" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="PROFILE_GENDER" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="PROFILE_GRADE" xml:space="preserve">
+    <value>Grade</value>
+  </data>
+  <data name="PROFILE_ID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="PROFILE_JOBDESC" xml:space="preserve">
+    <value>Job Description</value>
+  </data>
+  <data name="PROFILE_JOBTITLE" xml:space="preserve">
+    <value>Job Title</value>
+  </data>
+  <data name="PROFILE_LASTNAME" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="PROFILE_LEVEL" xml:space="preserve">
+    <value>Level</value>
+  </data>
+  <data name="PROFILE_LINKEDIN" xml:space="preserve">
+    <value>LinkedIn</value>
+  </data>
+  <data name="PROFILE_LOCATION" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="PROFILE_MALE" xml:space="preserve">
+    <value>Male</value>
+  </data>
+  <data name="PROFILE_MOBPHONE" xml:space="preserve">
+    <value>Mobile Phone</value>
+  </data>
+  <data name="PROFILE_OTHERCONTACT" xml:space="preserve">
+    <value>Other Contact</value>
+  </data>
+  <data name="PROFILE_POSTCODE" xml:space="preserve">
+    <value>PostCode</value>
+  </data>
+  <data name="PROFILE_PROVINCE" xml:space="preserve">
+    <value>Province</value>
+  </data>
+  <data name="PROFILE_QQ" xml:space="preserve">
+    <value>QQ</value>
+  </data>
+  <data name="PROFILE_SCHOOL" xml:space="preserve">
+    <value>School</value>
+  </data>
+  <data name="PROFILE_SKILLDESC" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="PROFILE_SKILLNAME" xml:space="preserve">
+    <value>Skill Name</value>
+  </data>
+  <data name="PROFILE_SKILLS" xml:space="preserve">
+    <value>Skills</value>
+  </data>
+  <data name="PROFILE_STARTDATE" xml:space="preserve">
+    <value>Start Date</value>
+  </data>
+  <data name="PROFILE_STREET" xml:space="preserve">
+    <value>Street</value>
+  </data>
+  <data name="PROFILE_TELEPHONE" xml:space="preserve">
+    <value>Telephone</value>
+  </data>
+  <data name="PROFILE_TWITTER" xml:space="preserve">
+    <value>Twitter</value>
+  </data>
+  <data name="PROFILE_WECHAT" xml:space="preserve">
+    <value>WeChat</value>
+  </data>
+  <data name="PROFILE_WKEXPRERIENCE" xml:space="preserve">
+    <value>Work Experience</value>
+  </data>
   <data name="TASKMGR_LBL_COMP_DATE" xml:space="preserve">
     <value>Completed Date</value>
   </data>
@@ -638,5 +878,35 @@
   </data>
   <data name="TASKMGR_TITLE" xml:space="preserve">
     <value>Task Management</value>
+  </data>
+  <data name="USERMGR_BTN_PROFILE" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="USERMGR_BTN_RESETPASS" xml:space="preserve">
+    <value>Reset password</value>
+  </data>
+  <data name="USERMGR_COL_ACTION" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="USERMGR_COL_EMAIL" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="USERMGR_COL_STATUS" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="USERMGR_COL_USERID" xml:space="preserve">
+    <value>User ID</value>
+  </data>
+  <data name="USERMGR_COL_USERNAME" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="USERMGR_LBL_ACTIVE" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="USERMGR_TITLE" xml:space="preserve">
+    <value>User Management</value>
+  </data>
+  <data name="USERPROFILE_TITLE" xml:space="preserve">
+    <value>User Profile</value>
   </data>
 </root>

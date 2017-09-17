@@ -148,7 +148,11 @@
                                         <a href="#" class="btn btn-default btn-flat" id="loginUserProfileLink">@FE.Creator.Admin.lang.AppLang.LAYOUT_PROFILE</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="/Account/LogOff" class="btn btn-default btn-flat">@FE.Creator.Admin.lang.AppLang.LAYOUT_SIGNOUT</a>
+                                            @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { role = "form" }))
+                                            {
+                                                @Html.AntiForgeryToken()
+                                                <button type="submit" class="btn btn-default btn-flat">@FE.Creator.Admin.lang.AppLang.LAYOUT_SIGNOUT</button>
+                                            }
                                     </div>
                                 </li>
                             </ul>

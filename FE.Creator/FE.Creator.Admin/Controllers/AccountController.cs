@@ -10,12 +10,14 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FE.Creator.Admin.Models;
 using FE.Creator.ObjectRepository;
+using NLog;
 
 namespace FE.Creator.Admin.Controllers
 {
     [Authorize]
     public class AccountController : BaseController
     {
+        private static ILogger logger = LogManager.GetCurrentClassLogger(typeof(AccountController));
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -152,14 +154,19 @@ namespace FE.Creator.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            logger.Info("Being Register");
             if (ModelState.IsValid)
             {
+                logger.Info("Register User info:");
+                logger.Info("Name/Email : " + model.Email);
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    logger.Info("Register user succeed!");
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    logger.Info("New user signed in.");
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
@@ -171,6 +178,7 @@ namespace FE.Creator.Admin.Controllers
                 AddErrors(result);
             }
 
+            logger.Info("End Register");
             // If we got this far, something failed, redisplay form
             return View(model);
         }

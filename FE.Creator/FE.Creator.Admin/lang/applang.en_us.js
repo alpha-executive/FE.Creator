@@ -13,6 +13,8 @@
     },
     COMMON_EDIT_SAVE_SUCCESS: "Change Saved！",
     COMMON_EDIT_SAVE_FAILED: "Change Faild: ",
+    COMMON_DLG_TITLE_ERROR: "Error",
+    COMMON_DLG_TITLE_WARN: "Warn",
     INDEX_YOY_STATICS_REPORT: "YOY Statics Report",
     INDEX_SUBTXT_PBD : "Post, Diary and Books",
     INDEX_AVG_PROGRESS_REPORT: "Average Progress Report",
@@ -48,5 +50,7 @@
     DIARY_WEATHER_RAIN: "rain",
     DIARY_WEATHER_WINDY: "windy",
     DIARY_WEATHER_STORM: "thunder storm",
-    DIARY_PREFIX_DIARY : "Diary "
+    DIARY_PREFIX_DIARY: "Diary ",
+    PROFILE_CHANGE_FAILED: "Change failed: {0}",
+    USERMGR_PASS_SAVE_DONE: "Password Reset Done"
 }

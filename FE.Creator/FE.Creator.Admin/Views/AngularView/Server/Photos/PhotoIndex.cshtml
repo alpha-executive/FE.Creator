@@ -40,7 +40,7 @@
                                 <button type="button" class="btn btn-success" type="file" multiple ngf-select="ctrl.importImages($files, $invalidFiles)" ngf-max-size="20MB"><i class="fa fa-upload"></i></button>
                             </div>
                             <ol class="breadcrumb site-navpath pull-right">
-                                <li><a ng-click="ctrl.switchTab(true)" href="javascript:void(0);"><i class="fa fa-home text-warning"></i> Alburms</a></li>
+                                <li><a ng-click="ctrl.switchTab(true)" href="javascript:void(0);"><i class="fa fa-home text-warning"></i> @FE.Creator.Admin.lang.AppLang.IMAGEMGR_ALBUMS</a></li>
                                 <li class="active"><a href="javascript:void(0);" ng-switch="ctrl.currentalbum.properties.imageCategoryType.value">
                                                        <i class="fa fa-file-powerpoint-o text-warning" ng-switch-when="2"></i>
                                                        <i class="fa fa-file-image-o text-success" ng-switch-when="3"></i>
@@ -58,8 +58,8 @@
                                 <div class="box-header with-border">
                                     <div class="mailbox-controls">
                                         <div class="btn-group">
-                                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveSelectedImagesToAlbum()"><i class="fa fa-save text-green"></i> Confirm</button>
-                                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelAlbumImageSelection()"><i class="fa fa-save text-green"></i> Cancel</button>
+                                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveSelectedImagesToAlbum()"><i class="fa fa-save text-green"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_CONFIRM</button>
+                                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelAlbumImageSelection()"><i class="fa fa-save text-green"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_CANCEL</button>
                                         </div>
                                     </div>
                                 </div>

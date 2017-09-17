@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "AppSettings";
+    ViewBag.Title = FE.Creator.Admin.lang.AppLang.APPSETTINGS_TITLE;
 }
 <div class="box box-primary" ng-app="ngObjectRepository" ng-controller="AppSettingsController as ctrl">
     <div class="box-header">
@@ -9,7 +9,7 @@
     <div class="box-body">
         <form class="form-horizontal">
             <div class="form-group">
-                <label class="control-label col-sm-2"><i class="fa fa-language"></i> Language</label>
+                <label class="control-label col-sm-2"><i class="fa fa-language"></i> @FE.Creator.Admin.lang.AppLang.APPSETTINGS_LANG</label>
                 <div class="col-sm-10">
                     <select class="form-control" ng-model="ctrl.appsettings.properties.language.value">
                         <option ng-repeat="lang in ctrl.languages" value="{{lang.langCode}}">{{lang.text}}</option>
@@ -18,7 +18,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">
-                    <i class="fa fa-calendar"></i> DateTime Format
+                    <i class="fa fa-calendar"></i> @FE.Creator.Admin.lang.AppLang.APPSETTINGS_DATEFMT
                 </label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" ng-model="ctrl.appsettings.properties.dateTimeFormat.value" />
@@ -26,7 +26,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">
-                    <i class="fa fa-coffee"></i> System Theme
+                    <i class="fa fa-coffee"></i> @FE.Creator.Admin.lang.AppLang.APPSETTINGS_THEME
                 </label>
                 <div class="col-sm-10">
                     <ul class="list-unstyled clearfix theme-selector">
@@ -47,16 +47,16 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">
-                    <i class="fa fa-toggle-on"></i> Pull Message
+                    <i class="fa fa-toggle-on"></i> @FE.Creator.Admin.lang.AppLang.APPSETTINGS_PULLMSG
                 </label>
                 <div class="col-sm-10">
-                    <input type="radio" ng-model="ctrl.appsettings.properties.pullMessageFromPublisher.value" ng-value="0" ng-checked="ctrl.appsettings.properties.pullMessageFromPublisher.value == 0" /> No
-                    <input type="radio" ng-model="ctrl.appsettings.properties.pullMessageFromPublisher.value" ng-value="1" ng-checked="ctrl.appsettings.properties.pullMessageFromPublisher.value == 1" /> Yes
+                    <input type="radio" ng-model="ctrl.appsettings.properties.pullMessageFromPublisher.value" ng-value="0" ng-checked="ctrl.appsettings.properties.pullMessageFromPublisher.value == 0" /> @FE.Creator.Admin.lang.AppLang.COMMON_LBL_NO
+                    <input type="radio" ng-model="ctrl.appsettings.properties.pullMessageFromPublisher.value" ng-value="1" ng-checked="ctrl.appsettings.properties.pullMessageFromPublisher.value == 1" /> @FE.Creator.Admin.lang.AppLang.COMMON_LBL_YES
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">
-                    <i class="fa fa-link"></i> Provider URL
+                    <i class="fa fa-link"></i> @FE.Creator.Admin.lang.AppLang.APPSETTINGS_PROVIDER_URL
                 </label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control field-datepicker" ng-model="ctrl.appsettings.properties.pullMessagePublisherUrl.value" />
@@ -65,7 +65,7 @@
         </form>
     </div>
     <div class="box-footer text-center">
-        <button class="btn btn-warning" type="button" ng-click="ctrl.saveSettings(ctrl.appsettings)"><i class="fa fa-save"></i> Save</button>
+        <button class="btn btn-warning" type="button" ng-click="ctrl.saveSettings(ctrl.appsettings)"><i class="fa fa-save"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_SAVE</button>
     </div>
 </div>
 @section Scripts {

@@ -141,7 +141,7 @@
         vm.saveSettings = function (setting) {
             objectUtilService.saveServiceObject(setting, function (data) {
                 Notification.success({
-                    message: 'Change Saved!',
+                    message: AppLang.COMMON_EDIT_SAVE_SUCCESS,
                     delay: 3000,
                     positionY: 'bottom',
                     positionX: 'right',

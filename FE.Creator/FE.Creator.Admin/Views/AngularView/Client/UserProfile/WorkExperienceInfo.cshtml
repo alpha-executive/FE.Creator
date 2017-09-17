@@ -1,6 +1,6 @@
 ﻿<div class="box box-primary" ng-init="ctrl.init(CurrentUserProfileId)" ng-controller="WorkExperiencesController as ctrl">
     <div class="box-header with-border">
-        <h3 class="box-title"><i class="fa fa-clock-o margin-r-5"></i> Work Experience</h3>
+        <h3 class="box-title"><i class="fa fa-clock-o margin-r-5"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_WKEXPRERIENCE</h3>
     </div>
     <div class="box-body" ng-if="!ctrl.isEditWorkExperiences">
         <div class="row">
@@ -20,7 +20,7 @@
         </div>
         <ul class="list-inline">
             <li class="pull-right">
-                <button class="btn btn-box-tool" type="button" ng-click="ctrl.onWorkExperienceEditing()"><i class="fa fa-pencil"></i> Edit</button>
+                <button class="btn btn-box-tool" type="button" ng-click="ctrl.onWorkExperienceEditing()"><i class="fa fa-pencil"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_EDIT</button>
             </li>
         </ul>
     </div>
@@ -29,44 +29,44 @@
             <div class="box box-warning" ng-repeat="exp in ctrl.workexperiences">
                 <div class="box-body box-warning">
                     <div class="form-group">
-                        <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Company</label>
+                        <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_COMPANY</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" ng-model="exp.properties.company.value" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Company Url</label>
+                        <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_COMPANYURL</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" ng-model="exp.properties.companyUrl.value" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Job Title</label>
+                        <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_JOBTITLE</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" ng-model="exp.properties.jobTitle.value" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Start Date</label>
+                        <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_STARTDATE</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control field-datepicker" ng-model="exp.properties.startDate.value" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2"><i class="fa fa-tag"></i> End Date</label>
+                        <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_ENDDATE</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control field-datepicker" ng-model="exp.properties.endDate.value" />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Job Description</label>
+                        <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_JOBDESC</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control" ng-model="exp.properties.eventDescription.value" />
                         </div>
                     </div>
                     <ul class="list-inline">
                         <li class="pull-right">
-                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.deleteWorkExperience(exp)"><i class="fa fa-trash"></i> Delete</button>
+                            <button class="btn btn-box-tool" type="button" ng-click="ctrl.deleteWorkExperience(exp)"><i class="fa fa-trash"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_DELETE</button>
                         </li>
                     </ul>
                 </div>
@@ -80,9 +80,9 @@
             </div>
             <ul class="list-inline">
                 <li class="pull-right">
-                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.onAddWorkExperience()"><i class="fa fa-plus"></i> Add</button>
-                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.onSaveWorkExperiences()"><i class="fa fa-save"></i> Save</button>
-                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelWorkExperiencesEdit()"><i class="fa fa-close "></i> Cancel</button>
+                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.onAddWorkExperience()"><i class="fa fa-plus"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_ADD</button>
+                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.onSaveWorkExperiences()"><i class="fa fa-save"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_SAVE</button>
+                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelWorkExperiencesEdit()"><i class="fa fa-close "></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_CANCEL</button>
                 </li>
             </ul>
 

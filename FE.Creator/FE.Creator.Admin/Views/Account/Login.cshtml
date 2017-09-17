@@ -1,39 +1,39 @@
 ﻿@using FE.Creator.Admin.Models
 @model LoginViewModel
 @{
-    ViewBag.Title = "Log in";
+    ViewBag.Title = FE.Creator.Admin.lang.AppLang.LOGIN_TITLE;
     Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
 <div class="login-box-body">
-<p class="login-box-msg">Sign in to start your session</p>
+<p class="login-box-msg">@FE.Creator.Admin.lang.AppLang.LOGIN_START_MSG</p>
 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
 {
     @Html.AntiForgeryToken()
     <div class="form-group has-feedback">
         <label for="Email">
-            Email
+            @FE.Creator.Admin.lang.AppLang.LOGIN_LBL_EMAIL
         </label>
         <input name="Email" id="Email" type="text" class="form-control" placeholder="Email">
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
     </div>
     <div class="form-group has-feedback">
         <label for="Password">
-            Passowrd
+            @FE.Creator.Admin.lang.AppLang.LOGIN_LBL_PASS
         </label>
         <input id="Password" name="Password" type="password" class="form-control" placeholder="Password">
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <a href="@Url.Action("ForgotPassword")" class="pull-right">I forgot my password</a>
+            <a href="@Url.Action("ForgotPassword")" class="pull-right">@FE.Creator.Admin.lang.AppLang.LOGIN_LBL_FOGETPASS</a>
         </div>
     </div>
     <div class="row">
         <div class="col-xs-8">
             <div class="checkbox icheck">
                 <label>
-                    <input id="RememberMe" name="RememberMe" type="checkbox"> Remember Me
+                    <input id="RememberMe" name="RememberMe" type="checkbox"> @FE.Creator.Admin.lang.AppLang.LOGIN_LBL_REMBERME
                 </label>
             </div>
         </div>
@@ -41,7 +41,7 @@
     <div class="row">
         <!-- /.col -->
         <div class="col-xs-12">
-            <button type="submit" class="btn btn-success btn-block btn-flat">Sign In</button>
+            <button type="submit" class="btn btn-success btn-block btn-flat">@FE.Creator.Admin.lang.AppLang.LOGIN_BTN_SIGNIN</button>
         </div>
         <!-- /.col -->
     </div>
@@ -50,25 +50,23 @@
     {
         <div class="form-group has-error">
             <label class="control-label" for="inputError">
-                <i class="fa fa-times-circle-o"></i>Invalid User name or Password
+                <i class="fa fa-times-circle-o"></i>@FE.Creator.Admin.lang.AppLang.LOGIN_MSG_INVALIDUSER
             </label>
         </div>
     }
 }
 <!-- /.social-auth-links -->
 <section>
-    <a href="@Url.Action("Register")" class="text-center">Register a new membership</a>
+    <a href="@Url.Action("Register")" class="text-center">@FE.Creator.Admin.lang.AppLang.LOGIN_LBL_REGISTERNEW</a>
 </section>
 @using (Html.BeginForm("ExternalLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl })) {
     @Html.AntiForgeryToken()
     <div class="social-auth-links text-center">
         <button class="btn btn-block btn-social btn-google btn-flat"  type="submit"  id="Google" name="provider" value="Google">
-            <i class="fa fa-google-plus"></i> Sign in using
-            Google+
+            <i class="fa fa-google-plus"></i> @FE.Creator.Admin.lang.AppLang.LOGIN_BTN_SIGNGOOGLE
         </button>
         <button class="btn btn-block btn-social btn-microsoft btn-flat" type="submit" id="Microsoft" name="provider" value="Microsoft">
-            <i class="fa fa-windows"></i> Sign in using
-            Microsoft Account
+            <i class="fa fa-windows"></i> @FE.Creator.Admin.lang.AppLang.LOGIN_BTN_SIGNMICROSOFT
         </button>
     </div>
   }

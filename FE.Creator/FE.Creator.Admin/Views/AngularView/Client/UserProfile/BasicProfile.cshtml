@@ -7,20 +7,20 @@
         <h3 class="profile-username text-center">{{ctrl.basicinfo.properties.firstName.value}}, {{ctrl.basicinfo.properties.lastName.value}}</h3>
         <div class="row">
             <div class="col-md-4">
-                <strong><i class="fa fa-birthday-cake margin-r-5"></i> Birth Date</strong>
+                <strong><i class="fa fa-birthday-cake margin-r-5"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_BIRTH_DATE</strong>
                 <p class="text-muted">
                     {{ctrl.basicinfo.properties.birthDate.value}}
                 </p>
             </div>
             <div class="col-md-4">
-                <strong><i class="fa fa-genderless margin-r-5"></i> Gender</strong>
+                <strong><i class="fa fa-genderless margin-r-5"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_GENDER</strong>
                 <p class="text-muted">
-                    <span ng-if="ctrl.basicinfo.properties.gender.value  == 0">Male</span>
-                    <span ng-if="ctrl.basicinfo.properties.gender.value  == 1">Female</span>
+                    <span ng-if="ctrl.basicinfo.properties.gender.value  == 0">@FE.Creator.Admin.lang.AppLang.PROFILE_MALE</span>
+                    <span ng-if="ctrl.basicinfo.properties.gender.value  == 1">@FE.Creator.Admin.lang.AppLang.PROFILE_FEMALE</span>
                 </p>
             </div>
             <div class="col-md-4">
-                <strong><i class="fa fa-barcode margin-r-5"></i> ID</strong>
+                <strong><i class="fa fa-barcode margin-r-5"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_ID</strong>
                 <p class="text-muted">
                     {{ctrl.basicinfo.properties.ID.value}}
                 </p>
@@ -28,21 +28,21 @@
         </div>
         <ul class="list-inline">
             <li class="pull-right">
-                <button class="btn btn-box-tool" type="button" ng-click="ctrl.onBasicInfoEditing()"><i class="fa fa-pencil"></i> Edit</button>
+                <button class="btn btn-box-tool" type="button" ng-click="ctrl.onBasicInfoEditing()"><i class="fa fa-pencil"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_EDIT</button>
             </li>
         </ul>
     </div>
     <form class="form-horizontal" ng-if="ctrl.isEditBasicInfo">
         <div class="box-body box-primary">
             <div class="form-group">
-                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> First Name</label>
+                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_FIRSTNAME</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" ng-model="ctrl.basicinfo.properties.firstName.value" />
                 </div>
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">
-                    <i class="fa fa-tag"></i> Last Name
+                    <i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_LASTNAME
                 </label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" ng-model="ctrl.basicinfo.properties.lastName.value" />
@@ -50,7 +50,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">
-                    <i class="fa fa-tag"></i> Birth Date
+                    <i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_BIRTH_DATE
                 </label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control field-datepicker" ng-model="ctrl.basicinfo.properties.birthDate.value" />
@@ -58,7 +58,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">
-                    <i class="fa fa-tag"></i> ID
+                    <i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_ID
                 </label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" ng-model="ctrl.basicinfo.properties.ID.value" />
@@ -66,19 +66,19 @@
             </div>
             <div class="form-group">
                 <label class="control-label col-sm-2">
-                    <i class="fa fa-tag"></i> Gender
+                    <i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_GENDER
                 </label>
                 <div class="col-sm-10">
                     <div class="form-control">
-                        <input type="radio" ng-model="ctrl.basicinfo.properties.gender.value" ng-value="0" ng-checked="ctrl.basicinfo.properties.gender.value == 0" /> Male
-                        <input type="radio" ng-model="ctrl.basicinfo.properties.gender.value" ng-value="1" ng-checked="ctrl.basicinfo.properties.gender.value == 1" /> FeMale
+                        <input type="radio" ng-model="ctrl.basicinfo.properties.gender.value" ng-value="0" ng-checked="ctrl.basicinfo.properties.gender.value == 0" /> @FE.Creator.Admin.lang.AppLang.PROFILE_MALE
+                        <input type="radio" ng-model="ctrl.basicinfo.properties.gender.value" ng-value="1" ng-checked="ctrl.basicinfo.properties.gender.value == 1" /> @FE.Creator.Admin.lang.AppLang.PROFILE_FEMALE
                     </div>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button class="btn btn-warning" type="file" ngf-select="ctrl.uploadFiles($file, $invalidFiles,ctrl.basicinfo.properties.Image)" ngf-max-height="1000" ngf-max-size="10MB">
-                        <i class="fa fa-upload"></i> Upload Image <i class="fa fa-refresh fa-spin text-green" ng-if="ctrl.f.showprogress"></i>
+                        <i class="fa fa-upload"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_BTN_UPLOADIMG <i class="fa fa-refresh fa-spin text-green" ng-if="ctrl.f.showprogress"></i>
                     </button><span class="message">{{ctrl.errorMsg}}</span>
                     <br />
                     <br />
@@ -95,8 +95,8 @@
             </div>
             <ul class="list-inline">
                 <li class="pull-right">
-                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveUserinfo()"><i class="fa fa-save"></i> Save</button>
-                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelUserInfoEdit()"><i class="fa fa-close "></i> Cancel</button>
+                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveUserinfo()"><i class="fa fa-save"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_SAVE</button>
+                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelUserInfoEdit()"><i class="fa fa-close "></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_CANCEL</button>
                 </li>
             </ul>
             <script type="text/javascript">

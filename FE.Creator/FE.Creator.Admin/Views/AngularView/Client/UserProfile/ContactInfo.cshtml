@@ -1,61 +1,61 @@
 ﻿     <!-- Contact Box -->
 <div class="box box-primary" ng-init="ctrl.init(CurrentUserProfileId)" ng-controller="ContactController as ctrl">
     <div class="box-header with-border">
-        <h3 class="box-title"><i class="fa fa-phone margin-r-5"></i> Contact</h3>
+        <h3 class="box-title"><i class="fa fa-phone margin-r-5"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_CONTACT</h3>
     </div>
     <!-- /.box-header -->
     <div class="box-body" ng-if="!ctrl.isEditContact">
         <div class="row">
             <div class="col-md-4">
-                <strong><i class="fa fa-phone margin-r-5"></i> Telephone</strong>
+                <strong><i class="fa fa-phone margin-r-5"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_TELEPHONE</strong>
                 <p class="text-muted">
                     {{ctrl.contact.properties.phone.value}}
                 </p>
             </div>
             <div class="col-md-4">
-                <strong><i class="fa fa-mobile-phone margin-r-5"></i> Mobile Phone</strong>
+                <strong><i class="fa fa-mobile-phone margin-r-5"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_MOBPHONE</strong>
                 <p class="text-muted">
                     {{ctrl.contact.properties.mobile.value}}
                 </p>
             </div>
             <div class="col-md-4">
-                <strong><i class="fa fa-envelope-o margin-r-5"></i> Email</strong>
+                <strong><i class="fa fa-envelope-o margin-r-5"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_EMAIL</strong>
                 <p class="text-muted">
                     {{ctrl.contact.properties.eMail.value}}
                 </p>
             </div>
             <div class="col-md-4">
-                <strong><i class="fa fa-weixin margin-r-5"></i> WeChat</strong>
+                <strong><i class="fa fa-weixin margin-r-5"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_WECHAT</strong>
                 <p class="text-muted">
                     {{ctrl.contact.properties.weChat.value}}
                 </p>
             </div>
             <div class="col-md-4">
-                <strong><i class="fa fa-qq margin-r-5"></i> QQ</strong>
+                <strong><i class="fa fa-qq margin-r-5"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_QQ</strong>
                 <p class="text-muted">
                     {{ctrl.contact.properties.QQ.value}}
                 </p>
             </div>
             <div class="col-md-4">
-                <strong><i class="fa fa-twitter margin-r-5"></i> Twitter</strong>
+                <strong><i class="fa fa-twitter margin-r-5"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_TWITTER</strong>
                 <p class="text-muted">
                     {{ctrl.contact.properties.tweet.value}}
                 </p>
             </div>
             <div class="col-md-4">
-                <strong><i class="fa fa-linkedin margin-r-5"></i> LinkedIn</strong>
+                <strong><i class="fa fa-linkedin margin-r-5"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_LINKEDIN</strong>
                 <p class="text-muted">
                     {{ctrl.contact.properties.linkedIn.value}}
                 </p>
             </div>
             <div class="col-md-4">
-                <strong><i class="fa fa-facebook margin-r-5"></i> Facebook</strong>
+                <strong><i class="fa fa-facebook margin-r-5"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_FACEBOOK</strong>
                 <p class="text-muted">
                     {{ctrl.contact.properties.facebook.value}}
                 </p>
             </div>
             <div class="col-md-4">
-                <strong><i class="fa fa-file-text-o margin-r-5"></i> Other Contact</strong>
+                <strong><i class="fa fa-file-text-o margin-r-5"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_OTHERCONTACT</strong>
                 <p class="text-muted">
                     {{ctrl.contact.properties.freeNote.value}}
                 </p>
@@ -63,7 +63,7 @@
         </div>
         <ul class="list-inline">
             <li class="pull-right">
-                <button class="btn btn-box-tool" type="button" ng-click="ctrl.onContactEditing()"><i class="fa fa-pencil"></i> Edit</button>
+                <button class="btn btn-box-tool" type="button" ng-click="ctrl.onContactEditing()"><i class="fa fa-pencil"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_EDIT</button>
             </li>
         </ul>
     </div>
@@ -71,63 +71,63 @@
     <form class="form-horizontal" ng-if="ctrl.isEditContact">
         <div class="box-body">
             <div class="form-group">
-                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Telephone</label>
+                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_TELEPHONE</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" ng-model="ctrl.contact.properties.phone.value" />
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Mobile Phone</label>
+                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_MOBPHONE</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" ng-model="ctrl.contact.properties.mobile.value" />
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Email</label>
+                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_EMAIL</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" ng-model="ctrl.contact.properties.eMail.value" />
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> WeChat</label>
+                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_WECHAT</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" ng-model="ctrl.contact.properties.weChat.value" />
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> QQ</label>
+                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_QQ</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" ng-model="ctrl.contact.properties.qQ.value" />
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Tweet</label>
+                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_TWITTER</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" ng-model="ctrl.contact.properties.tweet.value" />
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> LinkedIn</label>
+                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_LINKEDIN</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" ng-model="ctrl.contact.properties.linkedIn.value" />
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Facebook</label>
+                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_FACEBOOK</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" ng-model="ctrl.contact.properties.facebook.value" />
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> Other Contact</label>
+                <label class="control-label col-sm-2"><i class="fa fa-tag"></i> @FE.Creator.Admin.lang.AppLang.PROFILE_OTHERCONTACT</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" ng-model="ctrl.contact.properties.freeNote.value" />
                 </div>
             </div>
             <ul class="list-inline">
                 <li class="pull-right">
-                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveContact()"><i class="fa fa-save"></i> Save</button>
-                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelContactEdit()"><i class="fa fa-close "></i> Cancel</button>
+                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.saveContact()"><i class="fa fa-save"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_SAVE</button>
+                    <button class="btn btn-box-tool" type="button" ng-click="ctrl.cancelContactEdit()"><i class="fa fa-close "></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_CANCEL</button>
                 </li>
             </ul>
         </div>

@@ -10,7 +10,7 @@
         <img ng-if="userprofile.properties.Image.fileUrl == null" src="/Content/adminlte-2.3.6/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
         <p>
             {{loginUserName}}
-            <small>Member since Nov. 2012</small>
+            @*<small>Member since Nov. 2012</small>*@
         </p>
     </li>
     <!-- Menu Body -->
@@ -30,10 +30,10 @@
     <!-- Menu Footer-->
     <li class="user-footer">
         <div class="pull-left">
-            <a href="/ngView/EditOrDisplay/SystemUsers/UserProfileIndex/{{userProfileId}}" class="btn btn-default btn-flat">Profile</a>
+            <a href="/ngView/EditOrDisplay/SystemUsers/UserProfileIndex/{{userProfileId}}" class="btn btn-default btn-flat">@FE.Creator.Admin.lang.AppLang.PROFILE_BTN_PROFILE</a>
         </div>
         <div class="pull-right">
-            <a href="/Account/LogOff" class="btn btn-default btn-flat">Sign out</a>
+            <a href="/Account/LogOff" class="btn btn-default btn-flat">@FE.Creator.Admin.lang.AppLang.PROFILE_BTN_SIGNOUT</a>
         </div>
     </li>
 </ul>

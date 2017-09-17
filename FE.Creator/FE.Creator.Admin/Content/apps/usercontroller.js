@@ -25,11 +25,11 @@
             ObjectRepositoryDataService.resetPassword(user.id)
             .then(function (data) {
                 Notification.success({
-                    message: 'Password Reset Done',
+                    message: AppLang.USERMGR_PASS_SAVE_DONE,
                     delay: 3000,
                     positionY: 'bottom',
                     positionX: 'right',
-                    title: 'Warn',
+                    title:  AppLang.COMMON_DLG_TITLE_WARN,
                 });
             });
         }
