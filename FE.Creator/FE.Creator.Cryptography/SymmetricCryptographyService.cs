@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,30 +11,45 @@ namespace FE.Creator.Cryptography
 {
     public class SymmetricCryptographyService : ISymmetricCryptographyService
     {
-
+        ILogger logger = LogManager.GetCurrentClassLogger();
         private byte[] getIV(string key)
         {
+            logger.Debug("Start getIV");
+
             byte[] originalKey = Convert.FromBase64String(key);
+            logger.Debug("originalKey : " + originalKey);
+
             int ivLength = BitConverter.ToInt32(originalKey, originalKey.Length - 4);
             byte[] iv = new byte[ivLength];
 
+            logger.Debug("iv : " + Convert.ToBase64String(iv));
             Array.Copy(originalKey, iv, ivLength);
+
+            logger.Debug("End getIV");
 
             return iv;
         }
         private byte[] getKey(string key)
         {
+            logger.Debug("Start getKey");
+            logger.Debug("key : " + key);
+
             byte[] originalKey = Convert.FromBase64String(key);
             int ivLength = BitConverter.ToInt32(originalKey, originalKey.Length - 4);
             byte[] keys = new byte[originalKey.Length - 4 - ivLength];
 
             Array.Copy(originalKey, ivLength, keys, 0,  originalKey.Length - 4 - ivLength);
 
+            logger.Debug("End getKey");
             return keys;
         }
 
         public byte[] DecryptData(byte[] data, string decryptKey)
         {
+            logger.Debug("Start DecryptData");
+            logger.Debug("decryptKey : " + decryptKey);
+            logger.Debug("data : " + Convert.ToBase64String(data));
+
             TripleDESCryptoServiceProvider TDES = new TripleDESCryptoServiceProvider();
             TDES.Key = getKey(decryptKey);
             TDES.IV = getIV(decryptKey);
@@ -48,6 +64,7 @@ namespace FE.Creator.Cryptography
                     {
                         string content = SReader.ReadToEnd();
 
+                        logger.Debug("End DecryptData");
                         return UTF8Encoding.Default.GetBytes(content);
                     }
                 }
@@ -56,6 +73,9 @@ namespace FE.Creator.Cryptography
 
         public byte[] EncryptData(byte[] data, string encryptKey)
         {
+            logger.Debug("Start EncryptData");
+            logger.Debug("encryptKey : " + encryptKey);
+
             using (MemoryStream msstream = new MemoryStream())
             {
                 TripleDESCryptoServiceProvider TDES = new TripleDESCryptoServiceProvider();
@@ -70,6 +90,7 @@ namespace FE.Creator.Cryptography
                         writer.Write(UTF8Encoding.Default.GetString(data));
                     }
 
+                    logger.Debug("End EncryptData");
                     return msstream.ToArray();
                 }
             }

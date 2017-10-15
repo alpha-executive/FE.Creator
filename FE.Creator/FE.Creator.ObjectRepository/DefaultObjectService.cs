@@ -7,12 +7,14 @@ using FE.Creator.ObjectRepository.ServiceModels;
 using FE.Creator.ObjectRepository.EntityModels;
 using System.Data.Entity;
 using FE.Creator.ObjectRepository.Utils;
+using NLog;
 
 namespace FE.Creator.ObjectRepository
 {
     public class DefaultObjectService : IObjectService
     {
         private static object SyncRoot = new object();
+        private static ILogger logger = LogManager.GetCurrentClassLogger();
 
         /// <summary>
         /// Update the object field value according to the parameters provided in ObjectKeyValuePair
@@ -40,6 +42,7 @@ namespace FE.Creator.ObjectRepository
             }
             else
             {
+                logger.Error("Field Object Type is not supported currently : " + field.GetType().Name);
                 throw new NotSupportedException("Field Object Type is not supported currently.");
             }
         }
@@ -101,6 +104,7 @@ namespace FE.Creator.ObjectRepository
                     f.BinaryValue = fValue.GetStrongTypeValue<byte[]>();
                     break;
                 default:
+                    logger.Error(string.Format("{0} is not supported", defField.PrimeDataType.ToString()));
                     throw new NotSupportedException(string.Format("{0} is not supported", defField.PrimeDataType.ToString()));
             }
         }
@@ -154,6 +158,7 @@ namespace FE.Creator.ObjectRepository
                         field = new SingleSelectionGeneralObjectField();
                         break;
                     default:
+                        logger.Error("Field Object Type is not supported currently : " + field.GetType().Name);
                         throw new NotSupportedException("Field Object Type is not supported currently.");
                 }
 
@@ -266,6 +271,7 @@ namespace FE.Creator.ObjectRepository
         /// <returns></returns>
         public int CreateORUpdateGeneralObject(ServiceObject serviceObject)
         {
+            logger.Debug("Start CreateORUpdateGeneralObject");
             lock (SyncRoot)
             {
                 using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
@@ -287,6 +293,7 @@ namespace FE.Creator.ObjectRepository
                             {
                                 objectId = UpdateGeneralObject(currObject, dboContext, serviceObject, goDefinition);
                             }
+                            logger.Debug("objectId : " + objectId);
 
                             trans.Commit();
 
@@ -294,8 +301,13 @@ namespace FE.Creator.ObjectRepository
                         }
                         catch (Exception ex)
                         {
+                            logger.Error(ex);
                             trans.Rollback();
                             throw ex;
+                        }
+                        finally
+                        {
+                            logger.Debug("End CreateORUpdateGeneralObject");
                         }
                     }
                 }
@@ -310,6 +322,7 @@ namespace FE.Creator.ObjectRepository
         /// <returns></returns>
         public int CreateORUpdateObjectDefinition(ObjectDefinition objectDef)
         {
+            logger.Debug("Start CreateORUpdateObjectDefinition");
             lock (SyncRoot)
             {
                 using (var dboContext = EntityContextFactory.GetDBObjectContext())
@@ -334,8 +347,13 @@ namespace FE.Creator.ObjectRepository
                         }
                         catch (Exception ex)
                         {
+                            logger.Error(ex);
                             trans.Rollback();
                             throw ex;
+                        }
+                        finally
+                        {
+                            logger.Debug("End CreateORUpdateObjectDefinition");
                         }
                     }
                 }
@@ -510,6 +528,8 @@ namespace FE.Creator.ObjectRepository
                 {
                     LoadSelctionItems(dboContext, objDefList);
                 }
+
+                logger.Debug("objDefList.Count : " + objDefList.Count);
 
                 return objDefList.Count > 0 ?
                     ObjectConverter.ConvertToObjectDefinitionList(objDefList).First() : null;

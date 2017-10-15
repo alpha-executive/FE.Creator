@@ -1,6 +1,7 @@
 ﻿using FE.Creator.Admin.MVCExtension;
 using FE.Creator.FileStorage;
 using FE.Creator.ObjectRepository.ServiceModels;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
     public class FilesController : ApiController
     {
         IFileStorageService storageService = null;
-        
+        ILogger logger = LogManager.GetCurrentClassLogger(typeof(FilesController));
 
         public FilesController(IFileStorageService storageService)
         {
@@ -47,27 +48,33 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
         // GET: api/Files
         public async Task<HttpResponseMessage> DownloadFile(string id, string parameters = null, bool thumbinal = false)
         {
+            logger.Debug("Start DownloadFile");
             HttpResponseMessage result = null;
 
             if (thumbinal)
             {
+                logger.Debug("get thumbinal image");
                 result = await this.GetFileThumbinal(id, parameters);
             }
             else
             {
+                logger.Debug("get original file content");
                 result = await this.GetFileContent(id, parameters);
             }
 
+            logger.Debug("End DownloadFile");
             return result;
         }
 
         private async Task<HttpResponseMessage> GetFileContent(string id, string parameters = null)
         {
+            logger.Debug("Start GetFileContent");
             HttpResponseMessage result = null;
             byte[] content = await storageService.GetFileContentAsync(id);
 
             if(content != null)
             {
+                logger.Debug("content found on the server storage.");
                 // Serve the file to the client
                 result = Request.CreateResponse(HttpStatusCode.OK);
                 result.Content = new ByteArrayContent(content);
@@ -76,19 +83,23 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
             }
             else
             {
+                logger.Debug("content was not found");
                 result = Request.CreateResponse(HttpStatusCode.NotFound);
             }
-           
+
+            logger.Debug("End GetFileContent");
             return result;
         }
 
         private async Task<HttpResponseMessage> GetFileThumbinal(string id,string parameters = null)
         {
+            logger.Debug("Start GetFileThumbinal");
             HttpResponseMessage result = null;
             byte[] content = await storageService.GetFileThumbinalAsync(id);
 
             if(content != null)
             {
+                logger.Debug("found content on server storage.");
                 result = Request.CreateResponse(HttpStatusCode.OK);
                 result.Content = new ByteArrayContent(content);
                 result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("Inline");
@@ -96,18 +107,22 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
             }
             else
             {
+                logger.Debug("content was not on server storage.");
                 result = Request.CreateResponse(HttpStatusCode.NotFound);
             }
-           
+
+            logger.Debug("End GetFileThumbinal");
             return result;
         }
         // POST: api/FileUpload
         [HttpPost]
         public async Task<IHttpActionResult> Post([FromUri] bool thumbinal = false, [FromUri] bool forContent = false)
-        {  
+        {
+            logger.Debug("Start FileController Post");
             // Check if the request contains multipart/form-data. 
             if (!Request.Content.IsMimeMultipartContent("form-data"))
             {
+                logger.Error("Unsupported media type");
                 return BadRequest("Unsupported media type");
             }
             try
@@ -122,16 +137,21 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
                     string fileName = !string.IsNullOrEmpty(stream.Headers.ContentDisposition.FileName) ?
                                                 stream.Headers.ContentDisposition.FileName : "file.unknown";
 
+                    logger.Info("the raw file name is : " + fileName);
                     fileName = fileName.Replace("\"", "")
                                     .Replace("'", "")
                                     .Replace("@", "_")
                                     .Replace("&", "_")
                                     .Replace(" ", "_");
 
+                    logger.Info("the encoded file name is " + fileName);
                     string extension = fileName.Substring(fileName.LastIndexOf('.'));
 
                     var fileBytes = await stream.ReadAsByteArrayAsync();
                     FileStorageInfo info = await storageService.SaveFileAsync(fileBytes, extension, thumbinal);
+
+                    logger.Info("file " + fileName + " was saved to server storage");
+                    logger.Debug("file save path : " + info.FileName);
 
                     files.Add(new ObjectFileField()
                     {
@@ -149,6 +169,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
                 IHttpActionResult result = forContent ? this.Ok<object>(new { uploaded = 1,  fileName =files[0].FileName, url=files[0].FileUrl})
                     : this.Ok<object>(new { status = "success", files = files });
 
+                logger.Debug("End FileController Post");
                 return result;
             }
             catch (Exception ex)
@@ -160,7 +181,11 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
         // DELETE: api/FileUpload/5
         public void DeleteFile(string id)
         {
+            logger.Debug("Start DeleteFile with id : " + id);
+
             storageService.DeleteFile(id);
+
+            logger.Debug("End DeleteFile");
         }
     }
 }

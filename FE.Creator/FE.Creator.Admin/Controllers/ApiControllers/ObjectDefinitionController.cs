@@ -12,6 +12,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
     using FE.Creator.ObjectRepository;
     using FE.Creator.ObjectRepository.ServiceModels;
     using MVCExtension;
+    using NLog;
 
     /// <summary>
     ///  GET api/objectdefinitions/list/{groupname}
@@ -38,6 +39,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
     public class ObjectDefinitionController : ApiController
     {
         IObjectService objectService = null;
+        ILogger logger = LogManager.GetCurrentClassLogger(typeof(ObjectDefinitionController));
 
         public ObjectDefinitionController(IObjectService objectService)
         {
@@ -46,7 +48,11 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
 
         private Task<IEnumerable<ObjectDefinition>> getObjectDefinitions()
         {
+            logger.Debug("Start getObjectDefinitions");
             var objDefinitions = objectService.GetAllObjectDefinitions();
+            logger.Debug(string.Format("count of the object definitions: {0}", objDefinitions != null ? objDefinitions.Count : 0));
+
+            logger.Debug("End getObjectDefinitions");
             return Task.FromResult<IEnumerable<ObjectDefinition>>(objDefinitions);
         }
 
@@ -60,6 +66,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         [HttpGet]
         public async Task<IHttpActionResult> List(string groupname = null)
         {
+            logger.Debug("Start ObjectDefinitionController.List");
             int groupId = -1;
             if (!string.IsNullOrEmpty(groupname))
             {
@@ -69,7 +76,10 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
                                   select g).FirstOrDefault();
 
                 groupId = foundGroup != null ? foundGroup.GroupID : -1;
+                logger.Debug("groupId = " + groupId);
             }
+
+            logger.Debug("End ObjectDefinitionController.List");
 
             if (groupId == -1)
                 return await this.FindObjectDefintionsByGroup();
@@ -123,12 +133,15 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         // POST: api/ObjectDefinition
         public async Task<IHttpActionResult> Post([FromBody]ObjectDefinition value)
         {
+            logger.Debug("Start Post");
             int objectId = -1;
             if(value != null)
             {
                objectId = objectService.CreateORUpdateObjectDefinition(value);
+                logger.Debug("New object defintion with objectId = " + objectId);
             }
 
+            logger.Debug("End Post");
             return await this.FindObjectDefinition(objectId);
         }
 
@@ -144,7 +157,10 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         // DELETE: api/ObjectDefinition/5
         public void Delete(int id)
         {
+            logger.Debug("Start Delete");
             objectService.DeleteObjectDefinition(id);
+            logger.Debug("object definition id = " + id + " was deleted");
+            logger.Debug("End Delete");
         }
     }
 }

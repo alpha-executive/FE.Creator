@@ -9,6 +9,7 @@ using System.Web.Http.Description;
 namespace FE.Creator.Admin.ApiControllers.Controllers
 {
     using MVCExtension;
+    using NLog;
     using ObjectRepository;
     using ObjectRepository.ServiceModels;
     using System.Threading.Tasks;
@@ -34,6 +35,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
     public class ObjectDefinitionGroupController : ApiController
     {
         IObjectService objectService = null;
+        ILogger logger = LogManager.GetCurrentClassLogger(typeof(ObjectDefinitionGroupController));
 
         public ObjectDefinitionGroupController(IObjectService service)
         {
@@ -78,9 +80,12 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         [ResponseType(typeof(ObjectDefinitionGroup))]
         public async Task<IHttpActionResult> Get(int id)
         {
+            logger.Debug("Start Get : " + id);
             var objDefGroup = await GetObjectDefinitionGroup(id);
 
+            logger.Debug(String.Format("get object definition group: {0} ", objDefGroup != null ? objDefGroup.GroupName : string.Empty));
 
+            logger.Debug("End Get : " + id);
             return this.Ok<ObjectDefinitionGroup>(objDefGroup);
         }
 
@@ -89,27 +94,33 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         [ResponseType(typeof(ObjectDefinitionGroup))]
         public IHttpActionResult Post([FromBody]ObjectDefinitionGroup value)
         {
+            logger.Debug("Start Post ObjectDefinitionGroup");
             if (value != null)
             {
                value.GroupID =  objectService.CreateOrUpdateObjectDefinitionGroup(value);
+                logger.Debug("New Created ObjectDefinitionGroup : " + value.GroupID);
             }
-
+            logger.Debug("End Post ObjectDefinitionGroup");
             return this.Created<ObjectDefinitionGroup>(this.Url.ToString(), value);
         }
 
         // PUT: api/ObjectDefinitionGroup/5
         public void Put(int id, [FromBody]ObjectDefinitionGroup value)
         {
+            logger.Debug("Start Put ObjectDefinitionGroup: " + id);
             if (value != null)
             {
                 objectService.CreateOrUpdateObjectDefinitionGroup(value);
             }
+            logger.Debug("End Put ObjectDefinitionGroup: " + id);
         }
 
         // DELETE: api/ObjectDefinitionGroup/5
         public void Delete(int id)
         {
+            logger.Debug("Start Delete ObjectDefinitionGroup: " + id);
             objectService.SoftDeleteObjectDefintionGroup(id);
+            logger.Debug("End Delete ObjectDefinitionGroup: " + id);
         }
     }
 }

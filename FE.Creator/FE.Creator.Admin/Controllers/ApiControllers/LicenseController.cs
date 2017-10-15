@@ -16,6 +16,7 @@ using FE.Creator.Admin.MVCExtension;
 using FE.Creator.Cryptography;
 using FE.Creator.ObjectRepository.EntityModels;
 using System.Text;
+using NLog;
 
 namespace FE.Creator.Admin.Controllers.ApiControllers
 {
@@ -37,6 +38,8 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
         ISymmetricCryptographyService symmetricCryptoService = null;
         MemoryCache licenseCache = MemoryCache.Default;
 
+        private static ILogger logger = LogManager.GetCurrentClassLogger(typeof(LicenseController));
+
         public LicenseController(IObjectService objectService,
             IRSACryptographyService cryptographysvc,
             ISymmetricCryptographyService symmetricCryptoService)
@@ -48,26 +51,32 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
 
         private string ReadResourceContent(string path)
         {
+            logger.Debug("Start ReadResourceContent");
+            logger.Debug(string.Format("path: {0}", path));
             using (StreamReader reader = new StreamReader(Assembly.GetExecutingAssembly().GetManifestResourceStream(path)))
             {
+                logger.Debug("End ReadResourceContent");
                 return reader != null ? reader.ReadToEnd() : string.Empty;
             }
         }
 
         private int ResolveCategoryGroup(XElement config)
         {
+            logger.Debug("Start ResolveCategoryGroup");
             string group = config.Attribute("group").Value;
             string groupKey = config.Attribute("key").Value;
 
             if (!this.objectService.IsObjectDefinitionGroupExists(group))
             {
-               return this.objectService.CreateOrUpdateObjectDefinitionGroup(new ObjectRepository.ServiceModels.ObjectDefinitionGroup
+                logger.Warn(string.Format("group {0} is not exists.", group));
+                logger.Debug("End ResolveCategoryGroup");
+                return this.objectService.CreateOrUpdateObjectDefinitionGroup(new ObjectRepository.ServiceModels.ObjectDefinitionGroup
                 {
                     GroupKey = groupKey,
                     GroupName = group
                 });
             }
-
+            logger.Debug("End ResolveCategoryGroup");
             return this.objectService.GetObjectDefinitionGroupByName(group).GroupID;
         }
     
@@ -83,23 +92,29 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
                 case "Datetime":
                 case "Number":
                 case "Binary":
+                    logger.Debug("Parse Binary field.");
                     PrimeDefinitionField field = new PrimeDefinitionField();
                     field.PrimeDataType = (ObjectRepository.EntityModels.PrimeFieldDataType)Enum.Parse(typeof(ObjectRepository.EntityModels.PrimeFieldDataType), typeString);
                     field.ObjectDefinitionFieldName = property.Attribute("name").Value;
                     field.ObjectDefinitionFieldKey = property.Attribute("key").Value;
-
+                    logger.Debug(string.Format("{0} = {1}", field.ObjectDefinitionFieldName, field.ObjectDefinitionFieldKey));
                     return field;
                 case "File":
+                    
                     ObjectDefinitionField fileField = new ObjectDefinitionField(ObjectRepository.EntityModels.GeneralObjectDefinitionFieldType.File);
                     fileField.ObjectDefinitionFieldKey = property.Attribute("key").Value;
                     fileField.ObjectDefinitionFieldName = property.Attribute("name").Value;
+                    logger.Debug("Parse File field " + fileField.ObjectDefinitionFieldName);
 
                     return fileField;
                 case "ObjRef":
+                    logger.Debug("Parse ObjRef field.");
                     ObjRefDefinitionField refField = new ObjRefDefinitionField();
                     refField.ObjectDefinitionFieldKey = property.Attribute("key").Value;
                     refField.ObjectDefinitionFieldName = property.Attribute("name").Value;
                     refField.ReferedObjectDefinitionID = this.objectService.GetObjectDefinitionByName(property.Attribute("refName").Value).ObjectDefinitionID;
+
+                    logger.Debug(string.Format("{0} = {1}", refField.ObjectDefinitionFieldName, refField.ReferedObjectDefinitionID));
 
                     return refField;
                 case "SingleSelection":
@@ -115,7 +130,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
                             SelectItemKey = item.Attribute("value").Value
                         });
                     }
-
+                    logger.Debug("Parse SingleSelection field : " + ssField.ObjectDefinitionFieldName);
                     return ssField;
                 default:
                     break;
@@ -126,6 +141,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
 
        private void ResolveEntity(int groupId, XElement entity)
         {
+            logger.Debug("Start ResolveEntity");
             ObjectDefinition definition = new ObjectDefinition();
             
             definition.ObjectDefinitionKey = entity.Attribute("key").Value;
@@ -137,20 +153,22 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
             var currentObjectDefinition = this.objectService.GetObjectDefinitionByName(definition.ObjectDefinitionName);
             definition.IsFeildsUpdateOnly = currentObjectDefinition != null;
 
-            foreach (XElement prop in entity.Descendants("property"))
-            {
-                ObjectDefinitionField objDefField = ParseObjectDefinitionField(prop);
-                if (objDefField != null)
-                {
-                    definition.ObjectFields.Add(objDefField);
-                }
-            }
-
             //if there is already a object there, do not register it.
             if (currentObjectDefinition == null)
             {
+                logger.Warn(string.Format("NOT FOUND {0} in system, create new one", definition.ObjectDefinitionName));
+                foreach (XElement prop in entity.Descendants("property"))
+                {
+                    ObjectDefinitionField objDefField = ParseObjectDefinitionField(prop);
+                    if (objDefField != null)
+                    {
+                        definition.ObjectFields.Add(objDefField);
+                    }
+                }
+
                 this.objectService.CreateORUpdateObjectDefinition(definition);
             }
+            logger.Debug("End ResolveEntity");
         }
 
         private void ProcessConfig(string config)
@@ -158,6 +176,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
             XDocument configDoc = XDocument.Parse(config);
             XElement configElement = configDoc.Descendants("config").FirstOrDefault();
             if(configElement != null){
+                logger.Info("process the system module config file.");
                 int groupId = ResolveCategoryGroup(configElement);
                 if (groupId > 0)
                 {
@@ -173,19 +192,27 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
         {
             try
             {
+                logger.Debug("Start IsValidLicense");
                 XDocument licenseDoc = XDocument.Load(new StringReader(license));
                 string grantlist = licenseDoc.Descendants("grantlist").FirstOrDefault().ToString();
                 string productKey = licenseDoc.Descendants("productkey").FirstOrDefault().Value;
 
+                logger.Debug("productKey = " + productKey);
                 byte[] contentToVerified = UTF8Encoding.Default.GetBytes(grantlist);
+
+                logger.Debug("SYS_RSA_PUBLIC_KEY = " + SYS_RSA_PUBLIC_KEY);
                 bool isValid = cryptoGraphysvc.VerifySignedHash(contentToVerified,
                     Convert.FromBase64String(productKey),
                     SYS_RSA_PUBLIC_KEY);
 
+                logger.Warn(string.Format("Product Key is Valid ? {0}", isValid));
+
+                logger.Debug("End IsValidLicense");
                 return isValid;
             }
             catch(Exception ex)
-            {   
+            {
+                logger.Error(ex);
             }
 
             return false;
@@ -202,6 +229,8 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
         }
         private void UpdateSystemConfig(string license)
         {
+            logger.Debug("Start UpdateSystemConfig");
+
             ServiceObject svObject = new ServiceObject();
             svObject.ObjectName = "FE Configuration";
             svObject.ObjectOwner = RequestContext.Principal.Identity.Name;
@@ -209,6 +238,10 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
             svObject.UpdatedBy = RequestContext.Principal.Identity.Name;
             svObject.CreatedBy = RequestContext.Principal.Identity.Name;
             svObject.ObjectDefinitionId = GetAppObjectDefintionIdByName("AppConfig");
+
+            logger.Debug(string.Format("svObject.ObjectName = {0}", svObject.ObjectName));
+            logger.Debug(string.Format("svObject.ObjectDefinitionId = {0}", svObject.ObjectDefinitionId));
+            logger.Debug(string.Format("svObject.ObjectOwner = {0}", svObject.ObjectOwner));
 
             //language
             svObject.Properties.Add(new ObjectKeyValuePair()
@@ -299,11 +332,14 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
             });
 
             objectService.CreateORUpdateGeneralObject(svObject);
+            logger.Debug("End UpdateSystemConfig");
         }
 
         private void RegistApplication(string license)
         {
+            logger.Debug("Start RegistApplication");
             string licenseMap = ReadResourceContent("FE.Creator.Admin.Config.Module.LicenseMaps.xml");
+            logger.Debug(string.Format("licenseMap = {0}", licenseMap));
             XDocument document = XDocument.Parse(licenseMap);
             var files = from f in document.Descendants("module")
                         select new
@@ -311,14 +347,16 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
                             LicenseId = f.Attribute("licenseId").Value,
                             FileUrl = f.Value
                         };
-
+            
             foreach(var f in files)
             {
                 string configureContent = ReadResourceContent(f.FileUrl);
+                logger.Debug(string.Format("configure content = {0}", configureContent));
                 ProcessConfig(configureContent);
             }
 
             UpdateSystemConfig(license);
+            logger.Debug("End RegistApplication");
         }
         
         private string LoadLicenseFromConfig()
@@ -333,7 +371,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
                 .FirstOrDefault()
                 .GetPropertyValue<PrimeObjectField>("license")
                 .GetStrongTypeValue<string>();
-
+            logger.Debug(string.Format("license data from DB: {0}", licenseData));
             return IsValidLicense(licenseData)? licenseData : SYS_EMPTY_LICENSE_FILE;
         }
 
@@ -342,11 +380,13 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
             XDocument license = licenseCache.Get("license") as XDocument;
             if(license == null)
             {
+                logger.Debug("License is not in Cache, try in the DB.");
                 string licenseContent = LoadLicenseFromConfig();
                 license = XDocument.Load(new StringReader(licenseContent));
 
                 if (license != null)
                 {
+                    logger.Debug(String.Format("get license from DB: {0}", license));
                     licenseCache.Add("license", license, DateTimeOffset.MaxValue);
                 }
             }
@@ -374,9 +414,11 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
         [HttpPost]
         public async Task<IHttpActionResult> Post()
         {
+            logger.Debug("Start LicenseController.Post");
             // Check if the request contains multipart/form-data. 
             if (!Request.Content.IsMimeMultipartContent("form-data"))
             {
+                logger.Error("Unsupported media type");
                 return BadRequest("Unsupported media type");
             }
 
@@ -387,12 +429,13 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
                 var fileBytes = await stream.ReadAsByteArrayAsync();
                 string license = System.Text.UTF8Encoding.Default.GetString(fileBytes);
 
+                logger.Debug(string.Format("license : {0}", license));
                 if (IsValidLicense(license))
                 {
                     RegistApplication(license);
                 }
             }
-
+            logger.Debug("End LicenseController.Post");
             return this.Ok();
         }
 

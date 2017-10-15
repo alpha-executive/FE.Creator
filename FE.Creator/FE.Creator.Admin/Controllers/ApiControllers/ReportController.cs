@@ -1,5 +1,6 @@
 ﻿using FE.Creator.ObjectRepository;
 using FE.Creator.ObjectRepository.ServiceModels;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
     public class ReportController : ApiController
     {
         IObjectService objectService = null;
+        ILogger logger = LogManager.GetCurrentClassLogger(typeof(ReportController));
         public ReportController(IObjectService objectService)
         {
             this.objectService = objectService;
@@ -46,6 +48,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
         [ResponseType(typeof(double[]))]
         public IHttpActionResult TargetStatusReport()
         {
+            logger.Debug("Start TargetStatusReport");
             int targetDefId = FindObjectDefinitionIdByName("Target");
             var targetList = objectService.GetAllSerivceObjects(targetDefId, new string[] { "targetStatus" });
 
@@ -68,7 +71,8 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
                                                         .Average(s => s.GetPropertyValue<PrimeObjectField>("taskStatus")
                                                                         .GetStrongTypeValue<int>())
                                                     : 0;
-
+            logger.Debug("taskPercentage : " + taskPercentage);
+            logger.Debug("End TargetStatusReport");
             return this.Ok(new double[] { targetPercentage,
                 taskPercentage });                                            
         }
@@ -77,6 +81,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
         [ResponseType(typeof(List<int[]>))]
         public IHttpActionResult YOYObjectUsageReport(string Id)
         {
+            logger.Debug("Start YOYObjectUsageReport");
             List<int[]> seriesData = new List<int[]>();
             if (!string.IsNullOrEmpty(Id))
             {
@@ -89,6 +94,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
                 }
             }
 
+            logger.Debug("End YOYObjectUsageReport");
             return this.Ok(seriesData);
         }
 

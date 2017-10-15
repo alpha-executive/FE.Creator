@@ -13,6 +13,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
     using System.Threading.Tasks;
     using System.Web.Http.Description;
     using MVCExtension;
+    using NLog;
 
     /// <summary>
     /// API for service objects
@@ -56,7 +57,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
     public class GeneralObjectController : ApiController
     {
         IObjectService objectService = null;
-
+        ILogger logger = LogManager.GetCurrentClassLogger(typeof(GeneralObjectController));
         public GeneralObjectController(IObjectService objectService)
         {
             this.objectService = objectService;
@@ -65,11 +66,17 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
 
         private ObjectDefinition FindObjectDefinitionByName(string defname)
         {
+            logger.Debug("Start FindObjectDefinitionByName");
+
             var objDefs = objectService.GetAllObjectDefinitions();
+
+            logger.Debug("objDefs.count : " + objDefs.Count);
+
             var findObjDef = (from def in objDefs
                               where def.ObjectDefinitionName.Equals(defname, StringComparison.InvariantCultureIgnoreCase)
                               select def).FirstOrDefault();
 
+            logger.Debug("End FindObjectDefinitionByName");
             return findObjDef;
         }
         /// <summary>
@@ -84,6 +91,8 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         [HttpGet]
         public async Task<IHttpActionResult> List(string definitionname, string parameters = null, int? pageIndex = 1, int? pageSize = int.MaxValue)
         {
+            logger.Debug("Start GeneralObjectController.List");
+
             if (!pageIndex.HasValue || pageIndex <= 0)
                 pageIndex = 1;
 
@@ -95,8 +104,13 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
 
             if (findObjDef != null)
             {
+                logger.Debug("find object definition: " + findObjDef.ObjectDefinitionName);
+
                 return await this.FindServiceObjects(findObjDef.ObjectDefinitionID, parameters,pageIndex, pageSize, null);
             }
+
+            logger.Error("object definition was not found");
+            logger.Debug("End GeneralObjectController.List");
 
             return this.NotFound();
         }
@@ -110,14 +124,19 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         [HttpGet]
         public async Task<IHttpActionResult> CountObjects(string definitionname)
         {
+            logger.Debug("Start CountObjects");
             var findObjDef = FindObjectDefinitionByName(definitionname);
 
             if (findObjDef != null)
             {
                 int findObjectsCount = await this.CountObjects(findObjDef.ObjectDefinitionID);
-             
+                logger.Debug("findObjectsCount : " + findObjectsCount);
+
                 return this.Ok<int>(findObjectsCount);
             }
+
+            logger.Error("findObjDef is null");
+            logger.Debug("End CountObjects");
 
             return this.NotFound();
         }
@@ -132,12 +151,15 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         public async Task<int> CountObjects(int id, string filters = null) {
             int count = 0;
 
+            logger.Debug("Start CountObjects");
             if (string.IsNullOrEmpty(filters))
             {
+                logger.Debug("no filters");
                 count = objectService.GetGeneralObjectCount(id);
             }
            else
             {
+                logger.Debug("filters : " + filters);
                 List<ObjectKeyValuePair> filterKps = ParseFilterKeyValuePairs(filters);
                 var fields = from kv in filterKps
                              select kv.KeyName;
@@ -150,14 +172,17 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
 
                 count = foundObjects.Count;
             }
-
+            logger.Debug("find count : " + count);
+            logger.Debug("End CountObjects");
             return count;
         }
 
         private Task<IEnumerable<ServiceObject>> getAllServiceObjectAsync(int id, int pageIndex, int pageSize, string[] properties = null)
         {
+            logger.Debug("Start getAllServiceObjectAsync");
             var objectList = objectService.GetServiceObjects(id, properties,pageIndex, pageSize);
 
+            logger.Debug("End getAllServiceObjectAsync");
             return Task.FromResult<IEnumerable<ServiceObject>>(objectList);
         }
 
@@ -194,7 +219,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
                 pageSize = int.MaxValue;
 
             List<ServiceObject> foundObjects = await FilterServiceObjects(id, parameters, pageIndex, pageSize, filters);
-
+            logger.Debug(string.Format("foundObjects {0}", foundObjects != null ? foundObjects.Count : 0));
             return this.Ok<IEnumerable<ServiceObject>>(foundObjects);
         }
 
@@ -203,11 +228,12 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             int? pageSize,
             List<ObjectKeyValuePair> filters)
         {
+            logger.Debug("Start FilterServiceObjects");
             var objectList = await getAllServiceObjectAsync(id,
                             1,
                             int.MaxValue,
                             string.IsNullOrEmpty(parameters) ? null : parameters.Split(new char[] { ',' }));
-
+            logger.Debug(string.Format("filters : {0}",  filters));
             List<ServiceObject> foundObjects = new List<ServiceObject>();
             if (filters != null)
             {
@@ -237,6 +263,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
                 foundObjects.AddRange(objectList);
             }
 
+            logger.Debug("End FilterServiceObjects");
             return foundObjects
                 .Skip((pageIndex.Value - 1) * pageSize.Value)
                 .Take(pageSize.Value)
@@ -262,10 +289,12 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         [HttpGet]
         public IHttpActionResult FindServiceObject(int id, string parameters = null)
         {
+            logger.Debug("Start FindServiceObject");
             var obj = objectService.GetServiceObjectById(id, 
                 string.IsNullOrEmpty(parameters) 
                 ? null : parameters.Split(new char[] { ',' }));
-
+            logger.Debug(string.Format("obj : {0}", obj != null ? obj.ObjectName : string.Empty));
+            logger.Debug("End FindServiceObject");
             return this.Ok<ServiceObject>(obj);
         }
 
@@ -305,6 +334,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         [ResponseType(typeof(ServiceObject))]
         public async Task<IHttpActionResult> FindServiceObjectsByFilter(string definitionname, string parameters = null, int? pageIndex = 1, int? pageSize = int.MaxValue, string filters = null)
         {
+            logger.Debug("Start FindServiceObjectsByFilter");
             var findObjDef = FindObjectDefinitionByName(definitionname);
             if (findObjDef != null)
             {
@@ -317,14 +347,27 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
                     filterKps.Count > 0 ? filterKps : null);
             }
 
+            logger.Error("findObjDef is null");
+            logger.Debug("End FindServiceObjectsByFilter");
+
             return this.NotFound();
         }
 
         private void EnsureServiceProperties(ServiceObject svcObject)
         {
-            ObjectDefinition objDef =  objectService.GetObjectDefinitionById(svcObject.ObjectDefinitionId);
+            logger.Debug("Start EnsureServiceProperties");
+            ObjectDefinition objDef = objectService.GetObjectDefinitionById(svcObject.ObjectDefinitionId);
             List<ObjectKeyValuePair> removedProperties = new List<ObjectKeyValuePair>();
+            if (objDef != null)
+            {
+                logger.Debug("objDef : " + objDef.ObjectDefinitionName);
+            }
+            else
+            {
+                logger.Error("objDef is null");
+            }
 
+            logger.Debug("svcObject.Properties.Count: " + svcObject.Properties.Count);
             for(int i=0; i<svcObject.Properties.Count; i++)
             {
                 ObjectKeyValuePair property = svcObject.Properties[i];
@@ -362,6 +405,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
                             break;
                         default:
                             //not supported yet.
+                            logger.Error("Not supported property : " + property.KeyName);
                             removedProperties.Add(property);
                             break;
                     }
@@ -376,15 +420,19 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             {
                 svcObject.Properties.Remove(p);
             }
+
+            logger.Debug("End EnsureServiceProperties");
         }
 
         private ServiceObject InsertOrUpdateServiceObject(ServiceObject value, bool isUpdate)
         {
+            logger.Debug("Start InsertOrUpdateServiceObject");
             if (value != null)
             {
                 //only for create
                 if (!isUpdate)
                 {
+                    logger.Debug("create new object");
                     value.CreatedBy = RequestContext.Principal.Identity.Name;
                     value.ObjectOwner = RequestContext.Principal.Identity.Name;
                 }
@@ -392,12 +440,15 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
                 value.UpdatedBy = RequestContext.Principal.Identity.Name;
                 EnsureServiceProperties(value);
                 int objectId = objectService.CreateORUpdateGeneralObject(value);
+                logger.Debug("new object id : " + objectId);
                 var properties = (from kv in value.Properties
                                   select kv.KeyName).ToArray<string>();
                 
                return objectService.GetServiceObjectById(objectId, properties);
             }
 
+            logger.Error("value is null");
+            logger.Debug("End InsertOrUpdateServiceObject");
             return value;
         }
         /// <summary>
@@ -406,7 +457,10 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         [ResponseType(typeof(ServiceObject))]
         public IHttpActionResult Post([FromBody]ServiceObject value)
         {
+            logger.Debug("Start GeneralObjectController.Post");
             ServiceObject postResult = InsertOrUpdateServiceObject(value, false);
+
+            logger.Debug("End GeneralObjectController.Post");
             return this.Created<ServiceObject>(Request.RequestUri, postResult);
         }
 
@@ -418,22 +472,11 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         [ResponseType(typeof(ServiceObject))]
         public IHttpActionResult Put(int id, [FromBody]ServiceObject value)
         {
+            logger.Debug("Start GeneralObjectController.Put");
             ServiceObject putResult = InsertOrUpdateServiceObject(value, true);
 
+            logger.Debug("End GeneralObjectController.Put");
             return this.Ok<ServiceObject>(putResult);
-        }
-
-        /// <summary>
-        /// POST:  api/objects/edit/{definitionname}
-        /// </summary>
-        /// <param name="definitionname"></param>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        [HttpPost]
-        [ResponseType(typeof(ServiceObject))]
-        public async Task<IHttpActionResult> Edit(string definitionname, [FromBody]ServiceObject obj)
-        {
-            return this.Ok<ServiceObject>(null);
         }
 
 
@@ -443,7 +486,10 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         /// <param name="id"></param>
         public void Delete(int id)
         {
+            logger.Debug("Start GeneralObjectController.Delete");
+            logger.Debug("delete object : " + id);
             objectService.DeleteServiceObject(id);
+            logger.Debug("End GeneralObjectController.Delete");
         }
     }
 }

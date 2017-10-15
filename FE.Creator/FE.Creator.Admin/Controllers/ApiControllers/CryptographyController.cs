@@ -2,6 +2,7 @@
 using FE.Creator.Cryptography;
 using FE.Creator.ObjectRepository;
 using FE.Creator.ObjectRepository.ServiceModels;
+using NLog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,9 +30,10 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
         ISymmetricCryptographyService cryptoservice = null;
         IRSACryptographyService rsaCryptoService = null;
         IObjectService objectService = null;
-
+        ILogger logger = LogManager.GetCurrentClassLogger(typeof(CryptographyController));
         private string GetSystemCryptographKeys()
         {
+            logger.Debug("Start GetSystemCryptographKeys...");
             var objDefs = objectService.GetAllObjectDefinitions();
             var findObjDef = (from def in objDefs
                               where def.ObjectDefinitionName.Equals("AppConfig", StringComparison.InvariantCultureIgnoreCase)
@@ -40,7 +42,8 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
             var svcObjects = objectService.GetServiceObjects(findObjDef.ObjectDefinitionID, 
                 new string[]{ "cryptoSecurityKey" }, 1, 1);
             string cryptoKey = svcObjects[0].GetPropertyValue<PrimeObjectField>("cryptoSecurityKey").GetStrongTypeValue<string>();
-
+            logger.Debug("get cryptoKey of length　" + cryptoKey.Length);
+            logger.Debug("End GetSystemCryptographKeys");
             return cryptoKey;
         }
 
@@ -56,11 +59,13 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
         [HttpGet]
         public HttpResponseMessage GeneratePrivateKeyPairs()
         {
+            logger.Debug("Start GeneratePrivateKeyPairs");
             HttpResponseMessage result = null;
             byte[] privateKey = rsaCryptoService.getEncryptionKeys();
 
             if (privateKey != null)
             {
+                logger.Debug("privateKey is not null");
                 result = Request.CreateResponse(HttpStatusCode.OK);
                 result.Content = new ByteArrayContent(privateKey);
                 result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
@@ -68,9 +73,11 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
             }
             else
             {
+                logger.Debug("privateKey is null");
                 result = Request.CreateResponse(HttpStatusCode.NotFound);
             }
 
+            logger.Debug("End GeneratePrivateKeyPairs");
             return result;
         }
 
@@ -78,9 +85,14 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
         [ResponseType(typeof(GenericDataModel))]
         public IHttpActionResult EncryptData([FromBody]GenericDataModel data)
         {
+            logger.Debug("Start EncryptData");
             byte[] bdata = System.Text.UTF8Encoding.Default.GetBytes(data.StringData);
-            byte[] sdata = cryptoservice.EncryptData(bdata, GetSystemCryptographKeys());
+            logger.Debug("bdata length of " + bdata.Length);
 
+            byte[] sdata = cryptoservice.EncryptData(bdata, GetSystemCryptographKeys());
+            logger.Debug("sdata length of " + sdata.Length);
+
+            logger.Debug("End EncryptData");
             return this.Created<GenericDataModel>(Request.RequestUri, new GenericDataModel
             {
                 StringData = Convert.ToBase64String(sdata)
@@ -91,9 +103,14 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
         [ResponseType(typeof(GenericDataModel))]
         public IHttpActionResult DecryptData([FromBody]GenericDataModel data)
         {
+            logger.Debug("Start DecryptData");
             byte[] bdata = Convert.FromBase64String(data.StringData);
-            byte[] sdata = cryptoservice.DecryptData(bdata, GetSystemCryptographKeys());
+            logger.Debug("bdata length of " + bdata.Length);
 
+            byte[] sdata = cryptoservice.DecryptData(bdata, GetSystemCryptographKeys());
+            logger.Debug("sdata length of " + sdata.Length);
+
+            logger.Debug("End DecryptData");
             return this.Created<GenericDataModel>(Request.RequestUri,
                 new GenericDataModel()
                 {
