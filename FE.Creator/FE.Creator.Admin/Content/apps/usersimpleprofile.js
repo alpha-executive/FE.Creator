@@ -34,19 +34,43 @@
     function loadApplicationTheme() {
         $.ajax({
             url: "/api/objects/FindServiceObjectsByFilter/AppConfig/"
-               + ["systemTheme"].join(),
+               + ["systemTheme","pullMessageFromPublisher"].join(),
             dataType: "json",
             success: function (data) {
-                if (Array.isArray(data) && data.length == 1) {
+                if (Array.isArray(data) && data.length > 0) {
                     var theme = getServiceObjectPropertyValue(data[0], "systemTheme");
                     if (theme != null
                         && theme.value != null 
                         && theme.value != "") {
                         applyTheme(theme.value);
                     }
+
+                    var pullMessageFromPublisher = getServiceObjectPropertyValue(data[0], "pullMessageFromPublisher");
+
+                    if (pullMessageFromPublisher.value > 0) {
+                        //load the provider updates.
+                        loadProviderUpdates();
+                    }
+
+                    //load the system events.
+                    loadSystemEvents();
                 }
             }
         });
+    }
+
+    function getErrorLevelIconStyles(level) {
+        if (level === 0) {
+            return "fa-times-circle text-red";
+        }
+        if (level === 1) {
+            return "fa-warning text-yellow";
+        }
+        if (level === 2) {
+            return "fa-info-circle text-blue";
+        }
+
+        return "fa-info-circle text-blue";
     }
     function loadUserRecentTasks() {
         $.ajax({
@@ -58,11 +82,12 @@
                 if (Array.isArray(data) && data.length > 0) {
                     if (data.length > 5) {
                         $("#tasks_on_menu").find(".taskcount").text("5+");
-                        $("#tasks_on_menu").find(".header").text("You have 5 more tasks");
+                        $("#tasks_on_menu").find(".header").text(
+                            AppLang.getFormatString(AppLang.INDEX_TASK_FMT, ["5"]));
                     }
                     else {
                         $("#tasks_on_menu").find(".taskcount").text(data.length);
-                        $("#tasks_on_menu").find(".header").text("You have"+ data.length +"tasks");
+                        $("#tasks_on_menu").find(".header").text(AppLang.getFormatString(AppLang.INDEX_TASK_FMT, [data.length.toString()]));
                     }
                     
                    
@@ -94,6 +119,76 @@
                                         "</a>" +
                                     "</li>";
                         $("#tasks_on_menu").find(".menu").append(mitem);
+                    }
+                }
+            }
+        });
+    }
+    function loadSystemEvents() {
+        var loadEventCount = 5;
+        $.ajax({
+            url: "/Home/LatestSystemEvent",
+            dataType: "json",
+            data: { count: 5 },
+            type: "POST", 
+            success: function (data) {
+                if (Array.isArray(data)
+                    && data.length > 0) {
+                    $("#event_counter").text(data.length.toString());
+                    $("#event_updates")
+                           .find(".header")
+                           .text(AppLang.getFormatString(AppLang.INDEX_EVENT_COUNTER_MSG_FMT, [data.length.toString()]));
+
+
+                    for (var i = 0; i < data.length; i++) {
+                        var item =  "<li>" +
+                                            "<a href=\"#\">"
+                                               + "<i class=\"fa " + getErrorLevelIconStyles(data[i].eventLevel) + "\"></i>" + data[i].EventTitle
+                                            + "</a>"
+                                        + "</li>"
+
+                        $("#event_updates").find(".menu").append(item);
+                    }
+                }
+            }
+        });
+    }
+    function loadProviderUpdates() {
+        $.ajax({
+            url: "/Home/ProviderNotification",
+            dataType: "json",
+            success: function (data) {
+                if (Array.isArray(data) 
+                     && data.length > 0) {
+
+                    if (data.length > 5) {
+                        $("#msg_count").text("5+");
+                        $("#provider_updates")
+                            .find(".header")
+                            .text(AppLang.getFormatString(AppLang.INDEX_PROVIDER_MESSAGE_FMT, ["5+"]));
+                    }
+                    else {
+                        $("#msg_count").text(data.length);
+                        $("#provider_updates")
+                            .find(".header")
+                            .text(AppLang.getFormatString(AppLang.INDEX_PROVIDER_MESSAGE_FMT, [data.length.toString()]));
+                    }
+
+                    for (var i = 0; i < data.length; i++) {
+                        var item = "<li>" +
+                                        "<a href=\"" + data[i].ActionUrl + "\">" +
+                                            "<div class=\"pull-left\">" +
+                                                  "<img src=\"" + data[i].ImageSrc + "\" class=\"img-circle\">" +
+                                            "</div>" +
+                                            "<h4>" +
+                                                 data[i].Notifier
+                                                 + "<small><i class=\"fa fa-clock-o\"></i> " + data[i].EventTime + "</small>" +
+                                            "</h4>" +
+                                            "<p>" + data[i].NotifyDesc + "</p>" +
+                                         "</a>" +
+                                   "</li>";
+
+                        $("#provider_updates").find(".menu").append(item);
                     }
                 }
             }

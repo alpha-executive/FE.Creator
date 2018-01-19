@@ -261,11 +261,13 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AngularViewModels.cs" />
+    <Compile Include="Models\AppEventModel.cs" />
     <Compile Include="Models\CKUploadModels.cs" />
     <Compile Include="Models\GenericDataModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LicenseViewModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ProviderNotification.cs" />
     <Compile Include="MVCExtension\ObjectDefintionConverter.cs" />
     <Compile Include="MVCExtension\UnityDependencyResolver.cs" />
     <Compile Include="MVCExtension\UnknownErrorFilterAttribute.cs" />
@@ -285,7 +287,9 @@
     <EmbeddedResource Include="Config\Module\Efficiency\AccountManagement.xml" />
     <EmbeddedResource Include="Config\Module\Efficiency\Content.xml" />
     <EmbeddedResource Include="Config\Module\Efficiency\Task.xml" />
-    <EmbeddedResource Include="Config\Module\SystemConfig\AppConfig.xml" />
+    <EmbeddedResource Include="Config\Module\SystemConfig\AppConfig.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <Content Include="Content\adminlte-2.3.6\bootstrap\css\bootstrap.css" />
     <Content Include="Content\adminlte-2.3.6\bootstrap\css\bootstrap.min.css" />
     <Content Include="Content\adminlte-2.3.6\bootstrap\css\weather-icons-wind.css" />

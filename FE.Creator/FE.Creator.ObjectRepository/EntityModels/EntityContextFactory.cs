@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NLog;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -9,9 +10,11 @@ namespace FE.Creator.ObjectRepository.EntityModels
 {
    internal class EntityContextFactory
     {
+        private static ILogger logger = LogManager.GetCurrentClassLogger(); 
         internal static DBObjectContext GetDBObjectContext()
         {
             string dbProvider = ConfigurationManager.AppSettings["databaseprovider"];
+            logger.Debug("dbProvider = " + dbProvider.ToLower());
             switch (dbProvider.ToLower())
             {
                 case "mysql":

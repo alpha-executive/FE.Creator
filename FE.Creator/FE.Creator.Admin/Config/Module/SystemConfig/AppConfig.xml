@@ -12,4 +12,13 @@
       <property name="license" key="FE_COL_SYS_LICENSE" type="String" displayOrder="8"></property>
     </properties>
   </entity>
+  <entity name="AppEvent" key="FE_SYS_APPEVENT">
+    <properties>
+      <property name="eventTitle" key="FE_COL_SYS_EVT_TITLE" type="String" displayOrder="1"></property>
+      <property name="eventDetails" key="FE_COL_SYS_EVT_DETAILS" type="String" displayOrder="2"></property>
+      <property name="eventDateTime" key="FE_COL_SYS_EVT_DATETIME" type="Datetime" displayOrder="3"></property>
+      <property name="eventLevel" key="FE_COL_SYS_EVT_LEVEL" type="Integer" displayOrder="4"></property>
+      <property name="eventOwner" key="FE_COL_SYS_EVT_OWNER" type="String" displayOrder="5"></property>
+    </properties>
+  </entity>
 </config>

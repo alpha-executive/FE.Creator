@@ -84,6 +84,18 @@ namespace FE.Creator.Admin.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    try
+                    {
+                        LogEvent(objectService,
+                            model.Email,
+                            AppEventModel.EnumEventLevel.Information,
+                            lang.AppLang.EVENT_APP_EVENT_USERLOGIN,
+                            string.Format(lang.AppLang.EVENT_APP_EVENT_LOGIN_DESC, model.Email));
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Error(ex);
+                    }
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -91,6 +103,18 @@ namespace FE.Creator.Admin.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
+                    try
+                    {
+                        LogEvent(objectService,
+                            model.Email,
+                            AppEventModel.EnumEventLevel.Warning,
+                            lang.AppLang.EVENT_APP_EVENT_LOGIN_FAILED,
+                            string.Format(lang.AppLang.EVENT_APP_EVENT_LOGIN_FAILEDDESC, model.Email));
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Error(ex);
+                    }
                     ModelState.AddModelError("", "Invalid login attempt.");
                     return View(model);
             }
@@ -163,6 +187,19 @@ namespace FE.Creator.Admin.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    try
+                    {
+                        LogEvent(objectService,
+                            model.Email,
+                            AppEventModel.EnumEventLevel.Warning,
+                            lang.AppLang.EVENT_APP_EVENT_NEWUSER,
+                            string.Format(lang.AppLang.EVNET_APP_EVENT_NEWUSER_DESC, model.Email));
+                    }
+                    catch(Exception ex)
+                    {
+                        logger.Error(ex);
+                    }
+
                     logger.Info("Register user succeed!");
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     logger.Info("New user signed in.");
@@ -346,6 +383,19 @@ namespace FE.Creator.Admin.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    try
+                    {
+                        LogEvent(objectService,
+                            loginInfo.Email,
+                            AppEventModel.EnumEventLevel.Information,
+                            lang.AppLang.EVENT_APP_EVENT_USERLOGIN,
+                            string.Format(lang.AppLang.EVENT_APP_EVENT_LOGIN_DESC, loginInfo.Email));
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Error(ex);
+                    }
+       
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -384,6 +434,19 @@ namespace FE.Creator.Admin.Controllers
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
+                    try
+                    {
+                        LogEvent(objectService,
+                            model.Email,
+                            AppEventModel.EnumEventLevel.Warning,
+                            lang.AppLang.EVENT_APP_EVENT_NEWUSER,
+                            string.Format(lang.AppLang.EVNET_APP_EVENT_NEWUSER_DESC, model.Email));
+                    }
+                    catch (Exception ex)
+                    {
+                        logger.Error(ex);
+                    }
+
                     result = await UserManager.AddLoginAsync(user.Id, info.Login);
                     if (result.Succeeded)
                     {

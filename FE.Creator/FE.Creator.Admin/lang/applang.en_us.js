@@ -5,7 +5,7 @@
             return format;
         }
 
-        return format.replace("/{\d+}/g", function (match, number) {
+        return format.replace(/{(\d+)}/g, function (match, number) {
             return typeof params[number] != 'undefined'
                    ? params[number]
                    : match;
@@ -27,6 +27,9 @@
     INDEX_REPORT_NAME_IMGS: "Images",
     INDEX_REPORT_NAME_TARGET: "Target",
     INDEX_REPORT_NAME_TASK: "Task",
+    INDEX_PROVIDER_MESSAGE_FMT: "You have {0} messages",
+    INDEX_EVENT_COUNTER_MSG_FMT: "You have {0} latest events", 
+    INDEX_TASK_FMT : "You have {0} more tasks",
     BOOK_INDEX_ROOT_FOLDER: "Home",
     BOOK_INDEX_NEW_FOLDER: "New Folder",
     BOOK_INDEX_NEW_DOCUMENT: "New Document",

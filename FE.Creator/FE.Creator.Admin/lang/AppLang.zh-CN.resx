@@ -375,6 +375,45 @@
   <data name="DOCUMENT_TH_SIZE_KB" xml:space="preserve">
     <value>大小 (KB)</value>
   </data>
+  <data name="EVENT_APP_ACCESS_URL_ERROR" xml:space="preserve">
+    <value>访问连接{0}出错</value>
+  </data>
+  <data name="EVENT_APP_ERROR" xml:space="preserve">
+    <value>系统错误</value>
+  </data>
+  <data name="EVENT_APP_EVENT" xml:space="preserve">
+    <value>系统事件</value>
+  </data>
+  <data name="EVENT_APP_EVENT_LOGIN_DESC" xml:space="preserve">
+    <value>{0}登录系统</value>
+  </data>
+  <data name="EVENT_APP_EVENT_LOGIN_FAILED" xml:space="preserve">
+    <value>用户登录系统失败</value>
+  </data>
+  <data name="EVENT_APP_EVENT_LOGIN_FAILEDDESC" xml:space="preserve">
+    <value>{0} 登录系统失败</value>
+  </data>
+  <data name="EVENT_APP_EVENT_NEWUSER" xml:space="preserve">
+    <value>系统有新的注册用户</value>
+  </data>
+  <data name="EVENT_APP_EVENT_TYPE_ERROR" xml:space="preserve">
+    <value>错误</value>
+  </data>
+  <data name="EVENT_APP_EVENT_TYPE_INFO" xml:space="preserve">
+    <value>信息</value>
+  </data>
+  <data name="EVENT_APP_EVENT_TYPE_WARNING" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="EVENT_APP_EVENT_USERLOGIN" xml:space="preserve">
+    <value>用户登录系统</value>
+  </data>
+  <data name="EVENT_APP_UNKOWN_ERROR" xml:space="preserve">
+    <value>发生未知的系统错误</value>
+  </data>
+  <data name="EVNET_APP_EVENT_NEWUSER_DESC" xml:space="preserve">
+    <value>用户{0}注册到系统</value>
+  </data>
   <data name="IMAGEMGR_ALBUM" xml:space="preserve">
     <value>相册</value>
   </data>
@@ -416,6 +455,15 @@
   </data>
   <data name="IMAGEMGR_VIEW_MORE_IMGS" xml:space="preserve">
     <value>查看更多图片</value>
+  </data>
+  <data name="INDEX_EVENT_COUNTER_MSG" xml:space="preserve">
+    <value>系统有{0}个新的事件</value>
+  </data>
+  <data name="INDEX_NOTIFY_DEFAULT_MSG" xml:space="preserve">
+    <value>FEConsole V1.0 现在正式上线了!</value>
+  </data>
+  <data name="INDEX_NOTIFY_DEFAULT_PROVIDER" xml:space="preserve">
+    <value>本地系统</value>
   </data>
   <data name="INDEX_REPORT_BOOKS" xml:space="preserve">
     <value>书籍</value>
@@ -511,7 +559,7 @@
     <value>文章</value>
   </data>
   <data name="LAYOUT_NAV_SYSCONF" xml:space="preserve">
-    <value>系统配置</value>
+    <value>系统</value>
   </data>
   <data name="LAYOUT_NAV_SYSUSR" xml:space="preserve">
     <value>系统用户</value>
@@ -536,6 +584,9 @@
   </data>
   <data name="LAYOUT_SUBTITLE" xml:space="preserve">
     <value>更好的体验!</value>
+  </data>
+  <data name="LAYOUT_SYSTEM_SETTINGS" xml:space="preserve">
+    <value>系统设置</value>
   </data>
   <data name="LAYOUT_VERSION" xml:space="preserve">
     <value>版本</value>
@@ -818,6 +869,12 @@
   </data>
   <data name="PROFILE_WKEXPRERIENCE" xml:space="preserve">
     <value>工作经验</value>
+  </data>
+  <data name="TASKMGR_BTN_LBL_COMTASK" xml:space="preserve">
+    <value>完成任务</value>
+  </data>
+  <data name="TASKMGR_BTN_LBL_STARTTASK" xml:space="preserve">
+    <value>增加进度</value>
   </data>
   <data name="TASKMGR_LBL_COMP_DATE" xml:space="preserve">
     <value>完成时间</value>

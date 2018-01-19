@@ -1,4 +1,6 @@
-﻿using FE.Creator.ObjectRepository;
+﻿using FE.Creator.Admin.Models;
+using FE.Creator.ObjectRepository;
+using FE.Creator.ObjectRepository.EntityModels;
 using FE.Creator.ObjectRepository.ServiceModels;
 using System;
 using System.Collections.Generic;
@@ -11,13 +13,78 @@ namespace FE.Creator.Admin.Controllers
 {
     public class BaseController : Controller
     {
-        IObjectService objectService = null;
+        protected IObjectService objectService = null;
         public BaseController(IObjectService objectService)
         {
             this.objectService = objectService;
         }
 
-        private int GetAppObjectDefintionIdByName(string defName)
+        protected int LogEvent(IObjectService objectService, string owner, AppEventModel.EnumEventLevel level, string title, string description)
+        {
+            ServiceObject svObject = new ServiceObject();
+            svObject.ObjectName = FE.Creator.Admin.lang.AppLang.EVENT_APP_EVENT;
+            svObject.ObjectOwner = owner;
+            svObject.OnlyUpdateProperties = false;
+            svObject.UpdatedBy = owner;
+            svObject.CreatedBy = owner;
+            svObject.ObjectDefinitionId = objectService
+                .GetObjectDefinitionByName("AppEvent")
+                .ObjectDefinitionID;
+
+            svObject.Properties.Add(new ObjectKeyValuePair()
+            {
+                KeyName = "eventTitle",
+                Value = new PrimeObjectField()
+                {
+                    PrimeDataType = PrimeFieldDataType.String,
+                    Value = title
+                }
+            });
+            svObject.Properties.Add(new ObjectKeyValuePair()
+            {
+                KeyName = "eventDetails",
+                Value = new PrimeObjectField()
+                {
+                    PrimeDataType = PrimeFieldDataType.String,
+                    Value = description
+                }
+            });
+
+            svObject.Properties.Add(new ObjectKeyValuePair()
+            {
+                KeyName = "eventDateTime",
+                Value = new PrimeObjectField()
+                {
+                    PrimeDataType = PrimeFieldDataType.Datetime,
+                    Value = DateTime.Now
+                }
+            });
+            svObject.Properties.Add(new ObjectKeyValuePair()
+            {
+                KeyName = "eventLevel",
+                Value = new PrimeObjectField()
+                {
+                    PrimeDataType = PrimeFieldDataType.Integer,
+                    Value = (int)level
+                }
+            });
+
+            svObject.Properties.Add(new ObjectKeyValuePair()
+            {
+                KeyName = "eventOwner",
+                Value = new PrimeObjectField()
+                {
+                    PrimeDataType = PrimeFieldDataType.String,
+                    Value = owner
+                }
+            });
+
+            int objId = objectService.CreateORUpdateGeneralObject(svObject);
+
+            return objId;
+        }
+
+        protected int GetAppObjectDefintionIdByName(string defName)
         {
             var objDefs = objectService.GetAllObjectDefinitions();
             var findObjDef = (from def in objDefs

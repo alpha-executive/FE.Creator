@@ -844,6 +844,123 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error happened when access url {0}.
+        /// </summary>
+        public static string EVENT_APP_ACCESS_URL_ERROR {
+            get {
+                return ResourceManager.GetString("EVENT_APP_ACCESS_URL_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application Error.
+        /// </summary>
+        public static string EVENT_APP_ERROR {
+            get {
+                return ResourceManager.GetString("EVENT_APP_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application Event.
+        /// </summary>
+        public static string EVENT_APP_EVENT {
+            get {
+                return ResourceManager.GetString("EVENT_APP_EVENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} is login to the System.
+        /// </summary>
+        public static string EVENT_APP_EVENT_LOGIN_DESC {
+            get {
+                return ResourceManager.GetString("EVENT_APP_EVENT_LOGIN_DESC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to Login to the System.
+        /// </summary>
+        public static string EVENT_APP_EVENT_LOGIN_FAILED {
+            get {
+                return ResourceManager.GetString("EVENT_APP_EVENT_LOGIN_FAILED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} Failed to Login to the System.
+        /// </summary>
+        public static string EVENT_APP_EVENT_LOGIN_FAILEDDESC {
+            get {
+                return ResourceManager.GetString("EVENT_APP_EVENT_LOGIN_FAILEDDESC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New User Registered to the System.
+        /// </summary>
+        public static string EVENT_APP_EVENT_NEWUSER {
+            get {
+                return ResourceManager.GetString("EVENT_APP_EVENT_NEWUSER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string EVENT_APP_EVENT_TYPE_ERROR {
+            get {
+                return ResourceManager.GetString("EVENT_APP_EVENT_TYPE_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information.
+        /// </summary>
+        public static string EVENT_APP_EVENT_TYPE_INFO {
+            get {
+                return ResourceManager.GetString("EVENT_APP_EVENT_TYPE_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning.
+        /// </summary>
+        public static string EVENT_APP_EVENT_TYPE_WARNING {
+            get {
+                return ResourceManager.GetString("EVENT_APP_EVENT_TYPE_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User login to the System.
+        /// </summary>
+        public static string EVENT_APP_EVENT_USERLOGIN {
+            get {
+                return ResourceManager.GetString("EVENT_APP_EVENT_USERLOGIN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unkown Application Error Happened..
+        /// </summary>
+        public static string EVENT_APP_UNKOWN_ERROR {
+            get {
+                return ResourceManager.GetString("EVENT_APP_UNKOWN_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User {0} is registered to the System.
+        /// </summary>
+        public static string EVNET_APP_EVENT_NEWUSER_DESC {
+            get {
+                return ResourceManager.GetString("EVNET_APP_EVENT_NEWUSER_DESC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Album.
         /// </summary>
         public static string IMAGEMGR_ALBUM {
@@ -966,6 +1083,33 @@ namespace FE.Creator.Admin.lang {
         public static string IMAGEMGR_VIEW_MORE_IMGS {
             get {
                 return ResourceManager.GetString("IMAGEMGR_VIEW_MORE_IMGS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are {0} Latest System Events.
+        /// </summary>
+        public static string INDEX_EVENT_COUNTER_MSG {
+            get {
+                return ResourceManager.GetString("INDEX_EVENT_COUNTER_MSG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FEConsole V1.0 is Now General Avaliable!.
+        /// </summary>
+        public static string INDEX_NOTIFY_DEFAULT_MSG {
+            get {
+                return ResourceManager.GetString("INDEX_NOTIFY_DEFAULT_MSG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Locale System.
+        /// </summary>
+        public static string INDEX_NOTIFY_DEFAULT_PROVIDER {
+            get {
+                return ResourceManager.GetString("INDEX_NOTIFY_DEFAULT_PROVIDER", resourceCulture);
             }
         }
         
@@ -1249,7 +1393,7 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to System Configuraion.
+        ///   Looks up a localized string similar to System.
         /// </summary>
         public static string LAYOUT_NAV_SYSCONF {
             get {
@@ -1326,6 +1470,15 @@ namespace FE.Creator.Admin.lang {
         public static string LAYOUT_SUBTITLE {
             get {
                 return ResourceManager.GetString("LAYOUT_SUBTITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to System Settings.
+        /// </summary>
+        public static string LAYOUT_SYSTEM_SETTINGS {
+            get {
+                return ResourceManager.GetString("LAYOUT_SYSTEM_SETTINGS", resourceCulture);
             }
         }
         
@@ -2172,6 +2325,24 @@ namespace FE.Creator.Admin.lang {
         public static string PROFILE_WKEXPRERIENCE {
             get {
                 return ResourceManager.GetString("PROFILE_WKEXPRERIENCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Complete task.
+        /// </summary>
+        public static string TASKMGR_BTN_LBL_COMTASK {
+            get {
+                return ResourceManager.GetString("TASKMGR_BTN_LBL_COMTASK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Increase Progress.
+        /// </summary>
+        public static string TASKMGR_BTN_LBL_STARTTASK {
+            get {
+                return ResourceManager.GetString("TASKMGR_BTN_LBL_STARTTASK", resourceCulture);
             }
         }
         

@@ -58,43 +58,28 @@
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <!-- Messages: style can be found in dropdown.less-->
-                        <li class="dropdown messages-menu">
+                        <li id="provider_update_nav"  class="dropdown messages-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-envelope-o"></i>
-                                <span class="label label-success">4</span>
+                                <span id="msg_count" class="label label-success">0</span>
                             </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 4 messages</li>
+                            <ul id="provider_updates" class="dropdown-menu">
+                                <li class="header"></li>
                                 <li>
                                     <!-- inner menu: contains the actual data -->
                                     <ul class="menu">
-                                        <li>
-                                            <!-- start message -->
-                                            <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="@Url.Content("~/Content/adminlte-2.3.6/dist/img/user2-160x160.jpg")" class="img-circle" alt="User Image">
-                                                </div>
-                                                <h4>
-                                                    Support Team
-                                                    <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                                </h4>
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li>
-                                        <!-- end message -->
                                     </ul>
                                 </li>
-                                <li class="footer"><a href="#">See All Messages</a></li>
                             </ul>
                         </li>
                         <!-- Notifications: style can be found in dropdown.less -->
                         <li class="dropdown notifications-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 <i class="fa fa-bell-o"></i>
-                                <span class="label label-warning">10</span>
+                                <span id="event_counter" class="label label-warning">0</span>
                             </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 10 notifications</li>
+                            <ul id="event_updates" class="dropdown-menu">
+                                <li class="header"></li>
                                 <li>
                                     <!-- inner menu: contains the actual data -->
                                     <ul class="menu">
@@ -194,6 +179,7 @@
                         <ul class="treeview-menu">
                             <li><a href="/ngview/Index/ObjectRepository/ObjectDefinitionGroupIndex"><i class="fa fa-object-group"></i> Object Group</a></li>
                             <li><a href="/ngview/Index/ObjectRepository/ObjectDefinitionIndex"><i class="fa fa-table"></i>Object Schema</a></li>
+                            <li><a href="/ngview/Index/Settings/AppSettingsIndex"><i class="fa fa-gears"></i>@FE.Creator.Admin.lang.AppLang.LAYOUT_SYSTEM_SETTINGS</a></li>
                             <li><a href="/ngview/Index/LicenseManagement/LicenseIndex"><i class="fa fa-balance-scale"></i>@FE.Creator.Admin.lang.AppLang.LAYOUT_NAV_LICENSE</a></li>
                         </ul>
                     </li>

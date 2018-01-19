@@ -378,6 +378,45 @@
   <data name="DOCUMENT_TITLE" xml:space="preserve">
     <value>Document Management</value>
   </data>
+  <data name="EVENT_APP_ACCESS_URL_ERROR" xml:space="preserve">
+    <value>Error happened when access url {0}</value>
+  </data>
+  <data name="EVENT_APP_ERROR" xml:space="preserve">
+    <value>Application Error</value>
+  </data>
+  <data name="EVENT_APP_EVENT" xml:space="preserve">
+    <value>Application Event</value>
+  </data>
+  <data name="EVENT_APP_EVENT_LOGIN_DESC" xml:space="preserve">
+    <value>User {0} is login to the System</value>
+  </data>
+  <data name="EVENT_APP_EVENT_LOGIN_FAILED" xml:space="preserve">
+    <value>Failed to Login to the System</value>
+  </data>
+  <data name="EVENT_APP_EVENT_LOGIN_FAILEDDESC" xml:space="preserve">
+    <value>User {0} Failed to Login to the System</value>
+  </data>
+  <data name="EVENT_APP_EVENT_NEWUSER" xml:space="preserve">
+    <value>New User Registered to the System</value>
+  </data>
+  <data name="EVENT_APP_EVENT_TYPE_ERROR" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="EVENT_APP_EVENT_TYPE_INFO" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="EVENT_APP_EVENT_TYPE_WARNING" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="EVENT_APP_EVENT_USERLOGIN" xml:space="preserve">
+    <value>User login to the System</value>
+  </data>
+  <data name="EVENT_APP_UNKOWN_ERROR" xml:space="preserve">
+    <value>Unkown Application Error Happened.</value>
+  </data>
+  <data name="EVNET_APP_EVENT_NEWUSER_DESC" xml:space="preserve">
+    <value>User {0} is registered to the System</value>
+  </data>
   <data name="IMAGEMGR_ALBUM" xml:space="preserve">
     <value>Album</value>
   </data>
@@ -419,6 +458,15 @@
   </data>
   <data name="IMAGEMGR_VIEW_MORE_IMGS" xml:space="preserve">
     <value>View More Images</value>
+  </data>
+  <data name="INDEX_EVENT_COUNTER_MSG" xml:space="preserve">
+    <value>There are {0} Latest System Events</value>
+  </data>
+  <data name="INDEX_NOTIFY_DEFAULT_MSG" xml:space="preserve">
+    <value>FEConsole V1.0 is Now General Avaliable!</value>
+  </data>
+  <data name="INDEX_NOTIFY_DEFAULT_PROVIDER" xml:space="preserve">
+    <value>Locale System</value>
   </data>
   <data name="INDEX_REPORT_BOOKS" xml:space="preserve">
     <value>Books</value>
@@ -514,7 +562,7 @@
     <value>Posts</value>
   </data>
   <data name="LAYOUT_NAV_SYSCONF" xml:space="preserve">
-    <value>System Configuraion</value>
+    <value>System</value>
   </data>
   <data name="LAYOUT_NAV_SYSUSR" xml:space="preserve">
     <value>System Users</value>
@@ -539,6 +587,9 @@
   </data>
   <data name="LAYOUT_SUBTITLE" xml:space="preserve">
     <value>Just for the Best Experience!</value>
+  </data>
+  <data name="LAYOUT_SYSTEM_SETTINGS" xml:space="preserve">
+    <value>System Settings</value>
   </data>
   <data name="LAYOUT_VERSION" xml:space="preserve">
     <value>Version</value>
@@ -821,6 +872,12 @@
   </data>
   <data name="PROFILE_WKEXPRERIENCE" xml:space="preserve">
     <value>Work Experience</value>
+  </data>
+  <data name="TASKMGR_BTN_LBL_COMTASK" xml:space="preserve">
+    <value>Complete task</value>
+  </data>
+  <data name="TASKMGR_BTN_LBL_STARTTASK" xml:space="preserve">
+    <value>Increase Progress</value>
   </data>
   <data name="TASKMGR_LBL_COMP_DATE" xml:space="preserve">
     <value>Completed Date</value>

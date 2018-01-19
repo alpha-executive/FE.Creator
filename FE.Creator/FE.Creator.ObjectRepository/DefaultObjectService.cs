@@ -192,6 +192,13 @@ namespace FE.Creator.ObjectRepository
             gobject.Updated = System.DateTime.Now;
             gobject.UpdatedBy = serviceObject.UpdatedBy;
 
+            logger.Debug(string.Format("gobject.GeneralObjectName = {0}", serviceObject.ObjectName));
+            logger.Debug(string.Format("gobject.ObjectOwner = {0}", serviceObject.ObjectOwner));
+            logger.Debug(string.Format("gobject.GeneralObjectDefinition = {0}", goDefinition.GeneralObjectDefinitionName));
+            logger.Debug(string.Format("gobject.CreatedBy = {0}", serviceObject.CreatedBy));
+            logger.Debug(string.Format("gobject.UpdatedBy = {0}", serviceObject.UpdatedBy));
+
+            logger.Debug("serviceObject.Properties.count = " + serviceObject.Properties.Count);
             foreach (ObjectKeyValuePair kvp in serviceObject.Properties)
             {
                 var currentFieldDef = (from f in goDefinition.GeneralObjectDefinitionFields
@@ -201,6 +208,10 @@ namespace FE.Creator.ObjectRepository
                 GeneralObjectField field = ParseObjectField(gobject, currentFieldDef, kvp);
                 if (field != null)
                 {
+                    logger.Debug(string.Format("field = {0}, fieldId = {1}"
+                        ,field.GeneralObjectDefinitionField.GeneralObjectDefinitionFieldName
+                        ,field.GeneralObjectFieldID));
+
                     gobject.GeneralObjectFields.Add(field);
                 }
             }
@@ -221,6 +232,8 @@ namespace FE.Creator.ObjectRepository
         /// <returns></returns>
         private static int UpdateGeneralObject(GeneralObject currentObject, DBObjectContext dboContext, ServiceObject serviceObject, GeneralObjectDefinition goDefinition)
         {
+            logger.Debug(string.Format("serviceObject.OnlyUpdateProperties={0}", serviceObject.OnlyUpdateProperties));
+            
             //if it's not properties update only, we will update the object information as well.
             if (!serviceObject.OnlyUpdateProperties)
             {
@@ -244,6 +257,7 @@ namespace FE.Creator.ObjectRepository
                                        where f.GeneralObjectDefinitionFieldID == currentFieldDef.GeneralObjectDefinitionFieldID
                                        select f).FirstOrDefault();
 
+                logger.Debug(string.Format("currObjectField != null ? {0}", currObjectField != null));
                 if(currObjectField != null) //update
                 {
                     UpdateObjectFieldValue(currObjectField, kvp, currentFieldDef);
@@ -369,6 +383,8 @@ namespace FE.Creator.ObjectRepository
         private static void UpdateGeneralObjectDefinition(ObjectDefinition objectDef, DBObjectContext dboContext, GeneralObjectDefinition goDefinition)
         {
             dboContext.Entry(goDefinition).Collection(g => g.GeneralObjectDefinitionFields).Load();
+
+            logger.Debug(string.Format("objectDef.IsFeildsUpdateOnly = {0}", objectDef.IsFeildsUpdateOnly));
             if (!objectDef.IsFeildsUpdateOnly)
             {
                 goDefinition.GeneralObjectDefinitionGroupID = objectDef.ObjectDefinitionGroupID;
@@ -379,6 +395,7 @@ namespace FE.Creator.ObjectRepository
                 goDefinition.UpdatedBy = objectDef.UpdatedBy;
             }
 
+            logger.Debug("objectDef.ObjectFields.count = " + objectDef.ObjectFields.Count);
             foreach (var f in objectDef.ObjectFields)
             {
                 GeneralObjectDefinitionField field = (from fd in goDefinition.GeneralObjectDefinitionFields
@@ -424,6 +441,11 @@ namespace FE.Creator.ObjectRepository
             goDefinition.Created = DateTime.Now;
             goDefinition.UpdatedBy = objectDef.UpdatedBy;
 
+            logger.Debug(string.Format("goDefinition.GeneralObjectDefinitionGroupID = {0}", objectDef.ObjectDefinitionGroupID));
+            logger.Debug(string.Format("goDefinition.GeneralObjectDefinitionKey = {0}", objectDef.ObjectDefinitionKey));
+            logger.Debug(string.Format("goDefinition.GeneralObjectDefinitionName = {0}", objectDef.ObjectDefinitionName));
+            logger.Debug(string.Format("goDefinition.ObjectOwner = {0}", objectDef.ObjectOwner));
+
             foreach (var f in objectDef.ObjectFields)
             {
                 GeneralObjectDefinitionField field =  ObjectConverter.ConvertSvcField2ObjDefinitionField(f, null);
@@ -442,6 +464,7 @@ namespace FE.Creator.ObjectRepository
         /// <returns></returns>
         public List<ObjectDefinition> GetAllObjectDefinitions()
         {
+            logger.Debug("Start GetAllObjectDefinitions()");
             List<ObjectDefinition> retObjList = null;
             using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
             {
@@ -455,11 +478,13 @@ namespace FE.Creator.ObjectRepository
                 retObjList = ObjectConverter.ConvertToObjectDefinitionList(objDefList);
             }
 
+            logger.Debug("End GetAllObjectDefinitions()");
             return retObjList;
         }
 
         public List<ObjectDefinition> GetObjectDefinitionsByGroup(int GroupId, int currentPage, int pageSize)
         {
+            logger.Debug("Start GetObjectDefinitionsByGroup");
             List<ObjectDefinition> retObjList = null;
             using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
             {
@@ -473,10 +498,12 @@ namespace FE.Creator.ObjectRepository
                 retObjList = ObjectConverter.ConvertToObjectDefinitionList(objDefList);
             }
 
+            logger.Debug("End GetObjectDefinitionsByGroup");
             return retObjList;
         }
         private static void LoadSelctionItems(DBObjectContext dboContext, List<GeneralObjectDefinition> objDefList)
         {
+            logger.Debug("objDefList.count : " + objDefList.Count);
             foreach (var objDef in objDefList)
             {
                 foreach (var field in objDef.GeneralObjectDefinitionFields)
@@ -491,6 +518,7 @@ namespace FE.Creator.ObjectRepository
 
         public List<ServiceObject> GetAllSerivceObjects(int ObjDefId, string[] properties)
         {
+            logger.Debug("Start GetAllSerivceObjects");
             List<ServiceObject> svsObjects = null;
             using (var dbContext = EntityContextFactory.GetDBObjectContext())
             {
@@ -498,26 +526,31 @@ namespace FE.Creator.ObjectRepository
                                                             .Include(o => o.GeneralObjectFields.Select(f=>f.GeneralObjectDefinitionField))
                                                             .ToList();
 
-
+                logger.Debug("objectList.count : " + objectList.Count);
                 svsObjects = ObjectConverter.ConvertToServiceObjectList(objectList, properties);
             }
-
+            logger.Debug("End GetAllSerivceObjects");
             return svsObjects;
         }
 
         public int GetGeneralObjectCount(int ObjDefId)
         {
+            logger.Debug("Start GetGeneralObjectCount");
             using (var dbContext = EntityContextFactory.GetDBObjectContext())
             {
                 var objectCount = dbContext.GeneralObjects
                                            .Where(o => o.GeneralObjectDefinitionID == ObjDefId && o.IsDeleted == false)
                                            .Count();
+
+                logger.Debug("objectCount = " + objectCount);
+                logger.Debug("End GetGeneralObjectCount");
                 return objectCount;
             }
         }
 
         public ObjectDefinition GetObjectDefinitionById(int objDefId)
         {
+            logger.Debug("Start GetObjectDefinitionById");
             using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
             {
                 var objDefList = dboContext.GeneralObjectDefinitions
@@ -531,6 +564,8 @@ namespace FE.Creator.ObjectRepository
 
                 logger.Debug("objDefList.Count : " + objDefList.Count);
 
+                logger.Debug("End GetObjectDefinitionById");
+
                 return objDefList.Count > 0 ?
                     ObjectConverter.ConvertToObjectDefinitionList(objDefList).First() : null;
             }
@@ -538,18 +573,21 @@ namespace FE.Creator.ObjectRepository
 
         public int GetObjectDefinitionCount()
         {
+            logger.Debug("Start GetObjectDefinitionCount");
             using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
             {
                 var objDefCount = dboContext.GeneralObjectDefinitions
                                  .Where(g=>g.IsDeleted == false)
                                  .Count();
-
+                logger.Debug("objDefCount = " + objDefCount);
+                logger.Debug("End GetObjectDefinitionCount");
                 return objDefCount;
             }
         }
 
         public List<ObjectDefinition> GetObjectDefinitions(int currentPage, int pageSize)
         {
+            logger.Debug("Start GetObjectDefinitions");
             List<ObjectDefinition> retObjList = null;
             int skipCount = currentPage > 1 ? (currentPage - 1) * pageSize : 0;
             using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
@@ -562,16 +600,20 @@ namespace FE.Creator.ObjectRepository
                                             .Take(pageSize)
                                             .ToList();
 
+                logger.Debug("objDefList.count = " + objDefList.Count);
+
                 LoadSelctionItems(dboContext, objDefList);
 
                 retObjList = ObjectConverter.ConvertToObjectDefinitionList(objDefList);
             }
 
+            logger.Debug("End GetObjectDefinitions");
             return retObjList;
         }
 
         public ServiceObject GetServiceObjectById(int objectId, string[] properties)
         {
+            logger.Debug("Start GetServiceObjectById");
             List<ServiceObject> svsObjects = null;
             using (var dbContext = EntityContextFactory.GetDBObjectContext())
             {
@@ -584,11 +626,15 @@ namespace FE.Creator.ObjectRepository
                 svsObjects = ObjectConverter.ConvertToServiceObjectList(objectList, properties);
             }
 
+            logger.Debug(string.Format("svsObjects!= null && svsObjects.Count ? {0}", svsObjects != null 
+                && svsObjects.Count > 0));
+            logger.Debug("End GetServiceObjectById");
             return svsObjects.Count > 0 ? svsObjects.First() : null;
         }
 
         public List<ServiceObject> GetServiceObjects(int ObjDefId, string[] properties, int currentPage, int pageSize)
         {
+            logger.Debug("Start GetServiceObjects");
             List<ServiceObject> svsObjects = null;
             int skipCount = currentPage > 1 ? (currentPage - 1) * pageSize : 0;
 
@@ -605,11 +651,16 @@ namespace FE.Creator.ObjectRepository
                 svsObjects = ObjectConverter.ConvertToServiceObjectList(objectList, properties);
             }
 
+            logger.Debug(string.Format("svsObjects != null ? {0}", svsObjects != null));
+            logger.Debug(string.Format("svsObjects.count > 0 ? {0}", svsObjects.Count > 0));
+            logger.Debug("End GetServiceObjects");
+
             return svsObjects;
         }
 
         public int SoftDeleteObjectDefinition(int objDefId, string updatedBy)
         {
+            logger.Debug("Start SoftDeleteObjectDefinition");
             lock (SyncRoot)
             {
                 using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
@@ -619,6 +670,8 @@ namespace FE.Creator.ObjectRepository
                                      .FirstOrDefault();
 
 
+                    logger.Debug(string.Format("objDef != null ? {0}", objDef != null));
+
                     if (objDef != null)
                     {
                         objDef.IsDeleted = true;
@@ -626,6 +679,7 @@ namespace FE.Creator.ObjectRepository
                         dboContext.SaveChanges();
                     }
 
+                    logger.Debug("End SoftDeleteObjectDefinition");
                     return objDef != null ? objDef.GeneralObjectDefinitionID : -1;
                 }
             }
@@ -633,6 +687,7 @@ namespace FE.Creator.ObjectRepository
 
         public int SoftDeleteServiceObject(int objectId, string updatedBy)
         {
+            logger.Debug("Start SoftDeleteServiceObject");
             lock (SyncRoot)
             {
                 using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
@@ -640,6 +695,8 @@ namespace FE.Creator.ObjectRepository
                     var obj = dboContext.GeneralObjects
                                             .Where(o => o.GeneralObjectID == objectId)
                                             .FirstOrDefault();
+
+                    logger.Debug(string.Format("obj != null ? {0}", obj != null));
                     if (obj != null)
                     {
                         obj.IsDeleted = true;
@@ -649,6 +706,7 @@ namespace FE.Creator.ObjectRepository
                         dboContext.SaveChanges();
                     }
 
+                    logger.Debug("End SoftDeleteServiceObject");
                     return obj != null ? obj.GeneralObjectID : -1;
                 }
             }
@@ -656,6 +714,7 @@ namespace FE.Creator.ObjectRepository
 
         public List<ObjectDefinitionGroup> GetObjectDefinitionGroups(int? parentGroupId)
         {
+            logger.Debug("Start GetObjectDefinitionGroups");
             List<ObjectDefinitionGroup> objList = null;
             using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
             {
@@ -667,8 +726,10 @@ namespace FE.Creator.ObjectRepository
                         .FindAll(s=> parentGroupId.HasValue ? s.ParentGroup != null && s.ParentGroup.GeneralObjectDefinitionGroupID == parentGroupId.Value : s.ParentGroup == null);
 
                 objList = ObjectConverter.Convert2ObjectDefinitionGroupList(objDefGroupList);
+                logger.Debug("objList.count = " + objList.Count);
             }
 
+            logger.Debug("End GetObjectDefinitionGroups");
             return objList;
         }
 
@@ -676,6 +737,7 @@ namespace FE.Creator.ObjectRepository
 
         public ObjectDefinitionGroup GetObjectDefinitionGroupById(int defId)
         {
+            logger.Debug("Start GetObjectDefinitionGroupById");
             List<ObjectDefinitionGroup> objList = null;
 
             using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
@@ -687,12 +749,15 @@ namespace FE.Creator.ObjectRepository
                         .ToList();
                 objList = ObjectConverter.Convert2ObjectDefinitionGroupList(objDefGroupList);
 
+                logger.Debug(string.Format("objList.Count > 0 ? {0}", objList.Count > 0));
+                logger.Debug("End GetObjectDefinitionGroupById");
                 return objList.Count > 0 ? objList.First() : null;
             }
         }
 
         public int CreateOrUpdateObjectDefinitionGroup(ObjectDefinitionGroup objGroup)
         {
+            logger.Debug("Start CreateOrUpdateObjectDefinitionGroup");
             lock (SyncRoot)
             {
                 using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
@@ -703,6 +768,7 @@ namespace FE.Creator.ObjectRepository
                             .Include(g => g.ChildrenGroups)
                             .FirstOrDefault();
 
+                    logger.Debug(string.Format("objDefGroup == null ? {0}", objDefGroup == null));
                     if(objDefGroup == null)
                     {
                        //insert
@@ -713,7 +779,7 @@ namespace FE.Creator.ObjectRepository
                     UpdateGeneralOjectRefGroupEntity(dboContext, objGroup, objDefGroup);
                     dboContext.SaveChanges();
 
-
+                    logger.Debug("End CreateOrUpdateObjectDefinitionGroup");
                     return objDefGroup.GeneralObjectDefinitionGroupID;
                 }
             }
@@ -737,6 +803,7 @@ namespace FE.Creator.ObjectRepository
         /// <returns></returns>
         public int SoftDeleteObjectDefintionGroup(int defId)
         {
+            logger.Debug("Start SoftDeleteObjectDefintionGroup");
             lock (SyncRoot)
             {
                 using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
@@ -747,12 +814,14 @@ namespace FE.Creator.ObjectRepository
                             .Include(g => g.ChildrenGroups)
                             .FirstOrDefault();
 
+                    logger.Debug(string.Format("objDefGroup != null ? {0}", objDefGroup != null));
                     if (objDefGroup != null)
                     {
                         objDefGroup.IsDeleted = true;
                         dboContext.SaveChanges();  
                     }
-                   
+
+                    logger.Debug("End SoftDeleteObjectDefintionGroup");
                     return objDefGroup != null ? objDefGroup.GeneralObjectDefinitionGroupID : -1;
                 }
             }
@@ -760,6 +829,7 @@ namespace FE.Creator.ObjectRepository
 
         public void DeleteServiceObject(int serviceObjectId)
         {
+            logger.Debug("Start DeleteServiceObject");
             lock (SyncRoot)
             {
                 using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
@@ -768,7 +838,7 @@ namespace FE.Creator.ObjectRepository
                                                 .Where(o => o.GeneralObjectID == serviceObjectId)
                                                 .Include(f => f.GeneralObjectFields)
                                                 .FirstOrDefault();
-                    
+                    logger.Debug(string.Format("generalObject != null ? {0}", generalObject != null));
                     if(generalObject != null)
                     {
                         generalObject.GeneralObjectFields.ToList().ForEach(f=>dboContext.GeneralObjectFields.Remove(f));
@@ -778,10 +848,12 @@ namespace FE.Creator.ObjectRepository
                     dboContext.SaveChanges();
                 }
             }
+            logger.Debug("End DeleteServiceObject");
         }
 
         public void DeleteObjectField(int objectFieldId)
         {
+            logger.Debug("Start DeleteObjectField");
             lock (SyncRoot)
             {
                 using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
@@ -793,13 +865,16 @@ namespace FE.Creator.ObjectRepository
                         dboContext.GeneralObjectFields.Remove(field);
                     }
 
+                    logger.Debug(string.Format("field != null ? {0}", field != null));
                     dboContext.SaveChanges();
                 }
             }
+            logger.Debug("End DeleteObjectField");
         }
 
         public void DeleteObjectDefinitionField(int fieldDefinitionId)
         {
+            logger.Debug("Start DeleteObjectDefinitionField");
             lock (SyncRoot)
             {
                 using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
@@ -809,6 +884,7 @@ namespace FE.Creator.ObjectRepository
                                              .Where(f => f.GeneralObjectDefinitionFieldID == fieldDefinitionId)
                                              .ToList();
 
+                    logger.Debug("objFields.count : " + objFields.Count);
                     //remove all the refered object fields firstly.
                     foreach(var field in objFields)
                     {
@@ -817,6 +893,8 @@ namespace FE.Creator.ObjectRepository
 
                     //find and remove the field definition.
                     var definitionField = dboContext.GeneralObjectDefinitionFields.Find(fieldDefinitionId);
+
+                    logger.Debug(string.Format("definitionField != null ? {0}", definitionField != null));
                     if (definitionField != null)
                     {
                         //special deal with the selection items.
@@ -827,22 +905,23 @@ namespace FE.Creator.ObjectRepository
                     dboContext.SaveChanges();
                 }
             }
+            logger.Debug("End DeleteObjectDefinitionField");
         }
 
         public void DeleteObjectDefinition(int objectDefinitionId)
         {
+            logger.Debug("Start DeleteObjectDefinition");
             lock (SyncRoot)
             {
                 using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
                 {
-
-
                     var objectDefinition = dboContext.GeneralObjectDefinitions
                                                      .Include(f => f.GeneralObjectDefinitionFields)
                                                      .Include(o => o.GeneralObjects.Select(f=>f.GeneralObjectFields))
                                                      .Where(d => d.GeneralObjectDefinitionID == objectDefinitionId)
                                                      .FirstOrDefault();
 
+                    logger.Debug(string.Format("objectDefinition != null ? {0}", objectDefinition != null));
                     if(objectDefinition != null)
                     {
                         //delete the objects bind to this definiton.
@@ -872,6 +951,7 @@ namespace FE.Creator.ObjectRepository
                     dboContext.SaveChanges();
                 }
             }
+            logger.Debug("End DeleteObjectDefinition");
         }
 
         private static void DeleteSingleSelectionItems(GeneralObjectDefinitionField f, DBObjectContext dboContext)
@@ -891,12 +971,14 @@ namespace FE.Creator.ObjectRepository
 
         public void DeleteSingleSelectionFieldSelectionItem(int selectionItemId)
         {
+            logger.Debug("Start DeleteSingleSelectionFieldSelectionItem");
             lock (SyncRoot)
             {
                 using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
                 {
                     var selectionItem =  dboContext.GeneralObjectDefinitionSelectItems.Find(selectionItemId);
 
+                    logger.Debug(string.Format("selectionItem != null ? {0}", selectionItem != null));
                     if (selectionItem != null)
                     {
                         dboContext.GeneralObjectDefinitionSelectItems.Remove(selectionItem);
@@ -905,22 +987,27 @@ namespace FE.Creator.ObjectRepository
                     dboContext.SaveChanges();
                 }
             }
+            logger.Debug("End DeleteSingleSelectionFieldSelectionItem");
         }
 
         public bool IsObjectDefinitionGroupExists(string groupName)
         {
+            logger.Debug("Start IsObjectDefinitionGroupExists");
             using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
             {
                 var groupCount = dboContext.GeneralObjectDefinitionGroups
                          .Where(g => g.IsDeleted == false && g.GeneralObjectDefinitionGroupName.Equals(groupName, StringComparison.InvariantCultureIgnoreCase))
                          .Count();
 
+                logger.Debug("groupCount = " + groupCount);
+                logger.Debug("End IsObjectDefinitionGroupExists");
                 return groupCount > 0;
             }
         }
 
         public ObjectDefinitionGroup GetObjectDefinitionGroupByName(string groupName)
         {
+            logger.Debug("Start GetObjectDefinitionGroupByName");
             using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
             {
                 var objDefGroupList = dboContext.GeneralObjectDefinitionGroups
@@ -931,23 +1018,29 @@ namespace FE.Creator.ObjectRepository
 
                 var objList = ObjectConverter.Convert2ObjectDefinitionGroupList(objDefGroupList);
 
+                logger.Debug("objList.count = " + objList.Count);
+                logger.Debug("End GetObjectDefinitionGroupByName");
+
                 return objList.Count > 0 ? objList.First() : null;
             }
         }
 
         public ObjectDefinition GetObjectDefinitionByName(string definitionName)
         {
+            logger.Debug("Start GetObjectDefinitionByName");
             using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
             {
                 var objDefList = dboContext.GeneralObjectDefinitions
                                  .Where(d => d.GeneralObjectDefinitionName.Equals(definitionName, StringComparison.InvariantCultureIgnoreCase))
                                  .Include(d => d.GeneralObjectDefinitionFields)
                                  .ToList();
+                logger.Debug("objDefList.Count = " + objDefList.Count);
                 if (objDefList.Count > 0)
                 {
                     LoadSelctionItems(dboContext, objDefList);
                 }
 
+                logger.Debug("End GetObjectDefinitionByName");
                 return objDefList.Count > 0 ?
                     ObjectConverter.ConvertToObjectDefinitionList(objDefList).First() : null;
             }

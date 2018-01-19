@@ -28,16 +28,16 @@
                         </div>
                     </td>
                     <td>
-                        <button type="button" class="btn btn-success btn-flat btn-xs" title="start task" ng-click="ctrl.startTask(task)" ng-disabled="task.properties.taskStatus.value >= 100">
+                        <button type="button" class="btn btn-success btn-flat btn-xs" title="@FE.Creator.Admin.lang.AppLang.TASKMGR_BTN_LBL_STARTTASK" ng-click="ctrl.startTask(task)" ng-disabled="task.properties.taskStatus.value >= 100">
                             <i class="fa fa-forward"></i>
                         </button>
-                        <button type="button" class="btn btn-success btn-flat btn-xs" title="complete task" ng-click="ctrl.completeTask(task)" ng-disabled="task.properties.taskStatus.value == 100">
+                        <button type="button" class="btn btn-success btn-flat btn-xs" title="@FE.Creator.Admin.lang.AppLang.TASKMGR_BTN_LBL_COMTASK" ng-click="ctrl.completeTask(task)" ng-disabled="task.properties.taskStatus.value == 100">
                             <i class="fa fa-stop"></i>
                         </button>
-                        <button type="button" class="btn btn-primary btn-flat btn-xs" ng-click="ctrl.createOrUpdateTask(task)">
+                        <button type="button" class="btn btn-primary btn-flat btn-xs" title="@FE.Creator.Admin.lang.AppLang.COMMON_BTN_EDIT" ng-click="ctrl.createOrUpdateTask(task)">
                             <i class="fa fa-pencil"></i>
                         </button>
-                        <button type="button" class="btn btn-warning btn-flat btn-xs" ng-click="ctrl.deleteTask(task)">
+                        <button type="button" class="btn btn-warning btn-flat btn-xs" title="@FE.Creator.Admin.lang.AppLang.COMMON_BTN_DELETE" ng-click="ctrl.deleteTask(task)">
                             <i class="fa fa-trash"></i>
                         </button>
                     </td>

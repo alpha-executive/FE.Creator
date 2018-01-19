@@ -5,7 +5,7 @@
             return format;
         }
 
-        return format.replace("/{\d+}/g", function (match, number) {
+        return format.replace(/{(\d+)}/g, function (match, number) {
             return typeof params[number] != 'undefined'
                    ? params[number]
                    : match;
@@ -27,6 +27,9 @@
     INDEX_REPORT_NAME_IMGS: "图片",
     INDEX_REPORT_NAME_TARGET: "目标",
     INDEX_REPORT_NAME_TASK: "任务",
+    INDEX_PROVIDER_MESSAGE_FMT: "你有{0}条新消息",
+    INDEX_EVENT_COUNTER_MSG_FMT: "你有{0}个新事件",
+    INDEX_TASK_FMT: "你至少有{0}个任务",
     BOOK_INDEX_ROOT_FOLDER: "根目录",
     BOOK_INDEX_NEW_FOLDER: "新建目录",
     BOOK_INDEX_NEW_DOCUMENT: "新建文档",
