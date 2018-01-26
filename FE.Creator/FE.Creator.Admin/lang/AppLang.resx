@@ -171,6 +171,21 @@
   <data name="ACCOUNTMGR_TITLE" xml:space="preserve">
     <value>Account Management</value>
   </data>
+  <data name="APPEVENT_ERROR_LEVEL_ERROR" xml:space="preserve">
+    <value>Critical Error</value>
+  </data>
+  <data name="APPEVENT_ERROR_LEVEL_INFO" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="APPEVENT_ERROR_LEVEL_WARNING" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="APPEVENT_TITLE" xml:space="preserve">
+    <value>Application Event</value>
+  </data>
+  <data name="APPEVENT_VIEW_ALL_EVENTS" xml:space="preserve">
+    <value>View all Events</value>
+  </data>
   <data name="APPSETTINGS_DATEFMT" xml:space="preserve">
     <value>DateTime Format</value>
   </data>
@@ -300,6 +315,99 @@
   <data name="CONTACTS_TITLE" xml:space="preserve">
     <value>Contacts Management</value>
   </data>
+  <data name="DATA_CUST_ADVANCED_PROPERTY" xml:space="preserve">
+    <value>Advanced Properties</value>
+  </data>
+  <data name="DATA_CUST_BACKTOLIST" xml:space="preserve">
+    <value>Back to List</value>
+  </data>
+  <data name="DATA_CUST_EDITTABLE" xml:space="preserve">
+    <value>Edit Custom Table</value>
+  </data>
+  <data name="DATA_CUST_FIELD_BIGINTEGER" xml:space="preserve">
+    <value>Big Integer Field</value>
+  </data>
+  <data name="DATA_CUST_FIELD_DATETIME" xml:space="preserve">
+    <value>DateTime Field</value>
+  </data>
+  <data name="DATA_CUST_FIELD_FILE" xml:space="preserve">
+    <value>File Upload Field</value>
+  </data>
+  <data name="DATA_CUST_FIELD_INTEGER" xml:space="preserve">
+    <value>Integer Field</value>
+  </data>
+  <data name="DATA_CUST_FIELD_NUMBER" xml:space="preserve">
+    <value>Number Field</value>
+  </data>
+  <data name="DATA_CUST_FIELD_OPT_DSP" xml:space="preserve">
+    <value>Display Text</value>
+  </data>
+  <data name="DATA_CUST_FIELD_OPT_ITEMS" xml:space="preserve">
+    <value>Selection Items</value>
+  </data>
+  <data name="DATA_CUST_FIELD_OPT_VALUE" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="DATA_CUST_FIELD_REFERNCE" xml:space="preserve">
+    <value>Object Reference Field</value>
+  </data>
+  <data name="DATA_CUST_FIELD_SINGLE_CHOICE" xml:space="preserve">
+    <value>Single Selection Field</value>
+  </data>
+  <data name="DATA_CUST_FIELD_STRING" xml:space="preserve">
+    <value>String Field</value>
+  </data>
+  <data name="DATA_CUST_FILED_BTNUPLOAD" xml:space="preserve">
+    <value>Upload File</value>
+  </data>
+  <data name="DATA_CUST_GENERAL_PROPERTY" xml:space="preserve">
+    <value>General Properties</value>
+  </data>
+  <data name="DATA_CUST_LBL_EDIT_TABLE" xml:space="preserve">
+    <value>Editing Table</value>
+  </data>
+  <data name="DATA_CUST_TABLE" xml:space="preserve">
+    <value>Custom Table</value>
+  </data>
+  <data name="DATA_CUST_TABLEGROUP" xml:space="preserve">
+    <value>Custom Table Group</value>
+  </data>
+  <data name="DATA_CUST_TABLE_CREATED" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="DATA_CUST_TABLE_CREATEDBY" xml:space="preserve">
+    <value>Created By</value>
+  </data>
+  <data name="DATA_CUST_TABLE_DATA" xml:space="preserve">
+    <value>Custom Table Data</value>
+  </data>
+  <data name="DATA_CUST_TABLE_GRPKEY" xml:space="preserve">
+    <value>Table Group Key</value>
+  </data>
+  <data name="DATA_CUST_TABLE_GRPNAME" xml:space="preserve">
+    <value>Table Group Name</value>
+  </data>
+  <data name="DATA_CUST_TABLE_OBJECT_NAME" xml:space="preserve">
+    <value>Data Name</value>
+  </data>
+  <data name="DATA_CUST_TABLE_OBJID" xml:space="preserve">
+    <value>Data Id</value>
+  </data>
+  <data name="DATA_CUST_TABLE_OBJOWNER" xml:space="preserve">
+    <value>Object Owner</value>
+  </data>
+  <data name="DATA_CUST_TABLE_UPDATED" xml:space="preserve">
+    <value>Updated</value>
+  </data>
+  <data name="DATA_CUST_TABLE_UPDATEDBY" xml:space="preserve">
+    <value>Updated By</value>
+  </data>
+  <data name="DATA_CUST_TOGGLE_DROPDOWN" xml:space="preserve">
+    <value>Toggle Dropdown</value>
+  </data>
+  <data name="DATA_CUST_VIEW_TABLE_OBJECT" xml:space="preserve">
+    <value>Viewing Table Data</value>
+  </data>
   <data name="DIARYMGR_AUTHOR_MOOD" xml:space="preserve">
     <value>Author Mood</value>
   </data>
@@ -387,6 +495,9 @@
   <data name="EVENT_APP_EVENT" xml:space="preserve">
     <value>Application Event</value>
   </data>
+  <data name="EVENT_APP_EVENT_LIST" xml:space="preserve">
+    <value>Event List</value>
+  </data>
   <data name="EVENT_APP_EVENT_LOGIN_DESC" xml:space="preserve">
     <value>User {0} is login to the System</value>
   </data>
@@ -461,6 +572,9 @@
   </data>
   <data name="INDEX_EVENT_COUNTER_MSG" xml:space="preserve">
     <value>There are {0} Latest System Events</value>
+  </data>
+  <data name="INDEX_MENU_HOT" xml:space="preserve">
+    <value>Hot</value>
   </data>
   <data name="INDEX_NOTIFY_DEFAULT_MSG" xml:space="preserve">
     <value>FEConsole V1.0 is Now General Avaliable!</value>
@@ -935,6 +1049,9 @@
   </data>
   <data name="TASKMGR_TITLE" xml:space="preserve">
     <value>Task Management</value>
+  </data>
+  <data name="TASKMGR_VIEW_ALL_TASK" xml:space="preserve">
+    <value>View all tasks</value>
   </data>
   <data name="USERMGR_BTN_PROFILE" xml:space="preserve">
     <value>Profile</value>

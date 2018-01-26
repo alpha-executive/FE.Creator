@@ -54,6 +54,13 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         public async Task<IHttpActionResult> GetByParentId(int? id = null)
         {
             IEnumerable<ObjectDefinitionGroup> objDefGroups = await GetAllObjectDefinitionGroups(id);
+#if !DEBUG
+            objDefGroups = objDefGroups.Where(def =>
+            {
+                return !def.GroupName.Equals("FESystem")
+                && !def.GroupKey.Equals("FE_SYS_APP_CONFIG");
+            });
+#endif
 
             return this.Ok<IEnumerable<ObjectDefinitionGroup>>(objDefGroups);
         }

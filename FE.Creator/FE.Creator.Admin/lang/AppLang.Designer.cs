@@ -223,6 +223,51 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Critical Error.
+        /// </summary>
+        public static string APPEVENT_ERROR_LEVEL_ERROR {
+            get {
+                return ResourceManager.GetString("APPEVENT_ERROR_LEVEL_ERROR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information.
+        /// </summary>
+        public static string APPEVENT_ERROR_LEVEL_INFO {
+            get {
+                return ResourceManager.GetString("APPEVENT_ERROR_LEVEL_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning.
+        /// </summary>
+        public static string APPEVENT_ERROR_LEVEL_WARNING {
+            get {
+                return ResourceManager.GetString("APPEVENT_ERROR_LEVEL_WARNING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Application Event.
+        /// </summary>
+        public static string APPEVENT_TITLE {
+            get {
+                return ResourceManager.GetString("APPEVENT_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View all Events.
+        /// </summary>
+        public static string APPEVENT_VIEW_ALL_EVENTS {
+            get {
+                return ResourceManager.GetString("APPEVENT_VIEW_ALL_EVENTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DateTime Format.
         /// </summary>
         public static string APPSETTINGS_DATEFMT {
@@ -610,6 +655,285 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Advanced Properties.
+        /// </summary>
+        public static string DATA_CUST_ADVANCED_PROPERTY {
+            get {
+                return ResourceManager.GetString("DATA_CUST_ADVANCED_PROPERTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back to List.
+        /// </summary>
+        public static string DATA_CUST_BACKTOLIST {
+            get {
+                return ResourceManager.GetString("DATA_CUST_BACKTOLIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Custom Table.
+        /// </summary>
+        public static string DATA_CUST_EDITTABLE {
+            get {
+                return ResourceManager.GetString("DATA_CUST_EDITTABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Big Integer Field.
+        /// </summary>
+        public static string DATA_CUST_FIELD_BIGINTEGER {
+            get {
+                return ResourceManager.GetString("DATA_CUST_FIELD_BIGINTEGER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DateTime Field.
+        /// </summary>
+        public static string DATA_CUST_FIELD_DATETIME {
+            get {
+                return ResourceManager.GetString("DATA_CUST_FIELD_DATETIME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Upload Field.
+        /// </summary>
+        public static string DATA_CUST_FIELD_FILE {
+            get {
+                return ResourceManager.GetString("DATA_CUST_FIELD_FILE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Integer Field.
+        /// </summary>
+        public static string DATA_CUST_FIELD_INTEGER {
+            get {
+                return ResourceManager.GetString("DATA_CUST_FIELD_INTEGER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number Field.
+        /// </summary>
+        public static string DATA_CUST_FIELD_NUMBER {
+            get {
+                return ResourceManager.GetString("DATA_CUST_FIELD_NUMBER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display Text.
+        /// </summary>
+        public static string DATA_CUST_FIELD_OPT_DSP {
+            get {
+                return ResourceManager.GetString("DATA_CUST_FIELD_OPT_DSP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selection Items.
+        /// </summary>
+        public static string DATA_CUST_FIELD_OPT_ITEMS {
+            get {
+                return ResourceManager.GetString("DATA_CUST_FIELD_OPT_ITEMS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value.
+        /// </summary>
+        public static string DATA_CUST_FIELD_OPT_VALUE {
+            get {
+                return ResourceManager.GetString("DATA_CUST_FIELD_OPT_VALUE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Object Reference Field.
+        /// </summary>
+        public static string DATA_CUST_FIELD_REFERNCE {
+            get {
+                return ResourceManager.GetString("DATA_CUST_FIELD_REFERNCE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Single Selection Field.
+        /// </summary>
+        public static string DATA_CUST_FIELD_SINGLE_CHOICE {
+            get {
+                return ResourceManager.GetString("DATA_CUST_FIELD_SINGLE_CHOICE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to String Field.
+        /// </summary>
+        public static string DATA_CUST_FIELD_STRING {
+            get {
+                return ResourceManager.GetString("DATA_CUST_FIELD_STRING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload File.
+        /// </summary>
+        public static string DATA_CUST_FILED_BTNUPLOAD {
+            get {
+                return ResourceManager.GetString("DATA_CUST_FILED_BTNUPLOAD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to General Properties.
+        /// </summary>
+        public static string DATA_CUST_GENERAL_PROPERTY {
+            get {
+                return ResourceManager.GetString("DATA_CUST_GENERAL_PROPERTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Editing Table.
+        /// </summary>
+        public static string DATA_CUST_LBL_EDIT_TABLE {
+            get {
+                return ResourceManager.GetString("DATA_CUST_LBL_EDIT_TABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Table.
+        /// </summary>
+        public static string DATA_CUST_TABLE {
+            get {
+                return ResourceManager.GetString("DATA_CUST_TABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created.
+        /// </summary>
+        public static string DATA_CUST_TABLE_CREATED {
+            get {
+                return ResourceManager.GetString("DATA_CUST_TABLE_CREATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created By.
+        /// </summary>
+        public static string DATA_CUST_TABLE_CREATEDBY {
+            get {
+                return ResourceManager.GetString("DATA_CUST_TABLE_CREATEDBY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Table Data.
+        /// </summary>
+        public static string DATA_CUST_TABLE_DATA {
+            get {
+                return ResourceManager.GetString("DATA_CUST_TABLE_DATA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Table Group Key.
+        /// </summary>
+        public static string DATA_CUST_TABLE_GRPKEY {
+            get {
+                return ResourceManager.GetString("DATA_CUST_TABLE_GRPKEY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Table Group Name.
+        /// </summary>
+        public static string DATA_CUST_TABLE_GRPNAME {
+            get {
+                return ResourceManager.GetString("DATA_CUST_TABLE_GRPNAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data Name.
+        /// </summary>
+        public static string DATA_CUST_TABLE_OBJECT_NAME {
+            get {
+                return ResourceManager.GetString("DATA_CUST_TABLE_OBJECT_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data Id.
+        /// </summary>
+        public static string DATA_CUST_TABLE_OBJID {
+            get {
+                return ResourceManager.GetString("DATA_CUST_TABLE_OBJID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Object Owner.
+        /// </summary>
+        public static string DATA_CUST_TABLE_OBJOWNER {
+            get {
+                return ResourceManager.GetString("DATA_CUST_TABLE_OBJOWNER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updated.
+        /// </summary>
+        public static string DATA_CUST_TABLE_UPDATED {
+            get {
+                return ResourceManager.GetString("DATA_CUST_TABLE_UPDATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updated By.
+        /// </summary>
+        public static string DATA_CUST_TABLE_UPDATEDBY {
+            get {
+                return ResourceManager.GetString("DATA_CUST_TABLE_UPDATEDBY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Table Group.
+        /// </summary>
+        public static string DATA_CUST_TABLEGROUP {
+            get {
+                return ResourceManager.GetString("DATA_CUST_TABLEGROUP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggle Dropdown.
+        /// </summary>
+        public static string DATA_CUST_TOGGLE_DROPDOWN {
+            get {
+                return ResourceManager.GetString("DATA_CUST_TOGGLE_DROPDOWN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Viewing Table Data.
+        /// </summary>
+        public static string DATA_CUST_VIEW_TABLE_OBJECT {
+            get {
+                return ResourceManager.GetString("DATA_CUST_VIEW_TABLE_OBJECT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Author Mood.
         /// </summary>
         public static string DIARYMGR_AUTHOR_MOOD {
@@ -871,6 +1195,15 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Event List.
+        /// </summary>
+        public static string EVENT_APP_EVENT_LIST {
+            get {
+                return ResourceManager.GetString("EVENT_APP_EVENT_LIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User {0} is login to the System.
         /// </summary>
         public static string EVENT_APP_EVENT_LOGIN_DESC {
@@ -1092,6 +1425,15 @@ namespace FE.Creator.Admin.lang {
         public static string INDEX_EVENT_COUNTER_MSG {
             get {
                 return ResourceManager.GetString("INDEX_EVENT_COUNTER_MSG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hot.
+        /// </summary>
+        public static string INDEX_MENU_HOT {
+            get {
+                return ResourceManager.GetString("INDEX_MENU_HOT", resourceCulture);
             }
         }
         
@@ -2514,6 +2856,15 @@ namespace FE.Creator.Admin.lang {
         public static string TASKMGR_TITLE {
             get {
                 return ResourceManager.GetString("TASKMGR_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View all tasks.
+        /// </summary>
+        public static string TASKMGR_VIEW_ALL_TASK {
+            get {
+                return ResourceManager.GetString("TASKMGR_VIEW_ALL_TASK", resourceCulture);
             }
         }
         

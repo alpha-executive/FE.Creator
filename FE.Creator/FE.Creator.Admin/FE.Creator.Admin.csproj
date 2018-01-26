@@ -1257,6 +1257,7 @@
     <Content Include="Content\apps\objectrepository.js" />
     <Content Include="Content\apps\objectutilservice.js" />
     <Content Include="Content\apps\pageservice.js" />
+    <Content Include="Content\apps\systemevent.js" />
     <Content Include="Content\apps\taskcontroller.js" />
     <Content Include="Content\apps\userprofilecontroller.js" />
     <Content Include="Content\apps\usercontroller.js" />
@@ -1512,6 +1513,7 @@
     <Content Include="Views\AngularView\Client\Efficiency\ArticleDisplayView.cshtml" />
     <Content Include="Views\Print\PrintArticle.cshtml" />
     <Content Include="Views\AngularView\Server\Settings\AppSettingsIndex.cshtml" />
+    <Content Include="Views\AngularView\Server\Settings\SystemEventIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />

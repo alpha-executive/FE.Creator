@@ -1,18 +1,18 @@
 ﻿<div class="col-lg-12">
     <div class="box box-success box-solid">
         <div class="box-header with-border">
-            <h3 class="box-title"><i class="fa fa-table"></i> Edit Object Schema - {{CurrentObjectDefinition.objectDefinitionName}}</h3>
+            <h3 class="box-title"><i class="fa fa-table"></i> @FE.Creator.Admin.lang.AppLang.DATA_CUST_EDITTABLE - {{CurrentObjectDefinition.objectDefinitionName}}</h3>
             <div class="box-tools pull-right">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-box-tool" ng-click="saveChanges()"><i class="fa fa-save"></i> Save Changes</button>
-                    <a class="btn btn-box-tool" href="/objdefs/{{groupId}}"><i class="fa fa-mail-reply"></i> Back to List</a>
+                    <button type="button" class="btn btn-box-tool" ng-click="saveChanges()"><i class="fa fa-save"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_SAVE</button>
+                    <a class="btn btn-box-tool" href="/objdefs/{{groupId}}"><i class="fa fa-mail-reply"></i> @FE.Creator.Admin.lang.AppLang.DATA_CUST_BACKTOLIST</a>
                 </div>
             </div>
         </div>
         <div class="box-body">
             <div class="box box-warning">
                 <div class="box-header">
-                    <h4><i class="fa fa-flag-o"></i> General Property</h4>
+                    <h4><i class="fa fa-flag-o"></i> @FE.Creator.Admin.lang.AppLang.DATA_CUST_GENERAL_PROPERTY</h4>
                 </div>
                 <div class="box-body">
                     <div class="input-group">
@@ -28,24 +28,24 @@
             </div>
             <div class="box box-warning">
                 <div class="box-header">
-                    <h4 class="box-title"><i class="fa fa-cubes"></i> Advanced Properties</h4>
+                    <h4 class="box-title"><i class="fa fa-cubes"></i> @FE.Creator.Admin.lang.AppLang.DATA_CUST_ADVANCED_PROPERTY</h4>
                     <div class="box-tools pull-right">
                         <div class="btn-group">
-                            <span type="button" class="btn btn-warning btn-box-tool"><i class="fa fa-plus"></i>Add</span>
+                            <span type="button" class="btn btn-warning btn-box-tool"><i class="fa fa-plus"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_ADD</span>
                             <button type="button" class="btn btn-warning btn-box-tool dropdown-toggle" data-toggle="dropdown">
                                 <span class="caret"></span>
-                                <span class="sr-only">Toggle Dropdown</span>
+                                <span class="sr-only"> @FE.Creator.Admin.lang.AppLang.DATA_CUST_TOGGLE_DROPDOWN</span>
                             </button>
                             <ul class="dropdown-menu" role="menu">
-                                <li><a ng-click="addPrimaryField(0)">String Field</a></li>
-                                <li><a ng-click="addPrimaryField(1)">Integer Field</a></li>
-                                <li><a ng-click="addPrimaryField(2)">Big Integer Field</a></li>
-                                <li><a ng-click="addPrimaryField(3)">DateTime Field</a></li>
-                                <li><a ng-click="addPrimaryField(4)">Number Field</a></li>
-                                <li><a ng-click="addPrimaryField(5)">Binary Field</a></li>
-                                <li><a ng-click="addFileUploadField()">File Upload Field</a></li>
-                                <li><a ng-click="addObjectReferenceField()">Object Reference Field</a></li>
-                                <li><a ng-click="addSingleSelectionField()">Single Selection Field</a></li>
+                                <li><a ng-click="addPrimaryField(0)"> @FE.Creator.Admin.lang.AppLang.DATA_CUST_FIELD_STRING</a></li>
+                                <li><a ng-click="addPrimaryField(1)"> @FE.Creator.Admin.lang.AppLang.DATA_CUST_FIELD_INTEGER</a></li>
+                                <li><a ng-click="addPrimaryField(2)"> @FE.Creator.Admin.lang.AppLang.DATA_CUST_FIELD_BIGINTEGER</a></li>
+                                <li><a ng-click="addPrimaryField(3)"> @FE.Creator.Admin.lang.AppLang.DATA_CUST_FIELD_DATETIME</a></li>
+                                <li><a ng-click="addPrimaryField(4)"> @FE.Creator.Admin.lang.AppLang.DATA_CUST_FIELD_NUMBER</a></li>
+                                @*<li><a ng-click="addPrimaryField(5)">Binary Field</a></li>*@
+                                <li><a ng-click="addFileUploadField()">@FE.Creator.Admin.lang.AppLang.DATA_CUST_FIELD_FILE</a></li>
+                                <li><a ng-click="addObjectReferenceField()">@FE.Creator.Admin.lang.AppLang.DATA_CUST_FIELD_REFERNCE</a></li>
+                                <li><a ng-click="addSingleSelectionField()">@FE.Creator.Admin.lang.AppLang.DATA_CUST_FIELD_SINGLE_CHOICE</a></li>
                             </ul>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                                 </h4>
                                 <div class="box-tools pull-right">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-box-tool" ng-click="deleteObjectDefinitionField(fld)"><i class="fa fa-trash"></i> Delete</button>
+                                        <button type="button" class="btn btn-box-tool" ng-click="deleteObjectDefinitionField(fld)"><i class="fa fa-trash"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_DELETE</button>
                                     </div>
                                 </div>
                             </div>
@@ -81,8 +81,8 @@
         <div class="box-footer">
             <div class="box-tools">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-box-tool" ng-click="saveChanges()"><i class="fa fa-save"></i> Save Changes</button>
-                    <a class="btn btn-box-tool" href="/objdefs/{{groupId}}"><i class="fa fa-mail-reply"></i> Back to List</a>
+                    <button type="button" class="btn btn-box-tool" ng-click="saveChanges()"><i class="fa fa-save"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_SAVE</button>
+                    <a class="btn btn-box-tool" href="/objdefs/{{groupId}}"><i class="fa fa-mail-reply"></i> @FE.Creator.Admin.lang.AppLang.DATA_CUST_BACKTOLIST</a>
                 </div>
             </div>
         </div>

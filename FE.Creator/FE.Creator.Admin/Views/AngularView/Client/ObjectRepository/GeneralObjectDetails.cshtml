@@ -1,30 +1,30 @@
 ﻿
     <div class="box box-primary box-solid">
         <div class="box-header with-border">
-            <h3 class="box-title"><i class="fa fa-table"></i> View Object - {{ctrl.currentGeneralObject.objectName}}</h3>
+            <h3 class="box-title"><i class="fa fa-table"></i> @FE.Creator.Admin.lang.AppLang.DATA_CUST_VIEW_TABLE_OBJECT - {{ctrl.currentGeneralObject.objectName}}</h3>
             <div class="box-tools pull-right">
                 <div class="btn-group">
-                    <button class="btn btn-box-tool" ng-click="ctrl.setViewMode('list')"><i class="fa fa-mail-reply"></i> Back to List</button>
+                    <button class="btn btn-box-tool" ng-click="ctrl.setViewMode('list')"><i class="fa fa-mail-reply"></i> @FE.Creator.Admin.lang.AppLang.DATA_CUST_BACKTOLIST</button>
                 </div>
             </div>
         </div>
         <div class="box-body">
             <div class="box box-warning">
                 <div class="box-header">
-                    <h4><i class="fa fa-flag-o"></i> General Property</h4>
+                    <h4><i class="fa fa-flag-o"></i> @FE.Creator.Admin.lang.AppLang.DATA_CUST_GENERAL_PROPERTY</h4>
                 </div>
                 <div class="box-body">
                     <!--ID and Name-->
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-group">
-                                <span class="input-group-addon label-default"><i class="fa fa-star-o text-yellow"></i> Object Id</span>
+                                <span class="input-group-addon label-default"><i class="fa fa-star-o text-yellow"></i> @FE.Creator.Admin.lang.AppLang.DATA_CUST_TABLE_OBJID</span>
                                 <span class="form-control">{{ctrl.currentGeneralObject.objectID}}</span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="input-group">
-                                <span class="input-group-addon label-default"><i class="fa fa-star-o text-yellow"></i> Object Name</span>
+                                <span class="input-group-addon label-default"><i class="fa fa-star-o text-yellow"></i> @FE.Creator.Admin.lang.AppLang.DATA_CUST_TABLE_OBJECT_NAME</span>
                                 <span class="form-control">{{ctrl.currentGeneralObject.objectName}}</span>
                             </div>
                         </div>
@@ -34,7 +34,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="input-group">
-                                <span class="input-group-addon label-default"><i class="fa fa-star-o text-yellow"></i> Object Owner</span>
+                                <span class="input-group-addon label-default"><i class="fa fa-star-o text-yellow"></i> @FE.Creator.Admin.lang.AppLang.DATA_CUST_TABLE_OBJOWNER</span>
                                 <span class="form-control">{{ctrl.currentGeneralObject.objectOwner}}</span>
                             </div>
                         </div>
@@ -44,13 +44,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-group">
-                                <span class="input-group-addon label-default"><i class="fa fa-star-o text-yellow"></i> Created</span>
+                                <span class="input-group-addon label-default"><i class="fa fa-star-o text-yellow"></i> @FE.Creator.Admin.lang.AppLang.DATA_CUST_TABLE_CREATED</span>
                                 <span class="form-control">{{ctrl.currentGeneralObject.created}}</span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="input-group">
-                                <span class="input-group-addon label-default"><i class="fa fa-star-o text-yellow"></i> Created By</span>
+                                <span class="input-group-addon label-default"><i class="fa fa-star-o text-yellow"></i> @FE.Creator.Admin.lang.AppLang.DATA_CUST_TABLE_CREATEDBY</span>
                                 <span class="form-control">{{ctrl.currentGeneralObject.createdBy}}</span>
                             </div>
                         </div>
@@ -60,13 +60,13 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="input-group">
-                                <span class="input-group-addon label-default"><i class="fa fa-star-o text-yellow"></i> Updated</span>
+                                <span class="input-group-addon label-default"><i class="fa fa-star-o text-yellow"></i> @FE.Creator.Admin.lang.AppLang.DATA_CUST_TABLE_UPDATED</span>
                                 <span class="form-control">{{ctrl.currentGeneralObject.updated}}</span>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="input-group">
-                                <span class="input-group-addon label-default"><i class="fa fa-star-o text-yellow"></i> Updated By</span>
+                                <span class="input-group-addon label-default"><i class="fa fa-star-o text-yellow"></i> @FE.Creator.Admin.lang.AppLang.DATA_CUST_TABLE_UPDATEDBY</span>
                                 <span class="form-control">{{ctrl.currentGeneralObject.updatedBy}}</span>
                             </div>
                         </div>
@@ -75,7 +75,7 @@
             </div>
             <div class="box box-warning">
                 <div class="box-header">
-                    <h4 class="box-title"><i class="fa fa-cubes"></i> Advanced Properties</h4>
+                    <h4 class="box-title"><i class="fa fa-cubes"></i> @FE.Creator.Admin.lang.AppLang.DATA_CUST_ADVANCED_PROPERTY</h4>
                 </div>
                 <div class="box-body">
                     <div class="row" ng-repeat="field in ctrl.currentObjectDefinition.objectFields">
@@ -113,7 +113,7 @@
         <div class="box-footer">
             <div class="box-tools">
                 <div class="btn-group">
-                    <button class="btn btn-box-tool" ng-click="ctrl.setViewMode('list')"><i class="fa fa-mail-reply"></i> Back to List</button>
+                    <button class="btn btn-box-tool" ng-click="ctrl.setViewMode('list')"><i class="fa fa-mail-reply"></i> @FE.Creator.Admin.lang.AppLang.DATA_CUST_BACKTOLIST</button>
                 </div>
             </div>
         </div>

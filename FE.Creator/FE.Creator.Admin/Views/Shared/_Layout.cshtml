@@ -83,14 +83,9 @@
                                 <li>
                                     <!-- inner menu: contains the actual data -->
                                     <ul class="menu">
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                            </a>
-                                        </li>
                                     </ul>
                                 </li>
-                                <li class="footer"><a href="#">View all</a></li>
+                                <li class="footer"><a href="/ngview/Index/Settings/SystemEventIndex">@FE.Creator.Admin.lang.AppLang.APPEVENT_VIEW_ALL_EVENTS</a></li>
                             </ul>
                         </li>
                         <!-- Tasks: style can be found in dropdown.less -->
@@ -100,14 +95,14 @@
                                 <span class="label label-danger taskcount">0</span>
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="header">You have no tasks</li>
+                                <li class="header"></li>
                                 <li>
                                     <!-- inner menu: contains the actual data -->
                                     <ul class="menu">
                                     </ul>
                                 </li>
                                 <li class="footer">
-                                    <a href="/ngview/Index/Efficiency/TaskIndex">View all tasks</a>
+                                    <a href="/ngview/Index/Efficiency/TaskIndex">@FE.Creator.Admin.lang.AppLang.TASKMGR_VIEW_ALL_TASK</a>
                                 </li>
                             </ul>
                         </li>
@@ -177,8 +172,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="/ngview/Index/ObjectRepository/ObjectDefinitionGroupIndex"><i class="fa fa-object-group"></i> Object Group</a></li>
-                            <li><a href="/ngview/Index/ObjectRepository/ObjectDefinitionIndex"><i class="fa fa-table"></i>Object Schema</a></li>
+                            <li><a href="/ngview/Index/Settings/SystemEventIndex"><i class="fa fa-bell"></i>@FE.Creator.Admin.lang.AppLang.APPEVENT_TITLE</a></li>
                             <li><a href="/ngview/Index/Settings/AppSettingsIndex"><i class="fa fa-gears"></i>@FE.Creator.Admin.lang.AppLang.LAYOUT_SYSTEM_SETTINGS</a></li>
                             <li><a href="/ngview/Index/LicenseManagement/LicenseIndex"><i class="fa fa-balance-scale"></i>@FE.Creator.Admin.lang.AppLang.LAYOUT_NAV_LICENSE</a></li>
                         </ul>
@@ -188,11 +182,13 @@
                             <i class="fa fa-diamond"></i>
                             <span>@FE.Creator.Admin.lang.AppLang.LAYOUT_NAV_DATAMGR</span>
                             <span class="pull-right-container">
-                                <small class="label pull-right bg-red">Hot</small>
+                                <small class="label pull-right bg-red">@FE.Creator.Admin.lang.AppLang.INDEX_MENU_HOT</small>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="/ngview/Index/ObjectRepository/GeneralObjectIndex"><i class="fa fa-opera"></i> @FE.Creator.Admin.lang.AppLang.LAYOUT_NAV_GENERALOBJ</a></li>
+                            <li><a href="/ngview/Index/ObjectRepository/ObjectDefinitionGroupIndex"><i class="fa fa-object-group"></i> @FE.Creator.Admin.lang.AppLang.DATA_CUST_TABLEGROUP</a></li>
+                            <li><a href="/ngview/Index/ObjectRepository/ObjectDefinitionIndex"><i class="fa fa-table"></i> @FE.Creator.Admin.lang.AppLang.DATA_CUST_TABLE</a></li>
+                            <li><a href="/ngview/Index/ObjectRepository/GeneralObjectIndex"><i class="fa fa-opera"></i> @FE.Creator.Admin.lang.AppLang.DATA_CUST_TABLE_DATA</a></li>
                         </ul>
                     </li>
                     <li>

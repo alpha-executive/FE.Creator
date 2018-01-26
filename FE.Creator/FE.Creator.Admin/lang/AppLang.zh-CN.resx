@@ -171,6 +171,21 @@
   <data name="ACCOUNTMGR_TITLE" xml:space="preserve">
     <value>账户管理</value>
   </data>
+  <data name="APPEVENT_ERROR_LEVEL_ERROR" xml:space="preserve">
+    <value>严重错误</value>
+  </data>
+  <data name="APPEVENT_ERROR_LEVEL_INFO" xml:space="preserve">
+    <value>提示</value>
+  </data>
+  <data name="APPEVENT_ERROR_LEVEL_WARNING" xml:space="preserve">
+    <value>警告</value>
+  </data>
+  <data name="APPEVENT_TITLE" xml:space="preserve">
+    <value>应用程序事件</value>
+  </data>
+  <data name="APPEVENT_VIEW_ALL_EVENTS" xml:space="preserve">
+    <value>查看所有事件</value>
+  </data>
   <data name="APPSETTINGS_DATEFMT" xml:space="preserve">
     <value>时间格式</value>
   </data>
@@ -300,6 +315,99 @@
   <data name="CONTACTS_TITLE" xml:space="preserve">
     <value>联系人管理</value>
   </data>
+  <data name="DATA_CUST_ADVANCED_PROPERTY" xml:space="preserve">
+    <value>高级属性</value>
+  </data>
+  <data name="DATA_CUST_BACKTOLIST" xml:space="preserve">
+    <value>返回到列表</value>
+  </data>
+  <data name="DATA_CUST_EDITTABLE" xml:space="preserve">
+    <value>编辑数据表</value>
+  </data>
+  <data name="DATA_CUST_FIELD_BIGINTEGER" xml:space="preserve">
+    <value>长整数字段</value>
+  </data>
+  <data name="DATA_CUST_FIELD_DATETIME" xml:space="preserve">
+    <value>时间字段</value>
+  </data>
+  <data name="DATA_CUST_FIELD_FILE" xml:space="preserve">
+    <value>文件字段</value>
+  </data>
+  <data name="DATA_CUST_FIELD_INTEGER" xml:space="preserve">
+    <value>整数字段</value>
+  </data>
+  <data name="DATA_CUST_FIELD_NUMBER" xml:space="preserve">
+    <value>数字字段</value>
+  </data>
+  <data name="DATA_CUST_FIELD_OPT_DSP" xml:space="preserve">
+    <value>显示名称</value>
+  </data>
+  <data name="DATA_CUST_FIELD_OPT_ITEMS" xml:space="preserve">
+    <value>备选项目</value>
+  </data>
+  <data name="DATA_CUST_FIELD_OPT_VALUE" xml:space="preserve">
+    <value>值</value>
+  </data>
+  <data name="DATA_CUST_FIELD_REFERNCE" xml:space="preserve">
+    <value>数据引用字段</value>
+  </data>
+  <data name="DATA_CUST_FIELD_SINGLE_CHOICE" xml:space="preserve">
+    <value>单选字段</value>
+  </data>
+  <data name="DATA_CUST_FIELD_STRING" xml:space="preserve">
+    <value>字符字段</value>
+  </data>
+  <data name="DATA_CUST_FILED_BTNUPLOAD" xml:space="preserve">
+    <value>上传文件</value>
+  </data>
+  <data name="DATA_CUST_GENERAL_PROPERTY" xml:space="preserve">
+    <value>一般属性</value>
+  </data>
+  <data name="DATA_CUST_LBL_EDIT_TABLE" xml:space="preserve">
+    <value>编辑数据表</value>
+  </data>
+  <data name="DATA_CUST_TABLE" xml:space="preserve">
+    <value>自定义数据表定义</value>
+  </data>
+  <data name="DATA_CUST_TABLEGROUP" xml:space="preserve">
+    <value>自定义数据表分组</value>
+  </data>
+  <data name="DATA_CUST_TABLE_CREATED" xml:space="preserve">
+    <value>创建时间</value>
+  </data>
+  <data name="DATA_CUST_TABLE_CREATEDBY" xml:space="preserve">
+    <value>创建人</value>
+  </data>
+  <data name="DATA_CUST_TABLE_DATA" xml:space="preserve">
+    <value>自定义数据表数据</value>
+  </data>
+  <data name="DATA_CUST_TABLE_GRPKEY" xml:space="preserve">
+    <value>数据表分组编码</value>
+  </data>
+  <data name="DATA_CUST_TABLE_GRPNAME" xml:space="preserve">
+    <value>数据表分组名称</value>
+  </data>
+  <data name="DATA_CUST_TABLE_OBJECT_NAME" xml:space="preserve">
+    <value>数据名称</value>
+  </data>
+  <data name="DATA_CUST_TABLE_OBJID" xml:space="preserve">
+    <value>数据标识</value>
+  </data>
+  <data name="DATA_CUST_TABLE_OBJOWNER" xml:space="preserve">
+    <value>数据拥有者</value>
+  </data>
+  <data name="DATA_CUST_TABLE_UPDATED" xml:space="preserve">
+    <value>更新时间</value>
+  </data>
+  <data name="DATA_CUST_TABLE_UPDATEDBY" xml:space="preserve">
+    <value>更新人</value>
+  </data>
+  <data name="DATA_CUST_TOGGLE_DROPDOWN" xml:space="preserve">
+    <value>切换下拉列表</value>
+  </data>
+  <data name="DATA_CUST_VIEW_TABLE_OBJECT" xml:space="preserve">
+    <value>查看数据表数据</value>
+  </data>
   <data name="DIARYMGR_AUTHOR_MOOD" xml:space="preserve">
     <value>心情指数</value>
   </data>
@@ -384,6 +492,9 @@
   <data name="EVENT_APP_EVENT" xml:space="preserve">
     <value>系统事件</value>
   </data>
+  <data name="EVENT_APP_EVENT_LIST" xml:space="preserve">
+    <value>事件列表</value>
+  </data>
   <data name="EVENT_APP_EVENT_LOGIN_DESC" xml:space="preserve">
     <value>{0}登录系统</value>
   </data>
@@ -458,6 +569,9 @@
   </data>
   <data name="INDEX_EVENT_COUNTER_MSG" xml:space="preserve">
     <value>系统有{0}个新的事件</value>
+  </data>
+  <data name="INDEX_MENU_HOT" xml:space="preserve">
+    <value>热门</value>
   </data>
   <data name="INDEX_NOTIFY_DEFAULT_MSG" xml:space="preserve">
     <value>FEConsole V1.0 现在正式上线了!</value>
@@ -932,6 +1046,9 @@
   </data>
   <data name="TASKMGR_TITLE" xml:space="preserve">
     <value>任务管理</value>
+  </data>
+  <data name="TASKMGR_VIEW_ALL_TASK" xml:space="preserve">
+    <value>查看所有任务</value>
   </data>
   <data name="USERMGR_BTN_PROFILE" xml:space="preserve">
     <value>用户资料</value>

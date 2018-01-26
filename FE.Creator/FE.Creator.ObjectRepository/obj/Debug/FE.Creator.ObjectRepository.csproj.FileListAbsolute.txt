@@ -36,4 +36,7 @@ C:\Workspace\projects\devops\FE.Creator\FE.Creator.ObjectRepository\bin\Debug\Mi
 C:\Workspace\projects\devops\FE.Creator\FE.Creator.ObjectRepository\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.xml
 C:\Workspace\projects\devops\FE.Creator\FE.Creator.ObjectRepository\obj\Debug\FE.Creator.ObjectRepository.dll
 C:\Workspace\projects\devops\FE.Creator\FE.Creator.ObjectRepository\obj\Debug\FE.Creator.ObjectRepository.pdb
-C:\Workspace\projects\devops\FE.Creator\FE.Creator.ObjectRepository\obj\Debug\FE.Creator.ObjectRepository.csprojResolveAssemblyReference.cache
+C:\Workspace\projects\devops\FE.Creator\FE.Creator.ObjectRepository\bin\Debug\NLog.dll
+C:\Workspace\projects\devops\FE.Creator\FE.Creator.ObjectRepository\bin\Debug\NLog.Web.dll
+C:\Workspace\projects\devops\FE.Creator\FE.Creator.ObjectRepository\bin\Debug\NLog.xml
+C:\Workspace\projects\devops\FE.Creator\FE.Creator.ObjectRepository\bin\Debug\NLog.Web.xml

@@ -4,7 +4,7 @@
             <h3 class="box-title"><i class="fa fa-table"></i>  {{def.objectDefinitionName}}</h3>
             <div class="box-tools pull-right">
                 <a href="/objdefs/{{groupId}}/{{def.objectDefinitionID}}/edit" class="btn btn-box-tool">
-                    <i class="fa fa-edit"></i> Edit
+                    <i class="fa fa-edit"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_EDIT
                 </a>
                 <button type="button" class="btn btn-box-tool" data-widget="collapse">
                     <i class="fa fa-expand"></i>
@@ -27,10 +27,10 @@
         <div class="box-footer">
             <div class="box-tools">
                 <button  class="btn btn-box-tool" ng-click="deleteObjectDefintion(def.objectDefinitionID)">
-                    <i class="fa fa-trash"></i> Delete
+                    <i class="fa fa-trash"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_DELETE
                 </button>
                 <a href="/objdefs/{{groupId}}/{{def.objectDefinitionID}}/edit" class="btn btn-box-tool">
-                    <i class="fa fa-edit"></i> Edit
+                    <i class="fa fa-edit"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_EDIT
                 </a>
             </div>
         </div>

@@ -8,12 +8,12 @@
     <input type="text" class="form-control" placeholder="Field Key" ng-model="fld.objectDefinitionFieldKey">
 </div>
 <br />
-<h4>Selection Items</h4>
+<h4>@FE.Creator.Admin.lang.AppLang.DATA_CUST_FIELD_OPT_ITEMS</h4>
 <div class="row" ng-repeat="fitem in fld.selectionItems">
     <div class="col-lg-6">
         <div class="input-group">
             <span class="input-group-addon">
-                Display Text
+                @FE.Creator.Admin.lang.AppLang.DATA_CUST_FIELD_OPT_DSP
             </span>
             <input type="text" class="form-control" ng-model="fitem.selectDisplayName">
         </div>
@@ -23,7 +23,7 @@
     <div class="col-lg-6">
         <div class="input-group">
             <span class="input-group-addon">
-                Text Key
+                @FE.Creator.Admin.lang.AppLang.DATA_CUST_FIELD_OPT_VALUE
             </span>
             <input type="text" class="form-control" ng-model="fitem.selectItemKey">
             <span class="input-group-btn">
