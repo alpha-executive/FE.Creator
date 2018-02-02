@@ -2,7 +2,9 @@
     "use strict";
 
     var PrimaryTypes = ['String', 'Integer', 'Long', 'Datetime', 'Number', 'Binary'];
-
+    var PrimaryTypesNameLangs = [AppLang.DATA_CUST_FIELD_STRING, AppLang.DATA_CUST_FIELD_INTEGER, AppLang.DATA_CUST_FIELD_LONG, AppLang.DATA_CUST_FIELD_DATETIME, AppLang.DATA_CUST_FIELD_NUMBER];
+    var PrimaryTypesKeyCodeLangs = [AppLang.DATA_CUST_FIELD_STRING_KEY, AppLang.DATA_CUST_FIELD_INTEGER_KEY, AppLang.DATA_CUST_FIELD_LONG_KEY, AppLang.DATA_CUST_FIELD_DATETIME_KEY, AppLang.DATA_CUST_FIELD_NUMBER_KEY];
+    var PrimaryTypesLangs = [AppLang.DATA_CUST_STRING_TYPE, AppLang.DATA_CUST_INTEGER_TYPE, AppLang.DATA_CUST_LONG_TYPE, AppLang.DATA_CUST_DATETIME_TYPE, AppLang.DATA_CUST_NUMBER_TYPE];
     angular
          .module('ngObjectRepository')
            .controller("ObjectDefinitionController", ObjectDefinitionController)
@@ -32,15 +34,15 @@
         return function (field) {
             switch (field.generalObjectDefinitionFiledType) {
                 case 0:
-                    return PrimaryTypes[field.primeDataType];
+                    return PrimaryTypesLangs[field.primeDataType];
                 case 1:
-                    return 'Reference';
+                    return Applang.DATA_CUST_OBJREF_TYPE;
                 case 2:
-                    return 'Select';
+                    return Applang.DATA_CUST_SL_TYPE;
                 case 3:
-                    return 'File';
+                    return Applang.DATA_CUST_FILE_TYPE;
                 default:
-                    return 'Unknown';
+                    return AppLang.DATA_CUST_UNKNOWN_TYPE;
             }
         };
     });
@@ -104,8 +106,8 @@
 
         function addPrimaryField(primeDataType) {
             var primaryDataType = {
-                objectDefinitionFieldName: PrimaryTypes[primeDataType],
-                objectDefinitionFieldKey: PrimaryTypes[primeDataType],
+                objectDefinitionFieldName: PrimaryTypesNameLangs[primeDataType],
+                objectDefinitionFieldKey: PrimaryTypesKeyCodeLangs[primeDataType],
                 generalObjectDefinitionFiledType: 0,
                 primeDataType: primeDataType
             };
@@ -115,16 +117,16 @@
 
         function addFileUploadField() {
             var field = {
-                objectDefinitionFieldName: 'File Upload',
-                objectDefinitionFieldKey: 'File Upload',
+                objectDefinitionFieldName: AppLang.DATA_CUST_FIELD_FILE,
+                objectDefinitionFieldKey: AppLang.DATA_CUST_FIELD_FILE_KEY,
                 generalObjectDefinitionFiledType: 3
             };
             scopeContext.CurrentObjectDefinition.objectFields.splice(0, 0, field);
         }
         function addObjectReferenceField() {
             var field = {
-                objectDefinitionFieldName: 'Object Reference',
-                objectDefinitionFieldKey: 'Object Reference',
+                objectDefinitionFieldName: AppLang.DATA_CUST_FIELD_OBJ_REF,
+                objectDefinitionFieldKey: AppLang.DATA_CUST_FIELD_OBJ_REF_KEY,
                 generalObjectDefinitionFiledType: 1
             };
             scopeContext.CurrentObjectDefinition.objectFields.splice(0, 0, field);
@@ -132,8 +134,8 @@
 
         function addSingleSelectionField() {
             var field = {
-                objectDefinitionFieldName: 'Single Selection Field',
-                objectDefinitionFieldKey: 'Single selection Field',
+                objectDefinitionFieldName: AppLang.DATA_CUST_FIELD_SL,
+                objectDefinitionFieldKey: AppLang.DATA_CUST_FIELD_SL_KEY,
                 generalObjectDefinitionFiledType: 2
             };
             scopeContext.CurrentObjectDefinition.objectFields.splice(0, 0, field);
@@ -153,11 +155,11 @@
                     }
                     catch (e) {
                         Notification.error({
-                            message: 'Delete Faild: ' + e.message,
+                            message: AppLang.COMMON_EDIT_SAVE_FAILED + e.message,
                             delay: 5000,
                             positionY: 'bottom',
                             positionX: 'right',
-                            title: 'Error',
+                            title: AppLang.COMMON_DLG_TITLE_ERROR,
                         });
                     }
                 }
@@ -173,8 +175,8 @@
             }
 
             field.selectionItems.push({
-                selectDisplayName: "New Item",
-                selectItemKey: "New Item Key"
+                selectDisplayName: AppLang.DATA_CUST_SL_ITEM,
+                selectItemKey: AppLang.DATA_CUST_SL_ITEM_KEY
             });
         }
 
@@ -199,7 +201,7 @@
                 }
             }
             catch (e) {
-                Notification.error({ message: 'Delete Faild: ' + e.message, delay: 5000, positionY: 'bottom', positionX: 'right' });
+                Notification.error({ message: AppLang.COMMON_DELETE_FAILED + e.message, delay: 5000, positionY: 'bottom', positionX: 'right' });
             }
         }
 
@@ -209,21 +211,21 @@
                     scopeContext.CurrentObjectDefinition)
                 .then(function (data) {
                     Notification.success({
-                        message: 'Change Saved!',
+                        message: AppLang.COMMON_EDIT_SAVE_SUCCESS,
                         delay: 3000,
                         positionY: 'bottom',
                         positionX: 'right',
-                        title: 'Warn',
+                        title: AppLang.COMMON_DLG_TITLE_WARN,
                     });
                 });
             }
             catch (e) {
                 Notification.error({
-                    message: 'Change Faild: ' + e.message,
+                    message: AppLang.COMMON_EDIT_SAVE_FAILED + e.message,
                     delay: 5000,
                     positionY: 'bottom',
                     positionX: 'right',
-                    title: 'Error'
+                    title: AppLang.COMMON_DLG_TITLE_ERROR
                 });
             }
         }

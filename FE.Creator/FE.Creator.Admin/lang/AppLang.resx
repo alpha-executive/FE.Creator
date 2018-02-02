@@ -273,6 +273,9 @@
   <data name="COMMON_BTN_SAVE" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="COMMON_BTN_VIEW" xml:space="preserve">
+    <value>View</value>
+  </data>
   <data name="COMMON_LBL_NO" xml:space="preserve">
     <value>No</value>
   </data>
@@ -315,11 +318,38 @@
   <data name="CONTACTS_TITLE" xml:space="preserve">
     <value>Contacts Management</value>
   </data>
+  <data name="CUST_DATA_TABLE_KEY" xml:space="preserve">
+    <value>Table Key Code</value>
+  </data>
+  <data name="CUST_DATA_TABLE_NAME" xml:space="preserve">
+    <value>Table Name</value>
+  </data>
+  <data name="DATA_CUST_ADD_DATA" xml:space="preserve">
+    <value>Add Table Data</value>
+  </data>
+  <data name="DATA_CUST_ADD_DISP_COL" xml:space="preserve">
+    <value>Add Display Column</value>
+  </data>
   <data name="DATA_CUST_ADVANCED_PROPERTY" xml:space="preserve">
-    <value>Advanced Properties</value>
+    <value>Custom Properties</value>
   </data>
   <data name="DATA_CUST_BACKTOLIST" xml:space="preserve">
     <value>Back to List</value>
+  </data>
+  <data name="DATA_CUST_COL_CREATED" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="DATA_CUST_COL_ID" xml:space="preserve">
+    <value>ID</value>
+  </data>
+  <data name="DATA_CUST_COL_NAME" xml:space="preserve">
+    <value>Table Data Name</value>
+  </data>
+  <data name="DATA_CUST_DATA_LIST" xml:space="preserve">
+    <value>Table Data List</value>
+  </data>
+  <data name="DATA_CUST_DATA_MGR" xml:space="preserve">
+    <value>Table Data Management</value>
   </data>
   <data name="DATA_CUST_EDITTABLE" xml:space="preserve">
     <value>Edit Custom Table</value>
@@ -366,11 +396,17 @@
   <data name="DATA_CUST_LBL_EDIT_TABLE" xml:space="preserve">
     <value>Editing Table</value>
   </data>
+  <data name="DATA_CUST_SELECT_TABLE" xml:space="preserve">
+    <value>Select a Custom Table...</value>
+  </data>
   <data name="DATA_CUST_TABLE" xml:space="preserve">
     <value>Custom Table</value>
   </data>
   <data name="DATA_CUST_TABLEGROUP" xml:space="preserve">
     <value>Custom Table Group</value>
+  </data>
+  <data name="DATA_CUST_TABLES_IN_GRP" xml:space="preserve">
+    <value>Tables In The  Table Group</value>
   </data>
   <data name="DATA_CUST_TABLE_CREATED" xml:space="preserve">
     <value>Created</value>
@@ -391,10 +427,10 @@
     <value>Data Name</value>
   </data>
   <data name="DATA_CUST_TABLE_OBJID" xml:space="preserve">
-    <value>Data Id</value>
+    <value>Table Data Id</value>
   </data>
   <data name="DATA_CUST_TABLE_OBJOWNER" xml:space="preserve">
-    <value>Object Owner</value>
+    <value>Table Data Owner</value>
   </data>
   <data name="DATA_CUST_TABLE_UPDATED" xml:space="preserve">
     <value>Updated</value>
@@ -404,6 +440,9 @@
   </data>
   <data name="DATA_CUST_TOGGLE_DROPDOWN" xml:space="preserve">
     <value>Toggle Dropdown</value>
+  </data>
+  <data name="DATA_CUST_UPDATE_RESULTS" xml:space="preserve">
+    <value>Update Results!</value>
   </data>
   <data name="DATA_CUST_VIEW_TABLE_OBJECT" xml:space="preserve">
     <value>Viewing Table Data</value>

@@ -66,7 +66,7 @@ namespace FE.Creator.Admin
                     "~/Content/adminlte-2.3.6/plugins/fastclick/fastclick.js",
                     "~/Content/adminlte-2.3.6/plugins/pace/pace.min.js",
                     "~/Content/adminlte-2.3.6/plugins/iCheck/icheck.min.js",
-                    "~/Content/adminlte-2.3.6/dist/js/app.min.js"
+                    "~/Content/adminlte-2.3.6/dist/js/app.js"
                 ));
 
             bundles.Add(new ScriptBundle("~/js/ckeditor").Include(

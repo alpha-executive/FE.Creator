@@ -130,30 +130,53 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService, Upload
         }
     }
 
-    function onPageClick(pageIndex) {
-        if (pageIndex < 1 || pageIndex > vm.pager.totalPages || pageIndex == vm.currentPageIndex) {
-            return;
-        }
 
+    function onPageClick(pageIndex, force) {
+        if (vm.pager.currentPage == pageIndex && !force)
+            return;
+
+        onPageChange(pageIndex);
+    }
+
+    function onPageChange(pageIndex) {
+        vm.reCalculatePager(pageIndex).then(function (data) {
+            if (pageIndex < 1) {
+                pageIndex = 1;
+            }
+            if (pageIndex > vm.pager.totalPages) {
+                pageIndex = vm.pager.totalPages;
+            }
+            vm.pager.currentPage = pageIndex;
+            vm.reloadServiceObjects(pageIndex);
+        });
+    }
+
+    vm.reCalculatePager = function (pageIndex) {
+      return  ObjectRepositoryDataService.getServiceObjectCount(vm.currentObjectDefinition.objectDefinitionID)
+                    .then(function (data) {
+                        if (!isNaN(data)) {
+                            //pager settings
+                            if (pageIndex == null || pageIndex < 1)
+                                pageIndex = 1;
+
+                            vm.pager = PagerService.createPager(data, pageIndex, vm.pageSize, 10);
+                            vm.pager.disabledLastPage = pageIndex > vm.pager.totalPages;
+                            vm.pager.disabledFirstPage = pageIndex == 1;
+                        }
+
+                        return data;
+                    });
+    }
+
+    vm.reloadServiceObjects = function(pageIndex) {
         var searchColumns = [];
         vm.currentObjectDefinition.objectFields.forEach(function (of, idx, ar) {
             searchColumns.push(of.objectDefinitionFieldName);
         });
 
-
         ObjectRepositoryDataService.getServiceObjects(vm.currentObjectDefinition.objectDefinitionID, searchColumns.toString(), pageIndex, vm.pageSize)
             .then(function (data) {
                 vm.ServiceObjectList = data;
-
-                ObjectRepositoryDataService.getServiceObjectCount(vm.currentObjectDefinition.objectDefinitionID)
-                    .then(function (data) {
-                        //page size and pager length is 10.
-                        // get pager object from service
-                        vm.pager = PagerService.createPager(data, pageIndex, vm.pageSize, 10);
-                        vm.pager.disabledLastPage = pageIndex > vm.pager.totalPages;
-                        vm.pager.disabledFirstPage = pageIndex == 1;
-                        vm.currentPageIndex = pageIndex;
-                    });
                 return vm.ServiceObjectList;
             });
     }
@@ -255,19 +278,35 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService, Upload
             .then(function (data) {
                 //if there is no error to delete the object
                 if (data != null && data.status == 204) {
+                    var foundServiceItem = null;
                     vm.ServiceObjectList.forEach(function (item, index, arr) {
                         if (item.objectID == objectid) {
-                            vm.ServiceObjectList.splice(index, 1);
+                            foundServiceItem = item;
                         }
                     });
+
+                    if (foundServiceItem != null) {
+                        if (vm.pager.totalPages > vm.pager.currentPage
+                                || (vm.ServiceObjectList.length <= 1 && vm.pager.totalPages == vm.pager.currentPage)) {
+                            var navPageIndex = vm.ServiceObjectList.length - 1 <= 0
+                                   ? vm.pager.currentPage - 1 : vm.pager.currentPage;
+                            onPageChange(navPageIndex);
+                        }
+                        else {
+                            var index = vm.ServiceObjectList.indexOf(foundServiceItem);
+                            if (index >= 0) {
+                                vm.ServiceObjectList.splice(index, 1);
+                            }
+                        }
+                    }
                 }
                 else {
                     Notification.error({
-                        message: 'Delete Object Failed: ' + data.toString(),
+                        message: AppLang.COMMON_EDIT_SAVE_FAILED + data.toString(),
                         delay: 5000,
                         positionY: 'bottom',
                         positionX: 'right',
-                        title: 'Error'
+                        title: AppLang.COMMON_DLG_TITLE_ERROR
                     });
                 }
             });
@@ -353,7 +392,7 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService, Upload
             vm.currentPageIndex = 0;
 
             //set to page 1.
-            vm.onPageClick(1);
+            onPageChange(1);
         }
         else {
             vm.disabledNewObject()
@@ -435,48 +474,61 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService, Upload
             ObjectRepositoryDataService.createOrUpdateServiceObject(vm.currentGeneralObject.objectID, vm.currentGeneralObject)
             .then(function (data) {
                 if (data == null || data == "" || data.objectID != null) {
+                 
+                    if (data != null && data != "") {
+                        if ((vm.currentGeneralObject.objectID == null || vm.currentGeneralObject.objectID == 0)
+                           && vm.ServiceObjectList.length >= vm.pager.pageSize) {
+                            onPageChange(1);
+                        } else {
+                            var searchColumns = [];
+                            vm.currentObjectDefinition.objectFields.forEach(function (of, idx, ar) {
+                                searchColumns.push(of.objectDefinitionFieldName);
+                            });
+
+                            //add the new created object to object list.
+                            ObjectRepositoryDataService.getServiceObject(data.objectID, searchColumns.toString())
+                             .then(function (data) {
+                                 if (data.objectID != null && data.objectID > 0) {
+                                     var index = vm.ServiceObjectList.indexOf(vm.currentGeneralObject);
+                                     if (index >= 0) {
+                                         vm.ServiceObjectList.splice(index, 1, data);
+                                     } else {
+                                         vm.ServiceObjectList.unshift(data);
+                                     }
+                                 }
+
+                                 return data;
+                             });
+                        }
+                    }
+
                     Notification.success({
-                        message: 'Change Saved!',
+                        message: AppLang.COMMON_EDIT_SAVE_SUCCESS,
                         delay: 3000,
                         positionY: 'bottom',
                         positionX: 'right',
-                        title: 'Warn',
+                        title: AppLang.COMMON_DLG_TITLE_WARN,
                     });
-
-                    //update the object id.
-                    if (data != null && data != "") {
-                        vm.currentGeneralObject.objectID = data.objectID;
-
-                        //add the new created object to object list.
-                        ObjectRepositoryDataService.getServiceObject(data.objectID)
-                         .then(function (data) {
-                             if (data.objectID == vm.currentGeneralObject.objectID) {
-                                 vm.ServiceObjectList.splice(0, 0, data)
-                             }
-
-                             return data;
-                         });
-                    }
                 }
                 else {
                     //something error happend.
                     Notification.error({
-                        message: 'Change Faild: ' + data.toString(),
+                        message: AppLang.COMMON_EDIT_SAVE_FAILED + data.toString(),
                         delay: 5000,
                         positionY: 'bottom',
                         positionX: 'right',
-                        title: 'Error'
+                        title: AppLang.COMMON_DLG_TITLE_ERROR
                     });
                 }
             });
         }
         catch (e) {
             Notification.error({
-                message: 'Change Faild: ' + e.message,
+                message: AppLang.COMMON_EDIT_SAVE_FAILED + e.message,
                 delay: 5000,
                 positionY: 'bottom',
                 positionX: 'right',
-                title: 'Error'
+                title: AppLang.COMMON_DLG_TITLE_ERROR
             });
         }
     }

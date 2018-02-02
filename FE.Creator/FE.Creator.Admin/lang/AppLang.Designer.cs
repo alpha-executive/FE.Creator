@@ -529,6 +529,15 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View.
+        /// </summary>
+        public static string COMMON_BTN_VIEW {
+            get {
+                return ResourceManager.GetString("COMMON_BTN_VIEW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string COMMON_LBL_NO {
@@ -655,7 +664,43 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Advanced Properties.
+        ///   Looks up a localized string similar to Table Key Code.
+        /// </summary>
+        public static string CUST_DATA_TABLE_KEY {
+            get {
+                return ResourceManager.GetString("CUST_DATA_TABLE_KEY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Table Name.
+        /// </summary>
+        public static string CUST_DATA_TABLE_NAME {
+            get {
+                return ResourceManager.GetString("CUST_DATA_TABLE_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Table Data.
+        /// </summary>
+        public static string DATA_CUST_ADD_DATA {
+            get {
+                return ResourceManager.GetString("DATA_CUST_ADD_DATA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Display Column.
+        /// </summary>
+        public static string DATA_CUST_ADD_DISP_COL {
+            get {
+                return ResourceManager.GetString("DATA_CUST_ADD_DISP_COL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Custom Properties.
         /// </summary>
         public static string DATA_CUST_ADVANCED_PROPERTY {
             get {
@@ -669,6 +714,51 @@ namespace FE.Creator.Admin.lang {
         public static string DATA_CUST_BACKTOLIST {
             get {
                 return ResourceManager.GetString("DATA_CUST_BACKTOLIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created.
+        /// </summary>
+        public static string DATA_CUST_COL_CREATED {
+            get {
+                return ResourceManager.GetString("DATA_CUST_COL_CREATED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID.
+        /// </summary>
+        public static string DATA_CUST_COL_ID {
+            get {
+                return ResourceManager.GetString("DATA_CUST_COL_ID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Table Data Name.
+        /// </summary>
+        public static string DATA_CUST_COL_NAME {
+            get {
+                return ResourceManager.GetString("DATA_CUST_COL_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Table Data List.
+        /// </summary>
+        public static string DATA_CUST_DATA_LIST {
+            get {
+                return ResourceManager.GetString("DATA_CUST_DATA_LIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Table Data Management.
+        /// </summary>
+        public static string DATA_CUST_DATA_MGR {
+            get {
+                return ResourceManager.GetString("DATA_CUST_DATA_MGR", resourceCulture);
             }
         }
         
@@ -808,6 +898,15 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select a Custom Table....
+        /// </summary>
+        public static string DATA_CUST_SELECT_TABLE {
+            get {
+                return ResourceManager.GetString("DATA_CUST_SELECT_TABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom Table.
         /// </summary>
         public static string DATA_CUST_TABLE {
@@ -871,7 +970,7 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data Id.
+        ///   Looks up a localized string similar to Table Data Id.
         /// </summary>
         public static string DATA_CUST_TABLE_OBJID {
             get {
@@ -880,7 +979,7 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Object Owner.
+        ///   Looks up a localized string similar to Table Data Owner.
         /// </summary>
         public static string DATA_CUST_TABLE_OBJOWNER {
             get {
@@ -916,11 +1015,29 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tables In The  Table Group.
+        /// </summary>
+        public static string DATA_CUST_TABLES_IN_GRP {
+            get {
+                return ResourceManager.GetString("DATA_CUST_TABLES_IN_GRP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Toggle Dropdown.
         /// </summary>
         public static string DATA_CUST_TOGGLE_DROPDOWN {
             get {
                 return ResourceManager.GetString("DATA_CUST_TOGGLE_DROPDOWN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Results!.
+        /// </summary>
+        public static string DATA_CUST_UPDATE_RESULTS {
+            get {
+                return ResourceManager.GetString("DATA_CUST_UPDATE_RESULTS", resourceCulture);
             }
         }
         

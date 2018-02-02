@@ -17,12 +17,12 @@
                 <div class="box-body">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-star-o text-yellow"></i></span>
-                        <input type="text" class="form-control" placeholder="Object Name" ng-model="CurrentObjectDefinition.objectDefinitionName">
+                        <input type="text" class="form-control" placeholder="@FE.Creator.Admin.lang.AppLang.CUST_DATA_TABLE_NAME" ng-model="CurrentObjectDefinition.objectDefinitionName">
                     </div>
                     <br />
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-star-o text-yellow"></i></span>
-                        <input type="text" class="form-control" placeholder="Object Key" ng-model="CurrentObjectDefinition.objectDefinitionKey">
+                        <input type="text" class="form-control" placeholder="@FE.Creator.Admin.lang.AppLang.CUST_DATA_TABLE_KEY" ng-model="CurrentObjectDefinition.objectDefinitionKey">
                     </div>
                 </div>
             </div>
@@ -79,7 +79,7 @@
             </div><!--/.box-->
         </div><!-- /.box-body -->
         <div class="box-footer">
-            <div class="box-tools">
+            <div class="box-tools pull-right">
                 <div class="btn-group">
                     <button type="button" class="btn btn-box-tool" ng-click="saveChanges()"><i class="fa fa-save"></i> @FE.Creator.Admin.lang.AppLang.COMMON_BTN_SAVE</button>
                     <a class="btn btn-box-tool" href="/objdefs/{{groupId}}"><i class="fa fa-mail-reply"></i> @FE.Creator.Admin.lang.AppLang.DATA_CUST_BACKTOLIST</a>

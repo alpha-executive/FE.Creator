@@ -28,11 +28,14 @@
         vm.currentEditingArticle = null;
         vm.currentViewArticle = null;
         vm.displayMode = "articleList";
+        vm.currentArticleId = null;
         //vm.groupDisplayMode = "groupList";
 
         init();
 
-        function init() {
+        function init(currArticleId) {
+            vm.currentArticleId = currArticleId || $scope.CurrentArticleId;
+
             ObjectRepositoryDataService.getLightWeightObjectDefinitions().then(
               function (data) {
                   vm.objectDefinitions = data;
@@ -40,7 +43,16 @@
                   return vm.objectDefinitions;
               }).then(function (data) {
                   vm.reloadArticleGroups();
-                  onPageClick(1, true);
+
+                  //if the viewArticleID is not null, then it is a display mode, just display the article.
+                  if (vm.currentArticleId != null
+                      && vm.currentArticleId != "") {
+                      vm.viewArticle({
+                          objectID: vm.currentArticleId
+                      });
+                  } else {
+                      onPageClick(1, true);
+                  }
               });
         }
 
@@ -140,23 +152,38 @@
         }
 
         vm.viewArticle = function (article) {
-            if (article.properties.articleContent == null || article.properties.articleContent.value == null) {
-                ObjectRepositoryDataService.getServiceObject(article.objectID, "articleContent")
-                                  .then(function (data) {
-                                      var articleContent = objectUtilService.parseServiceObject(data);
-                                      article.properties.articleContent = articleContent.properties.articleContent;
-                                      article.properties.articleContent.value = $sce.trustAsHtml(article.properties.articleContent.value);
+            if (article.properties == null 
+                || article.properties.articleContent == null
+                || article.properties.articleContent.value == null) {
 
-                                      vm.currentViewArticle = article;
-                                      vm.setDisplayMode("articleView");
-                                       
-                                      return data;
-                                  }).then(function(data){
-                                      $timeout(function () {
-                                          highlightCode("pre code");
-                                      }, 100);
-                                  });
-            } else {
+                //the article is not been loaded ever
+                var attrs = "articleContent";
+                if (article.properties == null) {
+                    attrs = ["articleDesc", "articleContent", "isOriginal", "articleImage", "articleSharedLevel", "articleGroup"].join();
+                }
+
+                ObjectRepositoryDataService.getServiceObject(article.objectID, attrs)
+                            .then(function (data) {
+                                if (article.properties == null) {
+                                    article = objectUtilService.parseServiceObject(data);
+                                    article.properties.articleContent.value = $sce.trustAsHtml(article.properties.articleContent.value);
+                                } else {
+                                    var articleContent = objectUtilService.parseServiceObject(data);
+                                    article.properties.articleContent = articleContent.properties.articleContent;
+                                    article.properties.articleContent.value = $sce.trustAsHtml(article.properties.articleContent.value);
+                                }
+
+                                vm.currentViewArticle = article;
+                                vm.setDisplayMode("articleView");
+
+                                return data;
+                            }).then(function (data) {
+                                $timeout(function () {
+                                    highlightCode("pre code");
+                                }, 100);
+                            });
+
+            }else {
                 vm.currentViewArticle = article;
                 vm.setDisplayMode("articleView");
                 $timeout(function () {
@@ -273,6 +300,11 @@
         }
 
         vm.return2List = function () {
+            if (vm.currentArticleId != null) {
+                onPageClick(1, true);
+                vm.currentArticleId = null;
+            }
+
             vm.setDisplayMode("articleList");
         }
 

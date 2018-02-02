@@ -273,6 +273,9 @@
   <data name="COMMON_BTN_SAVE" xml:space="preserve">
     <value>保存</value>
   </data>
+  <data name="COMMON_BTN_VIEW" xml:space="preserve">
+    <value>查看</value>
+  </data>
   <data name="COMMON_LBL_NO" xml:space="preserve">
     <value>否</value>
   </data>
@@ -315,11 +318,38 @@
   <data name="CONTACTS_TITLE" xml:space="preserve">
     <value>联系人管理</value>
   </data>
+  <data name="CUST_DATA_TABLE_KEY" xml:space="preserve">
+    <value>表编码</value>
+  </data>
+  <data name="CUST_DATA_TABLE_NAME" xml:space="preserve">
+    <value>表名称</value>
+  </data>
+  <data name="DATA_CUST_ADD_DATA" xml:space="preserve">
+    <value>新建表数据</value>
+  </data>
+  <data name="DATA_CUST_ADD_DISP_COL" xml:space="preserve">
+    <value>添加显示列</value>
+  </data>
   <data name="DATA_CUST_ADVANCED_PROPERTY" xml:space="preserve">
-    <value>高级属性</value>
+    <value>自定义属性</value>
   </data>
   <data name="DATA_CUST_BACKTOLIST" xml:space="preserve">
     <value>返回到列表</value>
+  </data>
+  <data name="DATA_CUST_COL_CREATED" xml:space="preserve">
+    <value>创建时间</value>
+  </data>
+  <data name="DATA_CUST_COL_ID" xml:space="preserve">
+    <value>ID编码</value>
+  </data>
+  <data name="DATA_CUST_COL_NAME" xml:space="preserve">
+    <value>表数据名称</value>
+  </data>
+  <data name="DATA_CUST_DATA_LIST" xml:space="preserve">
+    <value>表数据列表</value>
+  </data>
+  <data name="DATA_CUST_DATA_MGR" xml:space="preserve">
+    <value>表数据管理</value>
   </data>
   <data name="DATA_CUST_EDITTABLE" xml:space="preserve">
     <value>编辑数据表</value>
@@ -366,11 +396,17 @@
   <data name="DATA_CUST_LBL_EDIT_TABLE" xml:space="preserve">
     <value>编辑数据表</value>
   </data>
+  <data name="DATA_CUST_SELECT_TABLE" xml:space="preserve">
+    <value>请选择一个自定义表</value>
+  </data>
   <data name="DATA_CUST_TABLE" xml:space="preserve">
     <value>自定义数据表定义</value>
   </data>
   <data name="DATA_CUST_TABLEGROUP" xml:space="preserve">
     <value>自定义数据表分组</value>
+  </data>
+  <data name="DATA_CUST_TABLES_IN_GRP" xml:space="preserve">
+    <value>分组中的自定义数据表</value>
   </data>
   <data name="DATA_CUST_TABLE_CREATED" xml:space="preserve">
     <value>创建时间</value>
@@ -404,6 +440,9 @@
   </data>
   <data name="DATA_CUST_TOGGLE_DROPDOWN" xml:space="preserve">
     <value>切换下拉列表</value>
+  </data>
+  <data name="DATA_CUST_UPDATE_RESULTS" xml:space="preserve">
+    <value>更新结果！</value>
   </data>
   <data name="DATA_CUST_VIEW_TABLE_OBJECT" xml:space="preserve">
     <value>查看数据表数据</value>

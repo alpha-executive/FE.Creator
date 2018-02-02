@@ -11,6 +11,34 @@
  * @license MIT <http://opensource.org/licenses/MIT>
  */
 
+// Cookies
+function createCookie(name, value, days) {
+    if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        var expires = "; expires=" + date.toGMTString();
+    }
+    else var expires = "";
+
+    document.cookie = name + "=" + value + expires + "; path=/";
+}
+
+function readCookie(name) {
+    var nameEQ = name + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+        if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+}
+
+function eraseCookie(name) {
+    createCookie(name, "", -1);
+}
+
+
 //Make sure jQuery has been loaded before app.js
 if (typeof jQuery === "undefined") {
   throw new Error("AdminLTE requires jQuery");
@@ -142,6 +170,13 @@ $(function () {
 
   //Fix for IE page transitions
   $("body").removeClass("hold-transition");
+
+  var sidebarstatus = readCookie("sidebaropened");
+  //initialize the slidbar status from the cookie settings.
+  if (sidebarstatus === "true") {
+      $("body").removeClass('sidebar-open').removeClass('sidebar-collapse');
+      $("body").addClass("sidebar-open");
+  }
 
   //Extend options if external options exist
   if (typeof AdminLTEOptions !== "undefined") {
@@ -320,17 +355,21 @@ function _init() {
         //Enable sidebar push menu
         if ($(window).width() > (screenSizes.sm - 1)) {
           if ($("body").hasClass('sidebar-collapse')) {
-            $("body").removeClass('sidebar-collapse').trigger('expanded.pushMenu');
+              $("body").removeClass('sidebar-collapse').trigger('expanded.pushMenu');
+              createCookie("sidebaropened", "true", 1);
           } else {
-            $("body").addClass('sidebar-collapse').trigger('collapsed.pushMenu');
+              $("body").addClass('sidebar-collapse').trigger('collapsed.pushMenu');
+              createCookie("sidebaropened", "false", 1);
           }
         }
         //Handle sidebar push menu for small screens
         else {
           if ($("body").hasClass('sidebar-open')) {
-            $("body").removeClass('sidebar-open').removeClass('sidebar-collapse').trigger('collapsed.pushMenu');
+              $("body").removeClass('sidebar-open').removeClass('sidebar-collapse').trigger('collapsed.pushMenu');
+              createCookie("sidebaropened", "false", 1);
           } else {
-            $("body").addClass('sidebar-open').trigger('expanded.pushMenu');
+              $("body").addClass('sidebar-open').trigger('expanded.pushMenu');
+              createCookie("sidebaropened", "true", 1);
           }
         }
       });

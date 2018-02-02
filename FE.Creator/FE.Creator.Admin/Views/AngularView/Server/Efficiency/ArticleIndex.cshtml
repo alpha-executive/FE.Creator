@@ -1,8 +1,8 @@
 ﻿@{
     ViewBag.Title = FE.Creator.Admin.lang.AppLang.POST_TITLE;
 }
-<div class="row" ng-app="ngObjectRepository" ng-controller="ArticleController as ctrl">
-    <div class="col-md-12">
+<div class="row" ng-app="ngObjectRepository" ng-init="CurrentArticleId ='@Model'">
+    <div class="col-md-12" ng-controller="ArticleController as ctrl" ng-init="ctrl.init(CurrentArticleId)">
         <div class="box box-primary">
             <div class="box-header with-border" ng-if="ctrl.displayMode != 'articleView'">
                 <ul class="nav navbar-nav">
