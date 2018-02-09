@@ -4,7 +4,7 @@
         <div class="col-sm-3 margin-bottom" ng-repeat="img in imgrow">
             <div class="image-card">
                 <div class="image-wrapper" ng-click="ctrl.viewLargeImage(img)">
-                    <img class="img-responsive" style="width:100%;" src="{{img.properties.imageFile.fileUrl}}?thumbinal=true" alt="{{img.objectName}}">
+                    <img class="img-responsive" style="width:100%;max-height:230px;" src="{{img.properties.imageFile.fileUrl}}?thumbinal=true" alt="{{img.objectName}}">
                     <div class="image-desc" ng-if="img.properties.imageDesc.value != null && img.properties.imageDesc.value!= ''">
                         {{img.properties.imageDesc.value}}
                     </div>

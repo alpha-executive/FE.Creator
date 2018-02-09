@@ -111,7 +111,7 @@ namespace FE.Creator.FileStorage
             return Task.FromResult<byte[]>(contents);
         }
 
-        public FileStorageInfo SaveFile(byte[] fileContents, string fileExtension, bool createThumbnial = false)
+        public async Task<FileStorageInfo> SaveFile(byte[] fileContents, string fileExtension, bool createThumbnial = false)
         {
             logger.Debug("Start SaveFile");
             string fileName = Path.GetRandomFileName() + fileExtension;
@@ -121,10 +121,10 @@ namespace FE.Creator.FileStorage
             logger.Debug("path : " + path);
             logger.Debug("thumbinalPath : " + thumbinalPath);
 
-            Task<FileStorageInfo> storeTask = SaveFileContent(fileContents, createThumbnial, fileName, path, thumbinalPath);
+            FileStorageInfo storeTask = await SaveFileContent(fileContents, createThumbnial, fileName, path, thumbinalPath);
 
             logger.Debug("End SaveFile");
-            return storeTask.Result;
+            return storeTask;
         }
 
         private void saveLocalFileIndex(LocalFileIndex indexInfo)
@@ -207,11 +207,11 @@ namespace FE.Creator.FileStorage
             }
         }
 
-        public Task<FileStorageInfo> SaveFileAsync(byte[] fileContents, string fileExtension, bool createThumbnial = false)
+        public async Task<FileStorageInfo> SaveFileAsync(byte[] fileContents, string fileExtension, bool createThumbnial = false)
         {
-            FileStorageInfo fileInfo = SaveFile(fileContents, fileExtension, createThumbnial);
+            FileStorageInfo fileInfo = await SaveFile(fileContents, fileExtension, createThumbnial);
 
-            return Task.FromResult<FileStorageInfo>(fileInfo);
+            return fileInfo;
         }
 
         public void DeleteFile(string fileName)

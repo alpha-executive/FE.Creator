@@ -54,3 +54,8 @@
 /FE.Creator/FE.Creator.Admin/App_Start/bin
 /FE.Creator/FE.Creator.Cryptography/bin/Debug
 /FE.Creator/FE.Creator.Admin/logs
+/FE.Creator/FE.Creator.Cryptography/bin/Release
+/FE.Creator/FE.Creator.Cryptography/obj/Release
+/FE.Creator/FE.Creator.FileStorage/bin/Release
+/FE.Creator/FE.Creator.UT/bin/Release
+/FE.Creator/FE.Creator.UT/bin/Debug

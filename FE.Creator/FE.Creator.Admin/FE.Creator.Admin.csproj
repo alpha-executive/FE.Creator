@@ -35,6 +35,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DeployEncryptKey>Encryption password is used only if any deployment setting is marked as secure</DeployEncryptKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -329,6 +330,7 @@
     <Content Include="Content\adminlte-2.3.6\dist\css\skins\skin-yellow.min.css" />
     <Content Include="Content\adminlte-2.3.6\dist\css\skins\_all-skins.css" />
     <Content Include="Content\adminlte-2.3.6\dist\css\skins\_all-skins.min.css" />
+    <Content Include="Content\adminlte-2.3.6\dist\img\alarm-50.png" />
     <Content Include="Content\adminlte-2.3.6\dist\img\avatar.png" />
     <Content Include="Content\adminlte-2.3.6\dist\img\avatar04.png" />
     <Content Include="Content\adminlte-2.3.6\dist\img\avatar2.png" />
@@ -362,60 +364,6 @@
     <Content Include="Content\adminlte-2.3.6\dist\js\demo.js" />
     <Content Include="Content\adminlte-2.3.6\dist\js\pages\dashboard.js" />
     <Content Include="Content\adminlte-2.3.6\dist\js\pages\dashboard2.js" />
-    <Content Include="Content\adminlte-2.3.6\documentation\build\include\adminlte-options.html" />
-    <Content Include="Content\adminlte-2.3.6\documentation\build\include\advice.html" />
-    <Content Include="Content\adminlte-2.3.6\documentation\build\include\browsers.html" />
-    <Content Include="Content\adminlte-2.3.6\documentation\build\include\components.html" />
-    <Content Include="Content\adminlte-2.3.6\documentation\build\include\dependencies.html" />
-    <Content Include="Content\adminlte-2.3.6\documentation\build\include\download.html" />
-    <Content Include="Content\adminlte-2.3.6\documentation\build\include\faq.html" />
-    <Content Include="Content\adminlte-2.3.6\documentation\build\include\implementations.html" />
-    <Content Include="Content\adminlte-2.3.6\documentation\build\include\introduction.html" />
-    <Content Include="Content\adminlte-2.3.6\documentation\build\include\layout.html" />
-    <Content Include="Content\adminlte-2.3.6\documentation\build\include\license.html" />
-    <Content Include="Content\adminlte-2.3.6\documentation\build\include\plugins.html" />
-    <Content Include="Content\adminlte-2.3.6\documentation\build\include\upgrade.html" />
-    <Content Include="Content\adminlte-2.3.6\documentation\build\index.html" />
-    <Content Include="Content\adminlte-2.3.6\documentation\docs.js" />
-    <Content Include="Content\adminlte-2.3.6\documentation\index.html" />
-    <Content Include="Content\adminlte-2.3.6\documentation\style.css" />
-    <Content Include="Content\adminlte-2.3.6\Gruntfile.js" />
-    <Content Include="Content\adminlte-2.3.6\index.html" />
-    <Content Include="Content\adminlte-2.3.6\index2.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\calendar.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\charts\chartjs.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\charts\flot.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\charts\inline.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\charts\morris.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\examples\404.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\examples\500.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\examples\blank.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\examples\invoice-print.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\examples\invoice.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\examples\lockscreen.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\examples\login.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\examples\pace.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\examples\profile.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\examples\register.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\forms\advanced.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\forms\editors.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\forms\general.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\layout\boxed.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\layout\collapsed-sidebar.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\layout\fixed.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\layout\top-nav.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\mailbox\compose.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\mailbox\mailbox.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\mailbox\read-mail.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\tables\data.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\tables\simple.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\UI\buttons.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\UI\general.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\UI\icons.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\UI\modals.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\UI\sliders.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\UI\timeline.html" />
-    <Content Include="Content\adminlte-2.3.6\pages\widgets.html" />
     <Content Include="Content\adminlte-2.3.6\plugins\angularjs-slider\angular-slider.css" />
     <Content Include="Content\adminlte-2.3.6\plugins\angularjs-slider\angular-slider.js" />
     <Content Include="Content\adminlte-2.3.6\plugins\angularjs-slider\angular-slider.min.css" />
@@ -1231,7 +1179,6 @@
     <Content Include="Content\adminlte-2.3.6\plugins\ui-select-master\select.js" />
     <Content Include="Content\adminlte-2.3.6\plugins\ui-select-master\select.min.css" />
     <Content Include="Content\adminlte-2.3.6\plugins\ui-select-master\select.min.js" />
-    <Content Include="Content\adminlte-2.3.6\starter.html" />
     <Content Include="Content\angularjs\angular-messages.min.js" />
     <Content Include="Content\angularjs\angular-sanitize.min.js" />
     <Content Include="Content\apps\accountrecordscontroller.js" />
@@ -1267,15 +1214,12 @@
     <Content Include="Global.asax" />
     <Content Include="Content\apps\css\app.css" />
     <Content Include="Content\base\bootstrap.min.js" />
-    <Content Include="Content\adminlte-2.3.6\.gitignore" />
-    <Content Include="Content\adminlte-2.3.6\.jshintrc" />
     <Content Include="Content\adminlte-2.3.6\bootstrap\css\bootstrap.css.map" />
     <Content Include="Content\adminlte-2.3.6\bootstrap\css\bootstrap.min.css.map" />
     <Content Include="Content\adminlte-2.3.6\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\adminlte-2.3.6\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\adminlte-2.3.6\bootstrap\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="Content\adminlte-2.3.6\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="Content\adminlte-2.3.6\bower.json" />
     <Content Include="Content\adminlte-2.3.6\build\bootstrap-less\mixins.less" />
     <Content Include="Content\adminlte-2.3.6\build\bootstrap-less\mixins\alerts.less" />
     <Content Include="Content\adminlte-2.3.6\build\bootstrap-less\mixins\background-variant.less" />
@@ -1360,10 +1304,7 @@
     <Content Include="Content\adminlte-2.3.6\build\less\timeline.less" />
     <Content Include="Content\adminlte-2.3.6\build\less\users-list.less" />
     <Content Include="Content\adminlte-2.3.6\build\less\variables.less" />
-    <Content Include="Content\adminlte-2.3.6\changelog.md" />
-    <Content Include="Content\adminlte-2.3.6\composer.json" />
     <Content Include="Content\adminlte-2.3.6\LICENSE" />
-    <Content Include="Content\adminlte-2.3.6\package.json" />
     <Content Include="Content\adminlte-2.3.6\plugins\ckeditor\CHANGES.md" />
     <Content Include="Content\adminlte-2.3.6\plugins\ckeditor\LICENSE.md" />
     <Content Include="Content\adminlte-2.3.6\plugins\ckeditor\plugins\scayt\CHANGELOG.md" />
@@ -1394,7 +1335,6 @@
     <Content Include="Content\adminlte-2.3.6\plugins\datatables\extensions\TableTools\Readme.md" />
     <Content Include="Content\adminlte-2.3.6\plugins\input-mask\phone-codes\phone-be.json" />
     <Content Include="Content\adminlte-2.3.6\plugins\input-mask\phone-codes\phone-codes.json" />
-    <Content Include="Content\adminlte-2.3.6\README.md" />
     <Content Include="Content\adminlte-2.3.6\plugins\ui-select-master\LICENSE" />
     <Content Include="Content\adminlte-2.3.6\plugins\ui-notification\LICENSE" />
     <Content Include="Content\adminlte-2.3.6\plugins\ng-file-upload-master\LICENSE" />
@@ -1419,6 +1359,7 @@
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Properties\PublishProfiles\kcentersite - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\LocalIIS.pubxml" />
     <Content Include="Content\base\modernizr-2.6.2.js" />
     <Content Include="Content\base\respond.min.js" />

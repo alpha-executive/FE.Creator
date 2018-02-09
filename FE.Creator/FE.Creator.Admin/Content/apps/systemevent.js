@@ -28,7 +28,7 @@
         }
 
 
-        function onPageClick(pageIndex) {
+        vm.onPageClick = function(pageIndex) {
             if (vm.pager.currentPage == pageIndex)
                 return;
 
