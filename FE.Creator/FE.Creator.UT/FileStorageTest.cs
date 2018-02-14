@@ -66,5 +66,12 @@ namespace FE.Creator.UT
 
             thumb.Save(@"C:\Workspace\thumbinal.bmp");
         }
+
+        [TestMethod]
+        public void TestGeneralThumbinalGenerate()
+        {
+            var thumb = SimpleFileThumbinalGenerator.GetThumbnail(@"C:\Workspace\temp.docx", 256, 256);
+            thumb.Save(@"C:\Workspace\thumbinal.bmp");
+        }
     }
 }

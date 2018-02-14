@@ -254,13 +254,27 @@ namespace FE.Creator.FileStorage
                 {
                     using (System.IO.MemoryStream ms = new MemoryStream())
                     {
-                        int THUMB_SIZE = 256;
-                        logger.Info("create new thumbinal file by WindowsThumbnailProvider");
-                        var thumbinal = WindowsThumbnailProvider.GetThumbnail(path, THUMB_SIZE, THUMB_SIZE, ThumbnailOptions.None);
-                        thumbinal.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                        try
+                        {
+                            int THUMB_SIZE = 256;
+#if GThumbinal
+                            logger.Info("create new thumbinal file by GeneralFileThumbinalGenerator");
+                            var thumbinal = SimpleFileThumbinalGenerator.GetThumbnail(path, THUMB_SIZE, THUMB_SIZE);
+#else
+                            logger.Info("create new thumbinal file by WindowsThumbnailProvider");
+                            var thumbinal = WindowsThumbnailProvider.GetThumbnail(path, THUMB_SIZE, THUMB_SIZE, ThumbnailOptions.None);
+#endif
+                            thumbinal.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                            
+                            returnBytes = ms.ToArray();
+                            logger.Info("size of returnBytes : " + returnBytes.Length);
+                        }
+                        catch(Exception ex)
+                        {
+                            logger.Error(ex);
 
-                        returnBytes = ms.ToArray();
-                        logger.Info("size of returnBytes : " + returnBytes.Length);
+                            returnBytes = File.ReadAllBytes(path);
+                        }
                     }
                 }
             }

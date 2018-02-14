@@ -40,4 +40,3 @@ C:\Workspace\projects\devops\FE.Creator\FE.Creator.ObjectRepository\bin\Debug\NL
 C:\Workspace\projects\devops\FE.Creator\FE.Creator.ObjectRepository\bin\Debug\NLog.Web.dll
 C:\Workspace\projects\devops\FE.Creator\FE.Creator.ObjectRepository\bin\Debug\NLog.xml
 C:\Workspace\projects\devops\FE.Creator\FE.Creator.ObjectRepository\bin\Debug\NLog.Web.xml
-C:\Workspace\projects\devops\FE.Creator\FE.Creator.ObjectRepository\obj\Debug\FE.Creator.ObjectRepository.csprojResolveAssemblyReference.cache
