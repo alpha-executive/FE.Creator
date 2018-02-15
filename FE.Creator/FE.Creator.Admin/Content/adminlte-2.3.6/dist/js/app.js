@@ -23,6 +23,24 @@ function createCookie(name, value, days) {
     document.cookie = name + "=" + value + expires + "; path=/";
 }
 
+function createLocalStorageKey(name, value) {
+    var storage = window.localStorage;
+    if (storage) {
+        storage[name] = value;
+    } else {
+        createCookie(name, value, 1);
+    }
+}
+function readLocalStorageKey(name) {
+    var storage = window.localStorage;
+    if (storage) {
+        return storage[name];
+    }
+    else {
+        return readCookie(name);
+    }
+}
+
 function readCookie(name) {
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
@@ -171,7 +189,7 @@ $(function () {
   //Fix for IE page transitions
   $("body").removeClass("hold-transition");
 
-  var sidebarstatus = readCookie("sidebaropened");
+  var sidebarstatus = readLocalStorageKey("sidebaropened");
   //initialize the slidbar status from the cookie settings.
   if (sidebarstatus === "true") {
       $("body").removeClass('sidebar-open').removeClass('sidebar-collapse');
@@ -356,20 +374,20 @@ function _init() {
         if ($(window).width() > (screenSizes.sm - 1)) {
           if ($("body").hasClass('sidebar-collapse')) {
               $("body").removeClass('sidebar-collapse').trigger('expanded.pushMenu');
-              createCookie("sidebaropened", "true", 1);
+              createLocalStorageKey("sidebaropened", "true");
           } else {
               $("body").addClass('sidebar-collapse').trigger('collapsed.pushMenu');
-              createCookie("sidebaropened", "false", 1);
+              createLocalStorageKey("sidebaropened", "false");
           }
         }
         //Handle sidebar push menu for small screens
         else {
           if ($("body").hasClass('sidebar-open')) {
               $("body").removeClass('sidebar-open').removeClass('sidebar-collapse').trigger('collapsed.pushMenu');
-              createCookie("sidebaropened", "false", 1);
+              createLocalStorageKey("sidebaropened", "false");
           } else {
               $("body").addClass('sidebar-open').trigger('expanded.pushMenu');
-              createCookie("sidebaropened", "true", 1);
+              createLocalStorageKey("sidebaropened", "true");
           }
         }
       });
