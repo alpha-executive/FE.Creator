@@ -18,6 +18,25 @@ namespace FE.Creator.FileStorage
     {
         private string mFullFileName = string.Empty;
         private static Dictionary<string, Bitmap> thumbinalMappings = new Dictionary<string, Bitmap>();
+        static GeneralFileThumbinalGenerator() {
+            thumbinalMappings.Add(".docx", Properties.Resources.docx);
+            thumbinalMappings.Add(".doc", Properties.Resources.docx);
+            thumbinalMappings.Add(".xlsx", Properties.Resources.xlsx);
+            thumbinalMappings.Add(".xls", Properties.Resources.xlsx);
+            thumbinalMappings.Add(".pptx", Properties.Resources.pptx);
+            thumbinalMappings.Add(".ppt", Properties.Resources.pptx);
+            thumbinalMappings.Add(".pdf", Properties.Resources.pdf);
+            thumbinalMappings.Add(".iso", Properties.Resources.iso);
+            thumbinalMappings.Add(".html", Properties.Resources.html);
+            thumbinalMappings.Add(".htm", Properties.Resources.html);
+
+            //Zip, rar, 7z, gz, tar.
+            thumbinalMappings.Add(".zip", Properties.Resources.zip);
+            thumbinalMappings.Add(".rar", Properties.Resources.zip);
+            thumbinalMappings.Add(".7z", Properties.Resources.zip);
+            thumbinalMappings.Add(".gz", Properties.Resources.zip);
+            thumbinalMappings.Add(".tar", Properties.Resources.zip);
+       }
 
         public string LowerCaseExtension
         {
@@ -44,23 +63,6 @@ namespace FE.Creator.FileStorage
         public GeneralFileThumbinalGenerator(string fullFileName)
         {
             this.mFullFileName = fullFileName;
-            thumbinalMappings.Add(".docx", Properties.Resources.docx);
-            thumbinalMappings.Add(".doc", Properties.Resources.docx);
-            thumbinalMappings.Add(".xlsx", Properties.Resources.xlsx);
-            thumbinalMappings.Add(".xls", Properties.Resources.xlsx);
-            thumbinalMappings.Add(".pptx", Properties.Resources.pptx);
-            thumbinalMappings.Add(".ppt", Properties.Resources.pptx);
-            thumbinalMappings.Add("pdf", Properties.Resources.pdf);
-            thumbinalMappings.Add(".iso", Properties.Resources.iso);
-            thumbinalMappings.Add(".html", Properties.Resources.html);
-            thumbinalMappings.Add(".htm", Properties.Resources.html);
-
-            //Zip, rar, 7z, gz, tar.
-            thumbinalMappings.Add(".zip", Properties.Resources.zip);
-            thumbinalMappings.Add(".rar", Properties.Resources.zip);
-            thumbinalMappings.Add(".7z", Properties.Resources.zip);
-            thumbinalMappings.Add(".gz", Properties.Resources.zip);
-            thumbinalMappings.Add(".tar", Properties.Resources.zip);
         }
 
         public Image GetThumbinal(int width, int height)
@@ -110,10 +112,15 @@ namespace FE.Creator.FileStorage
                 return null;
             }
 
-            return Image
-                .FromFile(mFullFileName)
-                .GetThumbnailImage(width, height, imageAbortHandler, IntPtr.Zero);
-              
+            Image orignialImage = Image
+                .FromFile(mFullFileName);
+
+            //get the thumbinal compress ratio.
+            double ratio = width * 1.0 / orignialImage.Width <= height * 1.0 / orignialImage.Height?
+                width * 1.0 / orignialImage.Width : height * 1.0 / orignialImage.Height;
+
+            return
+                orignialImage.GetThumbnailImage((int)(orignialImage.Width * ratio), (int)(orignialImage.Height * ratio), imageAbortHandler, IntPtr.Zero);
         }
     }
     public class SimpleFileThumbinalGenerator

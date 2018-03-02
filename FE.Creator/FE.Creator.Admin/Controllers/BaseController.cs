@@ -87,6 +87,10 @@ namespace FE.Creator.Admin.Controllers
         protected int GetAppObjectDefintionIdByName(string defName)
         {
             var objDefs = objectService.GetAllObjectDefinitions();
+            if (objDefs == null
+                || objDefs.Count == 0)
+                return -1;
+
             var findObjDef = (from def in objDefs
                               where def.ObjectDefinitionName.Equals(defName, StringComparison.InvariantCultureIgnoreCase)
                               select def).FirstOrDefault();

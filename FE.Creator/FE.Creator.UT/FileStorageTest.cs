@@ -62,7 +62,7 @@ namespace FE.Creator.UT
         [TestMethod]
         public void TestThumbnailGenerate()
         {
-           var thumb  = WindowsThumbnailProvider.GetThumbnail(@"C:\Workspace\Make_it_Happen_at_OpenText.xyz", 256, 256, ThumbnailOptions.None);
+           var thumb  = WindowsThumbnailProvider.GetThumbnail(@"C:\Workspace\ux1hslyh.qku.jpg", 256, 256, ThumbnailOptions.None);
 
             thumb.Save(@"C:\Workspace\thumbinal.bmp");
         }

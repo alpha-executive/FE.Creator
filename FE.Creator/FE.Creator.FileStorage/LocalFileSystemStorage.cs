@@ -239,7 +239,7 @@ namespace FE.Creator.FileStorage
             byte[] returnBytes = null;
 
             string path = isFullPathFileName ? fileName : getFilePath(fileName, new DirectoryInfo(StoreRoot));
-            string thumbnialPath = Path.Combine(path, ".thmb");
+            string thumbnialPath = path + ".thmb";
             logger.Info("path : " + path);
             logger.Info("thumbnialPath : " + thumbnialPath);
 
@@ -252,24 +252,30 @@ namespace FE.Creator.FileStorage
             {
                 if (File.Exists(path))
                 {
-                    using (System.IO.MemoryStream ms = new MemoryStream())
-                    {
+                    using(MemoryStream ms = new MemoryStream())
+                    {                    
                         try
                         {
-                            int THUMB_SIZE = 256;
-#if GThumbinal
+    #if GThumbinal
+                            int THUMB_SIZE = 512;
                             logger.Info("create new thumbinal file by GeneralFileThumbinalGenerator");
                             var thumbinal = SimpleFileThumbinalGenerator.GetThumbnail(path, THUMB_SIZE, THUMB_SIZE);
-#else
-                            logger.Info("create new thumbinal file by WindowsThumbnailProvider");
-                            var thumbinal = WindowsThumbnailProvider.GetThumbnail(path, THUMB_SIZE, THUMB_SIZE, ThumbnailOptions.None);
-#endif
+    #else
+                                int THUMB_SIZE = 256;
+                                logger.Info("create new thumbinal file by WindowsThumbnailProvider");
+                                var thumbinal = WindowsThumbnailProvider.GetThumbnail(path, THUMB_SIZE, THUMB_SIZE, ThumbnailOptions.None);
+    #endif
                             thumbinal.Save(ms, System.Drawing.Imaging.ImageFormat.Png);
+                            using (FileStream fs = new FileStream(thumbnialPath, FileMode.Create))
+                            {
+                                ms.WriteTo(fs);
+                            }
+
+                            returnBytes = File.ReadAllBytes(thumbnialPath);   
                             
-                            returnBytes = ms.ToArray();
                             logger.Info("size of returnBytes : " + returnBytes.Length);
                         }
-                        catch(Exception ex)
+                        catch (Exception ex)
                         {
                             logger.Error(ex);
 
