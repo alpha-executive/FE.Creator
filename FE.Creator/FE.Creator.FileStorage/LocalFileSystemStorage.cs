@@ -154,6 +154,7 @@ namespace FE.Creator.FileStorage
         }
 
 
+       
         private async Task<FileStorageInfo> SaveFileContent(byte[] fileContents, bool createThumbnial, string fileName, string path, string thumbinalPath)
         {
             logger.Debug("Start SaveFileContent");
@@ -167,6 +168,12 @@ namespace FE.Creator.FileStorage
 
             File.WriteAllBytes(path, fileContents);
 
+            //if it is a image, we need to deal with EXIF information if there is.
+            if (ImageConvertUtil.IsRecognisedImageFile(path)
+                && ImageConvertUtil.IsImage(fileContents))
+            {
+                ImageConvertUtil.ConvertEXIFImage(path);
+            }
 
             if (createThumbnial)
             {

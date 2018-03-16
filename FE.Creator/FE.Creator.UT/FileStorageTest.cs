@@ -3,6 +3,8 @@ using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FE.Creator.FileStorage;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace FE.Creator.UT
 {
@@ -72,6 +74,17 @@ namespace FE.Creator.UT
         {
             var thumb = SimpleFileThumbinalGenerator.GetThumbnail(@"C:\Workspace\temp.docx", 256, 256);
             thumb.Save(@"C:\Workspace\thumbinal.bmp");
+        }
+
+        [TestMethod]
+        public void TestImageExifConversion()
+        {
+            LocalFileSystemStorage fileStorage = new LocalFileSystemStorage(@"C:\Workspace\");
+            byte[] contents = File.ReadAllBytes(@"C:\Workspace\personal\images\2017-05\IMG_3861.JPG");
+            Task<FileStorageInfo> t = fileStorage.SaveFile(contents,
+                ".jpg", true);
+
+            Assert.IsNotNull(t.Result.FileFriendlyName);
         }
     }
 }

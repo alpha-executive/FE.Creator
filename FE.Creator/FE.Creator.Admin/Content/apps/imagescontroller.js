@@ -319,7 +319,7 @@
                             delay: 3000,
                             positionY: 'bottom',
                             positionX: 'right',
-                            title: 'Warn',
+                            title: AppLang.COMMON_DLG_TITLE_WARN,
                         });
                     }
                 }
@@ -330,7 +330,7 @@
                         delay: 5000,
                         positionY: 'bottom',
                         positionX: 'right',
-                        title: 'Error'
+                        title: AppLang.COMMON_DLG_TITLE_ERROR
                     });
                 }
             });
@@ -366,7 +366,7 @@
                             delay: 3000,
                             positionY: 'bottom',
                             positionX: 'right',
-                            title: 'Warn',
+                            title: AppLang.COMMON_DLG_TITLE_WARN,
                         });
                     }
                 }
@@ -377,7 +377,7 @@
                         delay: 5000,
                         positionY: 'bottom',
                         positionX: 'right',
-                        title: 'Error'
+                        title: AppLang.COMMON_DLG_TITLE_ERROR
                     });
                 }
             });
@@ -430,7 +430,7 @@
             vm.displayMode = vm.currentalbum == null ? "imageImport" : "albumImageImport";
             vm.files = files;
             vm.errorFiles = errFiles;
-            vm.progress = 0;
+            vm.progress = 1;
 
             var reloaded = false;
             var uploadcount = 0;

@@ -114,7 +114,7 @@ namespace FE.Creator.FileStorage
 
             Image orignialImage = Image
                 .FromFile(mFullFileName);
-
+           
             //get the thumbinal compress ratio.
             double ratio = width * 1.0 / orignialImage.Width <= height * 1.0 / orignialImage.Height?
                 width * 1.0 / orignialImage.Width : height * 1.0 / orignialImage.Height;

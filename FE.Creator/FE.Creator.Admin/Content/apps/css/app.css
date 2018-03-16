@@ -66,6 +66,7 @@
     }
     .image-wrapper img{
         width: 100%;
+        image-orientation:from-image;
     }
     .image-card:hover{
        box-shadow: 0 2px 4px 0 rgba(41, 201, 205, 0.2), 0 2px 10px 0 rgba(41, 201, 205, 0.3) !important;
