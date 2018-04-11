@@ -26,7 +26,7 @@ namespace FE.Creator.UT
             string xmlNode = document.Descendants("grantlist").FirstOrDefault().ToString();
            // string sha = CryptographyServiceFactory.SHAService.CalculateSHA256(UTF8Encoding.Default.GetBytes(xmlNode));
 
-            byte[] hashContent = UTF8Encoding.Default.GetBytes(xmlNode);
+            byte[] hashContent = UTF8Encoding.UTF8.GetBytes(xmlNode);
             byte[] content = cservice.HashAndSignBytes(hashContent, privateKey);
             string strContent = Convert.ToBase64String(content);
 
@@ -42,12 +42,12 @@ namespace FE.Creator.UT
             ISymmetricCryptographyService service = CryptographyServiceFactory.SymmetricCryptoService;
             string key = Convert.ToBase64String(service.getEncryptionKeys());
 
-            byte[] testcontent = UTF8Encoding.Default.GetBytes("Hello, Guys!");
+            byte[] testcontent = UTF8Encoding.UTF8.GetBytes("Hello, Guys!");
             byte[] econtent = service.EncryptData(testcontent, key);
             byte[] dcontent = service.DecryptData(econtent, key);
 
-            Assert.AreEqual(UTF8Encoding.Default.GetString(testcontent),
-                UTF8Encoding.Default.GetString(dcontent));
+            Assert.AreEqual(UTF8Encoding.UTF8.GetString(testcontent),
+                UTF8Encoding.UTF8.GetString(dcontent));
         }
     }
 }

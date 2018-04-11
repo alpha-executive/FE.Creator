@@ -276,7 +276,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Data\License.xml" />
+    <Content Include="App_Data\FECipherMachine.exe" />
     <Content Include="App_Data\ObjectRepository.mdf" />
     <Content Include="App_Data\ObjectRepository_log.ldf">
       <DependentUpon>ObjectRepository.mdf</DependentUpon>

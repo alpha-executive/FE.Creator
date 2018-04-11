@@ -198,7 +198,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
                 string productKey = licenseDoc.Descendants("productkey").FirstOrDefault().Value;
 
                 logger.Debug("productKey = " + productKey);
-                byte[] contentToVerified = UTF8Encoding.Default.GetBytes(grantlist);
+                byte[] contentToVerified = UTF8Encoding.UTF8.GetBytes(grantlist);
 
                 logger.Debug("SYS_RSA_PUBLIC_KEY = " + SYS_RSA_PUBLIC_KEY);
                 bool isValid = cryptoGraphysvc.VerifySignedHash(contentToVerified,
@@ -427,7 +427,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
             {
                 var stream = filesReadToProvider.Contents[0];
                 var fileBytes = await stream.ReadAsByteArrayAsync();
-                string license = System.Text.UTF8Encoding.Default.GetString(fileBytes);
+                string license = System.Text.UTF8Encoding.UTF8.GetString(fileBytes);
 
                 logger.Debug(string.Format("license : {0}", license));
                 if (IsValidLicense(license))

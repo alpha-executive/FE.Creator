@@ -81,12 +81,29 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
             return result;
         }
 
+        [HttpGet]
+        public HttpResponseMessage DownloadCipherMachineApp()
+        {
+            logger.Debug("Start DownloadCipherMachineApp");
+            HttpResponseMessage result = null;
+
+            result = Request.CreateResponse(HttpStatusCode.OK);
+            byte[] content = System.IO.File.ReadAllBytes(System.IO.Path.Combine(System.Web.HttpRuntime.AppDomainAppPath,
+                "App_Data", "FECipherMachine.exe"));
+            result.Content = new ByteArrayContent(content);
+            result.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
+            result.Content.Headers.ContentDisposition.FileName = "FECipherMachine.exe";
+
+            logger.Debug("End DownloadCipherMachineApp");
+            return result;
+        }
+
         [HttpPost]
         [ResponseType(typeof(GenericDataModel))]
         public IHttpActionResult EncryptData([FromBody]GenericDataModel data)
         {
             logger.Debug("Start EncryptData");
-            byte[] bdata = System.Text.UTF8Encoding.Default.GetBytes(data.StringData);
+            byte[] bdata = System.Text.UTF8Encoding.UTF8.GetBytes(data.StringData);
             logger.Debug("bdata length of " + bdata.Length);
 
             byte[] sdata = cryptoservice.EncryptData(bdata, GetSystemCryptographKeys());
@@ -114,7 +131,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
             return this.Created<GenericDataModel>(Request.RequestUri,
                 new GenericDataModel()
                 {
-                    StringData = System.Text.UTF8Encoding.Default.GetString(sdata)
+                    StringData = System.Text.UTF8Encoding.UTF8.GetString(sdata)
                 });
         }
     }

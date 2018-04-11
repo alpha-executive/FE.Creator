@@ -65,7 +65,7 @@ namespace FE.Creator.Cryptography
                         string content = SReader.ReadToEnd();
 
                         logger.Debug("End DecryptData");
-                        return UTF8Encoding.Default.GetBytes(content);
+                        return UTF8Encoding.UTF8.GetBytes(content);
                     }
                 }
             }
@@ -87,7 +87,7 @@ namespace FE.Creator.Cryptography
                 {
                     using(StreamWriter writer = new StreamWriter(CryptStream))
                     {
-                        writer.Write(UTF8Encoding.Default.GetString(data));
+                        writer.Write(UTF8Encoding.UTF8.GetString(data));
                     }
 
                     logger.Debug("End EncryptData");
