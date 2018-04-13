@@ -21,6 +21,7 @@
             getObjectDefintionsbyGroup: getObjectDefintionsbyGroup,
             getObjectDefinitionById: getObjectDefinitionById,
             getLightWeightObjectDefinitions: getLightWeightObjectDefinitions,
+            getCustomObjectDefinitions: getCustomObjectDefinitions,
             createOrUpdateObjectDefintion: createOrUpdateObjectDefintion,
             deleteObjectDefintionField: deleteObjectDefintionField,
             deleteObjectDefintion: deleteObjectDefintion,
@@ -158,7 +159,7 @@
         }
 
         function getLightWeightObjectDefinitions() {
-            return $http.get('/api/custom/ObjectDefinition/GetAllDefinitions')
+            return $http.get('/api/custom/ObjectDefinition/getSystemObjectDefinitions')
                 .then(complete)
                 .catch(error);
 
@@ -168,6 +169,21 @@
 
             function error(response) {
                 logger.error('XHR Failed for getLightWeightObjectDefinitions - ' + response.data);
+                return response.data;
+            }
+        }
+
+        function getCustomObjectDefinitions() {
+            return $http.get('/api/custom/ObjectDefinition/getCustomObjectDefinitions')
+            .then(complete)
+            .catch(error);
+
+            function complete(response) {
+                return response.data;
+            }
+
+            function error(response) {
+                logger.error('XHR Failed for getCustomObjectDefinitions - ' + response.data);
                 return response.data;
             }
         }

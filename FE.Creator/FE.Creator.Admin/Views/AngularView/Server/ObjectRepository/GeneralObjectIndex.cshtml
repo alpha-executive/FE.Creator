@@ -11,9 +11,9 @@
                     <h3 class="box-title">@FE.Creator.Admin.lang.AppLang.DATA_CUST_DATA_LIST</h3>
                     <div class="box-tools pull-right">
                         <div class="btn-group" style="width: 300px;">
-                            <ui-select ng-model="ctrl.currentObjectDefinition" ng-disabled="ctrl.disabled" style="min-width: 100px;" on-select="ctrl.onDefinitionChanged($item, $model)" title="Choose a person">
+                            <ui-select ng-model="ctrl.currentObjectDefinition" ng-disabled="ctrl.disabled" style="min-width: 100px;" on-select="ctrl.onDefinitionChanged($item, $model)" title="Choose a Custom Table">
                                 <ui-select-match placeholder="@FE.Creator.Admin.lang.AppLang.DATA_CUST_SELECT_TABLE">{{$select.selected.objectDefinitionName}}</ui-select-match>
-                                <ui-select-choices group-by="ctrl.GetObjectDefinitionGroup" repeat="objdef in ctrl.ObjectDefintions">
+                                <ui-select-choices group-by="ctrl.GetObjectDefinitionGroup" repeat="objdef in ctrl.CustomObjectDefinitions">
                                     <small ng-bind-html="objdef.objectDefinitionName"></small>
                                 </ui-select-choices>
                             </ui-select>

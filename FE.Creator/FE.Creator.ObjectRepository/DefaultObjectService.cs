@@ -486,21 +486,52 @@ namespace FE.Creator.ObjectRepository
         {
             logger.Debug("Start GetObjectDefinitionsByGroup");
             List<ObjectDefinition> retObjList = null;
+
             using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
             {
-                var objDefList = dboContext.GeneralObjectDefinitions
+                IQueryable<GeneralObjectDefinition> query = dboContext.GeneralObjectDefinitions
                     .Where(g => g.IsDeleted == false && g.GeneralObjectDefinitionGroupID == GroupId)
-                    .Include(d => d.GeneralObjectDefinitionFields)
-                    .ToList();
+                    .Include(d => d.GeneralObjectDefinitionFields);
 
-                LoadSelctionItems(dboContext, objDefList);
-
-                retObjList = ObjectConverter.ConvertToObjectDefinitionList(objDefList);
+                retObjList = ExecuteObjectDefinitionQuery(dboContext, GroupId, query);
             }
 
             logger.Debug("End GetObjectDefinitionsByGroup");
             return retObjList;
         }
+
+        private static List<ObjectDefinition> ExecuteObjectDefinitionQuery(DBObjectContext dboContext, int GroupId, IQueryable<GeneralObjectDefinition> query)
+        {
+            logger.Debug("Start ExecuteObjectDefinitionQuery");
+            List<ObjectDefinition> retObjList = null;
+
+            var objDefList = query.ToList();
+
+            LoadSelctionItems(dboContext, objDefList);
+
+            retObjList = ObjectConverter.ConvertToObjectDefinitionList(objDefList);
+
+            logger.Debug("End ExecuteObjectDefinitionQuery");
+            return retObjList;
+        }
+
+        public List<ObjectDefinition> GetObjectDefinitionsExceptGroup(int GroupId)
+        {
+            logger.Debug("Start GetObjectDefinitionsExceptGroup");
+            List<ObjectDefinition> retObjList = null;
+            using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
+            {
+                var query = dboContext.GeneralObjectDefinitions
+                    .Where(g => g.IsDeleted == false && g.GeneralObjectDefinitionGroupID != GroupId)
+                    .Include(d => d.GeneralObjectDefinitionFields);
+
+                retObjList = ExecuteObjectDefinitionQuery(dboContext, GroupId, query);
+            }
+
+            logger.Debug("End GetObjectDefinitionsExceptGroup");
+            return retObjList;
+        }
+
         private static void LoadSelctionItems(DBObjectContext dboContext, List<GeneralObjectDefinition> objDefList)
         {
             logger.Debug("objDefList.count : " + objDefList.Count);

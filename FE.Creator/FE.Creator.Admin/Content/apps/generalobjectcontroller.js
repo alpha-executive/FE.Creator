@@ -97,7 +97,8 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService, Upload
     vm.disabledNewObject = true; //disable the add new object
     vm.viewMode = 'list';  //by default, the view is list.
     vm.currentObjectDefinition = {}; //current object definition.
-    vm.ObjectDefintions = []; //all the available object definitions.
+    vm.ObjectDefintions = []; //all the available system object definitions.
+    vm.CustomObjectDefinitions = []; //all the custom defined object definitions.
     vm.ObjectDefGroups = [];  //all the available object definition groups.
     vm.GetObjectDefinitionGroup = GetObjectDefinitionGroup; //get the group name of the object definition
     vm.onDefinitionChanged = onDefinitionChanged; //object definition change event.
@@ -262,6 +263,15 @@ function GeneralObjectListController($scope, ObjectRepositoryDataService, Upload
 
                 return vm.ObjectDefintions;
             });
+
+        ObjectRepositoryDataService.getCustomObjectDefinitions()
+        .then(function (data) {
+            if (angular.isArray(data)) {
+                vm.CustomObjectDefinitions = data;
+
+                return vm.CustomObjectDefinitions;
+            }
+        });
     }
 
     function viewObjectDetails(objectid) {

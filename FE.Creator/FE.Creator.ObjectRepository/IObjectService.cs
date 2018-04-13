@@ -63,6 +63,12 @@ namespace FE.Creator.ObjectRepository
         List<ObjectDefinition> GetObjectDefinitionsByGroup(int GroupId, int currentPage, int pageSize);
 
         /// <summary>
+        /// Get the object definitions except for the given group.
+        /// </summary>
+        /// <param name="GroupId">GROUP ID</param>
+        /// <returns>object definitions not belone to the specified group.</returns>
+        List<ObjectDefinition> GetObjectDefinitionsExceptGroup(int GroupId);
+        /// <summary>
         /// Soft delete the object definition, add delete flag to the object definition.
         /// </summary>
         /// <param name="ObjDefId"></param>

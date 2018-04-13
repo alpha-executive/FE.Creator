@@ -23,6 +23,10 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
     ///  GET api/custom/ObjectDefinition/FindObjectDefintionsByGroup/{id}
     ///      {id}: optional, group id, if not specified, return all the object definitions
     ///      return:  return all the object defintions of current group specified by {id}: group id.
+    ///   GET: api/custom/ObjectDefinition/getSystemObjectDefinitions
+    ///       get system build-in object definitions.
+    ///   GET: api/custom/ObjectDefinition/getCustomObjectDefinitions
+    ///       get all the custom defined object definitions. 
     ///  GET: api/ObjectDefinition/{id}
     ///      {id}: required, object definition id.
     ///      return: return the specific definition by id.
@@ -96,6 +100,56 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             return this.Ok<IEnumerable<ObjectDefinition>>(objDefintions);
         }
 
+        // GET: api/custom/ObjectDefinition/getSystemObjectDefinitions
+        [ResponseType(typeof(IEnumerable<ObjectDefinition>))]
+        [HttpGet]
+        public IHttpActionResult getSystemObjectDefinitions()
+        {
+            logger.Debug("Start ObjectDefinitionController.getSystemObjectDefinitions");
+            var groups = objectService.GetObjectDefinitionGroups(null);
+            var sysGroup = (from g in groups
+                            where g.GroupName.Equals("FESystem", StringComparison.InvariantCultureIgnoreCase)
+                            select g).FirstOrDefault();
+            logger.Debug("FESystem group found ? " + sysGroup != null);
+
+            if (sysGroup != null)
+            {
+#if !DEBUG
+                var objDefinitions = objectService.GetObjectDefinitionsByGroup(sysGroup.GroupID, 1, int.MaxValue);
+#else
+                var objDefinitions = objectService.GetAllObjectDefinitions();
+#endif
+                logger.Debug("objDefinitions.Count = " + objDefinitions.Count);
+                return this.Ok<IEnumerable<ObjectDefinition>>(objDefinitions);
+            }
+
+            logger.Error("FESystem group not found, System is not in correct status, check license or database status.");
+            return this.NotFound();
+        }
+
+        // GET: api/custom/ObjectDefinition/getCustomObjectDefinitions
+        [ResponseType(typeof(IEnumerable<ObjectDefinition>))]
+        [HttpGet]
+        public IHttpActionResult getCustomObjectDefinitions()
+        {
+            logger.Debug("Start ObjectDefinitionController.getCustomObjectDefinitions");
+            var groups = objectService.GetObjectDefinitionGroups(null);
+            var sysGroup = (from g in groups
+                              where g.GroupName.Equals("FESystem", StringComparison.InvariantCultureIgnoreCase)
+                              select g).FirstOrDefault();
+            logger.Debug("FESystem group found ? " + sysGroup != null);
+
+            if(sysGroup!= null)
+            {
+                var objDefinitions = objectService.GetObjectDefinitionsExceptGroup(sysGroup.GroupID);
+                logger.Debug("objDefinitions.Count = " + objDefinitions.Count);
+                return this.Ok<IEnumerable<ObjectDefinition>>(objDefinitions);
+            }
+
+            logger.Error("FESystem group not found, System is not in correct status, check license or database status.");
+
+            return this.NotFound();
+        }
         /// <summary>
         ///  GET api/custom/ObjectDefinition/{id}
         /// </summary>
