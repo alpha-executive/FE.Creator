@@ -151,7 +151,7 @@
         }
 
        function reloadAppSettings(){
-                return ObjectRepositoryDataService.getServiceObjectsWithFilters(
+           return ObjectRepositoryDataService.getSysObjectsByFilters(
                    "AppConfig",
                    ["language", "dateTimeFormat", "systemTheme", "pullMessageFromPublisher", "pullMessagePublisherUrl"].join(),
                    1,

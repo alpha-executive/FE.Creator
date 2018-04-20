@@ -3,6 +3,7 @@ using FE.Creator.ObjectRepository.ServiceModels;
 using NLog;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -50,7 +51,14 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
         {
             logger.Debug("Start TargetStatusReport");
             int targetDefId = FindObjectDefinitionIdByName("Target");
-            var targetList = objectService.GetAllSerivceObjects(targetDefId, new string[] { "targetStatus" });
+            var targetList = objectService.GetAllSerivceObjects(targetDefId, 
+                new string[] { "targetStatus" },
+                new ServiceRequestContext()
+                {
+                    IsDataCurrentUserOnly = bool.Parse(ConfigurationManager.AppSettings["IsDataForLoginUserOnly"]),
+                    RequestUser = RequestContext.Principal.Identity.Name,
+                    UserSenstiveForSharedData = false
+                });
 
             var targetPercentage = targetList.Count > 0 ? (from t in targetList select t)
                                                             .Average(s => 
@@ -65,7 +73,14 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
             //                                                    : 0;
 
             int taskDefId = FindObjectDefinitionIdByName("Task");
-            var taskList = objectService.GetAllSerivceObjects(taskDefId, new string[] { "taskStatus" });
+            var taskList = objectService.GetAllSerivceObjects(taskDefId, 
+                        new string[] { "taskStatus" },
+                        new ServiceRequestContext()
+                        {
+                            IsDataCurrentUserOnly = bool.Parse(ConfigurationManager.AppSettings["IsDataForLoginUserOnly"]),
+                            RequestUser = RequestContext.Principal.Identity.Name,
+                            UserSenstiveForSharedData = false
+                        });
 
             var taskPercentage = taskList.Count > 0 ? (from t in taskList select t)
                                                         .Average(s => s.GetPropertyValue<PrimeObjectField>("taskStatus")
@@ -101,7 +116,14 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
         private int[] GetYoYStatisticReportData(string objectName)
         {
             int objDefId = FindObjectDefinitionIdByName(objectName);
-            var objList = objectService.GetAllSerivceObjects(objDefId, null);
+            var objList = objectService.GetAllSerivceObjects(objDefId, 
+                null,
+                new ServiceRequestContext()
+                {
+                    IsDataCurrentUserOnly = bool.Parse(ConfigurationManager.AppSettings["IsDataForLoginUserOnly"]),
+                    RequestUser = RequestContext.Principal.Identity.Name,
+                    UserSenstiveForSharedData = false
+                });
 
             DateTime dateOfLastYear = DateTime.Now.AddYears(-1).AddMonths(1);
             //only take care of the data of recent years.

@@ -33,7 +33,7 @@
     }
     function loadApplicationTheme() {
         $.ajax({
-            url: "/api/objects/FindServiceObjectsByFilter/AppConfig/"
+            url: "/api/objects/FindSysObjectsByFilter/AppConfig/"
                + ["systemTheme","pullMessageFromPublisher"].join(),
             dataType: "json",
             success: function (data) {
@@ -74,7 +74,7 @@
     }
     function loadUserRecentTasks() {
         $.ajax({
-            url: "/api/objects/FindServiceObjectsByFilter/Task/"
+            url: "/api/objects/FindSysObjectsByFilter/Task/"
                 + ["taskStatus", "taskType"].join()
                 + "?pageIndex=1&pageSize=6",
             dataType: "json",
@@ -200,7 +200,7 @@
             return;
 
         $.ajax({
-            url: "/api/objects/FindServiceObjectsByFilter/UserInfo/"
+            url: "/api/objects/FindSysObjectsByFilter/UserInfo/"
                 + ["firstName", "lastName", "birthDate", "gender", "ID", "image", "userExternalId"].join()
                 + "?filters=userExternalId," + loginUserId,
             dataType: "json",

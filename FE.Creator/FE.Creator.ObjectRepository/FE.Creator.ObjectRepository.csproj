@@ -118,6 +118,7 @@
     <Compile Include="ServiceModels\PrimeObjectField.cs" />
     <Compile Include="ServiceModels\ServiceObject.cs" />
     <Compile Include="ServiceModels\ServiceObjectField.cs" />
+    <Compile Include="ServiceModels\ServiceRequestContext.cs" />
     <Compile Include="ServiceModels\SingleSDefinitionField.cs" />
     <Compile Include="ServiceModels\SingleSelectionField.cs" />
     <Compile Include="Utils\IgnoreCaseStringCompare.cs" />

@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ABOUT_FECONSOLE_TITLE" xml:space="preserve">
+    <value>关于FEConsole</value>
+  </data>
   <data name="ACCOUNTMGR_ATTENTION" xml:space="preserve">
     <value>注意</value>
   </data>
@@ -605,6 +608,9 @@
   </data>
   <data name="IMAGEMGR_VIEW_MORE_IMGS" xml:space="preserve">
     <value>查看更多图片</value>
+  </data>
+  <data name="INDEX_ABOUT" xml:space="preserve">
+    <value>关于系统</value>
   </data>
   <data name="INDEX_EVENT_COUNTER_MSG" xml:space="preserve">
     <value>系统有{0}个新的事件</value>

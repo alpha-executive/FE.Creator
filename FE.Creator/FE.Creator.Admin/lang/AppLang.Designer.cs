@@ -61,6 +61,15 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About FEConsole.
+        /// </summary>
+        public static string ABOUT_FECONSOLE_TITLE {
+            get {
+                return ResourceManager.GetString("ABOUT_FECONSOLE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Attention.
         /// </summary>
         public static string ACCOUNTMGR_ATTENTION {
@@ -1533,6 +1542,15 @@ namespace FE.Creator.Admin.lang {
         public static string IMAGEMGR_VIEW_MORE_IMGS {
             get {
                 return ResourceManager.GetString("IMAGEMGR_VIEW_MORE_IMGS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string INDEX_ABOUT {
+            get {
+                return ResourceManager.GetString("INDEX_ABOUT", resourceCulture);
             }
         }
         

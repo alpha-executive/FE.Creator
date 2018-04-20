@@ -24,6 +24,12 @@ namespace FE.Creator.Admin.Controllers
             return View();
         }
 
+        public ActionResult About()
+        {
+            logger.Debug(string.Format("{0} access the home page", User.Identity.Name));
+            return View();
+        }
+
         public ActionResult LocalizationJS()
         {
             string languageFile = getLanguageJSFilePath();
@@ -42,7 +48,8 @@ namespace FE.Creator.Admin.Controllers
             var settings = objectService.GetServiceObjects(settingsDefId,
                 new string[] { "language", "pullMessageFromPublisher", "pullMessagePublisherUrl" },
                 1,
-                1);
+                1,
+                null);
 
             if (settings.Count > 0)
             {
@@ -129,7 +136,8 @@ namespace FE.Creator.Admin.Controllers
             var events = objectService.GetServiceObjects(eventDefId,
                new string[] { "eventTitle", "eventDetails", "eventDateTime", "eventLevel", "eventOwner" },
                1,
-               count > 0 ? count : 10);
+               count > 0 ? count : 10,
+               null);
 
             List<AppEventModel> latestEvents = new List<AppEventModel>();
             if(events != null && events.Count > 0)

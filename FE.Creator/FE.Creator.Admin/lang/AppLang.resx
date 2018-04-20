@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ABOUT_FECONSOLE_TITLE" xml:space="preserve">
+    <value>About FEConsole</value>
+  </data>
   <data name="ACCOUNTMGR_ATTENTION" xml:space="preserve">
     <value>Attention</value>
   </data>
@@ -608,6 +611,9 @@
   </data>
   <data name="IMAGEMGR_VIEW_MORE_IMGS" xml:space="preserve">
     <value>View More Images</value>
+  </data>
+  <data name="INDEX_ABOUT" xml:space="preserve">
+    <value>About</value>
   </data>
   <data name="INDEX_EVENT_COUNTER_MSG" xml:space="preserve">
     <value>There are {0} Latest System Events</value>

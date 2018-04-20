@@ -67,7 +67,9 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
 
         private Task<IEnumerable<ObjectDefinitionGroup>> GetAllObjectDefinitionGroups(int? parentGroupId)
         {
-            return Task.FromResult<IEnumerable<ObjectDefinitionGroup>>(objectService.GetObjectDefinitionGroups(parentGroupId));
+            return Task
+                .FromResult<IEnumerable<ObjectDefinitionGroup>>(objectService.GetObjectDefinitionGroups(parentGroupId, 
+                    null));
         }
 
         

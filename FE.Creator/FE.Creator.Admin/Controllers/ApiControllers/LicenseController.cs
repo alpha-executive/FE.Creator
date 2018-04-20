@@ -365,7 +365,8 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
                     GetAppObjectDefintionIdByName("AppConfig"),
                     new string[] {"license" },
                     1,
-                    1);
+                    1, 
+                    null);
 
             var licenseData = objects
                 .FirstOrDefault()

@@ -30,6 +30,7 @@
             getServiceObject: getServiceObject,
             getServiceObjectCount: getServiceObjectCount,
             getServiceObjectsWithFilters: getServiceObjectsWithFilters,
+            getSysObjectsByFilters: getSysObjectsByFilters,
             createOrUpdateServiceObject: createOrUpdateServiceObject,
             deleteServiceObject: deleteServiceObject,
             getUsers: getUsers,
@@ -317,22 +318,22 @@
             }
         }
 
-        function getServiceObjectsWithFilters(definitionName, parameters, pageIndex, pageSize, filters) {
-            var url = '/api/objects/FindServiceObjectsByFilter/'+ definitionName;
+        function sendServiceObjectFiltersRequest(rawurl, definitionName, parameters, pageIndex, pageSize, filters) {
+            var url = rawurl + definitionName;
             if (parameters != null)
                 url = url + '/' + parameters + "?";
             else
                 url = url + "?";
 
-            if(pageIndex != null)
+            if (pageIndex != null)
                 url = url + "&pageIndex=" + pageIndex;
 
-            if(pageSize != null)
+            if (pageSize != null)
                 url = url + "&pageSize=" + pageSize;
 
-            if(filters != null)
+            if (filters != null)
                 url = url + "&filters=" + filters;
-            
+
             var config = {
                 method: 'GET',
                 url: url
@@ -350,6 +351,27 @@
                 logger.error('XHR Failed for getServiceObjectsWithFilters - ' + response.data);
                 return response.data;
             }
+        }
+
+        function getServiceObjectsWithFilters(definitionName, parameters, pageIndex, pageSize, filters) {
+            var url = '/api/objects/FindServiceObjectsByFilter/';
+            return sendServiceObjectFiltersRequest(url,
+                definitionName,
+                parameters,
+                pageIndex,
+                pageSize,
+                filters);
+        }
+
+        
+        function getSysObjectsByFilters(definitionName, parameters, pageIndex, pageSize, filters) {
+            var url = '/api/objects/FindSysObjectsByFilter/';
+            return sendServiceObjectFiltersRequest(url,
+                definitionName,
+                parameters,
+                pageIndex,
+                pageSize,
+                filters);
         }
 
         function createOrUpdateServiceObject(id, svcObject) {

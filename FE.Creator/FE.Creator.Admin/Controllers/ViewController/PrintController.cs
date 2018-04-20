@@ -25,7 +25,7 @@ namespace FE.Creator.Admin.Controllers.ViewController
         public ActionResult PrintArticle(int id)
         {
             var serviceObject = objectService.GetServiceObjectById(id, 
-                new string[]{ "articleSharedLevel", "isOriginal", "articleDesc", "articleContent" });
+                new string[]{ "articleSharedLevel", "isOriginal", "articleDesc", "articleContent" }, null);
             return View(serviceObject);
         }
     }

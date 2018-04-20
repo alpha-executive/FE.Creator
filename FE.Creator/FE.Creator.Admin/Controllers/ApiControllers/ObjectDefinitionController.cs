@@ -13,6 +13,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
     using FE.Creator.ObjectRepository.ServiceModels;
     using MVCExtension;
     using NLog;
+    using System.Configuration;
 
     /// <summary>
     ///  GET api/objectdefinitions/list/{groupname}
@@ -74,7 +75,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             int groupId = -1;
             if (!string.IsNullOrEmpty(groupname))
             {
-                var groups = objectService.GetObjectDefinitionGroups(null);
+                var groups = objectService.GetObjectDefinitionGroups(null, null);
                 var foundGroup = (from g in groups
                                   where g.GroupName.Equals(groupname, StringComparison.InvariantCultureIgnoreCase)
                                   select g).FirstOrDefault();
@@ -106,7 +107,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         public IHttpActionResult getSystemObjectDefinitions()
         {
             logger.Debug("Start ObjectDefinitionController.getSystemObjectDefinitions");
-            var groups = objectService.GetObjectDefinitionGroups(null);
+            var groups = objectService.GetObjectDefinitionGroups(null, null);
             var sysGroup = (from g in groups
                             where g.GroupName.Equals("FESystem", StringComparison.InvariantCultureIgnoreCase)
                             select g).FirstOrDefault();
@@ -115,7 +116,10 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             if (sysGroup != null)
             {
 #if !DEBUG
-                var objDefinitions = objectService.GetObjectDefinitionsByGroup(sysGroup.GroupID, 1, int.MaxValue);
+                var objDefinitions = objectService.GetObjectDefinitionsByGroup(sysGroup.GroupID, 
+                    1, 
+                    int.MaxValue,
+                    null);
 #else
                 var objDefinitions = objectService.GetAllObjectDefinitions();
 #endif
@@ -133,7 +137,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         public IHttpActionResult getCustomObjectDefinitions()
         {
             logger.Debug("Start ObjectDefinitionController.getCustomObjectDefinitions");
-            var groups = objectService.GetObjectDefinitionGroups(null);
+            var groups = objectService.GetObjectDefinitionGroups(null, null);
             var sysGroup = (from g in groups
                               where g.GroupName.Equals("FESystem", StringComparison.InvariantCultureIgnoreCase)
                               select g).FirstOrDefault();
@@ -141,7 +145,13 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
 
             if(sysGroup!= null)
             {
-                var objDefinitions = objectService.GetObjectDefinitionsExceptGroup(sysGroup.GroupID);
+                var objDefinitions = objectService.GetObjectDefinitionsExceptGroup(sysGroup.GroupID,
+                    new ServiceRequestContext()
+                    {
+                        IsDataCurrentUserOnly = bool.Parse(ConfigurationManager.AppSettings["IsDataForLoginUserOnly"]),
+                        RequestUser = RequestContext.Principal.Identity.Name,
+                        UserSenstiveForSharedData = false
+                    });
                 logger.Debug("objDefinitions.Count = " + objDefinitions.Count);
                 return this.Ok<IEnumerable<ObjectDefinition>>(objDefinitions);
             }
@@ -160,7 +170,14 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         public async Task<IHttpActionResult> FindObjectDefintionsByGroup(int? id = null)
         {
             var objDefinitions = id.HasValue ?
-                objectService.GetObjectDefinitionsByGroup(id.Value, 1, int.MaxValue) :
+                objectService.GetObjectDefinitionsByGroup(id.Value,
+                1, 
+                int.MaxValue,
+                new ServiceRequestContext()
+                {
+                    IsDataCurrentUserOnly = bool.Parse(ConfigurationManager.AppSettings["IsDataForLoginUserOnly"]),
+                    RequestUser = RequestContext.Principal.Identity.Name
+                }) :
                 await getObjectDefinitions();
 
             return this.Ok<IEnumerable<ObjectDefinition>>(objDefinitions);
@@ -191,7 +208,9 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             int objectId = -1;
             if(value != null)
             {
-               objectId = objectService.CreateORUpdateObjectDefinition(value);
+                value.ObjectOwner = RequestContext.Principal.Identity.Name;
+                value.UpdatedBy = value.ObjectOwner;
+                objectId = objectService.CreateORUpdateObjectDefinition(value);
                 logger.Debug("New object defintion with objectId = " + objectId);
             }
 
@@ -204,6 +223,12 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         {
             if(value != null)
             {
+                value.UpdatedBy = RequestContext.Principal.Identity.Name;
+                if (string.IsNullOrEmpty(value.ObjectOwner))
+                {
+                    value.ObjectOwner = value.UpdatedBy;
+                }
+
                 objectService.CreateORUpdateObjectDefinition(value);
             }
         }

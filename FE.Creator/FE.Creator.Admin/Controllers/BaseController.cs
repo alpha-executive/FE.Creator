@@ -104,7 +104,8 @@ namespace FE.Creator.Admin.Controllers
             var settings = objectService.GetServiceObjects(settingsDefId,
                 new string[] { "language" },
                 1,
-                1);
+                1,
+                null);
             if (settings.Count > 0)
             {
                 string lang = settings

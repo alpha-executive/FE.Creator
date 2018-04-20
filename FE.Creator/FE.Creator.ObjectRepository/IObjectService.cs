@@ -60,14 +60,14 @@ namespace FE.Creator.ObjectRepository
         /// <param name="currentPage"></param>
         /// <param name="pageSize"></param>
         /// <returns></returns>
-        List<ObjectDefinition> GetObjectDefinitionsByGroup(int GroupId, int currentPage, int pageSize);
+        List<ObjectDefinition> GetObjectDefinitionsByGroup(int GroupId, int currentPage, int pageSize, ServiceRequestContext requestContext);
 
         /// <summary>
         /// Get the object definitions except for the given group.
         /// </summary>
         /// <param name="GroupId">GROUP ID</param>
         /// <returns>object definitions not belone to the specified group.</returns>
-        List<ObjectDefinition> GetObjectDefinitionsExceptGroup(int GroupId);
+        List<ObjectDefinition> GetObjectDefinitionsExceptGroup(int GroupId, ServiceRequestContext requestContext);
         /// <summary>
         /// Soft delete the object definition, add delete flag to the object definition.
         /// </summary>
@@ -89,7 +89,7 @@ namespace FE.Creator.ObjectRepository
         /// get the count of the general object.
         /// </summary>
         /// <returns></returns>
-        int GetGeneralObjectCount(int ObjDefId);
+        int GetGeneralObjectCount(int ObjDefId, ServiceRequestContext requestContext);
 
         /// <summary>
         /// get the service objects by object id
@@ -97,7 +97,7 @@ namespace FE.Creator.ObjectRepository
         /// <param name="objectId">the object id</param>
         /// <param name="properties">the properties will retrieved from the object</param>
         /// <returns></returns>
-        ServiceObject GetServiceObjectById(int objectId, string[] properties);
+        ServiceObject GetServiceObjectById(int objectId, string[] properties, ServiceRequestContext requestContext);
 
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace FE.Creator.ObjectRepository
         /// <param name="ObjDefId">Object Definition Id</param>
         /// <param name="properties">the properties will be retrieved from the objects</param>
         /// <returns></returns>
-        List<ServiceObject>  GetAllSerivceObjects(int ObjDefId, string[] properties);
+        List<ServiceObject>  GetAllSerivceObjects(int ObjDefId, string[] properties, ServiceRequestContext requestContext);
 
         /// <summary>
         /// get service objects of the specific page.
@@ -116,7 +116,7 @@ namespace FE.Creator.ObjectRepository
         /// <param name="currentPage">current page number</param>
         /// <param name="pageSize">current page size</param>
         /// <returns></returns>
-        List<ServiceObject> GetServiceObjects(int ObjDefId, string[] properties, int currentPage, int pageSize);
+        List<ServiceObject> GetServiceObjects(int ObjDefId, string[] properties, int currentPage, int pageSize, ServiceRequestContext requestContext);
 
         /// <summary>
         /// Soft delete the service object, set a delete flag to the object.
@@ -129,7 +129,7 @@ namespace FE.Creator.ObjectRepository
         /// Get all the ObjectDefinitionGroups.
         /// </summary>
         /// <returns></returns>
-        List<ObjectDefinitionGroup> GetObjectDefinitionGroups(int? parentGroupId);
+        List<ObjectDefinitionGroup> GetObjectDefinitionGroups(int? parentGroupId, ServiceRequestContext requestContext);
 
         /// <summary>
         /// Check whether the object definition group is exists.

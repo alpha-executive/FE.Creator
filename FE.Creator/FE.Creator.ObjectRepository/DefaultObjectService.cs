@@ -482,15 +482,26 @@ namespace FE.Creator.ObjectRepository
             return retObjList;
         }
 
-        public List<ObjectDefinition> GetObjectDefinitionsByGroup(int GroupId, int currentPage, int pageSize)
+        public List<ObjectDefinition> GetObjectDefinitionsByGroup(int GroupId, int currentPage, int pageSize, ServiceRequestContext requestContext)
         {
             logger.Debug("Start GetObjectDefinitionsByGroup");
             List<ObjectDefinition> retObjList = null;
 
+            if(requestContext == null)
+            {
+                requestContext = new ServiceRequestContext()
+                {
+                    IsDataCurrentUserOnly = false
+                };
+            }
+
             using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
             {
                 IQueryable<GeneralObjectDefinition> query = dboContext.GeneralObjectDefinitions
-                    .Where(g => g.IsDeleted == false && g.GeneralObjectDefinitionGroupID == GroupId)
+                    .Where(g => g.IsDeleted == false 
+                            && g.GeneralObjectDefinitionGroupID == GroupId
+                            && (!requestContext.IsDataCurrentUserOnly
+                            || requestContext.RequestUser == g.ObjectOwner))
                     .Include(d => d.GeneralObjectDefinitionFields);
 
                 retObjList = ExecuteObjectDefinitionQuery(dboContext, GroupId, query);
@@ -515,14 +526,28 @@ namespace FE.Creator.ObjectRepository
             return retObjList;
         }
 
-        public List<ObjectDefinition> GetObjectDefinitionsExceptGroup(int GroupId)
+        public List<ObjectDefinition> GetObjectDefinitionsExceptGroup(int GroupId, ServiceRequestContext requestContext)
         {
             logger.Debug("Start GetObjectDefinitionsExceptGroup");
             List<ObjectDefinition> retObjList = null;
+
+            if (requestContext == null)
+            {
+                logger.Debug("requestContext == null");
+                requestContext = new ServiceRequestContext
+                {
+                    IsDataCurrentUserOnly = false
+                };
+            }
+
             using (DBObjectContext dboContext = EntityContextFactory.GetDBObjectContext())
             {
                 var query = dboContext.GeneralObjectDefinitions
-                    .Where(g => g.IsDeleted == false && g.GeneralObjectDefinitionGroupID != GroupId)
+                    .Where(g => g.IsDeleted == false 
+                        && g.GeneralObjectDefinitionGroupID != GroupId
+                        && (!requestContext.IsDataCurrentUserOnly
+                            || requestContext.RequestUser == g.ObjectOwner)
+                      )
                     .Include(d => d.GeneralObjectDefinitionFields);
 
                 retObjList = ExecuteObjectDefinitionQuery(dboContext, GroupId, query);
@@ -547,13 +572,27 @@ namespace FE.Creator.ObjectRepository
             }
         }
 
-        public List<ServiceObject> GetAllSerivceObjects(int ObjDefId, string[] properties)
+        public List<ServiceObject> GetAllSerivceObjects(int ObjDefId, string[] properties, ServiceRequestContext requestContext)
         {
             logger.Debug("Start GetAllSerivceObjects");
             List<ServiceObject> svsObjects = null;
+
+            if (requestContext == null)
+            {
+                logger.Debug("requestContext == null");
+                requestContext = new ServiceRequestContext
+                {
+                    IsDataCurrentUserOnly = false
+                };
+            }
             using (var dbContext = EntityContextFactory.GetDBObjectContext())
             {
-                var objectList = dbContext.GeneralObjects.Where(o => o.GeneralObjectDefinitionID == ObjDefId && o.IsDeleted == false)
+                var objectList = dbContext.GeneralObjects.Where(o => o.GeneralObjectDefinitionID == ObjDefId 
+                                                                                && o.IsDeleted == false
+                                                                                && (!requestContext.IsDataCurrentUserOnly
+                                                                                        || requestContext.RequestUser == o.ObjectOwner
+                                                                                   )
+                                                             )
                                                             .Include(o => o.GeneralObjectFields.Select(f=>f.GeneralObjectDefinitionField))
                                                             .ToList();
 
@@ -564,13 +603,28 @@ namespace FE.Creator.ObjectRepository
             return svsObjects;
         }
 
-        public int GetGeneralObjectCount(int ObjDefId)
+        public int GetGeneralObjectCount(int ObjDefId, ServiceRequestContext requestContext)
         {
             logger.Debug("Start GetGeneralObjectCount");
+
+            if (requestContext == null)
+            {
+                logger.Debug("requestContext == null");
+                requestContext = new ServiceRequestContext
+                {
+                    IsDataCurrentUserOnly = false
+                };
+            }
+
             using (var dbContext = EntityContextFactory.GetDBObjectContext())
             {
                 var objectCount = dbContext.GeneralObjects
-                                           .Where(o => o.GeneralObjectDefinitionID == ObjDefId && o.IsDeleted == false)
+                                           .Where(o => o.GeneralObjectDefinitionID == ObjDefId 
+                                                && o.IsDeleted == false
+                                                && (!requestContext.IsDataCurrentUserOnly
+                                                    || requestContext.RequestUser == o.ObjectOwner
+                                                   )
+                                              )
                                            .Count();
 
                 logger.Debug("objectCount = " + objectCount);
@@ -642,14 +696,28 @@ namespace FE.Creator.ObjectRepository
             return retObjList;
         }
 
-        public ServiceObject GetServiceObjectById(int objectId, string[] properties)
+        public ServiceObject GetServiceObjectById(int objectId, string[] properties, ServiceRequestContext requestContext)
         {
             logger.Debug("Start GetServiceObjectById");
             List<ServiceObject> svsObjects = null;
+
+            if (requestContext == null)
+            {
+                logger.Debug("requestContext == null");
+                requestContext = new ServiceRequestContext
+                {
+                    IsDataCurrentUserOnly = false
+                };
+            }
+
             using (var dbContext = EntityContextFactory.GetDBObjectContext())
             {
                 var objectList = dbContext.GeneralObjects
-                                            .Where(o => o.GeneralObjectID == objectId)
+                                            .Where(o => o.GeneralObjectID == objectId
+                                                && (!requestContext.IsDataCurrentUserOnly
+                                                        || requestContext.RequestUser == o.ObjectOwner
+                                                       )
+                                             )
                                             .Include(o => o.GeneralObjectFields)
                                             .Include(o => o.GeneralObjectFields.Select(f => f.GeneralObjectDefinitionField))
                                             .ToList();
@@ -663,18 +731,31 @@ namespace FE.Creator.ObjectRepository
             return svsObjects.Count > 0 ? svsObjects.First() : null;
         }
 
-        public List<ServiceObject> GetServiceObjects(int ObjDefId, string[] properties, int currentPage, int pageSize)
+        public List<ServiceObject> GetServiceObjects(int ObjDefId, string[] properties, int currentPage, int pageSize, ServiceRequestContext requestContext)
         {
             logger.Debug("Start GetServiceObjects");
             List<ServiceObject> svsObjects = null;
             int skipCount = currentPage > 1 ? (currentPage - 1) * pageSize : 0;
 
+            if(requestContext == null)
+            {
+                logger.Debug("requestContext == null");
+                requestContext = new ServiceRequestContext
+                {
+                    IsDataCurrentUserOnly = false
+                };
+            }
             using (var dbContext = EntityContextFactory.GetDBObjectContext())
             {
                 var objectList = dbContext.GeneralObjects
-                                            .Where(o => o.GeneralObjectDefinitionID == ObjDefId && o.IsDeleted == false)
+                                            .Where(o => o.GeneralObjectDefinitionID == ObjDefId 
+                                                    && o.IsDeleted == false
+                                                    && (!requestContext.IsDataCurrentUserOnly
+                                                        || requestContext.RequestUser == o.ObjectOwner
+                                                       )
+                                                )
                                             .Include(o => o.GeneralObjectFields.Select(f => f.GeneralObjectDefinitionField))
-                                            .OrderByDescending(o=>o.Created)
+                                            .OrderByDescending(o => o.Created)
                                             .Skip(skipCount)
                                             .Take(pageSize)
                                             .ToList();
@@ -743,7 +824,7 @@ namespace FE.Creator.ObjectRepository
             }
         }
 
-        public List<ObjectDefinitionGroup> GetObjectDefinitionGroups(int? parentGroupId)
+        public List<ObjectDefinitionGroup> GetObjectDefinitionGroups(int? parentGroupId, ServiceRequestContext requestContext)
         {
             logger.Debug("Start GetObjectDefinitionGroups");
             List<ObjectDefinitionGroup> objList = null;

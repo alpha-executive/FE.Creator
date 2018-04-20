@@ -14,6 +14,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
     using System.Web.Http.Description;
     using MVCExtension;
     using NLog;
+    using System.Configuration;
 
     /// <summary>
     /// API for service objects
@@ -34,12 +35,18 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
     ///  GET: api/custom/GeneralObject/FindServiceObject/{id}
     ///       return: find the general object by object id.
     ///  
-    /// GET: api/objects/GeneralObject/FindServiceObjectsByFilter/{definitionname}/{parameters}?pageIndex=?&pageSize=?&filters=?
+    /// GET: /api/objects/GeneralObject/FindServiceObjectsByFilter/{definitionname}/{parameters}?pageIndex=?&pageSize=?&filters=?
     ///        {parameters}: optional, perperties name, splited by comma.
     ///        {definitionname}: required, object defintion name
     ///        filters: query parameters, property filters, key,value;key,value format.
     ///       return: the founded general object list
-    ///       
+    ///
+    /// Get: /api/objects/GeneralObject/FindSysObjectsByFilter/{definitionname}/{parameters}?pageIndex=?&pageSize=?&filters=?
+    ///     get all the service objects by filters, it is not user specific.
+    ///        {parameters}: optional, perperties name, splited by comma.
+    ///        {definitionname}: required, object defintion name
+    ///        filters: query parameters, property filters, key,value;key,value format.
+    ///       return: the founded general object list
     ///  POST api/GeneralObject
     ///       creat new service object
     ///       required body parameter: ServiceObject value
@@ -106,7 +113,17 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             {
                 logger.Debug("find object definition: " + findObjDef.ObjectDefinitionName);
 
-                return await this.FindServiceObjects(findObjDef.ObjectDefinitionID, parameters,pageIndex, pageSize, null);
+                return await this.FindServiceObjects(findObjDef.ObjectDefinitionID,
+                    new ServiceRequestContext()
+                    {
+                        IsDataCurrentUserOnly = bool.Parse(ConfigurationManager.AppSettings["IsDataForLoginUserOnly"]),
+                        RequestUser = RequestContext.Principal.Identity.Name,
+                        UserSenstiveForSharedData = false
+                    },
+                    parameters,
+                    pageIndex, 
+                    pageSize,
+                    null);
             }
 
             logger.Error("object definition was not found");
@@ -155,7 +172,13 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             if (string.IsNullOrEmpty(filters))
             {
                 logger.Debug("no filters");
-                count = objectService.GetGeneralObjectCount(id);
+                count = objectService.GetGeneralObjectCount(id,
+                    new ServiceRequestContext()
+                    {
+                        IsDataCurrentUserOnly = bool.Parse(ConfigurationManager.AppSettings["IsDataForLoginUserOnly"]),
+                        RequestUser = RequestContext.Principal.Identity.Name,
+                        UserSenstiveForSharedData = false
+                    });
             }
            else
             {
@@ -168,7 +191,13 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
                     string.Join(",", fields.ToArray()),
                     1, 
                     int.MaxValue,
-                    filterKps.Count > 0 ? filterKps : null);
+                    filterKps.Count > 0 ? filterKps : null,
+                     new ServiceRequestContext()
+                     {
+                         IsDataCurrentUserOnly = bool.Parse(ConfigurationManager.AppSettings["IsDataForLoginUserOnly"]),
+                         RequestUser = RequestContext.Principal.Identity.Name,
+                         UserSenstiveForSharedData = false
+                     });
 
                 count = foundObjects.Count;
             }
@@ -177,10 +206,14 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             return count;
         }
 
-        private Task<IEnumerable<ServiceObject>> getAllServiceObjectAsync(int id, int pageIndex, int pageSize, string[] properties = null)
+        private Task<IEnumerable<ServiceObject>> getAllServiceObjectAsync(int id, int pageIndex, int pageSize, ServiceRequestContext svcRequestContext, string[] properties = null)
         {
             logger.Debug("Start getAllServiceObjectAsync");
-            var objectList = objectService.GetServiceObjects(id, properties,pageIndex, pageSize);
+            var objectList = objectService.GetServiceObjects(id, 
+                properties,
+                pageIndex, 
+                pageSize,
+                svcRequestContext);
 
             logger.Debug("End getAllServiceObjectAsync");
             return Task.FromResult<IEnumerable<ServiceObject>>(objectList);
@@ -210,7 +243,7 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         }
 
 
-        private async Task<IHttpActionResult> FindServiceObjects(int id, string parameters = null, int? pageIndex = 1, int? pageSize = int.MaxValue, List<ObjectKeyValuePair> filters = null)
+        private async Task<IHttpActionResult> FindServiceObjects(int id, ServiceRequestContext svcRequestContext, string parameters = null, int? pageIndex = 1, int? pageSize = int.MaxValue, List<ObjectKeyValuePair> filters = null)
         {
             if (!pageIndex.HasValue || pageIndex <= 0)
                 pageIndex = 1;
@@ -218,7 +251,12 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
             if (!pageSize.HasValue || pageSize <= 0)
                 pageSize = int.MaxValue;
 
-            List<ServiceObject> foundObjects = await FilterServiceObjects(id, parameters, pageIndex, pageSize, filters);
+            List<ServiceObject> foundObjects = await FilterServiceObjects(id, 
+                parameters, 
+                pageIndex, 
+                pageSize, 
+                filters,
+                svcRequestContext);
             logger.Debug(string.Format("foundObjects {0}", foundObjects != null ? foundObjects.Count : 0));
             return this.Ok<IEnumerable<ServiceObject>>(foundObjects);
         }
@@ -226,12 +264,14 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         private async Task<List<ServiceObject>> FilterServiceObjects(int id, string parameters,
             int? pageIndex,
             int? pageSize,
-            List<ObjectKeyValuePair> filters)
+            List<ObjectKeyValuePair> filters,
+            ServiceRequestContext svcRequestContext)
         {
             logger.Debug("Start FilterServiceObjects");
             var objectList = await getAllServiceObjectAsync(id,
                             1,
                             int.MaxValue,
+                            svcRequestContext,
                             string.IsNullOrEmpty(parameters) ? null : parameters.Split(new char[] { ',' }));
             logger.Debug(string.Format("filters : {0}",  filters));
             List<ServiceObject> foundObjects = new List<ServiceObject>();
@@ -277,7 +317,17 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         [HttpGet]
         public async Task<IHttpActionResult> FindServiceObjects(int id, string parameters = null, int? pageIndex = 1, int? pageSize = int.MaxValue)
         {
-            return await FindServiceObjects(id, parameters, pageIndex, pageSize, null);
+            return await FindServiceObjects(id,
+                new ServiceRequestContext()
+                {
+                    IsDataCurrentUserOnly = bool.Parse(ConfigurationManager.AppSettings["IsDataForLoginUserOnly"]),
+                    RequestUser = RequestContext.Principal.Identity.Name,
+                    UserSenstiveForSharedData = false
+                },
+                parameters, 
+                pageIndex, 
+                pageSize, 
+                null);
         }
 
         /// <summary>
@@ -291,8 +341,14 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
         {
             logger.Debug("Start FindServiceObject");
             var obj = objectService.GetServiceObjectById(id, 
-                string.IsNullOrEmpty(parameters) 
-                ? null : parameters.Split(new char[] { ',' }));
+                    string.IsNullOrEmpty(parameters) 
+                    ? null : parameters.Split(new char[] { ',' }),
+                    new ServiceRequestContext()
+                    {
+                        IsDataCurrentUserOnly = bool.Parse(ConfigurationManager.AppSettings["IsDataForLoginUserOnly"]),
+                        RequestUser = RequestContext.Principal.Identity.Name,
+                        UserSenstiveForSharedData = false
+                    });
             logger.Debug(string.Format("obj : {0}", obj != null ? obj.ObjectName : string.Empty));
             logger.Debug("End FindServiceObject");
             return this.Ok<ServiceObject>(obj);
@@ -341,6 +397,46 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
                 List<ObjectKeyValuePair> filterKps = ParseFilterKeyValuePairs(filters);
 
                 return await this.FindServiceObjects(findObjDef.ObjectDefinitionID,
+                    new ServiceRequestContext()
+                    {
+                        IsDataCurrentUserOnly = bool.Parse(ConfigurationManager.AppSettings["IsDataForLoginUserOnly"]),
+                        RequestUser = RequestContext.Principal.Identity.Name,
+                        UserSenstiveForSharedData = false
+                    },
+                    parameters,
+                    pageIndex,
+                    pageSize,
+                    filterKps.Count > 0 ? filterKps : null);
+            }
+
+            logger.Error("findObjDef is null");
+            logger.Debug("End FindServiceObjectsByFilter");
+
+            return this.NotFound();
+        }
+
+        /// <summary>
+        /// Get: /api/custom/GeneralObject/FindSysObjectsByFilter/{definitionname}/{parameters}?pageIndex=?&pageSize=?&filters=?
+        ///     get all the service objects by filters, it is not user specific.
+        /// </summary>
+        /// <param name="definitionname"></param>
+        /// <param name="parameters"></param>
+        /// <param name="pageIndex"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="filters"></param>
+        /// <returns></returns>
+        [HttpGet]
+        [ResponseType(typeof(ServiceObject))]
+        public async Task<IHttpActionResult> FindSysObjectsByFilter(string definitionname, string parameters = null, int? pageIndex = 1, int? pageSize = int.MaxValue, string filters = null)
+        {
+            logger.Debug("Start FindServiceObjectsByFilter");
+            var findObjDef = FindObjectDefinitionByName(definitionname);
+            if (findObjDef != null)
+            {
+                List<ObjectKeyValuePair> filterKps = ParseFilterKeyValuePairs(filters);
+
+                return await this.FindServiceObjects(findObjDef.ObjectDefinitionID,
+                   null,
                     parameters,
                     pageIndex,
                     pageSize,
@@ -444,7 +540,14 @@ namespace FE.Creator.Admin.ApiControllers.Controllers
                 var properties = (from kv in value.Properties
                                   select kv.KeyName).ToArray<string>();
                 
-               return objectService.GetServiceObjectById(objectId, properties);
+               return objectService.GetServiceObjectById(objectId, 
+                   properties,
+                   new ServiceRequestContext()
+                   {
+                       IsDataCurrentUserOnly = bool.Parse(ConfigurationManager.AppSettings["IsDataForLoginUserOnly"]),
+                       RequestUser = RequestContext.Principal.Identity.Name,
+                       UserSenstiveForSharedData = false
+                   });
             }
 
             logger.Error("value is null");

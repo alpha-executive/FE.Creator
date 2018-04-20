@@ -40,7 +40,7 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
                               select def).FirstOrDefault();
 
             var svcObjects = objectService.GetServiceObjects(findObjDef.ObjectDefinitionID, 
-                new string[]{ "cryptoSecurityKey" }, 1, 1);
+                new string[]{ "cryptoSecurityKey" }, 1, 1, null);
             string cryptoKey = svcObjects[0].GetPropertyValue<PrimeObjectField>("cryptoSecurityKey").GetStrongTypeValue<string>();
             logger.Debug("get cryptoKey of length　" + cryptoKey.Length);
             logger.Debug("End GetSystemCryptographKeys");
