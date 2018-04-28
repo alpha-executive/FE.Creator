@@ -117,8 +117,56 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ABOUT_APP_LICENSE" xml:space="preserve">
+    <value>本程序授权方式为： </value>
+  </data>
+  <data name="ABOUT_COMPONENT_LICENSE" xml:space="preserve">
+    <value>授权</value>
+  </data>
+  <data name="ABOUT_COMPONENT_NAME" xml:space="preserve">
+    <value>模块名称</value>
+  </data>
+  <data name="ABOUT_COMPONENT_VERSION" xml:space="preserve">
+    <value>版本</value>
+  </data>
+  <data name="ABOUT_CONTACT_INFO" xml:space="preserve">
+    <value>联系方式</value>
+  </data>
   <data name="ABOUT_FECONSOLE_TITLE" xml:space="preserve">
     <value>关于FEConsole</value>
+  </data>
+  <data name="ABOUT_INTRODUCTION" xml:space="preserve">
+    <value>简介</value>
+  </data>
+  <data name="ABOUT_INTRO_CONTENT" xml:space="preserve">
+    <value>张宇杰 - 10年以上计算机软件相关工作经验.</value>
+  </data>
+  <data name="ABOUT_LICENSE" xml:space="preserve">
+    <value>授权方式</value>
+  </data>
+  <data name="ABOUT_LOCATION" xml:space="preserve">
+    <value>位置</value>
+  </data>
+  <data name="ABOUT_LOC_CONTENT" xml:space="preserve">
+    <value>中国北京</value>
+  </data>
+  <data name="ABOUT_NOTES" xml:space="preserve">
+    <value>附言</value>
+  </data>
+  <data name="ABOUT_NOTES_CONTENT" xml:space="preserve">
+    <value>热切希望这个程序可以为您幸福的生活添加一点额外的色彩。</value>
+  </data>
+  <data name="ABOUT_THE_AUTHOR" xml:space="preserve">
+    <value>关于作者</value>
+  </data>
+  <data name="ABOUT_TITLE" xml:space="preserve">
+    <value>关于</value>
+  </data>
+  <data name="ABOUT_WHYDESC" xml:space="preserve">
+    <value>FEConsol 建立初衷是打造一款统一的个人用户应用，以便更好的保护和组织用户的私人信息、组织珍贵记忆以及所学知识。对于那些有志于终生学习的用户,FEConsole 也是一个很好的帮手。分享同样是系统的一个重要功能， 你可以分享一篇文章， 一本书籍或者一些照片， 让所有的朋友们一起来分享你的快乐时光。</value>
+  </data>
+  <data name="ABOUT_WHYFECONSOLE" xml:space="preserve">
+    <value>FEConsole简介</value>
   </data>
   <data name="ACCOUNTMGR_ATTENTION" xml:space="preserve">
     <value>注意</value>
@@ -1028,6 +1076,9 @@
   </data>
   <data name="PROFILE_WKEXPRERIENCE" xml:space="preserve">
     <value>工作经验</value>
+  </data>
+  <data name="String" xml:space="preserve">
+    <value>FEConsole 同时可以合理的帮助那些希望终身学习的朋友提升自己。</value>
   </data>
   <data name="TASKMGR_BTN_LBL_COMTASK" xml:space="preserve">
     <value>完成任务</value>

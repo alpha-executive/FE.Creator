@@ -1,19 +1,15 @@
 ﻿@{
-    ViewBag.Title = "About";
+    ViewBag.Title = @FE.Creator.Admin.lang.AppLang.ABOUT_TITLE;
 }
 <div class="row">
     <div class="col-md-12">
         <div class="box box-primary">
-            <div class="box-header center">
-                <h2>About FEConsole</h2>
+            <div class="box-header text-center">
+                <h2>@FE.Creator.Admin.lang.AppLang.ABOUT_WHYFECONSOLE</h2>
             </div>
             <div class="box-body box-profile">
-               <img class="profile-user-img img-responsive img-circle" alt="User profile picture" src="../../dist/img/user4-128x128.jpg">
                 <p>
-                    FEConsole is a easy to use web application, which protect and organize your personal information, valuable memories, knowlege in one place!
-                </p>
-                <p>
-                    FEConsole is also a greate helper for those who are willing to learn and improve themself all their lives.
+                   @FE.Creator.Admin.lang.AppLang.ABOUT_WHYDESC
                 </p>
             </div>
             <!-- /.box-body -->
@@ -27,23 +23,16 @@
     <div class="col-md-12">
         <div class="box box-primary">
             <div class="box-header center">
-                A MIT License
+               <i class="fa fa-fw fa-balance-scale"></i> @FE.Creator.Admin.lang.AppLang.ABOUT_LICENSE
             </div>
-        </div>
-    </div>
-</div>
-
-<!--Component-->
-<div class="row">
-    <div class="col-md-12">
-        <div class="box box-primary">
             <div class="box-body">
+                <div>@FE.Creator.Admin.lang.AppLang.ABOUT_APP_LICENSE <label class="label label-warning"><i class="fa fa-fw fa-balance-scale"></i> MIT License</label></div>
                 <table class="table table-striped">
                     <tbody>
                         <tr>
-                            <th>Component Name</th>
-                            <th style="width:20%;">Version</th>
-                            <th style="width:20%;">License</th>
+                            <th>@FE.Creator.Admin.lang.AppLang.ABOUT_COMPONENT_NAME</th>
+                            <th style="width:20%;">@FE.Creator.Admin.lang.AppLang.ABOUT_COMPONENT_VERSION</th>
+                            <th style="width:20%;">@FE.Creator.Admin.lang.AppLang.ABOUT_COMPONENT_LICENSE</th>
                         </tr>
                         <tr>
                             <td>AdminLTE</td>
@@ -62,6 +51,38 @@
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+</div>
+
+<!--About the Author-->
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">@FE.Creator.Admin.lang.AppLang.ABOUT_THE_AUTHOR</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <strong><i class="fa fa-book margin-r-5"></i> @FE.Creator.Admin.lang.AppLang.ABOUT_INTRODUCTION</strong>
+                <p class="text-muted">
+                    @FE.Creator.Admin.lang.AppLang.ABOUT_INTRO_CONTENT
+                </p>
+                <hr>
+                <strong><i class="fa fa-map-marker margin-r-5"></i> @FE.Creator.Admin.lang.AppLang.ABOUT_LOCATION</strong>
+                <p class="text-muted"> @FE.Creator.Admin.lang.AppLang.ABOUT_LOC_CONTENT</p>
+                <hr>
+                <strong><i class="fa fa-comments margin-r-5"></i> @FE.Creator.Admin.lang.AppLang.ABOUT_CONTACT_INFO</strong>
+                <p>
+                    <span class="label label-primary"><i class="fa fa-envelope-o margin-r-5"></i> alpha_executive@126.com</span>
+                    <span class="label label-info"><i class="fa fa-linkedin margin-r-5"></i> alphateam.zhang@gmail.com</span>
+                    <span class="label label-success"><i class="fa fa-weixin margin-r-5"></i> ksfounder</span>
+                </p>
+                <hr>
+                <strong><i class="fa fa-file-text-o margin-r-5"></i> @FE.Creator.Admin.lang.AppLang.ABOUT_NOTES</strong>
+                <p class="text-muted">@FE.Creator.Admin.lang.AppLang.ABOUT_NOTES_CONTENT</p>
+            </div>
+            <!-- /.box-body -->
         </div>
     </div>
 </div>

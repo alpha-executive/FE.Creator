@@ -36,11 +36,11 @@
                 case 0:
                     return PrimaryTypesLangs[field.primeDataType];
                 case 1:
-                    return Applang.DATA_CUST_OBJREF_TYPE;
+                    return AppLang.DATA_CUST_OBJREF_TYPE;
                 case 2:
-                    return Applang.DATA_CUST_SL_TYPE;
+                    return AppLang.DATA_CUST_SL_TYPE;
                 case 3:
-                    return Applang.DATA_CUST_FILE_TYPE;
+                    return AppLang.DATA_CUST_FILE_TYPE;
                 default:
                     return AppLang.DATA_CUST_UNKNOWN_TYPE;
             }

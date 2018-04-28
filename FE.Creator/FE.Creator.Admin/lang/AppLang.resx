@@ -117,8 +117,60 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ABOUT_APP_LICENSE" xml:space="preserve">
+    <value>Application is Under</value>
+  </data>
+  <data name="ABOUT_COMPONENT_LICENSE" xml:space="preserve">
+    <value>License</value>
+  </data>
+  <data name="ABOUT_COMPONENT_NAME" xml:space="preserve">
+    <value>Component Name</value>
+  </data>
+  <data name="ABOUT_COMPONENT_VERSION" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="ABOUT_CONTACT_INFO" xml:space="preserve">
+    <value>Contact Information</value>
+  </data>
   <data name="ABOUT_FECONSOLE_TITLE" xml:space="preserve">
     <value>About FEConsole</value>
+  </data>
+  <data name="ABOUT_FECONSOLE_TITLE1" xml:space="preserve">
+    <value>About FEConsole</value>
+  </data>
+  <data name="ABOUT_INTRODUCTION" xml:space="preserve">
+    <value>Introduction</value>
+  </data>
+  <data name="ABOUT_INTRO_CONTENT" xml:space="preserve">
+    <value>Yujie, Zhang - 10+ years experience in computer software technology.</value>
+  </data>
+  <data name="ABOUT_LICENSE" xml:space="preserve">
+    <value>License</value>
+  </data>
+  <data name="ABOUT_LOCATION" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="ABOUT_LOC_CONTENT" xml:space="preserve">
+    <value>Beijing, China</value>
+  </data>
+  <data name="ABOUT_NOTES" xml:space="preserve">
+    <value>Notes</value>
+  </data>
+  <data name="ABOUT_NOTES_CONTENT" xml:space="preserve">
+    <value>Wishing you all the great things in life, Hope this application will bring you extra share of all that make your happiest.</value>
+  </data>
+  <data name="ABOUT_THE_AUTHOR" xml:space="preserve">
+    <value>About the Author</value>
+  </data>
+  <data name="ABOUT_TITLE" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="ABOUT_WHYDESC" xml:space="preserve">
+    <value>FEConsole is a easy to use web application, it is in purpose of protecting and organizing your personal information, valuable memories, knowlege in one place!
+FEConsole is also a greate helper for those who are willing to learn and improve themself all their lives. Share is also a key feature of this application, you can share your articles, books and images to the public, thus all your friends can enjor the happy moment with you.</value>
+  </data>
+  <data name="ABOUT_WHYFECONSOLE" xml:space="preserve">
+    <value>Why FEConsole</value>
   </data>
   <data name="ACCOUNTMGR_ATTENTION" xml:space="preserve">
     <value>Attention</value>

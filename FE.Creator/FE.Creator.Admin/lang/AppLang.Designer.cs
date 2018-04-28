@@ -61,11 +61,165 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Application is Under.
+        /// </summary>
+        public static string ABOUT_APP_LICENSE {
+            get {
+                return ResourceManager.GetString("ABOUT_APP_LICENSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to License.
+        /// </summary>
+        public static string ABOUT_COMPONENT_LICENSE {
+            get {
+                return ResourceManager.GetString("ABOUT_COMPONENT_LICENSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Component Name.
+        /// </summary>
+        public static string ABOUT_COMPONENT_NAME {
+            get {
+                return ResourceManager.GetString("ABOUT_COMPONENT_NAME", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Version.
+        /// </summary>
+        public static string ABOUT_COMPONENT_VERSION {
+            get {
+                return ResourceManager.GetString("ABOUT_COMPONENT_VERSION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact Information.
+        /// </summary>
+        public static string ABOUT_CONTACT_INFO {
+            get {
+                return ResourceManager.GetString("ABOUT_CONTACT_INFO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to About FEConsole.
         /// </summary>
         public static string ABOUT_FECONSOLE_TITLE {
             get {
                 return ResourceManager.GetString("ABOUT_FECONSOLE_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About FEConsole.
+        /// </summary>
+        public static string ABOUT_FECONSOLE_TITLE1 {
+            get {
+                return ResourceManager.GetString("ABOUT_FECONSOLE_TITLE1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yujie, Zhang - 10+ years experience in computer software technology..
+        /// </summary>
+        public static string ABOUT_INTRO_CONTENT {
+            get {
+                return ResourceManager.GetString("ABOUT_INTRO_CONTENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Introduction.
+        /// </summary>
+        public static string ABOUT_INTRODUCTION {
+            get {
+                return ResourceManager.GetString("ABOUT_INTRODUCTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to License.
+        /// </summary>
+        public static string ABOUT_LICENSE {
+            get {
+                return ResourceManager.GetString("ABOUT_LICENSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Beijing, China.
+        /// </summary>
+        public static string ABOUT_LOC_CONTENT {
+            get {
+                return ResourceManager.GetString("ABOUT_LOC_CONTENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location.
+        /// </summary>
+        public static string ABOUT_LOCATION {
+            get {
+                return ResourceManager.GetString("ABOUT_LOCATION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notes.
+        /// </summary>
+        public static string ABOUT_NOTES {
+            get {
+                return ResourceManager.GetString("ABOUT_NOTES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wishing you all the great things in life, Hope this application will bring you extra share of all that make your happiest..
+        /// </summary>
+        public static string ABOUT_NOTES_CONTENT {
+            get {
+                return ResourceManager.GetString("ABOUT_NOTES_CONTENT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About the Author.
+        /// </summary>
+        public static string ABOUT_THE_AUTHOR {
+            get {
+                return ResourceManager.GetString("ABOUT_THE_AUTHOR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        public static string ABOUT_TITLE {
+            get {
+                return ResourceManager.GetString("ABOUT_TITLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FEConsole is a easy to use web application, it is in purpose of protecting and organizing your personal information, valuable memories, knowlege in one place!
+        ///FEConsole is also a greate helper for those who are willing to learn and improve themself all their lives. Share is also a key feature of this application, you can share your articles, books and images to the public, thus all your friends can enjor the happy moment with you..
+        /// </summary>
+        public static string ABOUT_WHYDESC {
+            get {
+                return ResourceManager.GetString("ABOUT_WHYDESC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Why FEConsole.
+        /// </summary>
+        public static string ABOUT_WHYFECONSOLE {
+            get {
+                return ResourceManager.GetString("ABOUT_WHYFECONSOLE", resourceCulture);
             }
         }
         
