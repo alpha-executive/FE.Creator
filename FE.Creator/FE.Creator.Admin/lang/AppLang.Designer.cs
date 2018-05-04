@@ -124,7 +124,7 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yujie, Zhang - 10+ years experience in computer software technology..
+        ///   Looks up a localized string similar to Yujie, Zhang - 10+ years experience in computer software technology. Who is a self-motivated person and trying his best to lead a simple and easy life in this complex world. .
         /// </summary>
         public static string ABOUT_INTRO_CONTENT {
             get {

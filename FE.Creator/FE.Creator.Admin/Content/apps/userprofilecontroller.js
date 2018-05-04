@@ -74,6 +74,7 @@
         vm.isEditBasicInfo = false 
         vm.init = init;
         vm.currentUserProfileId = null;
+        vm.adminUser = null;
 
         function init(userProfileId) {
             vm.currentUserProfileId = userProfileId || $scope.currentUserProfileID;
@@ -81,6 +82,12 @@
                 function(data){
                     vm.objectDefinitions = data;
                     return vm.objectDefinitions;
+            });
+
+            ObjectRepositoryDataService.getAdminLoginName()
+            .then(function (data) {
+                vm.adminUser = data;
+                return vm.adminUser;
             });
 
             //UserProfile
@@ -218,6 +225,7 @@
         vm.init = init;
         vm.objectDefinitions = null;
         vm.currentUserProfileId = null;
+        vm.adminUser = null;
 
         function init(userProfileId) {
             vm.currentUserProfileId = userProfileId || $scope.currentUserProfileID;
@@ -226,6 +234,12 @@
                     vm.objectDefinitions = data;
                     return vm.objectDefinitions;
                 });
+
+            ObjectRepositoryDataService.getAdminLoginName()
+             .then(function (data) {
+                 vm.adminUser = data;
+                 return vm.adminUser;
+             });
 
             //Contact
             reloadContact(vm.currentUserProfileId);
@@ -327,6 +341,7 @@
         vm.init = init;
         vm.objectDefinitions = null;
         vm.currentUserProfileId = null;
+        vm.adminUser = null;
 
         function init(userProfileId) {
             vm.currentUserProfileId = userProfileId || $scope.currentUserProfileID;
@@ -335,6 +350,12 @@
                     vm.objectDefinitions = data;
                     return vm.objectDefinitions;
                 });
+
+            ObjectRepositoryDataService.getAdminLoginName()
+            .then(function (data) {
+                vm.adminUser = data;
+                return vm.adminUser;
+            });
 
              //addresses
             reloadAddresses(vm.currentUserProfileId);
@@ -438,6 +459,7 @@
         vm.init = init;
         vm.objectDefinitions = null;
         vm.currentUserProfileId = null;
+        vm.adminUser = null;
 
         function init(userProfileId) {
 
@@ -447,6 +469,12 @@
                     vm.objectDefinitions = data;
                     return vm.objectDefinitions;
                 });
+
+            ObjectRepositoryDataService.getAdminLoginName()
+            .then(function (data) {
+                vm.adminUser = data;
+                return vm.adminUser;
+            });
 
             //workexperiences
             reloadWorkExperience(vm.currentUserProfileId);
@@ -550,6 +578,7 @@
         vm.init = init;
         vm.isEditSkills = false;
         vm.currentUserProfileId = null;
+        vm.adminUser = null;
 
         function init(userProfileId) {
 
@@ -559,6 +588,12 @@
                     vm.objectDefinitions = data;
                     return vm.objectDefinitions;
                 });
+
+            ObjectRepositoryDataService.getAdminLoginName()
+            .then(function (data) {
+                vm.adminUser = data;
+                return vm.adminUser;
+            });
 
             //skills
             reloadSkills(vm.currentUserProfileId);
@@ -658,6 +693,7 @@
         vm.objectDefinitions = [];
         vm.init = init;
         vm.currentUserProfileId = null;
+        vm.adminUser = null;
 
         function init(userProfileId) {
 
@@ -667,6 +703,12 @@
                     vm.objectDefinitions = data;
                     return vm.objectDefinitions;
                 });
+
+            ObjectRepositoryDataService.getAdminLoginName()
+            .then(function (data) {
+                vm.adminUser = data;
+                return vm.adminUser;
+            });
 
             //Education
             reloadEducations(vm.currentUserProfileId);

@@ -34,6 +34,7 @@
             createOrUpdateServiceObject: createOrUpdateServiceObject,
             deleteServiceObject: deleteServiceObject,
             getUsers: getUsers,
+            getAdminLoginName: getAdminLoginName,
             getUserIdByLoginName : getUserIdByLoginName,
             resetPassword: resetPassword,
             getLicencedModules: getLicencedModules,
@@ -421,6 +422,21 @@
 
             function error(response) {
                 logger.error('XHR Failed for getUsers - ' + response.data);
+                return response.data;
+            }
+        }
+
+        function getAdminLoginName() {
+            return $http.get('/api/custom/SystemUser/GetAdminLoginName')
+                .then(complete)
+                .catch(error);
+
+            function complete(response) {
+                return response.data;
+            }
+
+            function error(response) {
+                logger.error('XHR Failed for getAdminLoginName - ' + response.data);
                 return response.data;
             }
         }

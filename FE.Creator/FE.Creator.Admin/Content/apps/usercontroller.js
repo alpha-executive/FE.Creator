@@ -10,6 +10,7 @@
         var vm = this;
         vm.users = {};
         vm.ResetPassword = ResetPassword;
+        vm.AdminUser = null;
 
         init();
         function init() {
@@ -18,6 +19,11 @@
                       vm.users = data;
                       return data;
                   });
+
+            ObjectRepositoryDataService.getAdminLoginName()
+            .then(function (data) {
+                vm.AdminUser = data;
+            });
         }
 
 

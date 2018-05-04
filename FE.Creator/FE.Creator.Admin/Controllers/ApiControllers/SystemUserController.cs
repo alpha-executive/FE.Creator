@@ -11,6 +11,7 @@ using System.Web.Http.Description;
 using Microsoft.AspNet.Identity.Owin;
 using FE.Creator.Admin.MVCExtension;
 using NLog;
+using System.Configuration;
 
 namespace FE.Creator.Admin.Controllers.ApiControllers
 {
@@ -67,6 +68,15 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
             return this.Ok<string>(userId);
         }
 
+        [HttpGet]
+        [ResponseType(typeof(string))]
+        public string GetAdminLoginName()
+        {
+            var adminUser = ConfigurationManager.AppSettings["SuperAdmin"];
+
+            return adminUser;
+        }
+
         private String GetResetPassword()
         {
             return System.Web.Security.Membership.GeneratePassword(8, 1);
@@ -75,6 +85,13 @@ namespace FE.Creator.Admin.Controllers.ApiControllers
         public async void ResetUserPassword(string id)
         {
             logger.Debug("Start ResetUserPassword");
+
+            if(RequestContext.Principal.Identity.Name.Equals(
+                ConfigurationManager.AppSettings["SuperAdmin"], StringComparison.CurrentCultureIgnoreCase))
+            {
+                throw new UnauthorizedAccessException("Permission Required to Reset password : " + RequestContext.Principal.Identity.Name);
+            }
+
             if (!string.IsNullOrEmpty(id))
             {
                 var user = await this.UserManager.FindByIdAsync(id);
