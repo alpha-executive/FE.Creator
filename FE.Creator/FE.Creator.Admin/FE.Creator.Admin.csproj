@@ -1891,6 +1891,7 @@
     <Content Include="Views\Print\PrintArticle.cshtml" />
     <Content Include="Views\AngularView\Server\Settings\AppSettingsIndex.cshtml" />
     <Content Include="Views\AngularView\Server\Settings\SystemEventIndex.cshtml" />
+    <Content Include="Views\Home\Help.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Base\" />

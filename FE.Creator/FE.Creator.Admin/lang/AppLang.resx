@@ -670,6 +670,9 @@ FEConsole is also a greate helper for those who are willing to learn and improve
   <data name="INDEX_EVENT_COUNTER_MSG" xml:space="preserve">
     <value>There are {0} Latest System Events</value>
   </data>
+  <data name="INDEX_HELP" xml:space="preserve">
+    <value>Help</value>
+  </data>
   <data name="INDEX_MENU_HOT" xml:space="preserve">
     <value>Hot</value>
   </data>

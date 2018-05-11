@@ -1718,6 +1718,15 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Help.
+        /// </summary>
+        public static string INDEX_HELP {
+            get {
+                return ResourceManager.GetString("INDEX_HELP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hot.
         /// </summary>
         public static string INDEX_MENU_HOT {

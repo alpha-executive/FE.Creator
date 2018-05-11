@@ -26,7 +26,13 @@ namespace FE.Creator.Admin.Controllers
 
         public ActionResult About()
         {
-            logger.Debug(string.Format("{0} access the home page", User.Identity.Name));
+            logger.Debug(string.Format("{0} access the About page", User.Identity.Name));
+            return View();
+        }
+
+        public ActionResult Help()
+        {
+            logger.Debug(string.Format("{0} access the Help page", User.Identity.Name));
             return View();
         }
 

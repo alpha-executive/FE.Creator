@@ -663,6 +663,9 @@
   <data name="INDEX_EVENT_COUNTER_MSG" xml:space="preserve">
     <value>系统有{0}个新的事件</value>
   </data>
+  <data name="INDEX_HELP" xml:space="preserve">
+    <value>帮助</value>
+  </data>
   <data name="INDEX_MENU_HOT" xml:space="preserve">
     <value>热门</value>
   </data>

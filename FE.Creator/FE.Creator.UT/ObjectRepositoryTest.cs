@@ -20,7 +20,7 @@ namespace FE.Creator.UT
                 GroupName = "SERVER OBJECT",
             });
 
-            Assert.IsTrue(service.GetObjectDefinitionGroups(null).Count == 1);
+            Assert.IsTrue(service.GetObjectDefinitionGroups(null, null).Count == 1);
         }
 
         [TestMethod]
@@ -31,7 +31,7 @@ namespace FE.Creator.UT
             ObjectDefinition definition = new ObjectDefinition();
             definition.IsFeildsUpdateOnly = false;
             definition.ObjectDefinitionKey = "PERSON_TEST";
-            definition.ObjectDefinitionGroupID = service.GetObjectDefinitionGroups(null)[0].GroupID;
+            definition.ObjectDefinitionGroupID = service.GetObjectDefinitionGroups(null, null)[0].GroupID;
             definition.ObjectDefinitionName = "Person";
             definition.ObjectOwner = "Admin";
             definition.UpdatedBy = "Admin";
@@ -97,8 +97,8 @@ namespace FE.Creator.UT
         public void GetObjectDefinitionByGroupTest()
         {
             IObjectService service = new DefaultObjectService();
-            var objectGroup = service.GetObjectDefinitionGroups(null)[0];
-            var objectDefinition = service.GetObjectDefinitionsByGroup(objectGroup.GroupID, 1, 10);
+            var objectGroup = service.GetObjectDefinitionGroups(null, null)[0];
+            var objectDefinition = service.GetObjectDefinitionsByGroup(objectGroup.GroupID, 1, 10, null);
 
             Assert.IsTrue(objectDefinition.Count > 0);
         }
@@ -168,7 +168,7 @@ namespace FE.Creator.UT
 
             int objId = service.CreateORUpdateGeneralObject(svObject);
 
-            Assert.IsTrue(service.GetGeneralObjectCount(service.GetAllObjectDefinitions()[0].ObjectDefinitionID) == 1);
+            Assert.IsTrue(service.GetGeneralObjectCount(service.GetAllObjectDefinitions()[0].ObjectDefinitionID, null) == 1);
         }
 
         [TestMethod]
@@ -181,7 +181,7 @@ namespace FE.Creator.UT
                    "Person AGE",
                    "Person Image",
                    "Person Manager"
-            });
+            }, null);
 
             var obj = objects[0];
             Assert.AreEqual(obj.ObjectName, "Peter");
@@ -196,7 +196,7 @@ namespace FE.Creator.UT
                    "Person Name",
                    "Person Sex",
                    "Person Manager"
-            });
+            }, null);
             Assert.AreEqual(obj.ObjectName, "Peter");
             Assert.AreEqual(obj.GetPropertyValue<PrimeObjectField>("Person Name").GetStrongTypeValue<string>(), "Peter, Robert");
             Assert.AreEqual(obj.GetPropertyValue<SingleSelectionField>("Person Sex").SelectedItemID, 5);
@@ -207,7 +207,7 @@ namespace FE.Creator.UT
                    "Person Name",
                    "Person Sex",
                    "Person Manager"
-            }, 1, 10);
+            }, 1, 10, null);
             obj = objects[0];
             Assert.AreEqual(obj.ObjectName, "Peter");
             Assert.AreEqual(obj.GetPropertyValue<PrimeObjectField>("Person Name").GetStrongTypeValue<string>(), "Peter, Robert");
@@ -219,7 +219,7 @@ namespace FE.Creator.UT
         public void UpdateObjectTest()
         {
             IObjectService service = new DefaultObjectService();
-            ServiceObject svObject = service.GetAllSerivceObjects(service.GetAllObjectDefinitions()[0].ObjectDefinitionID, null)[0];
+            ServiceObject svObject = service.GetAllSerivceObjects(service.GetAllObjectDefinitions()[0].ObjectDefinitionID, null, null)[0];
             svObject.OnlyUpdateProperties = true;
 
             svObject.Properties.Add(new ObjectKeyValuePair()
@@ -253,7 +253,7 @@ namespace FE.Creator.UT
              {
                 "Person Name",
                 "Person Image"
-             });
+             }, null);
 
             Assert.AreEqual(serviceobject.GetPropertyValue<PrimeObjectField>("Person Name").GetStrongTypeValue<string>(), "Peter, Robert - Updated");
             Assert.AreEqual(serviceobject.GetPropertyValue<ObjectFileField>("Person Image").FileName, "location-update.docx");
@@ -264,10 +264,10 @@ namespace FE.Creator.UT
         public void SoftDeleteObjectTest()
         {
             IObjectService service = new DefaultObjectService();
-            ServiceObject svObject = service.GetAllSerivceObjects(service.GetAllObjectDefinitions()[0].ObjectDefinitionID, null)[0];
+            ServiceObject svObject = service.GetAllSerivceObjects(service.GetAllObjectDefinitions()[0].ObjectDefinitionID, null, null)[0];
             int objectId = service.SoftDeleteServiceObject(svObject.ObjectID, "Tester");
             Assert.AreEqual(objectId, svObject.ObjectID);
-            Assert.AreEqual(service.GetGeneralObjectCount(svObject.ObjectDefinitionId), 0);
+            Assert.AreEqual(service.GetGeneralObjectCount(svObject.ObjectDefinitionId, null), 0);
         }
 
         [TestMethod]
@@ -277,7 +277,7 @@ namespace FE.Creator.UT
 
             var objects = service.GetAllSerivceObjects(service.GetAllObjectDefinitions()[0].ObjectDefinitionID, new string[] {
                    "Person Name"
-            });
+            }, null);
 
             var obj = objects[0];
             Assert.IsNotNull(obj.GetPropertyValue<PrimeObjectField>("Person Name"));
@@ -291,7 +291,7 @@ namespace FE.Creator.UT
 
             var objects = service.GetAllSerivceObjects(service.GetAllObjectDefinitions()[0].ObjectDefinitionID, new string[] {
                    "Person Image"
-            });
+            }, null);
 
             var obj = objects[0];
             Assert.IsNotNull(obj.GetPropertyValue<ObjectFileField>("Person Image"));
@@ -307,7 +307,7 @@ namespace FE.Creator.UT
             int definitionId = service.GetAllObjectDefinitions()[0].ObjectDefinitionID;
             var objects = service.GetAllSerivceObjects(definitionId, new string[] {
                    "Person Sex"
-            });
+            }, null);
 
             var obj = objects[0];
             Assert.IsNotNull(obj.GetPropertyValue<SingleSelectionField>("Person Sex"));
