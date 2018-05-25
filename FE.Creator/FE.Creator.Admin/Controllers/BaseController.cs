@@ -98,7 +98,7 @@ namespace FE.Creator.Admin.Controllers
             return findObjDef.ObjectDefinitionID;
         }
 
-        private string getAppSettingsLang()
+        protected string getAppSettingsLang()
         {
             int settingsDefId = GetAppObjectDefintionIdByName("AppConfig");
             var settings = objectService.GetServiceObjects(settingsDefId,
@@ -157,13 +157,15 @@ namespace FE.Creator.Admin.Controllers
                     return zhCNPath;
                 }
             }
-
-            //if language is not set in appsettings, apply chinese language if it's in chinese environment.
-            if (Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.Equals("zh-CN", StringComparison.InvariantCultureIgnoreCase))
+            else
             {
-                return zhCNPath;
+                //if language is not set in appsettings, apply chinese language if it's in chinese environment.
+                if (Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.Equals("zh-CN", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return zhCNPath;
+                }
             }
-
+ 
             return enUsPath;
         }
     }

@@ -64,3 +64,5 @@
 /FE.Creator/FE.Creator.CipherMachine/obj
 /sampledocument/sampledocument/
 *.user
+/openejb
+/xEditorPublish

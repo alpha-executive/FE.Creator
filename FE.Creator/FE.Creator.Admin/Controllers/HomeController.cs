@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -33,7 +34,25 @@ namespace FE.Creator.Admin.Controllers
         public ActionResult Help()
         {
             logger.Debug(string.Format("{0} access the Help page", User.Identity.Name));
-            return View();
+
+            string lang = getAppSettingsLang();
+            if (!string.IsNullOrEmpty(lang))
+            {
+                if ("zh-CN".Equals(lang, StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return View("Help_ZH_CN");
+                }
+            }
+            else
+            {
+                //if language is not set in appsettings, apply chinese language if it's in chinese environment.
+                if (Thread.CurrentThread.CurrentUICulture.TwoLetterISOLanguageName.Equals("zh-CN", StringComparison.InvariantCultureIgnoreCase))
+                {
+                    return View("Help_ZH_CN");
+                }
+            }
+
+            return View("Help");
         }
 
         public ActionResult LocalizationJS()
