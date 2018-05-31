@@ -182,7 +182,7 @@ FEConsole is also a greate helper for those who are willing to learn and improve
     <value>New Record</value>
   </data>
   <data name="ACCOUNTMGR_ENCTOOL_DESC" xml:space="preserve">
-    <value>Even through account senstive data were encrypted by system, but we recommand you to download a cryptography tool to encrypt your sensitive data before save them to the system.</value>
+    <value>Even through account senstive data were encrypted by system, but we recommend you to download a cryptography tool to encrypt your sensitive data before save them to the system.</value>
   </data>
   <data name="ACCOUNTMGR_LBL_ACTTYPE" xml:space="preserve">
     <value>Account Type</value>
@@ -740,7 +740,7 @@ FEConsole is also a greate helper for those who are willing to learn and improve
     <value>All rights reserved.</value>
   </data>
   <data name="LAYOUT_NAV_ACTMGR" xml:space="preserve">
-    <value>Account Management</value>
+    <value>Account</value>
   </data>
   <data name="LAYOUT_NAV_BOOKS" xml:space="preserve">
     <value>Books</value>
@@ -749,7 +749,7 @@ FEConsole is also a greate helper for those who are willing to learn and improve
     <value>Contacts</value>
   </data>
   <data name="LAYOUT_NAV_DATAMGR" xml:space="preserve">
-    <value>Data Management</value>
+    <value>Data</value>
   </data>
   <data name="LAYOUT_NAV_DIARY" xml:space="preserve">
     <value>Diary</value>
@@ -788,7 +788,7 @@ FEConsole is also a greate helper for those who are willing to learn and improve
     <value>Toggle navigation</value>
   </data>
   <data name="LAYOUT_NAV_USRMGR" xml:space="preserve">
-    <value>User Management</value>
+    <value>User</value>
   </data>
   <data name="LAYOUT_PROFILE" xml:space="preserve">
     <value>Profile</value>

@@ -122,7 +122,7 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="dir in ctrl.directories | filter: ctrl.searchText">
-                            <td><a class="btn btn-flat" ng-dblclick="ctrl.folderdbclick(dir)" href="javascript:void(0);"><i class="fa fa-folder text-yellow"></i> {{dir.objectName}}</a></td>
+                            <td><a class="btn btn-flat" ng-click="ctrl.folderdbclick(dir)" href="javascript:void(0);"><i class="fa fa-folder text-yellow"></i> {{dir.objectName}}</a></td>
                             <td>{{dir.updated}}</td>
                             <td>{{dir.objectOwner}}</td>
                             <td></td>
@@ -152,7 +152,7 @@
             <div class="box-body" ng-if="ctrl.viewMode != 'listView'">
                 <ul class="mailbox-attachments clearfix">
                     <li ng-repeat="dir in ctrl.directories | filter: ctrl.searchText">
-                        <a class="mailbox-attachment-icon" ng-dblclick="ctrl.folderdbclick(dir)" href="javascript:void(0);"><i class="fa fa-folder text-yellow"></i></a>
+                        <a class="mailbox-attachment-icon" ng-click="ctrl.folderdbclick(dir)" href="javascript:void(0);"><i class="fa fa-folder text-yellow"></i></a>
                         <div class="mailbox-attachment-info">
                             <a class="mailbox-attachment-name" href="javascript:void(0);">{{dir.objectName}}</a>
                             <span class="mailbox-attachment-size">

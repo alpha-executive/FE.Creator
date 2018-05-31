@@ -251,7 +251,7 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Even through account senstive data were encrypted by system, but we recommand you to download a cryptography tool to encrypt your sensitive data before save them to the system..
+        ///   Looks up a localized string similar to Even through account senstive data were encrypted by system, but we recommend you to download a cryptography tool to encrypt your sensitive data before save them to the system..
         /// </summary>
         public static string ACCOUNTMGR_ENCTOOL_DESC {
             get {
@@ -1925,7 +1925,7 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Account Management.
+        ///   Looks up a localized string similar to Account.
         /// </summary>
         public static string LAYOUT_NAV_ACTMGR {
             get {
@@ -1952,7 +1952,7 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data Management.
+        ///   Looks up a localized string similar to Data.
         /// </summary>
         public static string LAYOUT_NAV_DATAMGR {
             get {
@@ -2069,7 +2069,7 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User Management.
+        ///   Looks up a localized string similar to User.
         /// </summary>
         public static string LAYOUT_NAV_USRMGR {
             get {

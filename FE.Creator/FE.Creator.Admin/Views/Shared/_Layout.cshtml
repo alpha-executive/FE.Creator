@@ -167,7 +167,7 @@
                         <a href="#">
                             <i class="fa fa-cogs"></i> <span>@FE.Creator.Admin.lang.AppLang.LAYOUT_NAV_SYSCONF</span>
                             <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
+                                <small class="label pull-right bg-blue"><i class="fa fa-cog"></i></small>
                             </span>
                         </a>
                         <ul class="treeview-menu">
@@ -181,7 +181,7 @@
                             <i class="fa fa-diamond"></i>
                             <span>@FE.Creator.Admin.lang.AppLang.LAYOUT_NAV_DATAMGR</span>
                             <span class="pull-right-container">
-                                <small class="label pull-right bg-red">@FE.Creator.Admin.lang.AppLang.INDEX_MENU_HOT</small>
+                                <small class="label pull-right bg-red"><i class="fa fa-database"></i></small>
                             </span>
                         </a>
                         <ul class="treeview-menu">
@@ -233,27 +233,22 @@
                             <span>@FE.Creator.Admin.lang.AppLang.LAYOUT_NAV_ACTMGR</span>
                         </a>
                     </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-users"></i> <span>@FE.Creator.Admin.lang.AppLang.LAYOUT_NAV_USRMGR</span>
-                            <span class="pull-right-container">
-                                <small class="label pull-right bg-green"><i class="fa fa-heart-o"></i></small>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="/ngview/Index/SystemUsers/UsersIndex"><i class="fa fa-opera"></i> @FE.Creator.Admin.lang.AppLang.LAYOUT_NAV_SYSUSR</a></li>
-                        </ul>
-                    </li>
                     <li>
-                        <a href="/Home/About">
-                            <i class="fa fa-info-circle"></i>
-                            <span>@FE.Creator.Admin.lang.AppLang.INDEX_ABOUT</span>
+                        <a href="/ngview/Index/SystemUsers/UsersIndex">
+                            <i class="fa fa-users"></i> 
+                            <span>@FE.Creator.Admin.lang.AppLang.LAYOUT_NAV_USRMGR</span>
                         </a>
                     </li>
                     <li>
                         <a href="/Home/Help">
                             <i class="fa fa-question-circle"></i>
                             <span>@FE.Creator.Admin.lang.AppLang.INDEX_HELP</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/Home/About">
+                            <i class="fa fa-info-circle"></i>
+                            <span>@FE.Creator.Admin.lang.AppLang.INDEX_ABOUT</span>
                         </a>
                     </li>
                 </ul>

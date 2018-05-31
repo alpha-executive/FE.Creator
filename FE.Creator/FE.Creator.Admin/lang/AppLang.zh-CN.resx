@@ -535,7 +535,7 @@
     <value>文件夹名称</value>
   </data>
   <data name="DOCUMENT_GRID_VIEW" xml:space="preserve">
-    <value>表格视图</value>
+    <value>网格视图</value>
   </data>
   <data name="DOCUMENT_LBL_FILENAME" xml:space="preserve">
     <value>文件名称</value>
@@ -733,7 +733,7 @@
     <value>All rights reserved.</value>
   </data>
   <data name="LAYOUT_NAV_ACTMGR" xml:space="preserve">
-    <value>账号管理</value>
+    <value>账号</value>
   </data>
   <data name="LAYOUT_NAV_BOOKS" xml:space="preserve">
     <value>书籍</value>
@@ -742,7 +742,7 @@
     <value>联系人</value>
   </data>
   <data name="LAYOUT_NAV_DATAMGR" xml:space="preserve">
-    <value>数据管理</value>
+    <value>数据</value>
   </data>
   <data name="LAYOUT_NAV_DIARY" xml:space="preserve">
     <value>日记</value>
@@ -781,7 +781,7 @@
     <value>隐藏导航</value>
   </data>
   <data name="LAYOUT_NAV_USRMGR" xml:space="preserve">
-    <value>用户管理</value>
+    <value>用户</value>
   </data>
   <data name="LAYOUT_PROFILE" xml:space="preserve">
     <value>用户资料</value>
@@ -946,7 +946,7 @@
     <value>文章管理</value>
   </data>
   <data name="PROFILE_ADDRESS" xml:space="preserve">
-    <value>地址</value>
+    <value>联系地址</value>
   </data>
   <data name="PROFILE_BIRTH_DATE" xml:space="preserve">
     <value>出生日期</value>
@@ -973,7 +973,7 @@
     <value>公司网址</value>
   </data>
   <data name="PROFILE_CONTACT" xml:space="preserve">
-    <value>联系人</value>
+    <value>联系方式</value>
   </data>
   <data name="PROFILE_COUNTRY" xml:space="preserve">
     <value>国家</value>
@@ -982,7 +982,7 @@
     <value>学位</value>
   </data>
   <data name="PROFILE_EDUCATION" xml:space="preserve">
-    <value>学历</value>
+    <value>教育背景</value>
   </data>
   <data name="PROFILE_EMAIL" xml:space="preserve">
     <value>电子邮件</value>
@@ -1060,7 +1060,7 @@
     <value>技能名称</value>
   </data>
   <data name="PROFILE_SKILLS" xml:space="preserve">
-    <value>技能</value>
+    <value>个人技能</value>
   </data>
   <data name="PROFILE_STARTDATE" xml:space="preserve">
     <value>开始时间</value>
@@ -1079,9 +1079,6 @@
   </data>
   <data name="PROFILE_WKEXPRERIENCE" xml:space="preserve">
     <value>工作经验</value>
-  </data>
-  <data name="String" xml:space="preserve">
-    <value>FEConsole 同时可以合理的帮助那些希望终身学习的朋友提升自己。</value>
   </data>
   <data name="TASKMGR_BTN_LBL_COMTASK" xml:space="preserve">
     <value>完成任务</value>
