@@ -283,6 +283,33 @@
                         <li><b>Delete</b> Click the <button type="button" class="btn btn-warning btn-flat btn-xs"><i class="fa fa-trash"></i></button> button to delete a account record.</li>
                     </ul>
                 </section>
+                <section id="data">
+                    <h2 class="page-header"><i class="fa fa-diamond"></i> Manage Your Structured Data</h2>
+                    <p>
+                        People like the structured data, that's why Excel is so popular, it is great if there is a light-weight web-based application to allow user to store their structured data, "Data" module in FEConsole is here to archive this goal, it allows user to design their own structured table.
+                        Note that this feature is mainly for those user who are familiar with data table design or structured data process, don't use it if you are not familiar with structured data.
+                    </p>
+                    <h4>Custom Table Group</h4>
+                    <p>Custom table in the system must be created in a table group, to create or edit a custom group, go to "Data"->"Custom Table Group", then click the "Add" group card to add a new group.</p>
+                    <h4>Custom Table</h4>
+                    <p>Custom table is user designed table structure, it can contains any number of columns, each column is supposed to be a given data type, system provide rich kinds of data types for choose, it can be string, number, integer, single choice, file or object reference type.</p>
+                    <h4>Create Custom Table</h4>
+                    <p>Go to "Data"->"Custom Table", click and select a custom table group in the "custom table group" list, then click <a class="btn btn-social-icon btn-success btn-xs" href="javascript:void(0);"><i class="fa fa-plus"></i></a> button to lauch custom table design user interface, provide a unique table name,
+                    a unique table key code, and click dropdown button <span class="btn btn-warning btn-xs" type="button"><i class="fa fa-plus"></i> Add</span> to add custom columns, define column name and column key code for each customized column, then click <button class="btn btn-box-tool btn-xs" type="button"><i class="fa fa-save"></i> Save</button> button to save the new created table.</p>
+                    <h4>Operate a Cutom Table</h4>
+                    <ul>
+                        <li><b>Edit</b> Click the <a class="btn btn-box-tool" href="javascript:void(0);"><i class="fa fa-edit"></i> Edit</a> button on the target custom table to switch to the edit user interface, update the table or columns and click <button class="btn btn-box-tool btn-xs" type="button"><i class="fa fa-save"></i> Save</button> button to save the change.</li>
+                        <li><b>Delete</b> Expand the table properties by click <button class="btn btn-xs" type="button"><i class="fa fa-expand"></i></button> button on the target table, then click <button class="btn btn-box-tool"><i class="fa fa-trash"></i> Delete</button> button to delete the custom table, Note that all the table data stored in this custom table will be deleted as well.</li>
+                    </ul>
+                    <h4>Operate on Custom Table Data</h4>
+                    <p>Go to "Data"->"Custom Table Data" to operate on the custom table data.</p>
+                    <ul>
+                        <li><b>New Table Data Record</b> select the target "custom table" from the dropdown list, then click <button title="Add Table Data" class="btn btn-box-tool btn-xs" type="button"><i class="fa fa-plus text-green"></i></button> to lauch the data input user interface, input the "name" field and other user defined column field, then click <button class="btn btn-box-tool btn-xs"><i class="fa fa-save"></i> Save</button> button to add a new record.</li>
+                        <li><b>Edit Table Data Record</b> select the target "cutom table" from the dropdown list, then find the target table data record and click <button class="btn btn-primary btn-flat btn-xs" type="button"><i class="fa fa-pencil"></i> Edit</button> button to edit the data, remember to click <button class="btn btn-box-tool btn-xs"><i class="fa fa-save"></i> Save</button> button to save the change.</li>
+                        <li><b>Delete Table Data Record</b> select the target "custom table" from the dropdown list, find the target table data record and click <button class="btn btn-warning btn-flat btn-xs" type="button"><i class="fa fa-minus-square"></i> Delete</button> button to delete a table data record. </li>
+                        <li><b>View Table Data Record</b> select the target "custom table" from the dropdown list, find the target table data record and click  <button class="btn btn-success btn-flat btn-xs" type="button"><i class="fa fa-eye"></i> View</button> button to see the table data record.</li>
+                    </ul>
+                </section>
             </div>
             <!-- /.box-body -->
         </div>

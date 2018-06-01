@@ -269,6 +269,34 @@
                         <li><b>删除</b> 点击<button type="button" class="btn btn-warning btn-flat btn-xs"><i class="fa fa-trash"></i></button>按钮来删除一条账号记录。</li>
                     </ul>
                 </section>
+                <section id="data">
+                    <h2 class="page-header"><i class="fa fa-diamond"></i>管理结构化数据</h2>
+                    <p>
+                        人们都喜结构化的数据，这也是Excel受欢迎的一个原因，要是有一个基于网络的轻量级、结构化数据管理应用绝对是一件非常好的事情，FEConsole应用中的“数据”模块就实现了这个愿望，用户可以在这个系统里面定义自己的结构化表格。
+                        注意，这个模块主要是面向那些熟悉表格设计或者结构化数据处理的人群的，如果你对这些方面不熟悉，就不要用这个模块了。
+                    </p>
+                    <h4>自定义数据表分组</h4>
+                    <p>在系统中，自定义数据表必须放在一个表分组中，请从主菜单导航到"数据"->"自定义数据分组"，然后点击"添加"选项卡来添加一个新的数据表分组。</p>
+                    <h4>自定义数据表</h4>
+                    <p>自定义数据表是一个用户自定义的表结构，表中可以包含任意个字段，每一个字段都要指定数据类型，系统提供了丰富的数据类型以供选择，可以是“字符串” ，“数字”，“整数”，“单选”，“文件”或“引用”类型。</p>
+                    <h4>创建自定义数据表</h4>
+                    <p>
+                        从主菜单导航到 “数据”->“自定义数据表定义”，在表分组列表中点击选择一个“自定义数据表分组”，然后点击<a class="btn btn-social-icon btn-success btn-xs" href="javascript:void(0);"><i class="fa fa-plus"></i></a>按钮切换到表格定义界面，输入一个唯一的表格名称，一个唯一的表格编码，然后从<span class="btn btn-warning btn-xs" type="button"><i class="fa fa-plus"></i> 添加</span>下拉列表中选择自定义的字段，为每一个字段指定名称和编码，然后点击<button class="btn btn-xs" type="button"><i class="fa fa-save"></i> 保存</button>按钮来添加一个新的自定义表格。
+                    </p>
+                    <h4>自定义表格操作</h4>
+                    <ul>
+                        <li><b>编辑</b> 在目标自定义表格上点击<a class="btn btn-box-tool" href="javascript:void(0);"><i class="fa fa-edit"></i> 编辑</a>按钮切换到表格编辑界面，更新表格和字段后点击<button class="btn btn-box-tool btn-xs" type="button"><i class="fa fa-save"></i> 保存</button>按钮来保存更改。</li>
+                        <li><b>删除</b> 在目标自定义表格上点击<button class="btn btn-box-tool btn-xs" type="button"><i class="fa fa-expand"></i></button>按钮来展开表格属性，然后点击<button class="btn btn-box-tool"><i class="fa fa-trash"></i> 删除</button>按钮来删除自定义数据表，注意，自定义数据表中的数据也会被一并删除。</li>
+                    </ul>
+                    <h4>自定义表数据操作</h4>
+                    <p>从主菜单导航到“数据”->“自定义数据表数据”来操作表数据。</p>
+                    <ul>
+                        <li><b>新建表数据</b> 在下拉列表中选择目标“自定义数据表”，然后点击<button title="Add Table Data" class="btn btn-box-tool btn-xs" type="button"><i class="fa fa-plus text-green"></i></button>切换到新建界面，输入“名称”字段和其他的“自定义”字段，然后点击<button class="btn btn-box-tool btn-xs"><i class="fa fa-save"></i> 保存</button> 按钮来添加新的数据记录。</li>
+                        <li><b>编辑表数据</b> 在下拉列表中选择目标“自定义数据表”，然后点击<button class="btn btn-primary btn-flat btn-xs" type="button"><i class="fa fa-pencil"></i> 编辑</button>按钮, 记得更改完成后点击<button class="btn btn-box-tool btn-xs"><i class="fa fa-save"></i> 保存</button>按钮来保存更改。</li>
+                        <li><b>删除表数据</b> 在下拉列表中选择目标“自定义数据表”，然后点击<button class="btn btn-warning btn-flat btn-xs" type="button"><i class="fa fa-minus-square"></i> 删除</button>按钮将删除表数据记录。</li>
+                        <li><b>查看表数据</b> 在下拉列表中选择目标“自定义数据表”，然后点击<button class="btn btn-success btn-flat btn-xs" type="button"><i class="fa fa-eye"></i> 查看</button>按钮来查看表数据记录。</li>
+                    </ul>
+                </section>
             </div>
             <!-- /.box-body -->
         </div>
