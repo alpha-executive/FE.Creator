@@ -236,6 +236,7 @@
     <Compile Include="Controllers\ApiControllers\LicenseController.cs" />
     <Compile Include="Controllers\ApiControllers\ObjectDefinitionFieldController.cs" />
     <Compile Include="Controllers\ApiControllers\ReportController.cs" />
+    <Compile Include="Controllers\ApiControllers\SharedObjectsController.cs" />
     <Compile Include="Controllers\ApiControllers\SingleSelectionFieldItemController.cs" />
     <Compile Include="Controllers\ApiControllers\SystemUserController.cs" />
     <Compile Include="Controllers\ApiControllers\UniqueIDGeneratorController.cs" />
