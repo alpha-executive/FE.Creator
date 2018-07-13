@@ -31,6 +31,12 @@
             getServiceObjectCount: getServiceObjectCount,
             getServiceObjectsWithFilters: getServiceObjectsWithFilters,
             getSysObjectsByFilters: getSysObjectsByFilters,
+            getSharedArticles : getSharedArticles,
+            getSharedBooks: getSharedBooks,
+            getSharedImages: getSharedImages,
+            getSharedBookCount: getSharedBookCount,
+            getSharedImageCount: getSharedImageCount,
+            getSharedArticleCount: getSharedArticleCount,
             createOrUpdateServiceObject: createOrUpdateServiceObject,
             deleteServiceObject: deleteServiceObject,
             getUsers: getUsers,
@@ -244,7 +250,97 @@
                 return response.data;
             }
         }
+        /*==========================Shared Service Objects ========================*/
+        function sendSharedObjectsRequestProxy(config, orimethod) {
+            return $http(config)
+             .then(complete)
+             .catch(error);
 
+            function complete(response) {
+                return response.data;
+            }
+
+            function error(response) {
+                logger.error('XHR Failed for ' + orimethod + ' - ' + response.data);
+                return response.data;
+            }
+        }
+
+        function getSharedArticles(pageIndex, pageSize) {
+            if (pageIndex == null) {
+                pageIndex = 1;
+            }
+            if (pageSize == null) {
+                pageSize = Number.MAX_SAFE_INTEGER;
+            }
+
+            var config = {
+                method: 'GET',
+                url: '/api/custom/SharedObjects/SharedArticles' + "?page=" + pageIndex + "&pagesize=" + pageSize,
+            };
+
+            return sendSharedObjectsRequestProxy(config, "getSharedArticles");
+        }
+
+
+        function getSharedBooks(pageIndex, pageSize) {
+            if (pageIndex == null) {
+                pageIndex = 1;
+            }
+            if (pageSize == null) {
+                pageSize = Number.MAX_SAFE_INTEGER;
+            }
+
+            var config = {
+                method: 'GET',
+                url: '/api/custom/SharedObjects/SharedBooks' + "?page=" + pageIndex + "&pagesize=" + pageSize,
+            };
+
+            return sendSharedObjectsRequestProxy(config, "SharedBooks");
+        }
+
+        function getSharedImages(pageIndex, pageSize) {
+            if (pageIndex == null) {
+                pageIndex = 1;
+            }
+            if (pageSize == null) {
+                pageSize = Number.MAX_SAFE_INTEGER;
+            }
+
+            var config = {
+                method: 'GET',
+                url: '/api/custom/SharedObjects/SharedImages' + "?page=" + pageIndex + "&pagesize=" + pageSize,
+            };
+
+            return sendSharedObjectsRequestProxy(config, "SharedImages");
+        }
+        
+        function getSharedBookCount() {
+            var config = {
+                method: 'GET',
+                url: '/api/custom/SharedObjects/GetSharedBookCount'
+            };
+
+            return sendSharedObjectsRequestProxy(config, "getSharedBookCount");
+        }
+
+        function getSharedArticleCount() {
+            var config = {
+                method: 'GET',
+                url: '/api/custom/SharedObjects/GetSharedArticleCount'
+            };
+
+            return sendSharedObjectsRequestProxy(config, "getSharedArticleCount");
+        }
+
+        function getSharedImageCount() {
+            var config = {
+                method: 'GET',
+                url: '/api/custom/SharedObjects/GetSharedImageCount'
+            };
+
+            return sendSharedObjectsRequestProxy(config, "getSharedImageCount");
+        }
         /*==========================Service Objects ===============================*/
         function getServiceObjects(objectDefintionId, properties, pageIndex, pageSize) {
             if (pageIndex == null)

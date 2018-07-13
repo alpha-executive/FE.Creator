@@ -13,8 +13,40 @@ footer ::-moz-selection {background: #fff; color:#000;}
 .cleancode_block ::selection {background: #fff; color:#000;}
 .cleancode_block ::-moz-selection {background: #fff; color:#000;}
 
+.bs-callout-info {
+    border-left-color: rgba(48,166,124,0.5);
+}
+.bs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
 
-
+.image-desc{
+        position: absolute;
+        opacity:0;
+        left: 0;
+        bottom:20px;
+        color:white;
+        font-size:14px;
+        width:100%;
+        white-space:nowrap;
+        padding: 5px;
+        overflow-x:hidden;
+        text-overflow:ellipsis;
+        font-family: "Microsoft YaHei",Arial;
+        -moz-transition: all 0.5s ease-in-out; 
+        -webkit-transition: all 0.5s ease-in-out; 
+        -o-transition: all 0.5s ease-in-out; 
+        -ms-transition: all 0.5s ease-in-out; 
+        transition: all 0.5s ease-in-out; 
+    }
+    .image-wrapper:hover .image-desc{
+       background:rgba(22,22,22, 0.6);
+       opacity:1;
+    }
 body {
 	overflow-x:hidden;
 	position:relative;

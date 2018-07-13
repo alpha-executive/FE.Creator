@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Portal/Views/Shared/_PortalLayout.cshtml";
+}
+@model FE.Creator.Admin.Areas.Portal.Models.PostViewModel
+
+ <!-- HEADER -->
+<header>
+    <!-- MENU BLOCK -->
+    <div class="menu_block">
+        <!-- CONTAINER -->
+        <div class="container clearfix">
+            <!-- LOGO -->
+            <div class="logo pull-left">
+                <a href="/portal/portalhome"><span class="b1">FE</span><span class="b5">Portal</span></a>
+            </div><!-- //LOGO -->
+
+
+            <!-- MENU -->
+            <div class="pull-right">
+                <nav class="navmenu center">
+                    <ul>
+                        @*<li class="first active scroll_btn"><a href="/portal/portalhome">@FE.Creator.Admin.lang.ConsolePortal.PORTAL_MENU_HOME</a></li>
+                        <li class="scroll_btn"><a href="/portal/portalhome#articles">@FE.Creator.Admin.lang.ConsolePortal.PORTAL_MENU_POST</a></li>
+                        <li class="scroll_btn"><a href="/portal/portalhome#images">@FE.Creator.Admin.lang.ConsolePortal.PORTAL_MENU_IMAGE</a></li>
+                        <li class="scroll_btn"><a href="/portal/portalhome#books">@FE.Creator.Admin.lang.ConsolePortal.PORTAL_MENU_BOOK</a></li>*@
+                    </ul>
+                </nav>
+            </div><!-- //MENU -->
+        </div><!-- //MENU BLOCK -->
+    </div><!-- //CONTAINER -->
+</header><!-- //HEADER -->
+
+<!-- BREADCRUMBS -->
+<section class="clearfix parallax">
+    <div class="container center">
+        <h2>@Model.PostTitle</h2>
+    </div>
+</section><!-- //BREADCRUMBS -->
+
+<section id="posts">
+
+    <!-- CONTAINER -->
+    <div class="container">
+
+        <!-- ROW -->
+        <div class="row">
+
+            <!-- BLOG BLOCK -->
+            <div class="blog_block col-lg-12 col-md-12 padbot50">
+                <!-- SINGLE BLOG POST -->
+                <div class="single_blog_post clearfix" data-animated="fadeInUp">
+                   
+                    <div class="single_blog_post_descr">
+                        @*<div class="single_blog_post_title">@Model.PostTitle</div>*@
+                        <ul class="single_blog_post_info">
+                            <li><a href="javascript:void(0);" class="label label-warning">@Model.Author</a></li>
+                            @if (Model.IsOriginal)
+                            {
+                                <li><a href="javascript:void(0);" class="label label-info">Original</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="javascript:void(0);" class="label label-info">Copied</a></li>
+                            }
+                           <li><a href="javascript:void(0);" class="label label-primary">@Model.Created</a></li>
+                        </ul>
+                    </div>
+                    <div class="bs-callout-info bs-callout">
+                        <p class="lead">@Model.PostDesc</p>
+                    </div>
+                    <div class="single_blog_post_content">
+                        @MvcHtmlString.Create(Model.PostContent)
+                    </div>
+
+                </div><!-- //SINGLE BLOG POST -->
+
+            </div><!-- //BLOG BLOCK -->
+        </div><!-- //ROW -->
+    </div><!-- //CONTAINER -->
+</section>

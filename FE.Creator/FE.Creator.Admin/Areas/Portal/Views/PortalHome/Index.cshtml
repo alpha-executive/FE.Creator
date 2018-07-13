@@ -4,96 +4,148 @@
     Layout = "~/Areas/Portal/Views/Shared/_PortalLayout.cshtml";
 }
 
-<section id="home" class="padbot0">
+ <!-- HEADER -->
+<header>
 
-    <!-- TOP SLIDER -->
-    <div class="flexslider top_slider">
-        <ul class="slides">
-            <li class="slide1">
-                <div class="flex_caption1">
-                    <p class="title1 captionDelay2 FromTop">Creative</p>
-                    <p class="title2 captionDelay4 FromTop">White</p>
-                    <p class="title3 captionDelay6 FromTop">Templates</p>
-                    <p class="title4 captionDelay7 FromBottom">The template is suitable for any company and the direction that appreciates style, purity and quality of the web site.</p>
+    <!-- MENU BLOCK -->
+    <div class="menu_block">
+
+        <!-- CONTAINER -->
+        <div class="container clearfix">
+
+            <!-- LOGO -->
+            <div class="logo pull-left">
+                <a href="/"><span class="b1">FE</span><span class="b5">Console</span></a>
+            </div><!-- //LOGO -->
+            <!-- MENU -->
+            <div class="pull-right">
+                <nav class="navmenu center">
+                    <ul>
+                        <li class="first active scroll_btn"><a href="#home">@FE.Creator.Admin.lang.ConsolePortal.PORTAL_MENU_HOME</a></li>
+                        <li class="scroll_btn"><a href="#articles">@FE.Creator.Admin.lang.ConsolePortal.PORTAL_MENU_POST</a></li>
+                        <li class="scroll_btn"><a href="#images">@FE.Creator.Admin.lang.ConsolePortal.PORTAL_MENU_IMAGE</a></li>
+                        <li class="scroll_btn"><a href="#books">@FE.Creator.Admin.lang.ConsolePortal.PORTAL_MENU_BOOK</a></li>
+                    </ul>
+                </nav>
+            </div><!-- //MENU -->
+        </div><!-- //MENU BLOCK -->
+    </div><!-- //CONTAINER -->
+</header><!-- //HEADER -->
+@Html.Action("PortalFlexSlider", "PortalHome")
+<section id="articles">
+    <div class="container" ng-controller="SharedArticlesController as actrl">
+        <h2 style="margin-top:20px;">
+            <b class="b2">@FE.Creator.Admin.lang.ConsolePortal.PORTAL_POST_TITLE</b> @FE.Creator.Admin.lang.ConsolePortal.PORTAL_POST_DESC
+        </h2>
+        <hr style="border-color:cadetblue; border-width:2px;" />
+        <div class="row">
+            <!-- BLOG BLOCK -->
+            <div class="blog_block col-lg-12 col-md-12 padbot50" ng-if="actrl.articles.length > 0">
+                <!-- BLOG POST -->
+                <div class="blog_post margbot50 clearfix animated fadeInUp" data-animated="fadeInUp" ng-repeat="article in actrl.articles">
+                    <div class="post_item_img_widget" style="float:left; margin-right:10px;">
+                        <img style="width:270px; height:180px;" class="img-thumbnail" alt="" src="{{'/api/custom/SharedObjects/DownloadArticleImage/' + article.objectID }}">
+                        <a class="link" href="#" target="_blank"></a>
+                    </div>
+                    <div class="post_item_content-small">
+                        <a class="blog_post_title" href="{{'/portal/portalhome/viewarticlecontent/' + article.objectID}}" target="_blank">{{article.objectName}}</a>
+                        <div class="blog_post_date">{{article.created}}</div>
+                        <div class="blog_post_content">{{article.properties.articleDesc.value}}</div>
+                    </div>
+                    <hr>
+                </div><!-- //BLOG POST -->
+               
+                <!-- PAGINATION -->
+                <ul class="pagination clearfix" ng-if="actrl.pager.pages.length > 0">
+                    <li><a href="javascript:void(0);" ng-click="actrl.onPageClick(1)" ng-class="{disabled: actrl.pager.disabledFirstPage}">«</a></li>
+                    <li ng-repeat="page in actrl.pager.pages" ng-class="{'active':actrl.pager.currentPage === page}">
+                        <a href="javascript:void(0);" ng-click="actrl.onPageClick(page)">{{page}}</a>
+                    </li>
+                    <li><a href="javascript:void(0);" ng-click="actrl.onPageClick(actrl.pager.totalPages)" ng-class="{disabled:actrl.pager.disabledLastPage}">»</a></li>
+                </ul><!-- //PAGINATION -->
+            </div><!-- //BLOG BLOCK -->
+
+            <div class="blog_block col-lg-12 col-md-12 padbot50" ng-if="actrl.articles.length <= 0">
+                <div class="alert alert-info">
+                    <strong>@FE.Creator.Admin.lang.ConsolePortal.PORTAL_WARN_INFO</strong> @MvcHtmlString.Create(FE.Creator.Admin.lang.ConsolePortal.PORTAL_WARN_INFO_NO_POST)
                 </div>
-            <li class="slide2">
-                <div class="flex_caption1">
-                    <p class="title1 captionDelay6 FromLeft">Responsive</p>
-                    <p class="title2 captionDelay4 FromLeft">Design</p>
-                    <p class="title3 captionDelay2 FromLeft">Theme</p>
-                    <p class="title4 captionDelay7 FromLeft">The template is suitable for any company and the direction that appreciates style, purity and quality of the web site.</p>
-                </div>
-            </li>
-            <li class="slide3">
-                <div class="flex_caption1">
-                    <p class="title1 captionDelay1 FromBottom">Amazing</p>
-                    <p class="title2 captionDelay2 FromBottom">Video</p>
-                    <p class="title3 captionDelay3 FromBottom">Background</p>
-                    <p class="title4 captionDelay5 FromBottom">The template is suitable for any company and the direction that appreciates style, purity and quality of the web site.</p>
-                </div>
-           
-                <!-- VIDEO BACKGROUND -->
-                @*<a id="P2" class="player" data-property="{videoURL:'tDvBwPzJ7dY',containment:'.top_slider .slide3',autoPlay:true, mute:true, startAt:0, opacity:1}"></a>*@
-                <!-- //VIDEO BACKGROUND -->
-            </li>
-        </ul>
+            </div>
+        </div>
     </div>
-    <div id="carousel">
-        <ul class="slides">
-            <li><img src="/Content/portal/images/slider/slide1_bg.jpg" alt="" /></li>
-            <li><img src="/Content/portal/images/slider/slide2_bg.jpg" alt="" /></li>
-            <li><img src="/Content/portal/images/slider/slide3_bg.jpg" alt="" /></li>
-        </ul>
-    </div><!-- //TOP SLIDER -->
 </section>
 
-<section class="breadcrumbs_block clearfix parallax">
-    <div class="container center">
-        <h2><b>The</b> Blog</h2>
-        <p>Publication of the latest news, articles, and free apps.</p>
-    </div>
-</section>
-
-<section id="blog" style="min-height: 494px;">
-
+<!--IMAGES-->
+<section id="images">
     <!-- CONTAINER -->
-    <div class="container">
+    <div class="container" ng-controller="SharedImagesController as imgCtrl">
+        <h2><b class="b2">@FE.Creator.Admin.lang.ConsolePortal.PORTAL_IMAGE_TITLE</b> @FE.Creator.Admin.lang.ConsolePortal.PORTAL_IMAGE_DESC</h2>
+        <hr style="border-color:cadetblue; border-width:2px;" />
+        <!-- ROW -->
+         <div class="row recent_posts animated fadeInUp" data-animated="fadeInUp" data-appear-top-offset="-200" ng-if="imgCtrl.images.length > 0">
+                <div class="col-lg-4 col-md-4 col-sm-4 padbot30 post_item_block" ng-repeat="img in imgCtrl.images">
+                    <a href="javascript:void(0);" ng-click="imgCtrl.showLightboxImage($index)"><img style="height:220px;width:300px;" class="img-thumbnail" alt="{{img.caption}}" src="{{img.thumbUrl}}"></a>
+                </div>
+        </div><!-- //ROW -->
+        <!-- PAGINATION -->
+        <ul class="pagination clearfix" ng-if="imgCtrl.pager.pages.length > 0">
+            <li><a href="javascript:void(0);" ng-click="imgCtrl.onPageClick(1)" ng-class="{disabled: imgCtrl.pager.disabledFirstPage}">«</a></li>
+            <li ng-repeat="page in imgCtrl.pager.pages" ng-class="{'active':imgCtrl.pager.currentPage === page}">
+                <a href="javascript:void(0);" ng-click="imgCtrl.onPageClick(page)">{{page}}</a>
+            </li>
+            <li><a href="javascript:void(0);" ng-click="imgCtrl.onPageClick(imgCtrl.pager.totalPages)" ng-class="{disabled:imgCtrl.pager.disabledLastPage}">»</a></li>
+        </ul><!-- //PAGINATION -->
+        <div class="row recent_posts animated fadeInUp" ng-if="imgCtrl.images.length <= 0">
+            <div class="alert alert-info">
+                <strong>@FE.Creator.Admin.lang.ConsolePortal.PORTAL_WARN_INFO</strong>@MvcHtmlString.Create(FE.Creator.Admin.lang.ConsolePortal.PORTAL_WARN_INFO_NO_IMAGE)
+            </div>
+        </div>
+ 
+    </div><!-- //CONTAINER -->
+</section>
 
+<!--BOOKS-->
+<section id="books" style="min-height: 494px; padding-top: 50px;">
+    <!-- CONTAINER -->
+    <div class="container" ng-controller="SharedBooksController as bookctrl">
+        <h2><b class="b2">@FE.Creator.Admin.lang.ConsolePortal.PORTAL_BOOK_TITLE</b> @FE.Creator.Admin.lang.ConsolePortal.PORTAL_BOOK_DESC</h2>
+        <hr style="border-color:cadetblue; border-width:2px;" />
         <!-- ROW -->
         <div class="row">
-
             <!-- BLOG BLOCK -->
-            <div class="blog_block col-lg-12 col-md-12 padbot50">
+            <div class="blog_block col-lg-12 col-md-12 padbot50" ng-if="bookctrl.books.length > 0">
                 <!-- BLOG POST -->
-                <div class="blog_post margbot50 clearfix animated fadeInUp" data-animated="fadeInUp">
-                    <div class="blog_post_img">
-                        <img alt="" src="images/blog/1.jpg">
-                        <a class="zoom" href="blog-post.html"></a>
+                <div class="blog_post margbot50 clearfix animated fadeInUp" data-animated="fadeInUp" ng-repeat="book in bookctrl.books">
+                    <div class="post_item_img_small">
+                        <img alt="" src="{{'/api/custom/SharedObjects/DownloadSharedBook/' + book.objectID + '?thumbinal=true'}}">
+                        <a class="link" href="{{'/api/custom/SharedObjects/DownloadSharedBook/' + book.objectID}}"></a>
                     </div>
                     <div class="blog_post_descr">
-                        <div class="blog_post_date">JANUARY 30 | 21:30</div>
-                        <a class="blog_post_title" href="blog-post.html">Rihanna's Costume Designer Comes Into His Own with New Show</a>
+                        <div class="blog_post_date"></div>
+                        <a class="blog_post_title" href="{{'/api/custom/SharedObjects/DownloadSharedBook/' + book.objectID}}">{{book.objectName}}</a>
                         <ul class="blog_post_info">
-                            <li><a href="javascript:void(0);">Admin</a></li>
-                            <li><a href="javascript:void(0);">Creative</a></li>
-                            <li><a href="javascript:void(0);">3 Comments</a></li>
+                            <li><a href="javascript:void(0);" ng-if="book.properties.bookAuthor.value != null">{{book.properties.bookAuthor.value}}</a></li>
+                            <li><a href="javascript:void(0);" ng-if="book.properties.bookVersion.value != null">{{book.properties.bookVersion.value}}</a></li>
+                            <li><a href="javascript:void(0);" ng-if="book.properties.bookISBN.value != null">{{book.properties.bookISBN.value}}</a></li>
                         </ul>
                         <hr>
-                        <div class="blog_post_content">The best way to describe Adam Selman would be simply to say that he is the epitome of cool. So it’s only fitting that his first runway collection was made for the ultimate cool girl.</div>
-                        <a class="read_more_btn" href="blog-post.html">Read More</a>
+                        <div class="blog_post_content">{{book.properties.bookDesc.value}}</div>
                     </div>
                 </div><!-- //BLOG POST -->
                 <!-- PAGINATION -->
-                <ul class="pagination clearfix">
-                    <li><a href="javascript:void(0);">1</a></li>
-                    <li><a href="javascript:void(0);">2</a></li>
-                    <li class="active"><a href="javascript:void(0);">3</a></li>
-                    <li><a href="javascript:void(0);">4</a></li>
-                    <li><a href="javascript:void(0);">5</a></li>
-                    <li><a href="javascript:void(0);">. . .</a></li>
-                    <li><a href="javascript:void(0);">75</a></li>
+                <ul class="pagination clearfix" ng-if="bookctrl.pager.pages.length > 0">
+                    <li><a href="javascript:void(0);" ng-click="bookctrl.onPageClick(1)" ng-class="{disabled: bookctrl.pager.disabledFirstPage}">«</a></li>
+                    <li ng-repeat="page in bookctrl.pager.pages" ng-class="{'active':bookctrl.pager.currentPage === page}">
+                        <a href="javascript:void(0);" ng-click="bookctrl.onPageClick(page)">{{page}}</a>
+                    </li>
+                    <li><a href="javascript:void(0);" ng-click="bookctrl.onPageClick(bookctrl.pager.totalPages)" ng-class="{disabled:bookctrl.pager.disabledLastPage}">»</a></li>
                 </ul><!-- //PAGINATION -->
             </div><!-- //BLOG BLOCK -->
+        
+            <div class="blog_block col-lg-12 col-md-12 padbot50" ng-if="bookctrl.books.length <= 0">
+                <div class="alert alert-info">
+                    <strong>@FE.Creator.Admin.lang.ConsolePortal.PORTAL_WARN_INFO</strong> @MvcHtmlString.Create(FE.Creator.Admin.lang.ConsolePortal.PORTAL_WARN_INFO_NO_BOOKS)
+                </div>
+            </div>
         </div><!-- //ROW -->
     </div><!-- //CONTAINER -->
 </section>

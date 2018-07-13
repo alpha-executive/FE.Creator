@@ -229,6 +229,7 @@
     <Compile Include="App_Start\UnityConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Portal\Controllers\PortalHomeController.cs" />
+    <Compile Include="Areas\Portal\Models\PostViewModel.cs" />
     <Compile Include="Areas\Portal\PortalAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApiControllers\CryptographyController.cs" />
@@ -262,6 +263,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AppLang.resx</DependentUpon>
+    </Compile>
+    <Compile Include="lang\ConsolePortal.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConsolePortal.resx</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AngularViewModels.cs" />
@@ -1737,20 +1743,8 @@
     <Content Include="Content\portal\css\style.css" />
     <Content Include="Content\portal\images\avatar1.jpg" />
     <Content Include="Content\portal\images\avatar2.jpg" />
-    <Content Include="Content\portal\images\blog\1.jpg" />
-    <Content Include="Content\portal\images\blog\2.jpg" />
-    <Content Include="Content\portal\images\blog\3.jpg" />
-    <Content Include="Content\portal\images\blog\4.jpg" />
-    <Content Include="Content\portal\images\blog\5.jpg" />
     <Content Include="Content\portal\images\breadcrumbs_bg.jpg" />
     <Content Include="Content\portal\images\clean_code_bg.jpg" />
-    <Content Include="Content\portal\images\clients\1.jpg" />
-    <Content Include="Content\portal\images\clients\2.jpg" />
-    <Content Include="Content\portal\images\clients\3.jpg" />
-    <Content Include="Content\portal\images\clients\4.jpg" />
-    <Content Include="Content\portal\images\clients\5.jpg" />
-    <Content Include="Content\portal\images\clients\6.jpg" />
-    <Content Include="Content\portal\images\favicon.ico" />
     <Content Include="Content\portal\images\i1.png" />
     <Content Include="Content\portal\images\i2.png" />
     <Content Include="Content\portal\images\i3.png" />
@@ -1758,43 +1752,15 @@
     <Content Include="Content\portal\images\i5.png" />
     <Content Include="Content\portal\images\i6.png" />
     <Content Include="Content\portal\images\img1.png" />
-    <Content Include="Content\portal\images\portfolio\1.jpg" />
-    <Content Include="Content\portal\images\portfolio\1_2.jpg" />
-    <Content Include="Content\portal\images\portfolio\1_3.jpg" />
-    <Content Include="Content\portal\images\portfolio\1_4.jpg" />
     <Content Include="Content\portal\images\preloader.gif" />
-    <Content Include="Content\portal\images\prettyPhoto\default\loader.gif" />
-    <Content Include="Content\portal\images\prettyPhoto\default\sprite.png" />
     <Content Include="Content\portal\images\price_arrow.png" />
     <Content Include="Content\portal\images\slider\caption_img1.png" />
     <Content Include="Content\portal\images\slider\slide1_bg.jpg" />
     <Content Include="Content\portal\images\slider\slide2_bg.jpg" />
     <Content Include="Content\portal\images\slider\slide3_bg.jpg" />
     <Content Include="Content\portal\images\slider\slide_shadow.png" />
-    <Content Include="Content\portal\images\team\1.jpg" />
-    <Content Include="Content\portal\images\team\2.jpg" />
-    <Content Include="Content\portal\images\team\3.jpg" />
-    <Content Include="Content\portal\images\team\4.jpg" />
-    <Content Include="Content\portal\images\team\5.jpg" />
-    <Content Include="Content\portal\images\team\6.jpg" />
-    <Content Include="Content\portal\images\team\7.jpg" />
-    <Content Include="Content\portal\images\team\8.jpg" />
     <Content Include="Content\portal\images\team_bg.jpg" />
     <Content Include="Content\portal\images\video.png" />
-    <Content Include="Content\portal\images\works\1.jpg" />
-    <Content Include="Content\portal\images\works\1_2.jpg" />
-    <Content Include="Content\portal\images\works\2.jpg" />
-    <Content Include="Content\portal\images\works\2_2.jpg" />
-    <Content Include="Content\portal\images\works\3.jpg" />
-    <Content Include="Content\portal\images\works\3_2.jpg" />
-    <Content Include="Content\portal\images\works\4.jpg" />
-    <Content Include="Content\portal\images\works\4_2.jpg" />
-    <Content Include="Content\portal\images\works\5.jpg" />
-    <Content Include="Content\portal\images\works\5_2.jpg" />
-    <Content Include="Content\portal\images\works\6.jpg" />
-    <Content Include="Content\portal\images\works\6_2.jpg" />
-    <Content Include="Content\portal\images\works\7.jpg" />
-    <Content Include="Content\portal\images\works\7_2.jpg" />
     <Content Include="Content\portal\images\zoom.png" />
     <Content Include="Content\portal\images\zoom_h.png" />
     <Content Include="Content\portal\js\animate.js" />
@@ -1804,8 +1770,10 @@
     <Content Include="Content\portal\js\jquery.min.js" />
     <Content Include="Content\portal\js\jquery.nicescroll.min.js" />
     <Content Include="Content\portal\js\jquery.prettyPhoto.js" />
-    <Content Include="Content\portal\js\myscript.js" />
+    <Content Include="Content\portal\js\bwportal.js" />
     <Content Include="Content\portal\js\owl.carousel.js" />
+    <Content Include="Content\portal\js\portalcontrollers.js" />
+    <Content Include="Content\portal\js\portalentry.js" />
     <Content Include="Content\portal\js\superfish.min.js" />
     <Content Include="database\sqlite-ddl.sql" />
     <Content Include="favicon.ico" />
@@ -1876,11 +1844,16 @@
     <Content Include="Areas\Portal\Views\web.config" />
     <Content Include="Areas\Portal\Views\PortalHome\Index.cshtml" />
     <Content Include="Areas\Portal\Views\Shared\_PortalLayout.cshtml" />
-    <Content Include="Content\portal\images\blog\Thumbs.db" />
     <Content Include="Content\portal\images\slider\Thumbs.db" />
-    <Content Include="Content\portal\images\team\Thumbs.db" />
-    <Content Include="Content\portal\images\Thumbs.db" />
-    <Content Include="Content\portal\images\works\Thumbs.db" />
+    <Content Include="Areas\Portal\Views\PortalHome\AngularLightBoxTemplate.cshtml" />
+    <EmbeddedResource Include="lang\ConsolePortal.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConsolePortal.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="lang\ConsolePortal.zh-CN.resx" />
+    <Content Include="Areas\Portal\Views\PortalHome\PortalFlexSlider.cshtml" />
+    <Content Include="Areas\Portal\Views\PortalHome\PortalFlexSlider_ZH_CN.cshtml" />
+    <Content Include="Areas\Portal\Views\PortalHome\ViewArticleContent.cshtml" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -1984,7 +1957,6 @@
     <Content Include="Views\Home\Help_ZH_CN.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Portal\Models\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

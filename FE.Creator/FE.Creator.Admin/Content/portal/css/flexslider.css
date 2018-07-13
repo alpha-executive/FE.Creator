@@ -317,6 +317,10 @@ html[xmlns] .slides {display: block;}
 	background-attachment:fixed !important;
 }
 
+.top_slider .slide1-cn{
+	background-image:url(../images/slider/slide1_bg_cn.png);
+}
+
 .top_slider .slide1 .flex_caption1 {
 	position:absolute;
 	z-index:30;
@@ -344,6 +348,10 @@ html[xmlns] .slides {display: block;}
 	background-attachment:fixed !important;
 }
 
+.top_slider .slide2-cn {
+	background-image:url(../images/slider/slide2_bg_cn.png);
+}
+
 .top_slider .slide2 .flex_caption1 {
 	position:absolute;
 	z-index:30;
@@ -368,6 +376,10 @@ html[xmlns] .slides {display: block;}
 	background-image:url(../images/slider/slide3_bg.jpg);
 	background-repeat:no-repeat;
 	background-size:cover;
+}
+
+.top_slider .slide3-cn {
+	background-image:url(../images/slider/slide3_bg_cn.jpg);
 }
 
 .top_slider .slide3 .flex_caption1 {
