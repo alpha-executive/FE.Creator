@@ -3,11 +3,11 @@
     Layout = "~/Areas/Portal/Views/Shared/_PortalLayout.cshtml";
 }
 @model FE.Creator.Admin.Areas.Portal.Models.PostViewModel
-
+<script src="~/Content/portal/js/jquery.share.min.js"></script>
  <!-- HEADER -->
 <header>
     <!-- MENU BLOCK -->
-    <div class="menu_block">
+    <div class="menu_block margbot20">
         <!-- CONTAINER -->
         <div class="container clearfix">
             <!-- LOGO -->
@@ -17,15 +17,12 @@
 
 
             <!-- MENU -->
-            <div class="pull-right">
-                <nav class="navmenu center">
-                    <ul>
-                        @*<li class="first active scroll_btn"><a href="/portal/portalhome">@FE.Creator.Admin.lang.ConsolePortal.PORTAL_MENU_HOME</a></li>
-                        <li class="scroll_btn"><a href="/portal/portalhome#articles">@FE.Creator.Admin.lang.ConsolePortal.PORTAL_MENU_POST</a></li>
-                        <li class="scroll_btn"><a href="/portal/portalhome#images">@FE.Creator.Admin.lang.ConsolePortal.PORTAL_MENU_IMAGE</a></li>
-                        <li class="scroll_btn"><a href="/portal/portalhome#books">@FE.Creator.Admin.lang.ConsolePortal.PORTAL_MENU_BOOK</a></li>*@
-                    </ul>
-                </nav>
+            <div class="logo pull-right">
+                <div class="social-share" data-initialized="true" style="line-height:80px;">
+                    <a href="#" class="social-share-icon icon-weibo" data-weibo-tilte="@Model.PostTitle" data-weibo-url="@Model.ContentUrl" data-weibo-description="@Model.PostDesc" data-weibo-image="@Model.ImageUrl"></a>
+                    <a href="#" class="social-share-icon icon-qq" data-qq-tilte="@Model.PostTitle" data-qq-url="@Model.ContentUrl" data-qq-description="@Model.PostDesc" data-qq-image="@Model.ImageUrl"></a>
+                    <a href="#" class="social-share-icon icon-qzone" data-qzone-tilte="@Model.PostTitle" data-qzone-url="@Model.ContentUrl" data-qzone-description="@Model.PostDesc" data-qzone-image="@Model.ImageUrl"></a>
+                </div>
             </div><!-- //MENU -->
         </div><!-- //MENU BLOCK -->
     </div><!-- //CONTAINER -->
@@ -33,7 +30,7 @@
 
 <!-- BREADCRUMBS -->
 <section class="clearfix parallax">
-    <div class="container center">
+    <div class="container center" style="margin-top:20px;">
         <h2>@Model.PostTitle</h2>
     </div>
 </section><!-- //BREADCRUMBS -->
