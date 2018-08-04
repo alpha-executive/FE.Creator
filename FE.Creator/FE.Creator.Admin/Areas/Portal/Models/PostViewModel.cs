@@ -67,7 +67,7 @@ namespace FE.Creator.Admin.Areas.Portal.Models
                 if(this.ObjectId != 0)
                 {
                    
-                    return string.Format("{0}/api/custom/SharedObjects/DownloadSharedBook/{1}?thumbinal=true",
+                    return string.Format("{0}/api/custom/SharedObjects/DownloadArticleImage/{1}?thumbinal=true",
                        this.OriginalHost,
                        this.ObjectId);
                 }

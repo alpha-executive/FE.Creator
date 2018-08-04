@@ -79,12 +79,12 @@
     <!-- CONTAINER -->
     <div class="container" ng-controller="SharedImagesController as imgCtrl">
         <h2><b class="b2">@FE.Creator.Admin.lang.ConsolePortal.PORTAL_IMAGE_TITLE</b> @FE.Creator.Admin.lang.ConsolePortal.PORTAL_IMAGE_DESC</h2>
-        <hr style="border-color:cadetblue; border-width:2px;" />
+        <hr style="border-color:cadetblue; border-width:2px;" 
         <!-- ROW -->
-         <div class="row recent_posts animated fadeInUp" data-animated="fadeInUp" data-appear-top-offset="-200" ng-if="imgCtrl.images.length > 0">
-                <div class="col-lg-4 col-md-4 col-sm-4 padbot30 post_item_block" ng-repeat="img in imgCtrl.images">
-                    <a href="javascript:void(0);" ng-click="imgCtrl.showLightboxImage($index)"><img style="height:220px;width:300px;" class="img-thumbnail" alt="{{img.caption}}" src="{{img.thumbUrl}}"></a>
-                </div>
+        <div class="row recent_posts animated fadeInUp" data-animated="fadeInUp" data-appear-top-offset="-200" ng-if="imgCtrl.images.length > 0">
+            <div class="col-lg-4 col-md-4 col-sm-4 padbot30 post_item_block" ng-repeat="img in imgCtrl.images">
+                <a href="javascript:void(0);" ng-click="imgCtrl.showLightboxImage($index)"><img style="height:220px;width:300px;" class="img-thumbnail" alt="{{img.caption}}" src="{{img.thumbUrl}}"></a>
+            </div>
         </div><!-- //ROW -->
         <!-- PAGINATION -->
         <ul class="pagination clearfix" ng-if="imgCtrl.pager.pages.length > 0">
@@ -94,11 +94,13 @@
             </li>
             <li><a href="javascript:void(0);" ng-click="imgCtrl.onPageClick(imgCtrl.pager.totalPages)" ng-class="{disabled:imgCtrl.pager.disabledLastPage}">»</a></li>
         </ul><!-- //PAGINATION -->
-        <div class="row recent_posts animated fadeInUp" ng-if="imgCtrl.images.length <= 0">
+
+        <div class="blog_block col-lg-12 col-md-12 padbot50" ng-if="imgCtrl.images.length <= 0">
             <div class="alert alert-info">
                 <strong>@FE.Creator.Admin.lang.ConsolePortal.PORTAL_WARN_INFO</strong>@MvcHtmlString.Create(FE.Creator.Admin.lang.ConsolePortal.PORTAL_WARN_INFO_NO_IMAGE)
             </div>
         </div>
+        
  
     </div><!-- //CONTAINER -->
 </section>

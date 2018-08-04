@@ -1,6 +1,11 @@
 /*-----------------------------------------------------------------------------------*/
 /*	GENERAL STYLING
 /*-----------------------------------------------------------------------------------*/
+
+/* overwrite style */
+.social-share .icon-wechat .wechat-qrcode{
+    top:35px;
+}
 ::selection {background: #000; color:#fff;}
 ::-moz-selection {background: #000; color:#fff;}
 
