@@ -87,6 +87,7 @@ namespace FE.Creator.Admin.Areas.Portal.Controllers
 
                if(sharedLevel == 1)
                 {
+                    viewModel.ObjectId = article.ObjectID;
                     viewModel.PostTitle = article.ObjectName;
                     viewModel.PostDesc = article.GetPropertyValue<PrimeObjectField>("articleDesc")
                         .GetStrongTypeValue<string>();

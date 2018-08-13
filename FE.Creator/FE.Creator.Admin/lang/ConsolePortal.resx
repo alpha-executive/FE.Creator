@@ -133,8 +133,17 @@
   <data name="PORTAL_FOOTER_CONTACTUS" xml:space="preserve">
     <value>Contact Us</value>
   </data>
+  <data name="PORTAL_FOOTER_CONTACT_ADDR" xml:space="preserve">
+    <value>Beijing, China</value>
+  </data>
   <data name="PORTAL_FOOTER_DONATE" xml:space="preserve">
     <value>Donates</value>
+  </data>
+  <data name="PORTAL_FOOTER_DONATE_DESC" xml:space="preserve">
+    <value>Power the FEConsole Application with Your Donation!</value>
+  </data>
+  <data name="PORTAL_FOOTER_DONATE_LINK" xml:space="preserve">
+    <value>Click Here for Donation</value>
   </data>
   <data name="PORTAL_FOOTER_LICENSE" xml:space="preserve">
     <value>License</value>
@@ -169,6 +178,9 @@
   <data name="PORTAL_POST_DESC" xml:space="preserve">
     <value>Share What You Believe</value>
   </data>
+  <data name="PORTAL_POST_LIST" xml:space="preserve">
+    <value>BACK TO POST LIST</value>
+  </data>
   <data name="PORTAL_POST_TITLE" xml:space="preserve">
     <value>POST</value>
   </data>
@@ -183,5 +195,11 @@
   </data>
   <data name="PORTAL_WARN_INFO_NO_POST" xml:space="preserve">
     <value>There is &lt;b&gt;NO&lt;/b&gt; Posts Shared!</value>
+  </data>
+  <data name="PORTAL_WECHAT_HELP" xml:space="preserve">
+    <value>Click the "Discovery" button in Wechat, Scan the QRCode will share this content to your friends.</value>
+  </data>
+  <data name="PORTAL_WECHAT_TITLE" xml:space="preserve">
+    <value>Scan with Wechat to Share</value>
   </data>
 </root>

@@ -98,6 +98,15 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Beijing, China.
+        /// </summary>
+        public static string PORTAL_FOOTER_CONTACT_ADDR {
+            get {
+                return ResourceManager.GetString("PORTAL_FOOTER_CONTACT_ADDR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contact Us.
         /// </summary>
         public static string PORTAL_FOOTER_CONTACTUS {
@@ -112,6 +121,24 @@ namespace FE.Creator.Admin.lang {
         public static string PORTAL_FOOTER_DONATE {
             get {
                 return ResourceManager.GetString("PORTAL_FOOTER_DONATE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Power the FEConsole Application with Your Donation!.
+        /// </summary>
+        public static string PORTAL_FOOTER_DONATE_DESC {
+            get {
+                return ResourceManager.GetString("PORTAL_FOOTER_DONATE_DESC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click Here for Donation.
+        /// </summary>
+        public static string PORTAL_FOOTER_DONATE_LINK {
+            get {
+                return ResourceManager.GetString("PORTAL_FOOTER_DONATE_LINK", resourceCulture);
             }
         }
         
@@ -215,6 +242,15 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BACK TO POST LIST.
+        /// </summary>
+        public static string PORTAL_POST_LIST {
+            get {
+                return ResourceManager.GetString("PORTAL_POST_LIST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to POST.
         /// </summary>
         public static string PORTAL_POST_TITLE {
@@ -256,6 +292,24 @@ namespace FE.Creator.Admin.lang {
         public static string PORTAL_WARN_INFO_NO_POST {
             get {
                 return ResourceManager.GetString("PORTAL_WARN_INFO_NO_POST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click the &quot;Discovery&quot; button in Wechat, Scan the QRCode will share this content to your friends..
+        /// </summary>
+        public static string PORTAL_WECHAT_HELP {
+            get {
+                return ResourceManager.GetString("PORTAL_WECHAT_HELP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scan with Wechat to Share.
+        /// </summary>
+        public static string PORTAL_WECHAT_TITLE {
+            get {
+                return ResourceManager.GetString("PORTAL_WECHAT_TITLE", resourceCulture);
             }
         }
     }

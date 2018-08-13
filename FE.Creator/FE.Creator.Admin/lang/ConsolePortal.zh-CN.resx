@@ -135,6 +135,12 @@
   <data name="PORTAL_FOOTER_DONATE" xml:space="preserve">
     <value>捐赠</value>
   </data>
+  <data name="PORTAL_FOOTER_DONATE_DESC" xml:space="preserve">
+    <value>FEConsole 应用期待您的捐赠以变得更完善！</value>
+  </data>
+  <data name="PORTAL_FOOTER_DONATE_LINK" xml:space="preserve">
+    <value>点此链接捐赠</value>
+  </data>
   <data name="PORTAL_FOOTER_LICENSE" xml:space="preserve">
     <value> 授权</value>
   </data>
@@ -168,6 +174,9 @@
   <data name="PORTAL_POST_DESC" xml:space="preserve">
     <value>分享你的见解</value>
   </data>
+  <data name="PORTAL_POST_LIST" xml:space="preserve">
+    <value>返回到文章列表</value>
+  </data>
   <data name="PORTAL_POST_TITLE" xml:space="preserve">
     <value>文章</value>
   </data>
@@ -182,5 +191,11 @@
   </data>
   <data name="PORTAL_WARN_INFO_NO_POST" xml:space="preserve">
     <value>没有分享任何文章！</value>
+  </data>
+  <data name="PORTAL_WECHAT_HELP" xml:space="preserve">
+    <value>点击“发现”并扫描二维码分享本内容到朋友圈</value>
+  </data>
+  <data name="PORTAL_WECHAT_TITLE" xml:space="preserve">
+    <value>扫描二维码：分享</value>
   </data>
 </root>
