@@ -764,6 +764,9 @@
     <Content Include="Content\adminlte-2.3.6\plugins\ckeditor\plugins\image2\samples\assets\image1.jpg" />
     <Content Include="Content\adminlte-2.3.6\plugins\ckeditor\plugins\image2\samples\assets\image2.jpg" />
     <Content Include="Content\adminlte-2.3.6\plugins\ckeditor\plugins\image2\samples\image2.html" />
+    <Content Include="Content\adminlte-2.3.6\plugins\ckeditor\plugins\imageresponsive\lang\de.js" />
+    <Content Include="Content\adminlte-2.3.6\plugins\ckeditor\plugins\imageresponsive\lang\en.js" />
+    <Content Include="Content\adminlte-2.3.6\plugins\ckeditor\plugins\imageresponsive\plugin.js" />
     <Content Include="Content\adminlte-2.3.6\plugins\ckeditor\plugins\image\dialogs\image.js" />
     <Content Include="Content\adminlte-2.3.6\plugins\ckeditor\plugins\image\images\noimage.png" />
     <Content Include="Content\adminlte-2.3.6\plugins\ckeditor\plugins\lineutils\dev\dnd.html" />
@@ -1854,6 +1857,7 @@
     <Content Include="Areas\Portal\Views\PortalHome\PortalFlexSlider.cshtml" />
     <Content Include="Areas\Portal\Views\PortalHome\PortalFlexSlider_ZH_CN.cshtml" />
     <Content Include="Areas\Portal\Views\PortalHome\ViewArticleContent.cshtml" />
+    <Content Include="Content\adminlte-2.3.6\plugins\ckeditor\plugins\imageresponsive\README.md" />
     <None Include="NLog.xsd">
       <SubType>Designer</SubType>
     </None>
