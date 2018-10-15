@@ -141,6 +141,12 @@
   <data name="APP_VERSION" xml:space="preserve">
     <value>Cipher Machine V1.0</value>
   </data>
+  <data name="APP_WARN_NEED_MIG" xml:space="preserve">
+    <value>Application is not ready on this machine due to the application configure file is miss match with current system, please migrate the user.config file at the home directory of this application to following location firstly: {0}</value>
+  </data>
+  <data name="APP_WARN_NEED_MIG_CAP" xml:space="preserve">
+    <value>Configure File Migration Required</value>
+  </data>
   <data name="BTN_COPY" xml:space="preserve">
     <value>Copy Result</value>
   </data>

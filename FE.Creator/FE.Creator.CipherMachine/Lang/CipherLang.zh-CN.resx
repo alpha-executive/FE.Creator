@@ -141,6 +141,12 @@
   <data name="APP_VERSION" xml:space="preserve">
     <value>密码机V1.0</value>
   </data>
+  <data name="APP_WARN_NEED_MIG" xml:space="preserve">
+    <value>由于系统的配置文件和当前机器不兼容，请将程序目录内的user.config迁移到如下目录后再继续：{0}</value>
+  </data>
+  <data name="APP_WARN_NEED_MIG_CAP" xml:space="preserve">
+    <value>配置文件需要迁移</value>
+  </data>
   <data name="BTN_COPY" xml:space="preserve">
     <value>拷贝结果</value>
   </data>

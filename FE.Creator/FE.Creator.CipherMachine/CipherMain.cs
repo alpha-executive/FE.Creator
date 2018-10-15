@@ -15,9 +15,11 @@ namespace FE.Creator.CipherMachine
     using System.Configuration;
     using System.IO;
     using System.IO.Compression;
+    using System.Security.Cryptography;
 
     public partial class CipherMain : Form
     {
+        private static readonly string USER_PER_CONFIG_FILE = "user.config";
         private static readonly int MAX_STRING_LENGTH = 128;
         public CipherMain()
         {
@@ -137,6 +139,14 @@ namespace FE.Creator.CipherMachine
                 btnEncrypt.Text = CipherLang.BTN_ENCRYPT;
                 btnCopyResult.Text = CipherLang.BTN_COPY;
 
+                if (IsNeedMigration())
+                {
+                    this.Close();
+                    return;
+                }
+
+                lblStatus.Text = CipherLang.APP_VERSION;
+
                 if (string.IsNullOrEmpty(Properties.Settings.Default.EncryptKey))
                 {
                     IRSACryptographyService cryptService = CryptographyServiceFactory.RSACryptoService;
@@ -152,15 +162,56 @@ namespace FE.Creator.CipherMachine
                     Properties.Settings.Default.Save();
                 }
 
-                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
-
-                lblStatus.Text = CipherLang.APP_VERSION;
-                lblStatus.Text = config.FilePath;
+                //using (StreamWriter writer = new StreamWriter(config.FilePath))
+                //{
+                //    writer.
+                //}
             }
             catch (Exception ex)
             {
                 lblStatus.Text = CipherLang.APP_INITIALIZE_FAILED + ": " + ex.Message;
             }
+        }
+
+        static string CalculateMD5(string filename)
+        {
+            using (var md5 = MD5.Create())
+            {
+                using (var stream = File.OpenRead(filename))
+                {
+                    var hash = md5.ComputeHash(stream);
+                    return BitConverter.ToString(hash).Replace("-", "").ToLowerInvariant();
+                }
+            }
+        }
+
+        private static bool IsNeedMigration()
+        {
+            bool needMigration = false;
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+            if (File.Exists(USER_PER_CONFIG_FILE))
+            {
+               
+                if (File.Exists(config.FilePath))
+                {
+                    needMigration = !CalculateMD5(USER_PER_CONFIG_FILE)
+                        .Equals(CalculateMD5(config.FilePath));
+                }
+                else
+                {
+                    needMigration = true;
+                }
+            }
+
+            if (needMigration)
+            {
+                MessageBox.Show(string.Format(CipherLang.APP_WARN_NEED_MIG, config.FilePath),
+                CipherLang.APP_WARN_NEED_MIG_CAP, 
+                MessageBoxButtons.OK, 
+                MessageBoxIcon.Warning);
+            }
+
+            return needMigration;
         }
 
         private void btnCopyResult_Click(object sender, EventArgs e)
@@ -169,6 +220,23 @@ namespace FE.Creator.CipherMachine
             {
                 Clipboard.SetText(txtResult.Text, TextDataFormat.Text);
                 lblStatus.Text = CipherLang.APP_RESULT_COPIED;
+            }
+        }
+
+        private void CipherMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal);
+            if (File.Exists(config.FilePath))
+            {
+                //if there is any update to config file.
+                if (File.Exists(USER_PER_CONFIG_FILE)
+                    && CalculateMD5(config.FilePath)
+                        .Equals(USER_PER_CONFIG_FILE))
+                {
+                        return;
+                }
+
+                File.Copy(config.FilePath, USER_PER_CONFIG_FILE, true);               
             }
         }
     }

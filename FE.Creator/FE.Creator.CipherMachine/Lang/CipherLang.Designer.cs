@@ -133,6 +133,24 @@ namespace FE.Creator.CipherMachine.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Application is not ready on this machine due to the application configure file is miss match with current system, please migrate the user.config file at the home directory of this application to following location firstly: {0}.
+        /// </summary>
+        internal static string APP_WARN_NEED_MIG {
+            get {
+                return ResourceManager.GetString("APP_WARN_NEED_MIG", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Configure File Migration Required.
+        /// </summary>
+        internal static string APP_WARN_NEED_MIG_CAP {
+            get {
+                return ResourceManager.GetString("APP_WARN_NEED_MIG_CAP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Copy Result.
         /// </summary>
         internal static string BTN_COPY {
