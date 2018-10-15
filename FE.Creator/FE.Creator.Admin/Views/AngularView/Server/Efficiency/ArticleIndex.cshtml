@@ -126,6 +126,11 @@
                             </div>
                         </form>
                     </div>
+                    <script type="text/javascript">
+                        jQuery(window).bind('beforeunload', function () {
+                            return @FE.Creator.Admin.lang.AppLang.LEAVING_PAGE_WARN;
+                        });
+                    </script>
                 </div>
                 <div class="row" ng-if="ctrl.displayMode == 'articleList'">
                     <div class="col-md-12">
@@ -144,6 +149,7 @@
         </div>
     </div>
 </div>
+
 @section Scripts{
     @Scripts.Render("~/js/apputilities")
     @Scripts.Render("~/js/adminapp/article")

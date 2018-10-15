@@ -808,6 +808,9 @@ FEConsole is also a greate helper for those who are willing to learn and improve
   <data name="LAYOUT_VERSION" xml:space="preserve">
     <value>Version</value>
   </data>
+  <data name="LEAVING_PAGE_WARN" xml:space="preserve">
+    <value>Are you sure you want to leave this page?</value>
+  </data>
   <data name="LICMGR_BTN_UPLOADLIC" xml:space="preserve">
     <value>Upload Your License</value>
   </data>

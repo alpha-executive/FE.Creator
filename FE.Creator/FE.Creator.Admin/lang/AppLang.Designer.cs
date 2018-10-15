@@ -2132,6 +2132,15 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to leave this page?.
+        /// </summary>
+        public static string LEAVING_PAGE_WARN {
+            get {
+                return ResourceManager.GetString("LEAVING_PAGE_WARN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upload Your License.
         /// </summary>
         public static string LICMGR_BTN_UPLOADLIC {

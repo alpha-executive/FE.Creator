@@ -82,7 +82,7 @@ namespace FE.Creator.FileStorage
         private string mFullFileName = string.Empty;
         private static string[] SUPPORTED_FILE_TYPES = new string[]
         {
-            ".jpg",".png", ".bmp", ".gif", "jpeg"
+            ".jpg",".png", ".bmp", ".gif", ".jpeg"
         };
         public bool IsMatchFormat
         {

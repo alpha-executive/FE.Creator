@@ -494,7 +494,7 @@
                 }, function (response) {
                     errorCount += 1;
                     if (response.status > 0)
-                        vm.errorMsg = AppLang.getFormatString(IMAGEMGR_UPLOAD_ERR_MSG, [errorCount, totalfiles]);
+                        vm.errorMsg = AppLang.getFormatString(AppLang.IMAGEMGR_UPLOAD_ERR_MSG, [errorCount, totalfiles]);
                 }, function (evt) {
                 });
 
