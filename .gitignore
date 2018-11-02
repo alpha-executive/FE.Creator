@@ -7,8 +7,10 @@
 /FE.Creator/FE.Creator.Admin/App_Data
 /FE.Creator/FE.Creator.Admin/bin
 /FE.Creator/FE.Creator.Admin/bin
-/FE.Creator/FE.Creator.FileStorage/bin/Debug
-/FE.Creator/FE.Creator.FileStorage/obj/Debug
+bin/
+obj/
+/FE.Creator/FE.Creator.FileStorage/bin/
+/FE.Creator/FE.Creator.FileStorage/obj/
 /FE.Creator/FE.Creator.Admin/obj/Debug
 /FE.Creator/FE.Creator.ObjectRepository/obj/Debug
 /FE.Creator/UpgradeLog2.htm
