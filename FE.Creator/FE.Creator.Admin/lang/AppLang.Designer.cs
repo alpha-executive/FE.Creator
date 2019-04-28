@@ -1691,6 +1691,15 @@ namespace FE.Creator.Admin.lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loading ....
+        /// </summary>
+        public static string IMAGEMGR_VIEW_LOADING {
+            get {
+                return ResourceManager.GetString("IMAGEMGR_VIEW_LOADING", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View More Images.
         /// </summary>
         public static string IMAGEMGR_VIEW_MORE_IMGS {

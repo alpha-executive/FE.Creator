@@ -44,6 +44,7 @@
     IMAGEMGR_NEW_ALBUM: "New album",
     IMAGEMGR_NEW_IMAGE: "New Image",
     IMAGEMGR_UPLOAD_ERR_MSG: "{0} of {1} images was failed to be uploaded",
+    IMAGEMGR_VIEW_LOAD_ERROR: "Cann't load the image!",
     POST_NEW_POST: "New Post",
     POST_NEW_GROUP: "New Group",
     DIARY_WEATHER_SUNNY: "sunny",
