@@ -231,7 +231,7 @@ namespace FE.Creator.CipherMachine
                 //if there is any update to config file.
                 if (File.Exists(USER_PER_CONFIG_FILE)
                     && CalculateMD5(config.FilePath)
-                        .Equals(USER_PER_CONFIG_FILE))
+                        .Equals(CalculateMD5(USER_PER_CONFIG_FILE)))
                 {
                         return;
                 }
