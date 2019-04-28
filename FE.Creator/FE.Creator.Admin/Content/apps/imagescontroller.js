@@ -578,7 +578,25 @@
         }
 
         vm.viewLargeImage = function (img) {
-            vm.viewingImage = img;
+            var image = $('#viewImageModal .img-responsive');
+            var imgSpin = $("#imageLoadSpin");
+            image.hide();
+            imgSpin.show();
+
+            console.log(img.properties.imageFile.fileUrl);
+            var downloadImage = new Image();
+            downloadImage.onload = function (event) {
+                console.debug("onload is invoked");
+                imgSpin.hide();
+                image.show();
+                image.attr("src", this.src);
+            }
+            downloadImage.onerror = function (error) {
+                console.error("error is happened");
+                console.error(error);
+                imgSpin.find("p").text(AppLang.IMAGEMGR_VIEW_LOAD_ERROR);
+            }
+            downloadImage.src = img.properties.imageFile.fileUrl;
             $('#viewImageModal').modal('show');
         }
 

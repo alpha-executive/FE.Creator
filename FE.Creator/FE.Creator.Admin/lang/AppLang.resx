@@ -661,6 +661,9 @@ FEConsole is also a greate helper for those who are willing to learn and improve
   <data name="IMAGEMGR_TITLE" xml:space="preserve">
     <value>Photos Management</value>
   </data>
+  <data name="IMAGEMGR_VIEW_LOADING" xml:space="preserve">
+    <value>Loading ...</value>
+  </data>
   <data name="IMAGEMGR_VIEW_MORE_IMGS" xml:space="preserve">
     <value>View More Images</value>
   </data>

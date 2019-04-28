@@ -44,6 +44,7 @@
     IMAGEMGR_NEW_ALBUM: "新建相册",
     IMAGEMGR_NEW_IMAGE: "新建图片",
     IMAGEMGR_UPLOAD_ERR_MSG: "{1}张中的{0}张图片没有上传成功",
+    IMAGEMGR_VIEW_LOAD_ERROR: "加载图片出错！",
     POST_NEW_POST: "新建文章",
     POST_NEW_GROUP: "新建分组",
     DIARY_WEATHER_SUNNY: "晴",
