@@ -11,7 +11,7 @@
                 </div>
                 <div class="image-info-container">{{img.objectName}}</div>
                 <div class="box-tools text-left">
-                    <a class="btn btn-box-tool" href="{{img.properties.imageFile.fileUrl}}">
+                    <a class="btn btn-box-tool" href="{{img.properties.imageFile.fileUrl}}" download="{{img.objectName}}">
                         <i class="fa fa-cloud-download"></i>
                     </a>
                     <button class="btn btn-box-tool" type="button" ng-click="ctrl.createOrEditImage(img)">

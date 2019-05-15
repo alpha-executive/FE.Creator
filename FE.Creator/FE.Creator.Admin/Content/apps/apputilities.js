@@ -1,4 +1,5 @@
-﻿function initializeckEditor(editorid) {
+﻿function initializeckEditor(editorid, lang) {
+    var language = lang === "English" ? "en" : "zh-cn";
     var editor = CKEDITOR.replace(editorid, {
         // Define the toolbar: http://docs.ckeditor.com/#!/guide/dev_toolbar
         // The standard preset from CDN which we used as a base provides more features than we need.
@@ -15,7 +16,7 @@
             { name: 'document', items: ['Source', 'Print'] },
             { name: 'tools', items: ['Maximize', 'ShowBlocks'] },
         ],
-
+        language: language,
         // Since we define all configuration options here, let's instruct CKEditor to not load config.js which it does by default.
         // One HTTP request less will result in a faster startup time.
         // For more information check http://docs.ckeditor.com/#!/api/CKEDITOR.config-cfg-customConfig

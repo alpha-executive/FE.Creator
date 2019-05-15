@@ -25,6 +25,7 @@
 
                 file.upload.then(function (response) {
                     file.result = response.data;
+                    reloadLicenseList();
                     file.showprogress = false;
                 }, function (response) {
                     if (response.status > 0)
@@ -36,9 +37,9 @@
             }
         }
 
-        init();
+        reloadLicenseList();
 
-        function init(){
+        function reloadLicenseList(){
             ObjectRepositoryDataService.getLicencedModules()
                         .then(function (data) {
                             if (data != null && Array.isArray(data)

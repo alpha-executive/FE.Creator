@@ -1793,8 +1793,6 @@
     <Content Include="Global.asax" />
     <Content Include="Content\apps\css\app.css" />
     <Content Include="Content\base\bootstrap.min.js" />
-    <Content Include="Content\adminlte-2.3.6\bootstrap\css\bootstrap.css.map" />
-    <Content Include="Content\adminlte-2.3.6\bootstrap\css\bootstrap.min.css.map" />
     <Content Include="Content\adminlte-2.3.6\bootstrap\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\adminlte-2.3.6\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="Content\adminlte-2.3.6\bootstrap\fonts\glyphicons-halflings-regular.woff" />
