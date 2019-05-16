@@ -166,7 +166,7 @@
             vm.cancelObject.properties.diaryContent.value = tmpdiary.properties.diaryContent.value;
 
             $timeout(function () {
-                initializeckEditor('editor1');
+                initializeckEditor('editor1', AppLang.lang);
             }, 100);
         }
 

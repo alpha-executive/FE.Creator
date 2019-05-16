@@ -109,7 +109,7 @@
             vm.cancelObject.properties.articleContent.value = article.properties.articleContent.value;
             vm.setDisplayMode("articleEditing");
             $timeout(function () {
-                initializeckEditor('articleEditor');
+                initializeckEditor('articleEditor', AppLang.lang);
             }, 100)
         }
 

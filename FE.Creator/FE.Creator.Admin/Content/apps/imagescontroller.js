@@ -597,6 +597,7 @@
                 imgSpin.find("p").text(AppLang.IMAGEMGR_VIEW_LOAD_ERROR);
             }
             downloadImage.src = img.properties.imageFile.fileUrl;
+            vm.viewingImage = img;
             $('#viewImageModal').modal('show');
         }
 
